@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Optimal ad hand-off · {{ROUND}}</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="files/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FFFCF7; --paper: #FFFFFF; --bone: #EFE9DF; --line: rgba(44, 78, 37, .12); --line-2: rgba(44, 78, 37, .2);
+    --forest: #2C4E25; --deep: #1A500F; --sage: #87A482; --sage-25: rgba(135, 164, 130, .22);
+    --ink: #13170F; --body: #3E463C; --muted: #76736D; --plum: #6B4E71; --plum-25: rgba(107, 78, 113, .14);
+    --r: 16px;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  body { background: var(--cream); color: var(--body); font: 15px/1.55 "Public Sans", system-ui, sans-serif;
+         -webkit-font-smoothing: antialiased; font-feature-settings: "tnum" 1, "ss01" 1; }
+  a { color: var(--forest); }
+  code { font: 500 13px ui-monospace, "JetBrains Mono", monospace; background: var(--sage-25); color: var(--forest); padding: 1px 6px; border-radius: 6px; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  h1, h2, h3, h4 { color: var(--ink); font-weight: 400; }
+  h1 { font: 400 clamp(38px, 6vw, 64px)/1.02 Castoro, serif; letter-spacing: -.035em; }
+  h1 em, h2 em { color: var(--forest); }
+  h2 { font: 400 clamp(28px, 4vw, 40px)/1.08 Castoro, serif; letter-spacing: -.025em; }
+  h3 { font: 400 24px/1.2 Castoro, serif; letter-spacing: -.015em; }
+  h4 { font: 600 15px/1.35 "Public Sans"; }
+  .eyebrow { font: 700 11px "Public Sans"; letter-spacing: .16em; text-transform: uppercase; color: var(--forest); }
+  .id { font: 700 12px "Public Sans"; letter-spacing: .04em; color: var(--paper); background: var(--forest);
+        padding: 3px 8px; border-radius: 7px; vertical-align: 3px; margin-right: 4px; }
+  .note { color: var(--muted); font-size: 13.5px; }
+
+  /* hero */
+  .hero { padding: 56px 0 36px; border-bottom: 1px solid var(--line); }
+  .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; }
+  .brand img { height: 30px; }
+  .brand span { color: var(--muted); font-size: 13px; padding-left: 12px; border-left: 1px solid var(--line-2); }
+  .hero p.lede { max-width: 640px; font-size: 17px; margin: 18px 0 28px; color: var(--body); }
+  .stats { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+  .stat { background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; font-size: 13.5px; }
+  .stat b { color: var(--forest); font-weight: 700; }
+  .bundles { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .bundle { display: flex; align-items: center; justify-content: space-between; gap: 12px; text-decoration: none;
+            background: var(--forest); color: var(--cream); border-radius: 14px; padding: 16px 18px; transition: transform .15s, background .15s; }
+  .bundle:hover { background: var(--deep); transform: translateY(-1px); }
+  .bundle b { display: block; font-weight: 600; } .bundle small { opacity: .7; font-size: 12.5px; }
+  .bundle svg { flex: none; }
+
+  /* jump nav */
+  .jump { position: sticky; top: 0; z-index: 5; background: rgba(255, 252, 247, .86); backdrop-filter: blur(14px) saturate(1.4);
+          -webkit-backdrop-filter: blur(14px) saturate(1.4); border-bottom: 1px solid var(--line); }
+  .jump .wrap { display: flex; gap: 6px; overflow-x: auto; padding-top: 12px; padding-bottom: 12px; scrollbar-width: none; }
+  .jump a { flex: none; text-decoration: none; color: var(--body); font: 600 13px "Public Sans"; padding: 8px 14px;
+            border-radius: 999px; border: 1px solid var(--line); background: var(--paper); }
+  .jump a:hover { border-color: var(--forest); color: var(--forest); }
+
+  section.block { padding: 56px 0 8px; }
+  .shead { display: flex; align-items: end; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 22px; }
+  .shead p { max-width: 560px; }
+  .sub { margin: 30px 0 14px; display: flex; align-items: center; gap: 10px; }
+  .sub h3 { font-size: 20px; }
+
+  /* launch steps */
+  .launch { display: grid; grid-template-columns: 1.35fr 1fr; gap: 16px; }
+  .card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); }
+  .steps { padding: 26px 28px; counter-reset: s; }
+  .steps li { list-style: none; position: relative; padding: 0 0 16px 44px; }
+  .steps li:last-child { padding-bottom: 0; }
+  .steps li::before { counter-increment: s; content: counter(s); position: absolute; left: 0; top: -1px; width: 28px; height: 28px;
+                      border-radius: 50%; background: var(--sage-25); color: var(--forest); font: 700 13px/28px "Public Sans"; text-align: center; }
+  .steps li b { color: var(--ink); }
+  .settings { padding: 24px 24px 18px; }
+  .settings h4 { margin-bottom: 12px; }
+  .svcset { border-top: 1px solid var(--line); padding: 14px 0 6px; }
+  .svcset:first-of-type { border-top: 0; padding-top: 0; }
+
+  /* fields */
+  .field { margin-top: 10px; }
+  .flabel { display: flex; align-items: center; justify-content: space-between; gap: 8px; font: 600 11.5px "Public Sans";
+            letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+  .val, textarea { width: 100%; background: var(--cream); border: 1px solid var(--line); border-radius: 10px; padding: 9px 11px;
+                   font: 400 14px/1.5 "Public Sans"; color: var(--ink); word-break: break-word; }
+  textarea { resize: vertical; white-space: pre-wrap; }
+  .copy { font: 600 11.5px "Public Sans"; letter-spacing: .02em; text-transform: none; color: var(--forest); background: transparent;
+          border: 1px solid var(--line-2); border-radius: 999px; padding: 3px 10px; cursor: pointer; transition: all .15s; }
+  .copy:hover { background: var(--forest); color: var(--cream); border-color: var(--forest); }
+  .copy.done { background: var(--sage); color: var(--paper); border-color: var(--sage); }
+
+  /* downloads */
+  .dls { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+  .dl { display: flex; justify-content: space-between; align-items: center; gap: 10px; text-decoration: none; font: 500 13px "Public Sans";
+        color: var(--forest); background: var(--cream); border: 1px solid var(--line); border-radius: 10px; padding: 8px 11px; transition: all .15s; }
+  .dl::before { content: ""; width: 14px; height: 14px; flex: none; background: currentColor; opacity: .85;
+                -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>') center/contain no-repeat;
+                mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>') center/contain no-repeat; }
+  .dl span { flex: 1; } .dl em { font-style: normal; color: var(--muted); font-size: 12px; }
+  .dl:hover { border-color: var(--forest); background: var(--paper); }
+  .dl.primary { background: var(--forest); color: var(--cream); border-color: var(--forest); }
+  .dl.primary em { color: rgba(255, 252, 247, .7); }
+  .dl.primary:hover { background: var(--deep); }
+
+  /* video ads */
+  .ad { padding: 26px; margin-bottom: 16px; }
+  .adhead { margin-bottom: 18px; }
+  .adhead h3 { margin: 8px 0 4px; }
+  .svc { display: inline-block; font: 700 10.5px "Public Sans"; letter-spacing: .12em; text-transform: uppercase; padding: 4px 9px; border-radius: 6px; }
+  .svc.longevity { background: var(--sage-25); color: var(--forest); } .svc.menopause { background: var(--plum-25); color: var(--plum); }
+  .adbody { display: grid; grid-template-columns: auto minmax(280px, 1fr); gap: 26px; align-items: start; }
+  .cuts { display: grid; grid-template-columns: repeat(2, 230px); gap: 18px; }
+  .cut video { width: 230px; aspect-ratio: 9 / 16; border-radius: 12px; background: #000; display: block; }
+  .cutmeta { margin-top: 10px; display: flex; align-items: center; gap: 4px; color: var(--ink); }
+
+  /* static ads */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+  .static { overflow: hidden; display: flex; flex-direction: column; }
+  .static > img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; border-bottom: 1px solid var(--line); }
+  .smeta { padding: 14px 16px 16px; }
+  .smeta .dls { flex-direction: row; flex-wrap: wrap; } .smeta .dl { flex: 1 1 120px; }
+  .carousel { padding: 22px; margin-top: 14px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; margin: 14px 0 6px; }
+  .cards img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 10px; border: 1px solid var(--line); display: block; }
+  .cards figcaption { font-size: 13px; margin-top: 8px; color: var(--ink); }
+  .cards .dl { margin-top: 8px; }
+
+  /* instagram */
+  .reels { display: grid; gap: 16px; }
+  .reel { display: grid; grid-template-columns: auto 1fr; gap: 26px; padding: 24px; }
+  .reelmedia { display: flex; gap: 12px; }
+  .reelmedia video, .reelmedia img { width: 200px; aspect-ratio: 9 / 16; border-radius: 12px; object-fit: cover; background: #000; display: block; }
+  .reelmeta h3 { margin-bottom: 4px; }
+  .igsteps { padding: 22px 26px; margin-bottom: 16px; }
+  .igsteps ol { padding-left: 18px; } .igsteps li { margin: 4px 0; }
+  .callout { background: var(--sage-25); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin-top: 12px; color: var(--ink); font-size: 14px; }
+
+  footer { margin: 64px 0 0; padding: 28px 0 56px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13.5px; }
+
+  @media (max-width: 920px) {
+    .launch, .adbody, .reel { grid-template-columns: 1fr; }
+    .cuts { grid-template-columns: repeat(2, minmax(0, 1fr)); } .cut video { width: 100%; }
+    .reelmedia video, .reelmedia img { width: calc(50% - 6px); }
+  }
+  @media (max-width: 520px) { .wrap { padding: 0 16px; } .ad, .reel { padding: 18px; } }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="brand"><img src="files/logo.png" alt="Optimal"><span>Ad hand-off · {{ROUND}}</span></div>
+    <div class="eyebrow">For the ads team</div>
+    <h1>Everything to launch, <em>in one place.</em></h1>
+    <p class="lede">Every ad made on {{ROUND}}, ready to upload, with the exact text for each one. Preview it here, download what you need, then follow the six launch steps.</p>
+    <div class="stats">
+      <span class="stat"><b>{{N_VIDEO}}</b> video ads · Tight + Full cuts</span>
+      <span class="stat"><b>{{N_STATIC}}</b> static ads</span>
+      <span class="stat"><b>{{N_CAR}}</b> carousels</span>
+      <span class="stat"><b>{{N_REELS}}</b> Instagram reels</span>
+    </div>
+    <div class="bundles">
+      <a class="bundle" href="{{ZIP_VIDEOS}}" target="_blank" rel="noopener"><span><b>All video ads + reels</b><small>{{ZS_VIDEOS}} · download page</small></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="bundle" href="{{ZIP_R1}}" download><span><b>Static ads · round 1</b><small>.zip · {{ZS_R1}}</small></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="bundle" href="{{ZIP_R2}}" download><span><b>Static ads · round 2</b><small>.zip · {{ZS_R2}}</small></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+    </div>
+  </div>
+</header>
+
+<nav class="jump"><div class="wrap">
+  <a href="#launch">Launch steps</a><a href="#video">Video ads</a><a href="#round1">Static · round 1</a>
+  <a href="#round2">Static · round 2</a><a href="#instagram">Instagram reels</a>
+</div></nav>
+
+<main class="wrap">
+  <section class="block" id="launch">
+    <div class="shead"><div><div class="eyebrow">Meta Ads Manager</div><h2>Launch in <em>six steps</em></h2></div>
+      <p class="note">Repeat for each ad. Every card below has its own files and copy buttons.</p></div>
+    <div class="launch">
+      <ol class="card steps">
+        <li><b>Download</b> the ad's two files: the <b>4:5 Feed</b> file and the <b>9:16 Stories + Reels</b> file. Carousels have five 4:5 cards.</li>
+        <li>Open the campaign and go to the <b>right ad set</b>: Menopause or Longevity membership. Every ad for a service goes in that service's ad set, video and static alike.</li>
+        <li><b>Create ad.</b> Name it with the ID on its card (e.g. <code>LV2-T</code>, <code>M3</code>, <code>MB1</code>). Identity: the Optimal Facebook Page and @beoptimal.ca.</li>
+        <li><b>Media:</b> upload the 4:5 file, then customize placements, choose <b>Stories and Reels</b>, and swap in the 9:16 file.</li>
+        <li><b>Text:</b> paste the primary text, headline and description with the Copy buttons. CTA <b>Book now</b>. Paste the website URL and URL parameters from the settings box.</li>
+        <li><b>Videos only:</b> upload the thumbnail jpg, and turn <b>off</b> auto captions (ours are burned in), Advantage+ music and creative enhancements. Then publish, and judge after 7 days.</li>
+      </ol>
+      <div class="card settings">
+        <h4>Ad set settings</h4>
+        <div class="svcset"><span class="svc menopause">Menopause</span>
+          <div class="field"><div class="flabel">Website URL<button class="copy" data-copy="{{M_DEST}}">Copy</button></div><div class="val">{{M_DEST}}</div></div>
+          <div class="field"><div class="flabel">URL parameters<button class="copy" data-copy="{{M_UTM}}">Copy</button></div><div class="val">{{M_UTM}}</div></div>
+          <p class="note" style="margin-top:8px">Audience: women 35–60, about 40 km around Barrie, broad.</p></div>
+        <div class="svcset"><span class="svc longevity">Longevity membership</span>
+          <div class="field"><div class="flabel">Website URL<button class="copy" data-copy="{{L_DEST}}">Copy</button></div><div class="val">{{L_DEST}}</div></div>
+          <div class="field"><div class="flabel">URL parameters<button class="copy" data-copy="{{L_UTM}}">Copy</button></div><div class="val">{{L_UTM}}</div></div>
+          <p class="note" style="margin-top:8px">Audience: adults 35–70, about 40 km around Barrie, broad.</p></div>
+        <p class="note" style="margin-top:10px">Optimization: Landing page views. Keep URL parameters exactly as written, because they're deliberately neutral (Meta restricts health advertisers).</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="video">
+    <div class="shead"><div><div class="eyebrow">Video ads · Cheryl, care coordinator</div><h2>Video ads</h2></div>
+      <p class="note">Each ad comes in a Tight and a Full cut. Run both as separate ads in the same ad set and let Meta pick. Previews are compressed; the downloads are full quality.</p></div>
+    {{VIDEO_ADS}}
+  </section>
+
+  <section class="block" id="round1">
+    <div class="shead"><div><div class="eyebrow">Static ads · round 1</div><h2>Six formats <em>per service</em></h2></div>
+      <p class="note">Lists, stats, price cards, photos, diagrams and objections. Upload each as one ad, with the 4:5 file for Feed and the 9:16 file for Stories and Reels.</p></div>
+    <div class="sub"><span class="svc menopause">Menopause</span></div><div class="grid">{{R1_MENO}}</div>
+    <div class="sub"><span class="svc longevity">Longevity membership</span></div><div class="grid">{{R1_LONG}}</div>
+  </section>
+
+  <section class="block" id="round2">
+    <div class="shead"><div><div class="eyebrow">Static ads · round 2</div><h2>One sentence <em>per image</em></h2></div>
+      <p class="note">Each image carries the logo and one sentence, and Meta's Book now button does the rest. Carousels are five 4:5 cards: don't let Meta crop them to 1:1.</p></div>
+    <div class="sub"><span class="svc menopause">Menopause</span></div><div class="grid">{{R2_MENO}}</div>
+    <div class="sub"><span class="svc longevity">Longevity membership</span></div><div class="grid">{{R2_LONG}}</div>
+    {{CAROUSELS}}
+  </section>
+
+  <section class="block" id="instagram">
+    <div class="shead"><div><div class="eyebrow">Instagram · organic</div><h2>Reels for <em>@beoptimal.ca</em></h2></div>
+      <p class="note">These are the Tight cuts with an Instagram end card: “Comment LONGEVITY / MENOPAUSE” instead of a Book button, because a drawn button can't be tapped.</p></div>
+    <div class="card igsteps">
+      <h4>Posting (Meta Business Suite, on a computer)</h4>
+      <ol>
+        <li>Make sure the keyword auto-replies for <b>LONGEVITY</b> and <b>MENOPAUSE</b> are on before you post.</li>
+        <li>Create reel → upload the reel .mp4 → upload the cover .jpg as the cover → paste the caption.</li>
+        <li>Leave “Share to Facebook” off, and don't add Instagram music: the reel already has a quiet music bed.</li>
+      </ol>
+      <div class="callout">Posting the full Instagram relaunch pack? These three reels are already in it as <b>L7</b> (LV1), <b>L8</b> (LV2) and <b>M7</b> (MV1). Follow the pack's order instead of posting them separately.</div>
+    </div>
+    <div class="reels">{{REELS}}</div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  Optimal Health · 630 Huronia Rd, Unit 5, Barrie · Ad round {{ROUND}} (release <code>{{TAG}}</code>). Questions about the ads: Peter.
+</div></footer>
+
+<script>
+  document.querySelectorAll(".copy").forEach(b => b.addEventListener("click", async () => {
+    const t = b.dataset.copy;
+    try { await navigator.clipboard.writeText(t); }
+    catch { const a = document.createElement("textarea"); a.value = t; document.body.append(a); a.select(); document.execCommand("copy"); a.remove(); }
+    b.textContent = "Copied"; b.classList.add("done");
+    setTimeout(() => { b.textContent = "Copy"; b.classList.remove("done"); }, 1400);
+  }));
+  const vids = [...document.querySelectorAll("video")];
+  vids.forEach(v => v.addEventListener("play", () => vids.forEach(o => o !== v && o.pause())));
+</script>
+</body>
+</html>
