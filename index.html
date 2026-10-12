@@ -110,7 +110,8 @@
   .svc.longevity { background: var(--sage-25); color: var(--forest); } .svc.menopause { background: var(--plum-25); color: var(--plum); }
   .adbody { display: grid; grid-template-columns: auto minmax(280px, 1fr); gap: 26px; align-items: start; }
   .cuts { display: grid; grid-template-columns: repeat(2, 230px); gap: 18px; }
-  .cut video { width: 230px; aspect-ratio: 9 / 16; border-radius: 12px; background: #000; display: block; }
+  .cuts.one { grid-template-columns: 260px; }
+  .cut video { width: 100%; aspect-ratio: 9 / 16; border-radius: 12px; background: #000; display: block; }
   .cutmeta { margin-top: 10px; display: flex; align-items: center; gap: 4px; color: var(--ink); }
 
   /* static ads */
@@ -153,13 +154,13 @@
     <h1>Everything to launch, <em>in one place.</em></h1>
     <p class="lede">Every ad made on October 12, 2026, ready to upload, with the exact text for each one. Preview it here, download what you need, then follow the six launch steps.</p>
     <div class="stats">
-      <span class="stat"><b>3</b> video ads · Tight + Full cuts</span>
+      <span class="stat"><b>3</b> video ads</span>
       <span class="stat"><b>24</b> static ads</span>
       <span class="stat"><b>2</b> carousels</span>
       <span class="stat"><b>3</b> Instagram reels</span>
     </div>
     <div class="bundles">
-      <a class="bundle" href="https://github.com/Optimal-Research-Team/optimal-ad-handoff/releases/tag/2026-10-12" target="_blank" rel="noopener"><span><b>All video ads + reels</b><small>15 files · 569 MB · download page</small></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="bundle" href="https://github.com/Optimal-Research-Team/optimal-ad-handoff/releases/tag/2026-10-12" target="_blank" rel="noopener"><span><b>All video ads + reels</b><small>9 files · 320 MB · download page</small></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
       <a class="bundle" href="https://github.com/Optimal-Research-Team/optimal-ad-handoff/releases/download/2026-10-12/Optimal-static-ads-round-1_2026-10-12.zip" download><span><b>Static ads · round 1</b><small>.zip · 14 MB</small></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
       <a class="bundle" href="https://github.com/Optimal-Research-Team/optimal-ad-handoff/releases/download/2026-10-12/Optimal-static-ads-round-2_2026-10-12.zip" download><span><b>Static ads · round 2</b><small>.zip · 55 MB</small></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
     </div>
@@ -201,22 +202,17 @@
 
   <section class="block" id="video">
     <div class="shead"><div><div class="eyebrow">Video ads · Cheryl, care coordinator</div><h2>Video ads</h2></div>
-      <p class="note">Each ad comes in a Tight and a Full cut. Run both as separate ads in the same ad set and let Meta pick. Previews are compressed; the downloads are full quality.</p></div>
+      <p class="note">One cut per ad, each in 9:16 and 4:5. Previews are compressed; the downloads are full quality.</p></div>
     
     <article class="card ad" id="LV1">
       <header class="adhead"><span class="svc longevity">Longevity membership</span><h3><span class="id">LV1</span> 3 things to know before you book.</h3>
-        <p class="note">Ad names <code>LV1-T</code> and <code>LV1-F</code>. Upload the 4:5 and 9:16 files as one ad.</p></header>
+        <p class="note">Ad name <code>LV1-T</code>. Upload the 4:5 and 9:16 files as one ad.</p></header>
       <div class="adbody">
-        <div class="cuts">
+        <div class="cuts one">
         <div class="cut">
           <video src="previews/LongevityCore_Tight_9x16.mp4" poster="previews/LongevityCore_Tight_9x16.jpg" controls playsinline preload="none"></video>
           <div class="cutmeta"><span class="tag">LV1-T</span><b>Tight · 0:35</b></div>
           <div class="dls"><a class="dl primary" href="https://github.com/Optimal-Research-Team/optimal-ad-handoff/releases/download/2026-10-12/LV1-T_Tight_9x16.mp4" download><span>9:16 · Stories + Reels</span><em>51 MB</em></a><a class="dl" href="files/LV1-T_thumbnail_9x16.jpg" download><span>Thumbnail 9:16</span><em>497 KB</em></a><a class="dl" href="https://github.com/Optimal-Research-Team/optimal-ad-handoff/releases/download/2026-10-12/LV1-T_Tight_4x5.mp4" download><span>4:5 · Feed</span><em>39 MB</em></a><a class="dl" href="files/LV1-T_thumbnail_4x5.jpg" download><span>Thumbnail 4:5</span><em>384 KB</em></a><a class="dl" href="files/LV1-T_captions.srt" download><span>Captions .srt (optional)</span><em>1 KB</em></a></div>
-        </div>
-        <div class="cut">
-          <video src="previews/LongevityCore_Full_9x16.mp4" poster="previews/LongevityCore_Full_9x16.jpg" controls playsinline preload="none"></video>
-          <div class="cutmeta"><span class="tag">LV1-F</span><b>Full · 0:43</b></div>
-          <div class="dls"><a class="dl primary" href="https://github.com/Optimal-Research-Team/optimal-ad-handoff/releases/download/2026-10-12/LV1-F_Full_9x16.mp4" download><span>9:16 · Stories + Reels</span><em>64 MB</em></a><a class="dl" href="files/LV1-F_thumbnail_9x16.jpg" download><span>Thumbnail 9:16</span><em>495 KB</em></a><a class="dl" href="https://github.com/Optimal-Research-Team/optimal-ad-handoff/releases/download/2026-10-12/LV1-F_Full_4x5.mp4" download><span>4:5 · Feed</span><em>48 MB</em></a><a class="dl" href="files/LV1-F_thumbnail_4x5.jpg" download><span>Thumbnail 4:5</span><em>384 KB</em></a><a class="dl" href="files/LV1-F_captions.srt" download><span>Captions .srt (optional)</span><em>2 KB</em></a></div>
         </div></div>
         <div class="copyblock">
           <div class="field"><div class="flabel">Primary text (short)<button class="copy" data-copy="Three things to know before you book, from Cheryl, our care coordinator. Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="3">Three things to know before you book, from Cheryl, our care coordinator. Book a free 15-minute intro call.</textarea></div>
@@ -243,18 +239,13 @@ $1,495 a year, everything included. Book a free 15-minute intro call.</textarea>
     </article>
     <article class="card ad" id="LV2">
       <header class="adhead"><span class="svc longevity">Longevity membership</span><h3><span class="id">LV2</span> A full hour. Every year.</h3>
-        <p class="note">Ad names <code>LV2-T</code> and <code>LV2-F</code>. Upload the 4:5 and 9:16 files as one ad.</p></header>
+        <p class="note">Ad name <code>LV2-T</code>. Upload the 4:5 and 9:16 files as one ad.</p></header>
       <div class="adbody">
-        <div class="cuts">
+        <div class="cuts one">
         <div class="cut">
           <video src="previews/LongevityFullHour_Tight_9x16.mp4" poster="previews/LongevityFullHour_Tight_9x16.jpg" controls playsinline preload="none"></video>
           <div class="cutmeta"><span class="tag">LV2-T</span><b>Tight · 0:36</b></div>
           <div class="dls"><a class="dl primary" href="https://github.com/Optimal-Research-Team/optimal-ad-handoff/releases/download/2026-10-12/LV2-T_Tight_9x16.mp4" download><span>9:16 · Stories + Reels</span><em>32 MB</em></a><a class="dl" href="files/LV2-T_thumbnail_9x16.jpg" download><span>Thumbnail 9:16</span><em>333 KB</em></a><a class="dl" href="https://github.com/Optimal-Research-Team/optimal-ad-handoff/releases/download/2026-10-12/LV2-T_Tight_4x5.mp4" download><span>4:5 · Feed</span><em>26 MB</em></a><a class="dl" href="files/LV2-T_thumbnail_4x5.jpg" download><span>Thumbnail 4:5</span><em>270 KB</em></a><a class="dl" href="files/LV2-T_captions.srt" download><span>Captions .srt (optional)</span><em>1 KB</em></a></div>
-        </div>
-        <div class="cut">
-          <video src="previews/LongevityFullHour_Full_9x16.mp4" poster="previews/LongevityFullHour_Full_9x16.jpg" controls playsinline preload="none"></video>
-          <div class="cutmeta"><span class="tag">LV2-F</span><b>Full · 0:39</b></div>
-          <div class="dls"><a class="dl primary" href="https://github.com/Optimal-Research-Team/optimal-ad-handoff/releases/download/2026-10-12/LV2-F_Full_9x16.mp4" download><span>9:16 · Stories + Reels</span><em>35 MB</em></a><a class="dl" href="files/LV2-F_thumbnail_9x16.jpg" download><span>Thumbnail 9:16</span><em>333 KB</em></a><a class="dl" href="https://github.com/Optimal-Research-Team/optimal-ad-handoff/releases/download/2026-10-12/LV2-F_Full_4x5.mp4" download><span>4:5 · Feed</span><em>28 MB</em></a><a class="dl" href="files/LV2-F_thumbnail_4x5.jpg" download><span>Thumbnail 4:5</span><em>270 KB</em></a><a class="dl" href="files/LV2-F_captions.srt" download><span>Captions .srt (optional)</span><em>2 KB</em></a></div>
         </div></div>
         <div class="copyblock">
           <div class="field"><div class="flabel">Primary text (short)<button class="copy" data-copy="Every Optimal member gets a 60-minute longevity assessment with their Nurse Practitioner, every year. Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="3">Every Optimal member gets a 60-minute longevity assessment with their Nurse Practitioner, every year. Book a free 15-minute intro call.</textarea></div>
@@ -277,18 +268,13 @@ $1,495 a year, everything included. Book a free 15-minute intro call.</textarea>
     </article>
     <article class="card ad" id="MV1">
       <header class="adhead"><span class="svc menopause">Menopause</span><h3><span class="id">MV1</span> “I just don’t feel like myself.”</h3>
-        <p class="note">Ad names <code>MV1-T</code> and <code>MV1-F</code>. Upload the 4:5 and 9:16 files as one ad.</p></header>
+        <p class="note">Ad name <code>MV1-T</code>. Upload the 4:5 and 9:16 files as one ad.</p></header>
       <div class="adbody">
-        <div class="cuts">
+        <div class="cuts one">
         <div class="cut">
           <video src="previews/MenopauseMyself_Tight_9x16.mp4" poster="previews/MenopauseMyself_Tight_9x16.jpg" controls playsinline preload="none"></video>
           <div class="cutmeta"><span class="tag">MV1-T</span><b>Tight · 0:34</b></div>
           <div class="dls"><a class="dl primary" href="https://github.com/Optimal-Research-Team/optimal-ad-handoff/releases/download/2026-10-12/MV1-T_Tight_9x16.mp4" download><span>9:16 · Stories + Reels</span><em>31 MB</em></a><a class="dl" href="files/MV1-T_thumbnail_9x16.jpg" download><span>Thumbnail 9:16</span><em>337 KB</em></a><a class="dl" href="https://github.com/Optimal-Research-Team/optimal-ad-handoff/releases/download/2026-10-12/MV1-T_Tight_4x5.mp4" download><span>4:5 · Feed</span><em>25 MB</em></a><a class="dl" href="files/MV1-T_thumbnail_4x5.jpg" download><span>Thumbnail 4:5</span><em>277 KB</em></a><a class="dl" href="files/MV1-T_captions.srt" download><span>Captions .srt (optional)</span><em>1 KB</em></a></div>
-        </div>
-        <div class="cut">
-          <video src="previews/MenopauseMyself_Full_9x16.mp4" poster="previews/MenopauseMyself_Full_9x16.jpg" controls playsinline preload="none"></video>
-          <div class="cutmeta"><span class="tag">MV1-F</span><b>Full · 0:42</b></div>
-          <div class="dls"><a class="dl primary" href="https://github.com/Optimal-Research-Team/optimal-ad-handoff/releases/download/2026-10-12/MV1-F_Full_9x16.mp4" download><span>9:16 · Stories + Reels</span><em>40 MB</em></a><a class="dl" href="files/MV1-F_thumbnail_9x16.jpg" download><span>Thumbnail 9:16</span><em>337 KB</em></a><a class="dl" href="https://github.com/Optimal-Research-Team/optimal-ad-handoff/releases/download/2026-10-12/MV1-F_Full_4x5.mp4" download><span>4:5 · Feed</span><em>32 MB</em></a><a class="dl" href="files/MV1-F_thumbnail_4x5.jpg" download><span>Thumbnail 4:5</span><em>277 KB</em></a><a class="dl" href="files/MV1-F_captions.srt" download><span>Captions .srt (optional)</span><em>2 KB</em></a></div>
         </div></div>
         <div class="copyblock">
           <div class="field"><div class="flabel">Primary text (short)<button class="copy" data-copy="You don&#x27;t need a diagnosis to reach out. Book a free 15-minute call with our NP-led menopause team in Barrie.">Copy</button></div><textarea readonly rows="3">You don&#x27;t need a diagnosis to reach out. Book a free 15-minute call with our NP-led menopause team in Barrie.</textarea></div>
@@ -318,7 +304,7 @@ Our NP-led menopause and perimenopause program in Barrie starts with a free 15-m
       <article class="card static" id="M1">
         <img src="static-ads/r1/thumbs/M1.jpg" alt="M1" loading="lazy">
         <div class="smeta"><h4><span class="id">M1</span> Perimenopause is more than hot flashes</h4>
-          <div class="dls"><a class="dl primary" href="static-ads/r1/M1_4x5.png" download><span>4:5 Feed</span><em>335 KB</em></a><a class="dl" href="static-ads/r1/M1_9x16.png" download><span>9:16 Stories+Reels</span><em>660 KB</em></a></div>
+          <div class="dls"><a class="dl primary" href="static-ads/r1/M1_4x5.png" download><span>4:5 Feed</span><em>327 KB</em></a><a class="dl" href="static-ads/r1/M1_9x16.png" download><span>9:16 Stories+Reels</span><em>654 KB</em></a></div>
           <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Perimenopause can begin years before periods stop, and hot flashes are only one part of it. Sleep, mood, focus, joints and energy can all shift.
 
 Our NP-led program in Barrie starts with a 60-minute assessment and comprehensive labs. No referral needed.
@@ -332,7 +318,7 @@ Book a free 15-minute call to see if it&#x27;s a fit.</textarea></div><div class
       <article class="card static" id="M2">
         <img src="static-ads/r1/thumbs/M2.jpg" alt="M2" loading="lazy">
         <div class="smeta"><h4><span class="id">M2</span> 60 minutes</h4>
-          <div class="dls"><a class="dl primary" href="static-ads/r1/M2_4x5.png" download><span>4:5 Feed</span><em>270 KB</em></a><a class="dl" href="static-ads/r1/M2_9x16.png" download><span>9:16 Stories+Reels</span><em>396 KB</em></a></div>
+          <div class="dls"><a class="dl primary" href="static-ads/r1/M2_4x5.png" download><span>4:5 Feed</span><em>303 KB</em></a><a class="dl" href="static-ads/r1/M2_9x16.png" download><span>9:16 Stories+Reels</span><em>389 KB</em></a></div>
           <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="The first visit with our Nurse Practitioner is 60 minutes, one-on-one, booked after the bloodwork is back. Then structured follow-ups at weeks 6 and 12 with the same NP.
 
 Comprehensive bloodwork is OHIP-covered. No referral needed.
@@ -346,7 +332,7 @@ Book a free 15-minute call with our care coordinator.</textarea></div><div class
       <article class="card static" id="M3">
         <img src="static-ads/r1/thumbs/M3.jpg" alt="M3" loading="lazy">
         <div class="smeta"><h4><span class="id">M3</span> Know the cost before you start</h4>
-          <div class="dls"><a class="dl primary" href="static-ads/r1/M3_4x5.png" download><span>4:5 Feed</span><em>145 KB</em></a><a class="dl" href="static-ads/r1/M3_9x16.png" download><span>9:16 Stories+Reels</span><em>123 KB</em></a></div>
+          <div class="dls"><a class="dl primary" href="static-ads/r1/M3_4x5.png" download><span>4:5 Feed</span><em>138 KB</em></a><a class="dl" href="static-ads/r1/M3_9x16.png" download><span>9:16 Stories+Reels</span><em>114 KB</em></a></div>
           <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Menopause care with the price up front:
 
 Free 15-minute intro call
@@ -374,7 +360,7 @@ Book a free 15-minute call to see if the program is right for you.</textarea></d
       <article class="card static" id="M5">
         <img src="static-ads/r1/thumbs/M5.jpg" alt="M5" loading="lazy">
         <div class="smeta"><h4><span class="id">M5</span> A clear plan, start to finish</h4>
-          <div class="dls"><a class="dl primary" href="static-ads/r1/M5_4x5.png" download><span>4:5 Feed</span><em>286 KB</em></a><a class="dl" href="static-ads/r1/M5_9x16.png" download><span>9:16 Stories+Reels</span><em>381 KB</em></a></div>
+          <div class="dls"><a class="dl primary" href="static-ads/r1/M5_4x5.png" download><span>4:5 Feed</span><em>306 KB</em></a><a class="dl" href="static-ads/r1/M5_9x16.png" download><span>9:16 Stories+Reels</span><em>373 KB</em></a></div>
           <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="How it works:
 1. A free 15-minute call with our care coordinator
 2. Foundation Program (months 1–3): labs, an InBody scan, a 60-minute NP intake and two follow-ups
@@ -405,7 +391,7 @@ Book a free 15-minute call. No referral needed.</textarea></div><div class="fiel
       <article class="card static" id="L1">
         <img src="static-ads/r1/thumbs/L1.jpg" alt="L1" loading="lazy">
         <div class="smeta"><h4><span class="id">L1</span> One price. Everything included.</h4>
-          <div class="dls"><a class="dl primary" href="static-ads/r1/L1_4x5.png" download><span>4:5 Feed</span><em>156 KB</em></a><a class="dl" href="static-ads/r1/L1_9x16.png" download><span>9:16 Stories+Reels</span><em>148 KB</em></a></div>
+          <div class="dls"><a class="dl primary" href="static-ads/r1/L1_4x5.png" download><span>4:5 Feed</span><em>148 KB</em></a><a class="dl" href="static-ads/r1/L1_9x16.png" download><span>9:16 Stories+Reels</span><em>140 KB</em></a></div>
           <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Your own Nurse Practitioner, unlimited in-person and virtual visits, an annual 60-minute longevity assessment with advanced biomarkers, quarterly InBody scans and a written 12-month plan.
 
 $1,495 a year. HSA eligible.
@@ -419,7 +405,7 @@ Book a free 15-minute intro call with our care coordinator.</textarea></div><div
       <article class="card static" id="L2">
         <img src="static-ads/r1/thumbs/L2.jpg" alt="L2" loading="lazy">
         <div class="smeta"><h4><span class="id">L2</span> Keep your family doctor</h4>
-          <div class="dls"><a class="dl primary" href="static-ads/r1/L2_4x5.png" download><span>4:5 Feed</span><em>149 KB</em></a><a class="dl" href="static-ads/r1/L2_9x16.png" download><span>9:16 Stories+Reels</span><em>148 KB</em></a></div>
+          <div class="dls"><a class="dl primary" href="static-ads/r1/L2_4x5.png" download><span>4:5 Feed</span><em>141 KB</em></a><a class="dl" href="static-ads/r1/L2_9x16.png" download><span>9:16 Stories+Reels</span><em>145 KB</em></a></div>
           <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Joining Optimal doesn&#x27;t mean leaving your family doctor. Our Nurse Practitioners don&#x27;t bill OHIP, so there&#x27;s no outside-use penalty for you or your doctor.
 
 Many members keep their GP and use Optimal for same or next-day visits, longer appointments and a longevity plan.
@@ -433,7 +419,7 @@ Book a free 15-minute intro call.</textarea></div><div class="field"><div class=
       <article class="card static" id="L3">
         <img src="static-ads/r1/thumbs/L3.jpg" alt="L3" loading="lazy">
         <div class="smeta"><h4><span class="id">L3</span> Unwell on Monday? Seen by Tuesday.</h4>
-          <div class="dls"><a class="dl primary" href="static-ads/r1/L3_4x5.png" download><span>4:5 Feed</span><em>125 KB</em></a><a class="dl" href="static-ads/r1/L3_9x16.png" download><span>9:16 Stories+Reels</span><em>138 KB</em></a></div>
+          <div class="dls"><a class="dl primary" href="static-ads/r1/L3_4x5.png" download><span>4:5 Feed</span><em>117 KB</em></a><a class="dl" href="static-ads/r1/L3_9x16.png" download><span>9:16 Stories+Reels</span><em>130 KB</em></a></div>
           <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Same or next-day appointments for time-sensitive concerns, and routine visits with your own NP within a week, in person in Barrie or virtually.
 
 Optimal is a private membership clinic: $1,495 a year, everything included.
@@ -447,7 +433,7 @@ Book a free 15-minute intro call.</textarea></div><div class="field"><div class=
       <article class="card static" id="L4">
         <img src="static-ads/r1/thumbs/L4.jpg" alt="L4" loading="lazy">
         <div class="smeta"><h4><span class="id">L4</span> See what&#x27;s working, every 90 days</h4>
-          <div class="dls"><a class="dl primary" href="static-ads/r1/L4_4x5.png" download><span>4:5 Feed</span><em>203 KB</em></a><a class="dl" href="static-ads/r1/L4_9x16.png" download><span>9:16 Stories+Reels</span><em>249 KB</em></a></div>
+          <div class="dls"><a class="dl primary" href="static-ads/r1/L4_4x5.png" download><span>4:5 Feed</span><em>195 KB</em></a><a class="dl" href="static-ads/r1/L4_9x16.png" download><span>9:16 Stories+Reels</span><em>241 KB</em></a></div>
           <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Every 90 days, an InBody scan tracks muscle mass, body fat and visceral fat, so you and your NP can see what&#x27;s working between annual assessments.
 
 Included in the Optimal membership: $1,495 a year.
@@ -461,7 +447,7 @@ Book a free 15-minute intro call.</textarea></div><div class="field"><div class=
       <article class="card static" id="L5">
         <img src="static-ads/r1/thumbs/L5.jpg" alt="L5" loading="lazy">
         <div class="smeta"><h4><span class="id">L5</span> An hour with your NP. Every year.</h4>
-          <div class="dls"><a class="dl primary" href="static-ads/r1/L5_4x5.png" download><span>4:5 Feed</span><em>338 KB</em></a><a class="dl" href="static-ads/r1/L5_9x16.png" download><span>9:16 Stories+Reels</span><em>677 KB</em></a></div>
+          <div class="dls"><a class="dl primary" href="static-ads/r1/L5_4x5.png" download><span>4:5 Feed</span><em>330 KB</em></a><a class="dl" href="static-ads/r1/L5_9x16.png" download><span>9:16 Stories+Reels</span><em>668 KB</em></a></div>
           <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Once a year, your Nurse Practitioner spends 60 minutes with you on your labs, your goals and what&#x27;s changed, then writes your plan for the next 12 months.
 
 Advanced biomarkers that OHIP doesn&#x27;t cover are included in the $1,495 membership.

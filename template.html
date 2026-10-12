@@ -110,7 +110,8 @@
   .svc.longevity { background: var(--sage-25); color: var(--forest); } .svc.menopause { background: var(--plum-25); color: var(--plum); }
   .adbody { display: grid; grid-template-columns: auto minmax(280px, 1fr); gap: 26px; align-items: start; }
   .cuts { display: grid; grid-template-columns: repeat(2, 230px); gap: 18px; }
-  .cut video { width: 230px; aspect-ratio: 9 / 16; border-radius: 12px; background: #000; display: block; }
+  .cuts.one { grid-template-columns: 260px; }
+  .cut video { width: 100%; aspect-ratio: 9 / 16; border-radius: 12px; background: #000; display: block; }
   .cutmeta { margin-top: 10px; display: flex; align-items: center; gap: 4px; color: var(--ink); }
 
   /* static ads */
@@ -153,7 +154,7 @@
     <h1>Everything to launch, <em>in one place.</em></h1>
     <p class="lede">Every ad made on {{ROUND}}, ready to upload, with the exact text for each one. Preview it here, download what you need, then follow the six launch steps.</p>
     <div class="stats">
-      <span class="stat"><b>{{N_VIDEO}}</b> video ads · Tight + Full cuts</span>
+      <span class="stat"><b>{{N_VIDEO}}</b> video ads</span>
       <span class="stat"><b>{{N_STATIC}}</b> static ads</span>
       <span class="stat"><b>{{N_CAR}}</b> carousels</span>
       <span class="stat"><b>{{N_REELS}}</b> Instagram reels</span>
@@ -201,7 +202,7 @@
 
   <section class="block" id="video">
     <div class="shead"><div><div class="eyebrow">Video ads · Cheryl, care coordinator</div><h2>Video ads</h2></div>
-      <p class="note">Each ad comes in a Tight and a Full cut. Run both as separate ads in the same ad set and let Meta pick. Previews are compressed; the downloads are full quality.</p></div>
+      <p class="note">One cut per ad, each in 9:16 and 4:5. Previews are compressed; the downloads are full quality.</p></div>
     {{VIDEO_ADS}}
   </section>
 

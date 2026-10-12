@@ -36,7 +36,7 @@ VIDEOS = [  # id, service, folder in meta-ad-studio/out, render name, the line o
     ("LV2", "longevity", "longevity-ad2", "LongevityFullHour", "A full hour. Every year."),
     ("MV1", "menopause", "menopause-ad1", "MenopauseMyself", "“I just don’t feel like myself.”"),
 ]
-CUTS = [("T", "Tight"), ("F", "Full")]
+CUTS = [("T", "Tight")]   # Oct 12 (Peter): Tight cuts only
 RATIOS = [("9x16", "9:16 · Stories + Reels"), ("4x5", "4:5 · Feed")]
 
 
@@ -67,7 +67,7 @@ def stage(src, name):
     """Copy into the release staging dir only when changed, so a rebuild never rewrites a file mid-upload."""
     os.makedirs(STAGE, exist_ok=True)
     dst = os.path.join(STAGE, name)
-    if not os.path.exists(dst) or os.path.getsize(dst) != os.path.getsize(src):
+    if not os.path.exists(dst) or os.path.getsize(dst) != os.path.getsize(src) or os.path.getmtime(src) > os.path.getmtime(dst):
         shutil.copy2(src, dst)
     return REL + name
 
@@ -159,9 +159,9 @@ def build():
         vids_html.append(f'''
     <article class="card ad" id="{vid}">
       <header class="adhead"><span class="svc {svc}">{SERVICES[svc]["name"]}</span><h3><span class="id">{vid}</span> {esc(line)}</h3>
-        <p class="note">Ad names <code>{vid}-T</code> and <code>{vid}-F</code>. Upload the 4:5 and 9:16 files as one ad.</p></header>
+        <p class="note">Ad name <code>{vid}-T</code>. Upload the 4:5 and 9:16 files as one ad.</p></header>
       <div class="adbody">
-        <div class="cuts">{"".join(cuts_html)}</div>
+        <div class="cuts one">{"".join(cuts_html)}</div>
         <div class="copyblock">
           {copy_field("Primary text (short)", c["short"], 3)}
           {copy_field("Primary text (long)", c["long"], 8)}
