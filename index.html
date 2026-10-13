@@ -171,10 +171,40 @@
   .budget th { font: 600 11px "Public Sans"; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
   .budget td:first-child { font-weight: 600; color: var(--ink); white-space: nowrap; }
 
+  /* go-live checklist */
+  .golive { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; }
+  .golive .card { padding: 22px 24px; }
+  .golive h4 { color: var(--ink); margin-bottom: 4px; }
+  .golive .note { margin-bottom: 12px; }
+  .check { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: start; padding: 12px 0; border-top: 1px solid var(--line); cursor: pointer; }
+  .check:first-of-type { border-top: 0; }
+  .check input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--forest); cursor: pointer; }
+  .check b { color: var(--ink); font-weight: 600; }
+  .check span { font-size: 14.5px; }
+  .check small { display: block; color: var(--muted); font-size: 13px; margin-top: 3px; }
+  .check:has(input:checked) span { color: var(--muted); }
+  .check:has(input:checked) b { text-decoration: line-through; text-decoration-color: var(--sage); }
+  .progress { font: 600 12.5px "Public Sans"; color: var(--forest); background: var(--sage-25); border-radius: 999px; padding: 5px 12px; }
+  .warn { border-left: 3px solid #A8462F; }
+
+  /* hormozi pass */
+  .principles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 18px; }
+  .principles .card { padding: 16px 18px; }
+  .principles b { display: block; color: var(--ink); margin-bottom: 4px; font-size: 14.5px; }
+  .principles span { font-size: 13.5px; color: var(--body); }
+  .rws { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 12px; }
+  .rw { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 14px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 12px; }
+  .rw img { width: 96px; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 8px; border: 1px solid var(--line); display: block; }
+  .rwt .plan { margin: 0 0 0 4px; vertical-align: 1px; }
+  .rwt p { margin-top: 6px; font-size: 14px; line-height: 1.4; }
+  .rwt .before { color: var(--muted); text-decoration: line-through; text-decoration-color: rgba(118, 115, 109, .45); }
+  .rwt .after { font: 400 18px/1.25 Castoro, serif; color: var(--ink); }
+  .rwt .why { font-size: 13px; color: var(--body); }
+
   footer { margin: 64px 0 0; padding: 28px 0 56px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13.5px; }
 
   @media (max-width: 920px) {
-    .launch, .adbody, .reel, .pgrid, .prules { grid-template-columns: 1fr; }
+    .launch, .adbody, .reel, .pgrid, .prules, .golive, .principles { grid-template-columns: 1fr; }
     .cuts { grid-template-columns: repeat(2, minmax(0, 1fr)); } .cut video { width: 100%; }
     .reelmedia video, .reelmedia img { width: calc(50% - 6px); }
   }
@@ -187,7 +217,7 @@
     <div class="brand"><img src="files/logo.png" alt="Optimal"><span>Ad hand-off · October 12, 2026</span></div>
     <div class="eyebrow">For the ads team</div>
     <h1>Everything to launch, <em>in one place.</em></h1>
-    <p class="lede">Every ad made on October 12, 2026, ready to upload, with the exact text for each one. Don't launch all of them: start with the <b>12 marked Test now</b>, six per service, then rotate the rest in as the test tells you.</p>
+    <p class="lede">Every ad made on October 12, 2026, ready to upload, with the exact text for each one. Work through the go-live checklist, then launch the <b>12 marked Test now</b> (six per service) and rotate the rest in as the test tells you.</p>
     <div class="stats">
       <span class="stat"><b>12</b> to test first</span>
       <span class="stat"><b>3</b> video ads</span>
@@ -204,22 +234,53 @@
 </header>
 
 <nav class="jump"><div class="wrap">
-  <a href="#test">What to test</a><a href="#launch">Launch steps</a><a href="#video">Video ads</a><a href="#round1">Static · round 1</a>
+  <a href="#golive">Go-live checklist</a><a href="#test">What to test</a><a href="#hormozi">Why these words</a><a href="#launch">Launch steps</a><a href="#video">Video ads</a><a href="#round1">Static · round 1</a>
   <a href="#round2">Static · round 2</a><a href="#instagram">Instagram reels</a>
 </div></nav>
 
 <main class="wrap">
+  <section class="block" id="golive">
+    <div class="shead"><div><div class="eyebrow">Start here</div><h2>Go-live <em>checklist</em></h2></div>
+      <p class="note">Tick as you go. Ticks are saved in this browser only. <span class="progress" id="prog">0 of 0 done</span></p></div>
+    <div class="golive">
+      <div class="card">
+        <h4>In Meta Ads Manager</h4>
+        <p class="note">About an hour, start to finish.</p>
+        <label class="check warn"><input type="checkbox" data-k="g-404"><span><b>Fix or pause the three live menopause statics.</b> Their link, beoptimal.ca/womens-health, shows a "Page Not Found" page.
+          <small>Ad Library IDs 4548870122052378, 1707193563843938 and 1436333148369495. Pause them; the new set replaces them.</small></span></label>
+        <label class="check"><input type="checkbox" data-k="g-old"><span><b>Pause the older live ads</b> in the same campaigns so the test isn't diluted.
+          <small>The two older videos: 3267720843438130 (primary care intro) and 28548023041524231 (menopause info call).</small></span></label>
+        <label class="check"><input type="checkbox" data-k="g-sets"><span><b>Set up one ad set per service:</b> Menopause and Longevity membership, with the settings in Launch steps (broad audience, Advantage+ placements, Landing page views).</span></label>
+        <label class="check"><input type="checkbox" data-k="g-m"><span><b>Upload the six Menopause Test now ads</b> in rank order: MV1-T, MB1, M3, MB5, MB2, and the MC carousel.</span></label>
+        <label class="check"><input type="checkbox" data-k="g-l"><span><b>Upload the six Longevity Test now ads</b> in rank order: LV1-T, L1, L2, LB1, LB2, LB3.</span></label>
+        <label class="check"><input type="checkbox" data-k="g-copy"><span><b>Paste the copy and URLs from each card.</b> Name every ad with its ID. Keep the URL parameters exactly as written.
+          <small>Each card's Copy buttons carry the Hormozi-pass text: primary text, headline, description.</small></span></label>
+        <label class="check"><input type="checkbox" data-k="g-pub"><span><b>Publish, then don't touch it for 7 days.</b> Day 7 and day 14 rules are in What to test.</span></label>
+      </div>
+      <div class="card">
+        <h4>Confirm before publishing</h4>
+        <p class="note">Quick yes/no calls for Peter.</p>
+        <label class="check"><input type="checkbox" data-k="c-hst"><span><b>Foundation price wording.</b> M3 says "$895 + HST", matching the consent form. The landing page says "$895 one-time". Make them match.</span></label>
+        <label class="check"><input type="checkbox" data-k="c-cap"><span><b>Capacity.</b> The ads promise "start within days" (menopause) and "same or next-day visits" (longevity). Check the schedule can carry the extra bookings.</span></label>
+        <label class="check"><input type="checkbox" data-k="c-np"><span><b>Clinical read-through.</b> Chantelle reads the symptom lines: MB1, MB2, MB4, M1 and MV1.</span></label>
+        <label class="check"><input type="checkbox" data-k="c-markers"><span><b>Marker count.</b> In LV2 Cheryl says "40-plus biomarkers", while other materials say 26. Settle the number before LV2 runs.
+          <small>LV2 is in Next up, so this doesn't block the first launch.</small></span></label>
+        <label class="check"><input type="checkbox" data-k="c-redirect"><span><b>Site redirect.</b> Jeremy applies the /womens-health redirect patch, so old links and posts land on the menopause page.</span></label>
+      </div>
+    </div>
+  </section>
+
   <section class="block" id="test">
     <div class="shead"><div><div class="eyebrow">Before you launch</div><h2>Test <em>12</em> first, not all 29</h2></div>
       <p class="note">Meta's delivery system groups ads that look or say the same thing and spends on a few of them. A small local budget spread over 29 ads gives none of them enough spend to judge. So launch six distinct ideas per service, learn which angle wins, and rotate the rest in.</p></div>
     <div class="pgrid">
       <div class="card pcol"><span class="svc menopause">Menopause</span>
-        <h4>Test now <em>· launch in this order</em></h4><div class="prows"><a class="prow" href="#MV1"><span class="rank">1</span><img src="previews/MenopauseMyself_Tight_9x16.jpg" alt="" loading="lazy"><span class="pt"><b>MV1-T</b><span>“I just don’t feel like myself.”</span><small>Emotional hook · video</small></span></a><a class="prow" href="#MB1"><span class="rank">2</span><img src="static-ads/r2/thumbs/MB1.jpg" alt="" loading="lazy"><span class="pt"><b>MB1</b><span>Wide awake at 3 a.m., again.</span><small>Relatable moment · photo</small></span></a><a class="prow" href="#M3"><span class="rank">3</span><img src="static-ads/r1/thumbs/M3.jpg" alt="" loading="lazy"><span class="pt"><b>M3</b><span>Know the cost before you start</span><small>Price transparency · price card</small></span></a><a class="prow" href="#MB5"><span class="rank">4</span><img src="static-ads/r2/thumbs/MB5.jpg" alt="" loading="lazy"><span class="pt"><b>MB5</b><span>No referral or family doctor needed.</span><small>Access, no referral · clinic photo</small></span></a><a class="prow" href="#MB2"><span class="rank">5</span><img src="static-ads/r2/thumbs/MB2.jpg" alt="" loading="lazy"><span class="pt"><b>MB2</b><span>Brain fog is a common perimenopause symptom.</span><small>Symptom awareness · photo</small></span></a><a class="prow" href="#MC"><span class="rank">6</span><img src="static-ads/r2/thumbs/MC1.jpg" alt="" loading="lazy"><span class="pt"><b>MC1–5</b><span>Menopause carousel, 5 cards</span><small>How it works · carousel</small></span></a></div>
+        <h4>Test now <em>· launch in this order</em></h4><div class="prows"><a class="prow" href="#MV1"><span class="rank">1</span><img src="previews/MenopauseMyself_Tight_9x16.jpg" alt="" loading="lazy"><span class="pt"><b>MV1-T</b><span>“I just don’t feel like myself.”</span><small>Emotional hook · video</small></span></a><a class="prow" href="#MB1"><span class="rank">2</span><img src="static-ads/r2/thumbs/MB1.jpg" alt="" loading="lazy"><span class="pt"><b>MB1</b><span>Wide awake at 3 a.m., again.</span><small>Relatable moment · photo</small></span></a><a class="prow" href="#M3"><span class="rank">3</span><img src="static-ads/r1/thumbs/M3.jpg" alt="" loading="lazy"><span class="pt"><b>M3</b><span>Know the cost before you start</span><small>Price transparency · price card</small></span></a><a class="prow" href="#MB5"><span class="rank">4</span><img src="static-ads/r2/thumbs/MB5.jpg" alt="" loading="lazy"><span class="pt"><b>MB5</b><span>No referral, no family doctor, and you start within days.</span><small>Access, no referral · clinic photo</small></span></a><a class="prow" href="#MB2"><span class="rank">5</span><img src="static-ads/r2/thumbs/MB2.jpg" alt="" loading="lazy"><span class="pt"><b>MB2</b><span>Brain fog can be perimenopause, not just a busy life.</span><small>Symptom awareness · photo</small></span></a><a class="prow" href="#MC"><span class="rank">6</span><img src="static-ads/r2/thumbs/MC1.jpg" alt="" loading="lazy"><span class="pt"><b>MC1–5</b><span>Menopause carousel, 5 cards</span><small>How it works · carousel</small></span></a></div>
         <h4>Next up <em>· new angles for when you cut one</em></h4><div class="pchips"><a class="pchip" href="#M2"><b>M2</b> 60-minute first visit · big number</a><a class="pchip" href="#M1"><b>M1</b> Symptom list · education</a><a class="pchip" href="#MB4"><b>MB4</b> Hot flashes at work · photo</a><a class="pchip" href="#MB3"><b>MB3</b> NP-led, in Barrie · photo</a></div>
         <h4>Twins <em>· same message, new look, for when one fatigues</em></h4><div class="pchips"><a class="pchip twin" href="#M6"><b>M6</b> twin of MB1</a><a class="pchip twin" href="#M4"><b>M4</b> twin of MB5</a><a class="pchip twin" href="#M5"><b>M5</b> twin of MC1–5</a><a class="pchip twin" href="#MB6"><b>MB6</b> twin of M2</a></div>
       </div>
       <div class="card pcol"><span class="svc longevity">Longevity membership</span>
-        <h4>Test now <em>· launch in this order</em></h4><div class="prows"><a class="prow" href="#LV1"><span class="rank">1</span><img src="previews/LongevityCore_Tight_9x16.jpg" alt="" loading="lazy"><span class="pt"><b>LV1-T</b><span>3 things to know before you book.</span><small>A real person, trust · video</small></span></a><a class="prow" href="#L1"><span class="rank">2</span><img src="static-ads/r1/thumbs/L1.jpg" alt="" loading="lazy"><span class="pt"><b>L1</b><span>One price. Everything included.</span><small>Price and value · ledger</small></span></a><a class="prow" href="#L2"><span class="rank">3</span><img src="static-ads/r1/thumbs/L2.jpg" alt="" loading="lazy"><span class="pt"><b>L2</b><span>Keep your family doctor</span><small>Objection: my family doctor · diagram</small></span></a><a class="prow" href="#LB1"><span class="rank">4</span><img src="static-ads/r2/thumbs/LB1.jpg" alt="" loading="lazy"><span class="pt"><b>LB1</b><span>Barrie has a new kind of health clinic.</span><small>Local awareness · photo</small></span></a><a class="prow" href="#LB2"><span class="rank">5</span><img src="static-ads/r2/thumbs/LB2.jpg" alt="" loading="lazy"><span class="pt"><b>LB2</b><span>Same or next-day visits when something can&#x27;t wait.</span><small>Speed · photo</small></span></a><a class="prow" href="#LB3"><span class="rank">6</span><img src="static-ads/r2/thumbs/LB3.jpg" alt="" loading="lazy"><span class="pt"><b>LB3</b><span>Your body composition, measured every 90 days.</span><small>Measurement · photo</small></span></a></div>
+        <h4>Test now <em>· launch in this order</em></h4><div class="prows"><a class="prow" href="#LV1"><span class="rank">1</span><img src="previews/LongevityCore_Tight_9x16.jpg" alt="" loading="lazy"><span class="pt"><b>LV1-T</b><span>3 things to know before you book.</span><small>A real person, trust · video</small></span></a><a class="prow" href="#L1"><span class="rank">2</span><img src="static-ads/r1/thumbs/L1.jpg" alt="" loading="lazy"><span class="pt"><b>L1</b><span>One price. Everything included.</span><small>Price and value · ledger</small></span></a><a class="prow" href="#L2"><span class="rank">3</span><img src="static-ads/r1/thumbs/L2.jpg" alt="" loading="lazy"><span class="pt"><b>L2</b><span>Keep your family doctor</span><small>Objection: my family doctor · diagram</small></span></a><a class="prow" href="#LB1"><span class="rank">4</span><img src="static-ads/r2/thumbs/LB1.jpg" alt="" loading="lazy"><span class="pt"><b>LB1</b><span>Your own Nurse Practitioner in Barrie, with same or next-day visits.</span><small>Local awareness · photo</small></span></a><a class="prow" href="#LB2"><span class="rank">5</span><img src="static-ads/r2/thumbs/LB2.jpg" alt="" loading="lazy"><span class="pt"><b>LB2</b><span>Sick today, seen tomorrow, by an NP who knows you.</span><small>Speed · photo</small></span></a><a class="prow" href="#LB3"><span class="rank">6</span><img src="static-ads/r2/thumbs/LB3.jpg" alt="" loading="lazy"><span class="pt"><b>LB3</b><span>See what&#x27;s working, every 90 days.</span><small>Measurement · photo</small></span></a></div>
         <h4>Next up <em>· new angles for when you cut one</em></h4><div class="pchips"><a class="pchip" href="#LV2"><b>LV2-T</b> A full hour, every year · video</a><a class="pchip" href="#LC"><b>LC1–5</b> What $1,495 includes · carousel</a><a class="pchip" href="#L6"><b>L6</b> OHIP still covers labs · photo + capsule</a><a class="pchip" href="#LB4"><b>LB4</b> Written 12-month plan · photo</a></div>
         <h4>Twins <em>· same message, new look, for when one fatigues</em></h4><div class="pchips"><a class="pchip twin" href="#L3"><b>L3</b> twin of LB2</a><a class="pchip twin" href="#L4"><b>L4</b> twin of LB3</a><a class="pchip twin" href="#L5"><b>L5</b> twin of LV2-T</a><a class="pchip twin" href="#LB5"><b>LB5</b> twin of L1</a><a class="pchip twin" href="#LB6"><b>LB6</b> twin of L6</a></div>
       </div></div>
@@ -249,6 +310,51 @@
         <p class="note" style="margin-top:12px">These are rules of thumb for a single-city clinic. Recalibrate once week-one numbers come in: local CPMs vary a lot by season and audience.</p>
       </div>
     </div>
+  </section>
+
+  <section class="block" id="hormozi">
+    <div class="shead"><div><div class="eyebrow">Hormozi pass · Oct 13</div><h2>Why these <em>words</em></h2></div>
+      <p class="note">Every ad was reviewed the way Alex Hormozi reviews ads: would a stranger stop, know it's for them, want the outcome, believe it, and know the next step? These are the lines that changed on the image. All primary text and headlines were rewritten to the same rules.</p></div>
+    <div class="principles">
+      <div class="card"><b>Hook, then outcome</b><span>The image line has to stop the scroll and promise something concrete. "Sick today, seen tomorrow" beats "a new kind of clinic".</span></div>
+      <div class="card"><b>Cut wait and effort</b><span>Value goes up when time and effort go down: "start within days", "no referral", "free 15-minute call".</span></div>
+      <div class="card"><b>Benefits over features</b><span>Not "body composition scans": "see what's working". Not "a written plan": "know exactly what to do".</span></div>
+      <div class="card"><b>Make the price small</b><span>$1,495 a year is about $4 a day. Every longevity headline or description carries one of the two.</span></div>
+      <div class="card"><b>One offer everywhere</b><span>Image, primary text, headline and button all point at the same thing: a free 15-minute call, no commitment.</span></div>
+      <div class="card"><b>Only true scarcity</b><span>"We cap membership" and "a small panel of patients" both come from the clinic's own pages. Nothing is invented.</span></div>
+    </div>
+    <div class="rws"><div class="rw"><a href="#LB1"><img src="static-ads/r2/thumbs/LB1.jpg" alt="LB1" loading="lazy"></a>
+          <div class="rwt"><span class="id">LB1</span> <span class="plan now">Test now · #4</span>
+            <p class="before">Barrie has a new kind of health clinic.</p><p class="after">Your own Nurse Practitioner in Barrie, with same or next-day visits.</p><p class="why">Vague becomes a specific outcome. “New kind of clinic” says nothing; your own NP and next-day visits is the dream outcome.</p></div></div><div class="rw"><a href="#LB2"><img src="static-ads/r2/thumbs/LB2.jpg" alt="LB2" loading="lazy"></a>
+          <div class="rwt"><span class="id">LB2</span> <span class="plan now">Test now · #5</span>
+            <p class="before">Same or next-day visits when something can’t wait.</p><p class="after">Sick today, seen tomorrow, by an NP who knows you.</p><p class="why">A scene the reader has lived, plus the relationship. Time delay goes to almost zero.</p></div></div><div class="rw"><a href="#LB3"><img src="static-ads/r2/thumbs/LB3.jpg" alt="LB3" loading="lazy"></a>
+          <div class="rwt"><span class="id">LB3</span> <span class="plan now">Test now · #6</span>
+            <p class="before">Your body composition, measured every 90 days.</p><p class="after">See what’s working, every 90 days.</p><p class="why">Feature becomes benefit. Nobody wants a scan; they want proof it’s working.</p></div></div><div class="rw"><a href="#LB4"><img src="static-ads/r2/thumbs/LB4.jpg" alt="LB4" loading="lazy"></a>
+          <div class="rwt"><span class="id">LB4</span> <span class="plan next">Next up</span>
+            <p class="before">Every member gets a written 12-month plan.</p><p class="after">Know exactly what to do for your health this year.</p><p class="why">Sell the certainty, not the document.</p></div></div><div class="rw"><a href="#LB5"><img src="static-ads/r2/thumbs/LB5.jpg" alt="LB5" loading="lazy"></a>
+          <div class="rwt"><span class="id">LB5</span> <span class="plan twin">Twin of L1</span>
+            <p class="before">Your own Nurse Practitioner for $1,495 a year.</p><p class="after">Your own Nurse Practitioner for about $4 a day.</p><p class="why">The same price reframed per day ($1,495 ÷ 365).</p></div></div><div class="rw"><a href="#LB6"><img src="static-ads/r2/thumbs/LB6.jpg" alt="LB6" loading="lazy"></a>
+          <div class="rwt"><span class="id">LB6</span> <span class="plan twin">Twin of L6</span>
+            <p class="before">Medically necessary labs are still covered by OHIP.</p><p class="after">OHIP still covers your medically necessary labs.</p><p class="why">Lead with the reassurance: the objection is answered in the first three words.</p></div></div><div class="rw"><a href="#MB2"><img src="static-ads/r2/thumbs/MB2.jpg" alt="MB2" loading="lazy"></a>
+          <div class="rwt"><span class="id">MB2</span> <span class="plan now">Test now · #5</span>
+            <p class="before">Brain fog is a common perimenopause symptom.</p><p class="after">Brain fog can be perimenopause, not just a busy life.</p><p class="why">Names the wrong explanation she’s been giving herself, then reframes it. Curiosity, not a textbook line.</p></div></div><div class="rw"><a href="#MB3"><img src="static-ads/r2/thumbs/MB3.jpg" alt="MB3" loading="lazy"></a>
+          <div class="rwt"><span class="id">MB3</span> <span class="plan next">Next up</span>
+            <p class="before">Menopause care in Barrie, led by a Nurse Practitioner.</p><p class="after">Start menopause care in Barrie within days.</p><p class="why">Description becomes outcome plus speed. Cutting the time delay raises perceived value.</p></div></div><div class="rw"><a href="#MB4"><img src="static-ads/r2/thumbs/MB4.jpg" alt="MB4" loading="lazy"></a>
+          <div class="rwt"><span class="id">MB4</span> <span class="plan next">Next up</span>
+            <p class="before">Hot flashes don’t wait for a good time.</p><p class="after">Hot flashes don’t wait, and neither should you.</p><p class="why">Keeps the relatable hook and adds the push to act.</p></div></div><div class="rw"><a href="#MB5"><img src="static-ads/r2/thumbs/MB5.jpg" alt="MB5" loading="lazy"></a>
+          <div class="rwt"><span class="id">MB5</span> <span class="plan now">Test now · #4</span>
+            <p class="before">No referral or family doctor needed.</p><p class="after">No referral, no family doctor, and you start within days.</p><p class="why">Stacks the effort removers and adds speed.</p></div></div><div class="rw"><a href="#MC"><img src="static-ads/r2/thumbs/MC1.jpg" alt="MC1" loading="lazy"></a>
+          <div class="rwt"><span class="id">MC1</span> 
+            <p class="before">It starts with a free 15-minute call.</p><p class="after">Menopause care in Barrie starts with a free 15-minute call.</p><p class="why">Card 1 has to say who and where, or nobody swipes.</p></div></div><div class="rw"><a href="#MC"><img src="static-ads/r2/thumbs/MC4.jpg" alt="MC4" loading="lazy"></a>
+          <div class="rwt"><span class="id">MC4</span> 
+            <p class="before">You get a written treatment plan.</p><p class="after">You get a written plan and the same NP every visit.</p><p class="why">Adds continuity: the same person at every visit, so the plan comes with someone who knows the history.</p></div></div><div class="rw"><a href="#MC"><img src="static-ads/r2/thumbs/MC5.jpg" alt="MC5" loading="lazy"></a>
+          <div class="rwt"><span class="id">MC5</span> 
+            <p class="before">Book your free call at beoptimal.ca.</p><p class="after">No referral needed: book your free call at beoptimal.ca.</p><p class="why">Removes the last objection right at the call to action.</p></div></div><div class="rw"><a href="#LC"><img src="static-ads/r2/thumbs/LC1.jpg" alt="LC1" loading="lazy"></a>
+          <div class="rwt"><span class="id">LC1</span> 
+            <p class="before">Here’s what $1,495 a year includes.</p><p class="after">Here’s everything $1,495 a year gets you.</p><p class="why">“Gets you” is about the reader, not the product.</p></div></div><div class="rw"><a href="#LC"><img src="static-ads/r2/thumbs/LC5.jpg" alt="LC5" loading="lazy"></a>
+          <div class="rwt"><span class="id">LC5</span> 
+            <p class="before">Book a free intro call at beoptimal.ca.</p><p class="after">Start with a free 15-minute call, no commitment.</p><p class="why">Risk reversal: free, short and no strings.</p></div></div></div>
+    <p class="note" style="margin-top:14px">Kept as they were: MB1 ("Wide awake at 3 a.m., again." is already a strong hook), M3, L2, MB6 and the round 1 headlines. Primary text everywhere now follows one shape: hook, then what you get and how fast, then the free offer.</p>
   </section>
 
   <section class="block" id="launch">
@@ -293,22 +399,22 @@
           <div class="dls"><a class="dl primary" href="https://github.com/Optimal-Research-Team/optimal-ad-handoff/releases/download/2026-10-12/LV1-T_Tight_9x16.mp4" download><span>9:16 · Stories + Reels</span><em>51 MB</em></a><a class="dl" href="files/LV1-T_thumbnail_9x16.jpg" download><span>Thumbnail 9:16</span><em>497 KB</em></a><a class="dl" href="https://github.com/Optimal-Research-Team/optimal-ad-handoff/releases/download/2026-10-12/LV1-T_Tight_4x5.mp4" download><span>4:5 · Feed</span><em>39 MB</em></a><a class="dl" href="files/LV1-T_thumbnail_4x5.jpg" download><span>Thumbnail 4:5</span><em>384 KB</em></a><a class="dl" href="files/LV1-T_captions.srt" download><span>Captions .srt (optional)</span><em>1 KB</em></a></div>
         </div></div>
         <div class="copyblock">
-          <div class="field"><div class="flabel">Primary text (short)<button class="copy" data-copy="Three things to know before you book, from Cheryl, our care coordinator. Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="3">Three things to know before you book, from Cheryl, our care coordinator. Book a free 15-minute intro call.</textarea></div>
+          <div class="field"><div class="flabel">Primary text (short)<button class="copy" data-copy="3 things to know before you book, from Cheryl, our care coordinator. Your own Nurse Practitioner, unhurried visits and fast appointments for $1,495 a year. Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="3">3 things to know before you book, from Cheryl, our care coordinator. Your own Nurse Practitioner, unhurried visits and fast appointments for $1,495 a year. Book a free 15-minute intro call.</textarea></div>
           <div class="field"><div class="flabel">Primary text (long)<button class="copy" data-copy="Three things to know before you book, from Cheryl, our care coordinator:
 
 1. Every member gets a 60-minute annual longevity assessment with their Nurse Practitioner, including comprehensive bloodwork.
-2. Thorough, unrushed appointments.
+2. Thorough, unrushed appointments. We cap membership to keep it that way.
 3. Faster appointment times, so you&#x27;re seen when you need to be.
 
-$1,495 a year, everything included. Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="8">Three things to know before you book, from Cheryl, our care coordinator:
+$1,495 a year, about $4 a day, everything included and HSA eligible. Book a free 15-minute intro call. No commitment.">Copy</button></div><textarea readonly rows="8">Three things to know before you book, from Cheryl, our care coordinator:
 
 1. Every member gets a 60-minute annual longevity assessment with their Nurse Practitioner, including comprehensive bloodwork.
-2. Thorough, unrushed appointments.
+2. Thorough, unrushed appointments. We cap membership to keep it that way.
 3. Faster appointment times, so you&#x27;re seen when you need to be.
 
-$1,495 a year, everything included. Book a free 15-minute intro call.</textarea></div>
+$1,495 a year, about $4 a day, everything included and HSA eligible. Book a free 15-minute intro call. No commitment.</textarea></div>
           <div class="field"><div class="flabel">Headline<button class="copy" data-copy="3 things to know before you book">Copy</button></div><div class="val">3 things to know before you book</div></div>
-          <div class="field"><div class="flabel">Description<button class="copy" data-copy="$1,495/yr, all included">Copy</button></div><div class="val">$1,495/yr, all included</div></div>
+          <div class="field"><div class="flabel">Description<button class="copy" data-copy="About $4 a day, all included">Copy</button></div><div class="val">About $4 a day, all included</div></div>
           <div class="field"><div class="flabel">Website URL<button class="copy" data-copy="https://www.beoptimal.ca/membership">Copy</button></div><div class="val">https://www.beoptimal.ca/membership</div></div>
           <div class="field"><div class="flabel">URL parameters<button class="copy" data-copy="utm_source=meta&amp;utm_medium=paid&amp;utm_campaign=opt-b-q4&amp;utm_content={{ad.name}}">Copy</button></div><div class="val">utm_source=meta&amp;utm_medium=paid&amp;utm_campaign=opt-b-q4&amp;utm_content={{ad.name}}</div></div>
           <div class="field"><div class="flabel">Call to action</div><div class="val">Book now</div></div>
@@ -326,18 +432,18 @@ $1,495 a year, everything included. Book a free 15-minute intro call.</textarea>
           <div class="dls"><a class="dl primary" href="https://github.com/Optimal-Research-Team/optimal-ad-handoff/releases/download/2026-10-12/LV2-T_Tight_9x16.mp4" download><span>9:16 · Stories + Reels</span><em>32 MB</em></a><a class="dl" href="files/LV2-T_thumbnail_9x16.jpg" download><span>Thumbnail 9:16</span><em>333 KB</em></a><a class="dl" href="https://github.com/Optimal-Research-Team/optimal-ad-handoff/releases/download/2026-10-12/LV2-T_Tight_4x5.mp4" download><span>4:5 · Feed</span><em>26 MB</em></a><a class="dl" href="files/LV2-T_thumbnail_4x5.jpg" download><span>Thumbnail 4:5</span><em>270 KB</em></a><a class="dl" href="files/LV2-T_captions.srt" download><span>Captions .srt (optional)</span><em>1 KB</em></a></div>
         </div></div>
         <div class="copyblock">
-          <div class="field"><div class="flabel">Primary text (short)<button class="copy" data-copy="Every Optimal member gets a 60-minute longevity assessment with their Nurse Practitioner, every year. Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="3">Every Optimal member gets a 60-minute longevity assessment with their Nurse Practitioner, every year. Book a free 15-minute intro call.</textarea></div>
+          <div class="field"><div class="flabel">Primary text (short)<button class="copy" data-copy="When did anyone last spend a full hour on your health? Every Optimal member gets one, every year, with their Nurse Practitioner. Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="3">When did anyone last spend a full hour on your health? Every Optimal member gets one, every year, with their Nurse Practitioner. Book a free 15-minute intro call.</textarea></div>
           <div class="field"><div class="flabel">Primary text (long)<button class="copy" data-copy="A full hour with your Nurse Practitioner, every year.
 
 Every Optimal member gets an annual longevity assessment: 60 minutes on your labs, your body composition and your goals, then a written plan for the next 12 months.
 
-$1,495 a year, everything included. Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="8">A full hour with your Nurse Practitioner, every year.
+$1,495 a year, about $4 a day, everything included. We cap membership so visits stay unhurried. Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="8">A full hour with your Nurse Practitioner, every year.
 
 Every Optimal member gets an annual longevity assessment: 60 minutes on your labs, your body composition and your goals, then a written plan for the next 12 months.
 
-$1,495 a year, everything included. Book a free 15-minute intro call.</textarea></div>
+$1,495 a year, about $4 a day, everything included. We cap membership so visits stay unhurried. Book a free 15-minute intro call.</textarea></div>
           <div class="field"><div class="flabel">Headline<button class="copy" data-copy="A full hour. Every year.">Copy</button></div><div class="val">A full hour. Every year.</div></div>
-          <div class="field"><div class="flabel">Description<button class="copy" data-copy="$1,495/yr, all included">Copy</button></div><div class="val">$1,495/yr, all included</div></div>
+          <div class="field"><div class="flabel">Description<button class="copy" data-copy="About $4 a day, all included">Copy</button></div><div class="val">About $4 a day, all included</div></div>
           <div class="field"><div class="flabel">Website URL<button class="copy" data-copy="https://www.beoptimal.ca/membership">Copy</button></div><div class="val">https://www.beoptimal.ca/membership</div></div>
           <div class="field"><div class="flabel">URL parameters<button class="copy" data-copy="utm_source=meta&amp;utm_medium=paid&amp;utm_campaign=opt-b-q4&amp;utm_content={{ad.name}}">Copy</button></div><div class="val">utm_source=meta&amp;utm_medium=paid&amp;utm_campaign=opt-b-q4&amp;utm_content={{ad.name}}</div></div>
           <div class="field"><div class="flabel">Call to action</div><div class="val">Book now</div></div>
@@ -355,18 +461,18 @@ $1,495 a year, everything included. Book a free 15-minute intro call.</textarea>
           <div class="dls"><a class="dl primary" href="https://github.com/Optimal-Research-Team/optimal-ad-handoff/releases/download/2026-10-12/MV1-T_Tight_9x16.mp4" download><span>9:16 · Stories + Reels</span><em>31 MB</em></a><a class="dl" href="files/MV1-T_thumbnail_9x16.jpg" download><span>Thumbnail 9:16</span><em>337 KB</em></a><a class="dl" href="https://github.com/Optimal-Research-Team/optimal-ad-handoff/releases/download/2026-10-12/MV1-T_Tight_4x5.mp4" download><span>4:5 · Feed</span><em>25 MB</em></a><a class="dl" href="files/MV1-T_thumbnail_4x5.jpg" download><span>Thumbnail 4:5</span><em>277 KB</em></a><a class="dl" href="files/MV1-T_captions.srt" download><span>Captions .srt (optional)</span><em>1 KB</em></a></div>
         </div></div>
         <div class="copyblock">
-          <div class="field"><div class="flabel">Primary text (short)<button class="copy" data-copy="You don&#x27;t need a diagnosis to reach out. Book a free 15-minute call with our NP-led menopause team in Barrie.">Copy</button></div><textarea readonly rows="3">You don&#x27;t need a diagnosis to reach out. Book a free 15-minute call with our NP-led menopause team in Barrie.</textarea></div>
+          <div class="field"><div class="flabel">Primary text (short)<button class="copy" data-copy="&quot;I just don&#x27;t feel like myself.&quot; It&#x27;s what our care coordinator hears most. You don&#x27;t need a diagnosis to reach out: book a free 15-minute call. No referral needed.">Copy</button></div><textarea readonly rows="3">&quot;I just don&#x27;t feel like myself.&quot; It&#x27;s what our care coordinator hears most. You don&#x27;t need a diagnosis to reach out: book a free 15-minute call. No referral needed.</textarea></div>
           <div class="field"><div class="flabel">Primary text (long)<button class="copy" data-copy="&quot;I just don&#x27;t feel like myself.&quot; It&#x27;s what our care coordinator hears most often.
 
 Brain fog, broken sleep, mood changes, cycles that have suddenly shifted. You don&#x27;t need a diagnosis to reach out.
 
-Our NP-led menopause and perimenopause program in Barrie starts with a free 15-minute call. No referral needed.">Copy</button></div><textarea readonly rows="8">&quot;I just don&#x27;t feel like myself.&quot; It&#x27;s what our care coordinator hears most often.
+Our NP-led menopause and perimenopause program in Barrie starts within days, with labs and a 60-minute visit with the same NP every time. Your first step is a free 15-minute call. No referral needed.">Copy</button></div><textarea readonly rows="8">&quot;I just don&#x27;t feel like myself.&quot; It&#x27;s what our care coordinator hears most often.
 
 Brain fog, broken sleep, mood changes, cycles that have suddenly shifted. You don&#x27;t need a diagnosis to reach out.
 
-Our NP-led menopause and perimenopause program in Barrie starts with a free 15-minute call. No referral needed.</textarea></div>
+Our NP-led menopause and perimenopause program in Barrie starts within days, with labs and a 60-minute visit with the same NP every time. Your first step is a free 15-minute call. No referral needed.</textarea></div>
           <div class="field"><div class="flabel">Headline<button class="copy" data-copy="Menopause care in Barrie">Copy</button></div><div class="val">Menopause care in Barrie</div></div><div class="field"><div class="flabel">Alt headline<button class="copy" data-copy="You don&#x27;t need a diagnosis">Copy</button></div><div class="val">You don&#x27;t need a diagnosis</div></div>
-          <div class="field"><div class="flabel">Description<button class="copy" data-copy="Free 15-min intro call">Copy</button></div><div class="val">Free 15-min intro call</div></div>
+          <div class="field"><div class="flabel">Description<button class="copy" data-copy="Free 15-min call · No referral">Copy</button></div><div class="val">Free 15-min call · No referral</div></div>
           <div class="field"><div class="flabel">Website URL<button class="copy" data-copy="https://www.beoptimal.ca/services/menopause-and-perimenopause-care">Copy</button></div><div class="val">https://www.beoptimal.ca/services/menopause-and-perimenopause-care</div></div>
           <div class="field"><div class="flabel">URL parameters<button class="copy" data-copy="utm_source=meta&amp;utm_medium=paid&amp;utm_campaign=opt-a-q4&amp;utm_content={{ad.name}}">Copy</button></div><div class="val">utm_source=meta&amp;utm_medium=paid&amp;utm_campaign=opt-a-q4&amp;utm_content={{ad.name}}</div></div>
           <div class="field"><div class="flabel">Call to action</div><div class="val">Book now</div></div>
@@ -383,29 +489,29 @@ Our NP-led menopause and perimenopause program in Barrie starts with a free 15-m
         <img src="static-ads/r1/thumbs/M1.jpg" alt="M1" loading="lazy">
         <div class="smeta"><span class="plan next">Next up</span><h4><span class="id">M1</span> Perimenopause is more than hot flashes</h4>
           <div class="dls"><a class="dl primary" href="static-ads/r1/M1_4x5.png" download><span>4:5 Feed</span><em>329 KB</em></a><a class="dl" href="static-ads/r1/M1_9x16.png" download><span>9:16 Stories+Reels</span><em>656 KB</em></a></div>
-          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Perimenopause can begin years before periods stop, and hot flashes are only one part of it. Sleep, mood, focus, joints and energy can all shift.
+          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Perimenopause is more than hot flashes. 3 a.m. wake-ups, brain fog, joint aches and mood changes can all be part of it, often years before periods stop.
 
-Our NP-led program in Barrie starts with a 60-minute assessment and comprehensive labs. No referral needed.
+Our NP-led program in Barrie starts with comprehensive labs and a 60-minute visit, and you can start within days.
 
-Book a free 15-minute call to see if it&#x27;s a fit.">Copy</button></div><textarea readonly rows="4">Perimenopause can begin years before periods stop, and hot flashes are only one part of it. Sleep, mood, focus, joints and energy can all shift.
+Book your free 15-minute call. No referral needed.">Copy</button></div><textarea readonly rows="4">Perimenopause is more than hot flashes. 3 a.m. wake-ups, brain fog, joint aches and mood changes can all be part of it, often years before periods stop.
 
-Our NP-led program in Barrie starts with a 60-minute assessment and comprehensive labs. No referral needed.
+Our NP-led program in Barrie starts with comprehensive labs and a 60-minute visit, and you can start within days.
 
-Book a free 15-minute call to see if it&#x27;s a fit.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Menopause care in Barrie">Copy</button></div><div class="val">Menopause care in Barrie</div></div><div class="field"><div class="flabel">Description<button class="copy" data-copy="Free 15-min intro call">Copy</button></div><div class="val">Free 15-min intro call</div></div></div>
+Book your free 15-minute call. No referral needed.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="More than hot flashes">Copy</button></div><div class="val">More than hot flashes</div></div><div class="field"><div class="flabel">Description<button class="copy" data-copy="Free 15-min call · No referral">Copy</button></div><div class="val">Free 15-min call · No referral</div></div></div>
       </article>
       <article class="card static" id="M2">
         <img src="static-ads/r1/thumbs/M2.jpg" alt="M2" loading="lazy">
         <div class="smeta"><span class="plan next">Next up</span><h4><span class="id">M2</span> 60 minutes</h4>
           <div class="dls"><a class="dl primary" href="static-ads/r1/M2_4x5.png" download><span>4:5 Feed</span><em>236 KB</em></a><a class="dl" href="static-ads/r1/M2_9x16.png" download><span>9:16 Stories+Reels</span><em>390 KB</em></a></div>
-          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="The first visit with our Nurse Practitioner is 60 minutes, one-on-one, booked after the bloodwork is back. Then structured follow-ups at weeks 6 and 12 with the same NP.
+          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="60 minutes. That&#x27;s your first visit with our Nurse Practitioner: one-on-one, once your labs are back, with time to tell the whole story.
 
-Comprehensive bloodwork is OHIP-covered. No referral needed.
+Then follow-ups at weeks 6 and 12 with the same NP. Bloodwork is OHIP-covered.
 
-Book a free 15-minute call with our care coordinator.">Copy</button></div><textarea readonly rows="4">The first visit with our Nurse Practitioner is 60 minutes, one-on-one, booked after the bloodwork is back. Then structured follow-ups at weeks 6 and 12 with the same NP.
+Book your free 15-minute call. No referral needed.">Copy</button></div><textarea readonly rows="4">60 minutes. That&#x27;s your first visit with our Nurse Practitioner: one-on-one, once your labs are back, with time to tell the whole story.
 
-Comprehensive bloodwork is OHIP-covered. No referral needed.
+Then follow-ups at weeks 6 and 12 with the same NP. Bloodwork is OHIP-covered.
 
-Book a free 15-minute call with our care coordinator.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="A 60-minute first visit">Copy</button></div><div class="val">A 60-minute first visit</div></div><div class="field"><div class="flabel">Description<button class="copy" data-copy="Same NP every visit">Copy</button></div><div class="val">Same NP every visit</div></div></div>
+Book your free 15-minute call. No referral needed.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="A 60-minute first visit">Copy</button></div><div class="val">A 60-minute first visit</div></div><div class="field"><div class="flabel">Description<button class="copy" data-copy="Same NP every visit">Copy</button></div><div class="val">Same NP every visit</div></div></div>
       </article>
       <article class="card static" id="M3">
         <img src="static-ads/r1/thumbs/M3.jpg" alt="M3" loading="lazy">
@@ -413,43 +519,47 @@ Book a free 15-minute call with our care coordinator.</textarea></div><div class
           <div class="dls"><a class="dl primary" href="static-ads/r1/M3_4x5.png" download><span>4:5 Feed</span><em>140 KB</em></a><a class="dl" href="static-ads/r1/M3_9x16.png" download><span>9:16 Stories+Reels</span><em>110 KB</em></a></div>
           <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Menopause care with the price up front:
 
-Free 15-minute intro call
-Foundation Program (months 1–3): $895 + HST
+Free 15-minute call
+Foundation Program (months 1–3): $895 + HST, covering labs, a body scan, a 60-minute NP visit and 2 follow-ups
 Ongoing Care (month 4 on): $795 a year
 
-Bloodwork is OHIP-covered, and NP receipts may be claimable on extended health plans. Book your free call.">Copy</button></div><textarea readonly rows="4">Menopause care with the price up front:
+Bloodwork is OHIP-covered. No referral needed. Book your free call to see if it fits.">Copy</button></div><textarea readonly rows="4">Menopause care with the price up front:
 
-Free 15-minute intro call
-Foundation Program (months 1–3): $895 + HST
+Free 15-minute call
+Foundation Program (months 1–3): $895 + HST, covering labs, a body scan, a 60-minute NP visit and 2 follow-ups
 Ongoing Care (month 4 on): $795 a year
 
-Bloodwork is OHIP-covered, and NP receipts may be claimable on extended health plans. Book your free call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Menopause care, priced up front">Copy</button></div><div class="val">Menopause care, priced up front</div></div><div class="field"><div class="flabel">Description<button class="copy" data-copy="No referral needed">Copy</button></div><div class="val">No referral needed</div></div></div>
+Bloodwork is OHIP-covered. No referral needed. Book your free call to see if it fits.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Know the cost before you start">Copy</button></div><div class="val">Know the cost before you start</div></div><div class="field"><div class="flabel">Description<button class="copy" data-copy="Free 15-min call · No referral">Copy</button></div><div class="val">Free 15-min call · No referral</div></div></div>
       </article>
       <article class="card static" id="M4">
         <img src="static-ads/r1/thumbs/M4.jpg" alt="M4" loading="lazy">
         <div class="smeta"><span class="plan twin">Twin of MB5</span><h4><span class="id">M4</span> No referral. No family doctor needed.</h4>
           <div class="dls"><a class="dl primary" href="static-ads/r1/M4_4x5.png" download><span>4:5 Feed</span><em>1 MB</em></a><a class="dl" href="static-ads/r1/M4_9x16.png" download><span>9:16 Stories+Reels</span><em>2 MB</em></a></div>
-          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="No referral or family doctor needed. Our menopause and perimenopause program is led by a Nurse Practitioner, for women 35 and older, at our clinic in Barrie, with appointments within days.
+          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="No referral and no family doctor needed. Menopause and perimenopause care in Barrie, led by a Nurse Practitioner, for women 35 and older.
 
-Book a free 15-minute call to see if the program is right for you.">Copy</button></div><textarea readonly rows="4">No referral or family doctor needed. Our menopause and perimenopause program is led by a Nurse Practitioner, for women 35 and older, at our clinic in Barrie, with appointments within days.
+You can start within days, and you see the same NP at every visit.
 
-Book a free 15-minute call to see if the program is right for you.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="No referral needed">Copy</button></div><div class="val">No referral needed</div></div><div class="field"><div class="flabel">Description<button class="copy" data-copy="630 Huronia Rd, Barrie">Copy</button></div><div class="val">630 Huronia Rd, Barrie</div></div></div>
+Book your free 15-minute call.">Copy</button></div><textarea readonly rows="4">No referral and no family doctor needed. Menopause and perimenopause care in Barrie, led by a Nurse Practitioner, for women 35 and older.
+
+You can start within days, and you see the same NP at every visit.
+
+Book your free 15-minute call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="No referral needed">Copy</button></div><div class="val">No referral needed</div></div><div class="field"><div class="flabel">Description<button class="copy" data-copy="Start within days in Barrie">Copy</button></div><div class="val">Start within days in Barrie</div></div></div>
       </article>
       <article class="card static" id="M5">
         <img src="static-ads/r1/thumbs/M5.jpg" alt="M5" loading="lazy">
         <div class="smeta"><span class="plan twin">Twin of MC1–5</span><h4><span class="id">M5</span> A clear plan, start to finish</h4>
           <div class="dls"><a class="dl primary" href="static-ads/r1/M5_4x5.png" download><span>4:5 Feed</span><em>247 KB</em></a><a class="dl" href="static-ads/r1/M5_9x16.png" download><span>9:16 Stories+Reels</span><em>375 KB</em></a></div>
-          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="How it works:
-1. A free 15-minute call with our care coordinator
-2. Foundation Program (months 1–3): labs, an InBody scan, a 60-minute NP intake and two follow-ups
-3. Ongoing care with the same NP: three visits a year, prescriptions managed
+          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Here&#x27;s exactly how it works:
+1. A free 15-minute call. No commitment.
+2. Months 1–3: labs, a body scan, a 60-minute NP visit and 2 follow-ups.
+3. Ongoing care with the same NP, 3 visits a year.
 
-Book your free call. No commitment.">Copy</button></div><textarea readonly rows="4">How it works:
-1. A free 15-minute call with our care coordinator
-2. Foundation Program (months 1–3): labs, an InBody scan, a 60-minute NP intake and two follow-ups
-3. Ongoing care with the same NP: three visits a year, prescriptions managed
+No referral needed. Book your free call.">Copy</button></div><textarea readonly rows="4">Here&#x27;s exactly how it works:
+1. A free 15-minute call. No commitment.
+2. Months 1–3: labs, a body scan, a 60-minute NP visit and 2 follow-ups.
+3. Ongoing care with the same NP, 3 visits a year.
 
-Book your free call. No commitment.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="A clear plan, start to finish">Copy</button></div><div class="val">A clear plan, start to finish</div></div><div class="field"><div class="flabel">Description<button class="copy" data-copy="Free 15-min intro call">Copy</button></div><div class="val">Free 15-min intro call</div></div></div>
+No referral needed. Book your free call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="A clear plan, start to finish">Copy</button></div><div class="val">A clear plan, start to finish</div></div><div class="field"><div class="flabel">Description<button class="copy" data-copy="Free 15-min call · No referral">Copy</button></div><div class="val">Free 15-min call · No referral</div></div></div>
       </article>
       <article class="card static" id="M6">
         <img src="static-ads/r1/thumbs/M6.jpg" alt="M6" loading="lazy">
@@ -457,82 +567,82 @@ Book your free call. No commitment.</textarea></div><div class="field"><div clas
           <div class="dls"><a class="dl primary" href="static-ads/r1/M6_4x5.png" download><span>4:5 Feed</span><em>1 MB</em></a><a class="dl" href="static-ads/r1/M6_9x16.png" download><span>9:16 Stories+Reels</span><em>2 MB</em></a></div>
           <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="3 a.m. Wide awake. Again.
 
-Night sweats and broken sleep are common in perimenopause. Our NP-led program in Barrie starts with a 60-minute assessment and comprehensive labs.
+Night sweats and broken sleep are common in perimenopause, and they&#x27;re treatable. Our NP-led program in Barrie starts with labs and a 60-minute visit, and you can start within days.
 
-Book a free 15-minute call. No referral needed.">Copy</button></div><textarea readonly rows="4">3 a.m. Wide awake. Again.
+Book your free 15-minute call. No referral needed.">Copy</button></div><textarea readonly rows="4">3 a.m. Wide awake. Again.
 
-Night sweats and broken sleep are common in perimenopause. Our NP-led program in Barrie starts with a 60-minute assessment and comprehensive labs.
+Night sweats and broken sleep are common in perimenopause, and they&#x27;re treatable. Our NP-led program in Barrie starts with labs and a 60-minute visit, and you can start within days.
 
-Book a free 15-minute call. No referral needed.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Perimenopause care in Barrie">Copy</button></div><div class="val">Perimenopause care in Barrie</div></div><div class="field"><div class="flabel">Description<button class="copy" data-copy="Free 15-min intro call">Copy</button></div><div class="val">Free 15-min intro call</div></div></div>
+Book your free 15-minute call. No referral needed.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Perimenopause care in Barrie">Copy</button></div><div class="val">Perimenopause care in Barrie</div></div><div class="field"><div class="flabel">Description<button class="copy" data-copy="Free 15-min call · No referral">Copy</button></div><div class="val">Free 15-min call · No referral</div></div></div>
       </article></div>
     <div class="sub"><span class="svc longevity">Longevity membership</span></div><div class="grid">
       <article class="card static" id="L1">
         <img src="static-ads/r1/thumbs/L1.jpg" alt="L1" loading="lazy">
         <div class="smeta"><span class="plan now">Test now · #2</span><h4><span class="id">L1</span> One price. Everything included.</h4>
-          <div class="dls"><a class="dl primary" href="static-ads/r1/L1_4x5.png" download><span>4:5 Feed</span><em>150 KB</em></a><a class="dl" href="static-ads/r1/L1_9x16.png" download><span>9:16 Stories+Reels</span><em>136 KB</em></a></div>
-          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Your own Nurse Practitioner, unlimited in-person and virtual visits, an annual 60-minute longevity assessment with advanced biomarkers, quarterly InBody scans and a written 12-month plan.
+          <div class="dls"><a class="dl primary" href="static-ads/r1/L1_4x5.png" download><span>4:5 Feed</span><em>158 KB</em></a><a class="dl" href="static-ads/r1/L1_9x16.png" download><span>9:16 Stories+Reels</span><em>144 KB</em></a></div>
+          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="One price, everything included: your own Nurse Practitioner, unlimited in-person and virtual visits, a 60-minute longevity assessment every year, body scans every 90 days and a written 12-month plan.
 
-$1,495 a year. HSA eligible.
+$1,495 a year, about $4 a day. HSA eligible.
 
-Book a free 15-minute intro call with our care coordinator.">Copy</button></div><textarea readonly rows="4">Your own Nurse Practitioner, unlimited in-person and virtual visits, an annual 60-minute longevity assessment with advanced biomarkers, quarterly InBody scans and a written 12-month plan.
+We cap membership so visits stay unhurried. Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="4">One price, everything included: your own Nurse Practitioner, unlimited in-person and virtual visits, a 60-minute longevity assessment every year, body scans every 90 days and a written 12-month plan.
 
-$1,495 a year. HSA eligible.
+$1,495 a year, about $4 a day. HSA eligible.
 
-Book a free 15-minute intro call with our care coordinator.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="One price. Everything included.">Copy</button></div><div class="val">One price. Everything included.</div></div><div class="field"><div class="flabel">Description<button class="copy" data-copy="HSA eligible">Copy</button></div><div class="val">HSA eligible</div></div></div>
+We cap membership so visits stay unhurried. Book a free 15-minute intro call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="One price. Everything included.">Copy</button></div><div class="val">One price. Everything included.</div></div><div class="field"><div class="flabel">Description<button class="copy" data-copy="About $4 a day · HSA eligible">Copy</button></div><div class="val">About $4 a day · HSA eligible</div></div></div>
       </article>
       <article class="card static" id="L2">
         <img src="static-ads/r1/thumbs/L2.jpg" alt="L2" loading="lazy">
         <div class="smeta"><span class="plan now">Test now · #3</span><h4><span class="id">L2</span> Keep your family doctor</h4>
           <div class="dls"><a class="dl primary" href="static-ads/r1/L2_4x5.png" download><span>4:5 Feed</span><em>133 KB</em></a><a class="dl" href="static-ads/r1/L2_9x16.png" download><span>9:16 Stories+Reels</span><em>140 KB</em></a></div>
-          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Joining Optimal doesn&#x27;t mean leaving your family doctor. Our Nurse Practitioners don&#x27;t bill OHIP, so there&#x27;s no outside-use penalty for you or your doctor.
+          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Keep your family doctor. Our Nurse Practitioners don&#x27;t bill OHIP, so there&#x27;s no outside-use penalty for you or your doctor.
 
-Many members keep their GP and use Optimal for same or next-day visits, longer appointments and a longevity plan.
+Then add a team with time: same or next-day visits, longer appointments and a longevity plan every year.
 
-Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="4">Joining Optimal doesn&#x27;t mean leaving your family doctor. Our Nurse Practitioners don&#x27;t bill OHIP, so there&#x27;s no outside-use penalty for you or your doctor.
+Book a free 15-minute intro call. No commitment.">Copy</button></div><textarea readonly rows="4">Keep your family doctor. Our Nurse Practitioners don&#x27;t bill OHIP, so there&#x27;s no outside-use penalty for you or your doctor.
 
-Many members keep their GP and use Optimal for same or next-day visits, longer appointments and a longevity plan.
+Then add a team with time: same or next-day visits, longer appointments and a longevity plan every year.
 
-Book a free 15-minute intro call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Keep your family doctor">Copy</button></div><div class="val">Keep your family doctor</div></div><div class="field"><div class="flabel">Description<button class="copy" data-copy="Private NP membership, Barrie">Copy</button></div><div class="val">Private NP membership, Barrie</div></div></div>
+Book a free 15-minute intro call. No commitment.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Keep your family doctor">Copy</button></div><div class="val">Keep your family doctor</div></div><div class="field"><div class="flabel">Description<button class="copy" data-copy="Add an NP team with time">Copy</button></div><div class="val">Add an NP team with time</div></div></div>
       </article>
       <article class="card static" id="L3">
         <img src="static-ads/r1/thumbs/L3.jpg" alt="L3" loading="lazy">
         <div class="smeta"><span class="plan twin">Twin of LB2</span><h4><span class="id">L3</span> Unwell on Monday? Seen by Tuesday.</h4>
           <div class="dls"><a class="dl primary" href="static-ads/r1/L3_4x5.png" download><span>4:5 Feed</span><em>119 KB</em></a><a class="dl" href="static-ads/r1/L3_9x16.png" download><span>9:16 Stories+Reels</span><em>127 KB</em></a></div>
-          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Same or next-day appointments for time-sensitive concerns, and routine visits with your own NP within a week, in person in Barrie or virtually.
+          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Unwell on Monday? Seen by Tuesday.
 
-Optimal is a private membership clinic: $1,495 a year, everything included.
+Members get same or next-day visits for time-sensitive concerns, and routine visits within a week, with their own Nurse Practitioner, in person or virtual.
 
-Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="4">Same or next-day appointments for time-sensitive concerns, and routine visits with your own NP within a week, in person in Barrie or virtually.
+$1,495 a year, everything included. Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="4">Unwell on Monday? Seen by Tuesday.
 
-Optimal is a private membership clinic: $1,495 a year, everything included.
+Members get same or next-day visits for time-sensitive concerns, and routine visits within a week, with their own Nurse Practitioner, in person or virtual.
 
-Book a free 15-minute intro call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Same or next-day visits in Barrie">Copy</button></div><div class="val">Same or next-day visits in Barrie</div></div><div class="field"><div class="flabel">Description<button class="copy" data-copy="$1,495/yr, all included">Copy</button></div><div class="val">$1,495/yr, all included</div></div></div>
+$1,495 a year, everything included. Book a free 15-minute intro call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Seen same or next day">Copy</button></div><div class="val">Seen same or next day</div></div><div class="field"><div class="flabel">Description<button class="copy" data-copy="$1,495/yr · all included">Copy</button></div><div class="val">$1,495/yr · all included</div></div></div>
       </article>
       <article class="card static" id="L4">
         <img src="static-ads/r1/thumbs/L4.jpg" alt="L4" loading="lazy">
         <div class="smeta"><span class="plan twin">Twin of LB3</span><h4><span class="id">L4</span> See what&#x27;s working, every 90 days</h4>
           <div class="dls"><a class="dl primary" href="static-ads/r1/L4_4x5.png" download><span>4:5 Feed</span><em>197 KB</em></a><a class="dl" href="static-ads/r1/L4_9x16.png" download><span>9:16 Stories+Reels</span><em>243 KB</em></a></div>
-          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Every 90 days, an InBody scan tracks muscle mass, body fat and visceral fat, so you and your NP can see what&#x27;s working between annual assessments.
+          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="See what&#x27;s working. An InBody scan every 90 days tracks your muscle, body fat and visceral fat, and your NP reviews it with you.
 
-Included in the Optimal membership: $1,495 a year.
+Included in the $1,495 membership, with unlimited visits and an annual longevity assessment.
 
-Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="4">Every 90 days, an InBody scan tracks muscle mass, body fat and visceral fat, so you and your NP can see what&#x27;s working between annual assessments.
+Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="4">See what&#x27;s working. An InBody scan every 90 days tracks your muscle, body fat and visceral fat, and your NP reviews it with you.
 
-Included in the Optimal membership: $1,495 a year.
+Included in the $1,495 membership, with unlimited visits and an annual longevity assessment.
 
-Book a free 15-minute intro call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Body scans every 90 days, included">Copy</button></div><div class="val">Body scans every 90 days, included</div></div><div class="field"><div class="flabel">Description<button class="copy" data-copy="Optimal membership">Copy</button></div><div class="val">Optimal membership</div></div></div>
+Book a free 15-minute intro call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Body scans every 90 days">Copy</button></div><div class="val">Body scans every 90 days</div></div><div class="field"><div class="flabel">Description<button class="copy" data-copy="Included in membership">Copy</button></div><div class="val">Included in membership</div></div></div>
       </article>
       <article class="card static" id="L5">
         <img src="static-ads/r1/thumbs/L5.jpg" alt="L5" loading="lazy">
         <div class="smeta"><span class="plan twin">Twin of LV2-T</span><h4><span class="id">L5</span> An hour with your NP. Every year.</h4>
           <div class="dls"><a class="dl primary" href="static-ads/r1/L5_4x5.png" download><span>4:5 Feed</span><em>332 KB</em></a><a class="dl" href="static-ads/r1/L5_9x16.png" download><span>9:16 Stories+Reels</span><em>670 KB</em></a></div>
-          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Once a year, your Nurse Practitioner spends 60 minutes with you on your labs, your goals and what&#x27;s changed, then writes your plan for the next 12 months.
+          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="An hour with your Nurse Practitioner, every year. We go through your advanced biomarkers line by line, then write your plan for the next 12 months.
 
-Advanced biomarkers that OHIP doesn&#x27;t cover are included in the $1,495 membership.
+Included in the $1,495 membership, along with unlimited visits.
 
-Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="4">Once a year, your Nurse Practitioner spends 60 minutes with you on your labs, your goals and what&#x27;s changed, then writes your plan for the next 12 months.
+Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="4">An hour with your Nurse Practitioner, every year. We go through your advanced biomarkers line by line, then write your plan for the next 12 months.
 
-Advanced biomarkers that OHIP doesn&#x27;t cover are included in the $1,495 membership.
+Included in the $1,495 membership, along with unlimited visits.
 
 Book a free 15-minute intro call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="A 60-minute assessment, every year">Copy</button></div><div class="val">A 60-minute assessment, every year</div></div><div class="field"><div class="flabel">Description<button class="copy" data-copy="Advanced biomarkers included">Copy</button></div><div class="val">Advanced biomarkers included</div></div></div>
       </article>
@@ -540,15 +650,11 @@ Book a free 15-minute intro call.</textarea></div><div class="field"><div class=
         <img src="static-ads/r1/thumbs/L6.jpg" alt="L6" loading="lazy">
         <div class="smeta"><span class="plan next">Next up</span><h4><span class="id">L6</span> OHIP still covers your labs</h4>
           <div class="dls"><a class="dl primary" href="static-ads/r1/L6_4x5.png" download><span>4:5 Feed</span><em>1 MB</em></a><a class="dl" href="static-ads/r1/L6_9x16.png" download><span>9:16 Stories+Reels</span><em>2 MB</em></a></div>
-          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Optimal is a private membership, but OHIP still covers the medically necessary labs, imaging and specialist visits your NP orders.
+          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Optimal is private, but OHIP still covers the medically necessary labs, imaging and specialist visits your NP orders. The advanced longevity markers OHIP doesn&#x27;t cover are included in your membership.
 
-The membership itself is $1,495 a year and HSA eligible.
+$1,495 a year, HSA eligible. Book a free 15-minute intro call to ask about your coverage.">Copy</button></div><textarea readonly rows="4">Optimal is private, but OHIP still covers the medically necessary labs, imaging and specialist visits your NP orders. The advanced longevity markers OHIP doesn&#x27;t cover are included in your membership.
 
-Book a free 15-minute intro call to ask about your coverage.">Copy</button></div><textarea readonly rows="4">Optimal is a private membership, but OHIP still covers the medically necessary labs, imaging and specialist visits your NP orders.
-
-The membership itself is $1,495 a year and HSA eligible.
-
-Book a free 15-minute intro call to ask about your coverage.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Private care. OHIP still covers labs.">Copy</button></div><div class="val">Private care. OHIP still covers labs.</div></div><div class="field"><div class="flabel">Description<button class="copy" data-copy="$1,495/yr · HSA eligible">Copy</button></div><div class="val">$1,495/yr · HSA eligible</div></div></div>
+$1,495 a year, HSA eligible. Book a free 15-minute intro call to ask about your coverage.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="OHIP still covers your labs">Copy</button></div><div class="val">OHIP still covers your labs</div></div><div class="field"><div class="flabel">Description<button class="copy" data-copy="$1,495/yr · HSA eligible">Copy</button></div><div class="val">$1,495/yr · HSA eligible</div></div></div>
       </article></div>
   </section>
 
@@ -560,80 +666,80 @@ Book a free 15-minute intro call to ask about your coverage.</textarea></div><di
         <img src="static-ads/r2/thumbs/MB1.jpg" alt="MB1" loading="lazy">
         <div class="smeta"><span class="plan now">Test now · #2</span><h4><span class="id">MB1</span> Wide awake at 3 a.m., again.</h4>
           <div class="dls"><a class="dl primary" href="static-ads/r2/MB1_4x5.png" download><span>4:5 Feed</span><em>974 KB</em></a><a class="dl" href="static-ads/r2/MB1_9x16.png" download><span>9:16 Stories+Reels</span><em>1 MB</em></a></div>
-          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Night sweats and broken sleep are common in perimenopause. Book a free 15-minute call with our NP-led team in Barrie.">Copy</button></div><textarea readonly rows="4">Night sweats and broken sleep are common in perimenopause. Book a free 15-minute call with our NP-led team in Barrie.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Menopause care in Barrie">Copy</button></div><div class="val">Menopause care in Barrie</div></div></div>
+          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Night sweats and 3 a.m. wake-ups are common in perimenopause, and they&#x27;re treatable. Start within days with our NP-led team in Barrie: no referral, and your first call is free.">Copy</button></div><textarea readonly rows="4">Night sweats and 3 a.m. wake-ups are common in perimenopause, and they&#x27;re treatable. Start within days with our NP-led team in Barrie: no referral, and your first call is free.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Free 15-min call · No referral">Copy</button></div><div class="val">Free 15-min call · No referral</div></div></div>
       </article>
       <article class="card static" id="MB2">
         <img src="static-ads/r2/thumbs/MB2.jpg" alt="MB2" loading="lazy">
-        <div class="smeta"><span class="plan now">Test now · #5</span><h4><span class="id">MB2</span> Brain fog is a common perimenopause symptom.</h4>
-          <div class="dls"><a class="dl primary" href="static-ads/r2/MB2_4x5.png" download><span>4:5 Feed</span><em>940 KB</em></a><a class="dl" href="static-ads/r2/MB2_9x16.png" download><span>9:16 Stories+Reels</span><em>1 MB</em></a></div>
-          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Brain fog, poor sleep and mood changes can all be part of perimenopause. Book a free 15-minute call to see if our program fits.">Copy</button></div><textarea readonly rows="4">Brain fog, poor sleep and mood changes can all be part of perimenopause. Book a free 15-minute call to see if our program fits.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="NP-led menopause care">Copy</button></div><div class="val">NP-led menopause care</div></div></div>
+        <div class="smeta"><span class="plan now">Test now · #5</span><h4><span class="id">MB2</span> Brain fog can be perimenopause, not just a busy life.</h4>
+          <div class="dls"><a class="dl primary" href="static-ads/r2/MB2_4x5.png" download><span>4:5 Feed</span><em>942 KB</em></a><a class="dl" href="static-ads/r2/MB2_9x16.png" download><span>9:16 Stories+Reels</span><em>1 MB</em></a></div>
+          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Brain fog, lost words, keys in the fridge: these can be perimenopause, not just a busy life. Find out with comprehensive labs and a 60-minute NP visit. Book your free 15-minute call.">Copy</button></div><textarea readonly rows="4">Brain fog, lost words, keys in the fridge: these can be perimenopause, not just a busy life. Find out with comprehensive labs and a 60-minute NP visit. Book your free 15-minute call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Labs + a 60-minute NP visit">Copy</button></div><div class="val">Labs + a 60-minute NP visit</div></div></div>
       </article>
       <article class="card static" id="MB3">
         <img src="static-ads/r2/thumbs/MB3.jpg" alt="MB3" loading="lazy">
-        <div class="smeta"><span class="plan next">Next up</span><h4><span class="id">MB3</span> Menopause care in Barrie, led by a Nurse Practitioner.</h4>
+        <div class="smeta"><span class="plan next">Next up</span><h4><span class="id">MB3</span> Start menopause care in Barrie within days.</h4>
           <div class="dls"><a class="dl primary" href="static-ads/r2/MB3_4x5.png" download><span>4:5 Feed</span><em>2 MB</em></a><a class="dl" href="static-ads/r2/MB3_9x16.png" download><span>9:16 Stories+Reels</span><em>3 MB</em></a></div>
-          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Our menopause and perimenopause program is led by a Nurse Practitioner, here in Barrie. Book a free 15-minute call.">Copy</button></div><textarea readonly rows="4">Our menopause and perimenopause program is led by a Nurse Practitioner, here in Barrie. Book a free 15-minute call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="No referral needed">Copy</button></div><div class="val">No referral needed</div></div></div>
+          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Menopause and perimenopause care in Barrie, led by a Nurse Practitioner who keeps a small panel of patients. Start within days, no referral needed. Book your free 15-minute call.">Copy</button></div><textarea readonly rows="4">Menopause and perimenopause care in Barrie, led by a Nurse Practitioner who keeps a small panel of patients. Start within days, no referral needed. Book your free 15-minute call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Start within days">Copy</button></div><div class="val">Start within days</div></div></div>
       </article>
       <article class="card static" id="MB4">
         <img src="static-ads/r2/thumbs/MB4.jpg" alt="MB4" loading="lazy">
-        <div class="smeta"><span class="plan next">Next up</span><h4><span class="id">MB4</span> Hot flashes don&#x27;t wait for a good time.</h4>
+        <div class="smeta"><span class="plan next">Next up</span><h4><span class="id">MB4</span> Hot flashes don&#x27;t wait, and neither should you.</h4>
           <div class="dls"><a class="dl primary" href="static-ads/r2/MB4_4x5.png" download><span>4:5 Feed</span><em>1 MB</em></a><a class="dl" href="static-ads/r2/MB4_9x16.png" download><span>9:16 Stories+Reels</span><em>2 MB</em></a></div>
-          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Hot flashes are one of the most common signs of perimenopause. Book a free 15-minute call with our NP-led team.">Copy</button></div><textarea readonly rows="4">Hot flashes are one of the most common signs of perimenopause. Book a free 15-minute call with our NP-led team.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Menopause care in Barrie">Copy</button></div><div class="val">Menopause care in Barrie</div></div></div>
+          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Hot flashes, night sweats and broken sleep are common in perimenopause, and worth treating. Start within days with our NP-led team in Barrie. Book your free 15-minute call.">Copy</button></div><textarea readonly rows="4">Hot flashes, night sweats and broken sleep are common in perimenopause, and worth treating. Start within days with our NP-led team in Barrie. Book your free 15-minute call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Free 15-min call · No referral">Copy</button></div><div class="val">Free 15-min call · No referral</div></div></div>
       </article>
       <article class="card static" id="MB5">
         <img src="static-ads/r2/thumbs/MB5.jpg" alt="MB5" loading="lazy">
-        <div class="smeta"><span class="plan now">Test now · #4</span><h4><span class="id">MB5</span> No referral or family doctor needed.</h4>
+        <div class="smeta"><span class="plan now">Test now · #4</span><h4><span class="id">MB5</span> No referral, no family doctor, and you start within days.</h4>
           <div class="dls"><a class="dl primary" href="static-ads/r2/MB5_4x5.png" download><span>4:5 Feed</span><em>2 MB</em></a><a class="dl" href="static-ads/r2/MB5_9x16.png" download><span>9:16 Stories+Reels</span><em>2 MB</em></a></div>
-          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Start menopause care in Barrie without a referral or a family doctor. Book a free 15-minute call.">Copy</button></div><textarea readonly rows="4">Start menopause care in Barrie without a referral or a family doctor. Book a free 15-minute call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Free 15-min intro call">Copy</button></div><div class="val">Free 15-min intro call</div></div></div>
+          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="No referral and no family doctor needed. Start menopause care in Barrie within days, with the same Nurse Practitioner at every visit. Book your free 15-minute call.">Copy</button></div><textarea readonly rows="4">No referral and no family doctor needed. Start menopause care in Barrie within days, with the same Nurse Practitioner at every visit. Book your free 15-minute call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="No referral needed">Copy</button></div><div class="val">No referral needed</div></div></div>
       </article>
       <article class="card static" id="MB6">
         <img src="static-ads/r2/thumbs/MB6.jpg" alt="MB6" loading="lazy">
         <div class="smeta"><span class="plan twin">Twin of M2</span><h4><span class="id">MB6</span> Your first NP visit is a full 60 minutes.</h4>
           <div class="dls"><a class="dl primary" href="static-ads/r2/MB6_4x5.png" download><span>4:5 Feed</span><em>1 MB</em></a><a class="dl" href="static-ads/r2/MB6_9x16.png" download><span>9:16 Stories+Reels</span><em>2 MB</em></a></div>
-          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Your first Nurse Practitioner visit is 60 minutes, one-on-one. Book a free 15-minute call to get started.">Copy</button></div><textarea readonly rows="4">Your first Nurse Practitioner visit is 60 minutes, one-on-one. Book a free 15-minute call to get started.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="A 60-minute first visit">Copy</button></div><div class="val">A 60-minute first visit</div></div></div>
+          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Your first Nurse Practitioner visit is a full 60 minutes, one-on-one, once your labs are back. Then you keep the same NP at every visit. Book your free 15-minute call.">Copy</button></div><textarea readonly rows="4">Your first Nurse Practitioner visit is a full 60 minutes, one-on-one, once your labs are back. Then you keep the same NP at every visit. Book your free 15-minute call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="A 60-minute first visit">Copy</button></div><div class="val">A 60-minute first visit</div></div></div>
       </article></div>
     <div class="sub"><span class="svc longevity">Longevity membership</span></div><div class="grid">
       <article class="card static" id="LB1">
         <img src="static-ads/r2/thumbs/LB1.jpg" alt="LB1" loading="lazy">
-        <div class="smeta"><span class="plan now">Test now · #4</span><h4><span class="id">LB1</span> Barrie has a new kind of health clinic.</h4>
+        <div class="smeta"><span class="plan now">Test now · #4</span><h4><span class="id">LB1</span> Your own Nurse Practitioner in Barrie, with same or next-day visits.</h4>
           <div class="dls"><a class="dl primary" href="static-ads/r2/LB1_4x5.png" download><span>4:5 Feed</span><em>1 MB</em></a><a class="dl" href="static-ads/r2/LB1_9x16.png" download><span>9:16 Stories+Reels</span><em>2 MB</em></a></div>
-          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Optimal is a private, NP-led membership clinic in Barrie. Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="4">Optimal is a private, NP-led membership clinic in Barrie. Book a free 15-minute intro call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="A new kind of health clinic">Copy</button></div><div class="val">A new kind of health clinic</div></div></div>
+          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Your own Nurse Practitioner in Barrie: same or next-day visits when something can&#x27;t wait, unlimited in-person and virtual appointments, and a full longevity assessment every year. $1,495 a year. Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="4">Your own Nurse Practitioner in Barrie: same or next-day visits when something can&#x27;t wait, unlimited in-person and virtual appointments, and a full longevity assessment every year. $1,495 a year. Book a free 15-minute intro call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Your own NP · $1,495/yr">Copy</button></div><div class="val">Your own NP · $1,495/yr</div></div></div>
       </article>
       <article class="card static" id="LB2">
         <img src="static-ads/r2/thumbs/LB2.jpg" alt="LB2" loading="lazy">
-        <div class="smeta"><span class="plan now">Test now · #5</span><h4><span class="id">LB2</span> Same or next-day visits when something can&#x27;t wait.</h4>
+        <div class="smeta"><span class="plan now">Test now · #5</span><h4><span class="id">LB2</span> Sick today, seen tomorrow, by an NP who knows you.</h4>
           <div class="dls"><a class="dl primary" href="static-ads/r2/LB2_4x5.png" download><span>4:5 Feed</span><em>2 MB</em></a><a class="dl" href="static-ads/r2/LB2_9x16.png" download><span>9:16 Stories+Reels</span><em>2 MB</em></a></div>
-          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Members get same or next-day appointments for time-sensitive concerns. $1,495 a year, everything included.">Copy</button></div><textarea readonly rows="4">Members get same or next-day appointments for time-sensitive concerns. $1,495 a year, everything included.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Same or next-day visits">Copy</button></div><div class="val">Same or next-day visits</div></div></div>
+          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Members get same or next-day visits for time-sensitive concerns, with the same Nurse Practitioner every time. $1,495 a year, everything included. Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="4">Members get same or next-day visits for time-sensitive concerns, with the same Nurse Practitioner every time. $1,495 a year, everything included. Book a free 15-minute intro call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Same or next-day visits">Copy</button></div><div class="val">Same or next-day visits</div></div></div>
       </article>
       <article class="card static" id="LB3">
         <img src="static-ads/r2/thumbs/LB3.jpg" alt="LB3" loading="lazy">
-        <div class="smeta"><span class="plan now">Test now · #6</span><h4><span class="id">LB3</span> Your body composition, measured every 90 days.</h4>
+        <div class="smeta"><span class="plan now">Test now · #6</span><h4><span class="id">LB3</span> See what&#x27;s working, every 90 days.</h4>
           <div class="dls"><a class="dl primary" href="static-ads/r2/LB3_4x5.png" download><span>4:5 Feed</span><em>2 MB</em></a><a class="dl" href="static-ads/r2/LB3_9x16.png" download><span>9:16 Stories+Reels</span><em>2 MB</em></a></div>
-          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Every membership includes an InBody body composition scan every 90 days. Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="4">Every membership includes an InBody body composition scan every 90 days. Book a free 15-minute intro call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Scans every 90 days, included">Copy</button></div><div class="val">Scans every 90 days, included</div></div></div>
+          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="An InBody scan every 90 days shows exactly what&#x27;s changing: muscle, body fat and visceral fat, reviewed with your NP. Included in the $1,495 membership. Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="4">An InBody scan every 90 days shows exactly what&#x27;s changing: muscle, body fat and visceral fat, reviewed with your NP. Included in the $1,495 membership. Book a free 15-minute intro call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Body scans every 90 days">Copy</button></div><div class="val">Body scans every 90 days</div></div></div>
       </article>
       <article class="card static" id="LB4">
         <img src="static-ads/r2/thumbs/LB4.jpg" alt="LB4" loading="lazy">
-        <div class="smeta"><span class="plan next">Next up</span><h4><span class="id">LB4</span> Every member gets a written 12-month plan.</h4>
+        <div class="smeta"><span class="plan next">Next up</span><h4><span class="id">LB4</span> Know exactly what to do for your health this year.</h4>
           <div class="dls"><a class="dl primary" href="static-ads/r2/LB4_4x5.png" download><span>4:5 Feed</span><em>2 MB</em></a><a class="dl" href="static-ads/r2/LB4_9x16.png" download><span>9:16 Stories+Reels</span><em>2 MB</em></a></div>
-          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Your annual longevity assessment ends with a written plan for the next 12 months. Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="4">Your annual longevity assessment ends with a written plan for the next 12 months. Book a free 15-minute intro call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Your 12-month health plan">Copy</button></div><div class="val">Your 12-month health plan</div></div></div>
+          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Every member gets a 60-minute longevity assessment and a written 12-month plan, so you know exactly what to focus on this year. $1,495 a year, everything included. Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="4">Every member gets a 60-minute longevity assessment and a written 12-month plan, so you know exactly what to focus on this year. $1,495 a year, everything included. Book a free 15-minute intro call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Your 12-month health plan">Copy</button></div><div class="val">Your 12-month health plan</div></div></div>
       </article>
       <article class="card static" id="LB5">
         <img src="static-ads/r2/thumbs/LB5.jpg" alt="LB5" loading="lazy">
-        <div class="smeta"><span class="plan twin">Twin of L1</span><h4><span class="id">LB5</span> Your own Nurse Practitioner for $1,495 a year.</h4>
+        <div class="smeta"><span class="plan twin">Twin of L1</span><h4><span class="id">LB5</span> Your own Nurse Practitioner for about $4 a day.</h4>
           <div class="dls"><a class="dl primary" href="static-ads/r2/LB5_4x5.png" download><span>4:5 Feed</span><em>2 MB</em></a><a class="dl" href="static-ads/r2/LB5_9x16.png" download><span>9:16 Stories+Reels</span><em>2 MB</em></a></div>
-          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Your own Nurse Practitioner and unlimited in-person and virtual visits for $1,495 a year. HSA eligible.">Copy</button></div><textarea readonly rows="4">Your own Nurse Practitioner and unlimited in-person and virtual visits for $1,495 a year. HSA eligible.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="Unlimited visits, one annual fee">Copy</button></div><div class="val">Unlimited visits, one annual fee</div></div></div>
+          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Your own Nurse Practitioner, unlimited visits, an annual longevity assessment and body scans every 90 days: $1,495 a year, about $4 a day, HSA eligible. Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="4">Your own Nurse Practitioner, unlimited visits, an annual longevity assessment and body scans every 90 days: $1,495 a year, about $4 a day, HSA eligible. Book a free 15-minute intro call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="About $4 a day, all included">Copy</button></div><div class="val">About $4 a day, all included</div></div></div>
       </article>
       <article class="card static" id="LB6">
         <img src="static-ads/r2/thumbs/LB6.jpg" alt="LB6" loading="lazy">
-        <div class="smeta"><span class="plan twin">Twin of L6</span><h4><span class="id">LB6</span> Medically necessary labs are still covered by OHIP.</h4>
+        <div class="smeta"><span class="plan twin">Twin of L6</span><h4><span class="id">LB6</span> OHIP still covers your medically necessary labs.</h4>
           <div class="dls"><a class="dl primary" href="static-ads/r2/LB6_4x5.png" download><span>4:5 Feed</span><em>858 KB</em></a><a class="dl" href="static-ads/r2/LB6_9x16.png" download><span>9:16 Stories+Reels</span><em>1 MB</em></a></div>
-          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Optimal is private, but OHIP still covers the medically necessary labs, imaging and specialist visits your NP orders.">Copy</button></div><textarea readonly rows="4">Optimal is private, but OHIP still covers the medically necessary labs, imaging and specialist visits your NP orders.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="OHIP still covers your labs">Copy</button></div><div class="val">OHIP still covers your labs</div></div></div>
+          <div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Optimal is private, but OHIP still covers the medically necessary labs, imaging and specialist visits your NP orders. The advanced markers OHIP doesn&#x27;t cover are included. Book a free 15-minute intro call.">Copy</button></div><textarea readonly rows="4">Optimal is private, but OHIP still covers the medically necessary labs, imaging and specialist visits your NP orders. The advanced markers OHIP doesn&#x27;t cover are included. Book a free 15-minute intro call.</textarea></div><div class="field"><div class="flabel">Headline<button class="copy" data-copy="OHIP still covers your labs">Copy</button></div><div class="val">OHIP still covers your labs</div></div></div>
       </article></div>
     
       <article class="card carousel" id="MC"><span class="plan now">Test now · #6</span><h4><span class="id">MC1–MC5</span> Menopause carousel · 5 cards, 4:5</h4>
-        <div class="cards"><figure><img src="static-ads/r2/thumbs/MC1.jpg" alt="MC1" loading="lazy"><figcaption><b>MC1</b> <div class="field"><div class="flabel">Card headline<button class="copy" data-copy="Free 15-min call">Copy</button></div><div class="val">Free 15-min call</div></div><a class="dl primary" href="static-ads/r2/MC1_card1.png" download><span>Card .png</span><em>2 MB</em></a></figcaption></figure><figure><img src="static-ads/r2/thumbs/MC2.jpg" alt="MC2" loading="lazy"><figcaption><b>MC2</b> <div class="field"><div class="flabel">Card headline<button class="copy" data-copy="OHIP-covered labs">Copy</button></div><div class="val">OHIP-covered labs</div></div><a class="dl primary" href="static-ads/r2/MC2_card2.png" download><span>Card .png</span><em>850 KB</em></a></figcaption></figure><figure><img src="static-ads/r2/thumbs/MC3.jpg" alt="MC3" loading="lazy"><figcaption><b>MC3</b> <div class="field"><div class="flabel">Card headline<button class="copy" data-copy="60-minute NP visit">Copy</button></div><div class="val">60-minute NP visit</div></div><a class="dl primary" href="static-ads/r2/MC3_card3.png" download><span>Card .png</span><em>1 MB</em></a></figcaption></figure><figure><img src="static-ads/r2/thumbs/MC4.jpg" alt="MC4" loading="lazy"><figcaption><b>MC4</b> <div class="field"><div class="flabel">Card headline<button class="copy" data-copy="Written treatment plan">Copy</button></div><div class="val">Written treatment plan</div></div><a class="dl primary" href="static-ads/r2/MC4_card4.png" download><span>Card .png</span><em>2 MB</em></a></figcaption></figure><figure><img src="static-ads/r2/thumbs/MC5.jpg" alt="MC5" loading="lazy"><figcaption><b>MC5</b> <div class="field"><div class="flabel">Card headline<button class="copy" data-copy="Book your free call">Copy</button></div><div class="val">Book your free call</div></div><a class="dl primary" href="static-ads/r2/MC5_card5.png" download><span>Card .png</span><em>2 MB</em></a></figcaption></figure></div><div class="field"><div class="flabel">Primary text<button class="copy" data-copy="How menopause care works at Optimal, one step at a time. No referral needed.">Copy</button></div><textarea readonly rows="2">How menopause care works at Optimal, one step at a time. No referral needed.</textarea></div></article>
+        <div class="cards"><figure><img src="static-ads/r2/thumbs/MC1.jpg" alt="MC1" loading="lazy"><figcaption><b>MC1</b> <div class="field"><div class="flabel">Card headline<button class="copy" data-copy="Free 15-min call">Copy</button></div><div class="val">Free 15-min call</div></div><a class="dl primary" href="static-ads/r2/MC1_card1.png" download><span>Card .png</span><em>2 MB</em></a></figcaption></figure><figure><img src="static-ads/r2/thumbs/MC2.jpg" alt="MC2" loading="lazy"><figcaption><b>MC2</b> <div class="field"><div class="flabel">Card headline<button class="copy" data-copy="OHIP-covered labs">Copy</button></div><div class="val">OHIP-covered labs</div></div><a class="dl primary" href="static-ads/r2/MC2_card2.png" download><span>Card .png</span><em>850 KB</em></a></figcaption></figure><figure><img src="static-ads/r2/thumbs/MC3.jpg" alt="MC3" loading="lazy"><figcaption><b>MC3</b> <div class="field"><div class="flabel">Card headline<button class="copy" data-copy="60-minute NP visit">Copy</button></div><div class="val">60-minute NP visit</div></div><a class="dl primary" href="static-ads/r2/MC3_card3.png" download><span>Card .png</span><em>1 MB</em></a></figcaption></figure><figure><img src="static-ads/r2/thumbs/MC4.jpg" alt="MC4" loading="lazy"><figcaption><b>MC4</b> <div class="field"><div class="flabel">Card headline<button class="copy" data-copy="Same NP, written plan">Copy</button></div><div class="val">Same NP, written plan</div></div><a class="dl primary" href="static-ads/r2/MC4_card4.png" download><span>Card .png</span><em>2 MB</em></a></figcaption></figure><figure><img src="static-ads/r2/thumbs/MC5.jpg" alt="MC5" loading="lazy"><figcaption><b>MC5</b> <div class="field"><div class="flabel">Card headline<button class="copy" data-copy="Book your free call">Copy</button></div><div class="val">Book your free call</div></div><a class="dl primary" href="static-ads/r2/MC5_card5.png" download><span>Card .png</span><em>1 MB</em></a></figcaption></figure></div><div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Menopause care in Barrie, in 3 simple steps. Swipe to see exactly how it works, then book your free 15-minute call. No referral needed.">Copy</button></div><textarea readonly rows="2">Menopause care in Barrie, in 3 simple steps. Swipe to see exactly how it works, then book your free 15-minute call. No referral needed.</textarea></div></article>
       <article class="card carousel" id="LC"><span class="plan next">Next up</span><h4><span class="id">LC1–LC5</span> Longevity membership carousel · 5 cards, 4:5</h4>
-        <div class="cards"><figure><img src="static-ads/r2/thumbs/LC1.jpg" alt="LC1" loading="lazy"><figcaption><b>LC1</b> <div class="field"><div class="flabel">Card headline<button class="copy" data-copy="$1,495 a year">Copy</button></div><div class="val">$1,495 a year</div></div><a class="dl primary" href="static-ads/r2/LC1_card1.png" download><span>Card .png</span><em>2 MB</em></a></figcaption></figure><figure><img src="static-ads/r2/thumbs/LC2.jpg" alt="LC2" loading="lazy"><figcaption><b>LC2</b> <div class="field"><div class="flabel">Card headline<button class="copy" data-copy="Unlimited visits">Copy</button></div><div class="val">Unlimited visits</div></div><a class="dl primary" href="static-ads/r2/LC2_card2.png" download><span>Card .png</span><em>1 MB</em></a></figcaption></figure><figure><img src="static-ads/r2/thumbs/LC3.jpg" alt="LC3" loading="lazy"><figcaption><b>LC3</b> <div class="field"><div class="flabel">Card headline<button class="copy" data-copy="Annual assessment">Copy</button></div><div class="val">Annual assessment</div></div><a class="dl primary" href="static-ads/r2/LC3_card3.png" download><span>Card .png</span><em>2 MB</em></a></figcaption></figure><figure><img src="static-ads/r2/thumbs/LC4.jpg" alt="LC4" loading="lazy"><figcaption><b>LC4</b> <div class="field"><div class="flabel">Card headline<button class="copy" data-copy="Scans every 90 days">Copy</button></div><div class="val">Scans every 90 days</div></div><a class="dl primary" href="static-ads/r2/LC4_card4.png" download><span>Card .png</span><em>2 MB</em></a></figcaption></figure><figure><img src="static-ads/r2/thumbs/LC5.jpg" alt="LC5" loading="lazy"><figcaption><b>LC5</b> <div class="field"><div class="flabel">Card headline<button class="copy" data-copy="Book a free intro call">Copy</button></div><div class="val">Book a free intro call</div></div><a class="dl primary" href="static-ads/r2/LC5_card5.png" download><span>Card .png</span><em>1 MB</em></a></figcaption></figure></div><div class="field"><div class="flabel">Primary text<button class="copy" data-copy="What the Optimal membership includes, one card at a time. $1,495 a year, HSA eligible.">Copy</button></div><textarea readonly rows="2">What the Optimal membership includes, one card at a time. $1,495 a year, HSA eligible.</textarea></div></article>
+        <div class="cards"><figure><img src="static-ads/r2/thumbs/LC1.jpg" alt="LC1" loading="lazy"><figcaption><b>LC1</b> <div class="field"><div class="flabel">Card headline<button class="copy" data-copy="About $4 a day">Copy</button></div><div class="val">About $4 a day</div></div><a class="dl primary" href="static-ads/r2/LC1_card1.png" download><span>Card .png</span><em>2 MB</em></a></figcaption></figure><figure><img src="static-ads/r2/thumbs/LC2.jpg" alt="LC2" loading="lazy"><figcaption><b>LC2</b> <div class="field"><div class="flabel">Card headline<button class="copy" data-copy="Unlimited visits">Copy</button></div><div class="val">Unlimited visits</div></div><a class="dl primary" href="static-ads/r2/LC2_card2.png" download><span>Card .png</span><em>1 MB</em></a></figcaption></figure><figure><img src="static-ads/r2/thumbs/LC3.jpg" alt="LC3" loading="lazy"><figcaption><b>LC3</b> <div class="field"><div class="flabel">Card headline<button class="copy" data-copy="Annual assessment">Copy</button></div><div class="val">Annual assessment</div></div><a class="dl primary" href="static-ads/r2/LC3_card3.png" download><span>Card .png</span><em>2 MB</em></a></figcaption></figure><figure><img src="static-ads/r2/thumbs/LC4.jpg" alt="LC4" loading="lazy"><figcaption><b>LC4</b> <div class="field"><div class="flabel">Card headline<button class="copy" data-copy="Scans every 90 days">Copy</button></div><div class="val">Scans every 90 days</div></div><a class="dl primary" href="static-ads/r2/LC4_card4.png" download><span>Card .png</span><em>2 MB</em></a></figcaption></figure><figure><img src="static-ads/r2/thumbs/LC5.jpg" alt="LC5" loading="lazy"><figcaption><b>LC5</b> <div class="field"><div class="flabel">Card headline<button class="copy" data-copy="Free 15-min intro call">Copy</button></div><div class="val">Free 15-min intro call</div></div><a class="dl primary" href="static-ads/r2/LC5_card5.png" download><span>Card .png</span><em>1 MB</em></a></figcaption></figure></div><div class="field"><div class="flabel">Primary text<button class="copy" data-copy="Everything $1,495 a year gets you, about $4 a day and HSA eligible. Swipe, then book a free 15-minute intro call. No commitment.">Copy</button></div><textarea readonly rows="2">Everything $1,495 a year gets you, about $4 a day and HSA eligible. Swipe, then book a free 15-minute intro call. No commitment.</textarea></div></article>
   </section>
 
   <section class="block" id="instagram">
@@ -744,6 +850,14 @@ Educational content only. Not medical advice.
     b.textContent = "Copied"; b.classList.add("done");
     setTimeout(() => { b.textContent = "Copy"; b.classList.remove("done"); }, 1400);
   }));
+  const boxes = [...document.querySelectorAll(".check input")];
+  const prog = document.getElementById("prog");
+  const tally = () => { if (prog) prog.textContent = `${boxes.filter(b => b.checked).length} of ${boxes.length} done`; };
+  boxes.forEach(b => {
+    try { b.checked = localStorage.getItem("golive:" + b.dataset.k) === "1"; } catch (e) {}
+    b.addEventListener("change", () => { try { localStorage.setItem("golive:" + b.dataset.k, b.checked ? "1" : "0"); } catch (e) {} tally(); });
+  });
+  tally();
   const vids = [...document.querySelectorAll("video")];
   vids.forEach(v => v.addEventListener("play", () => vids.forEach(o => o !== v && o.pause())));
 </script>

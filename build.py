@@ -75,6 +75,25 @@ PLAN = {
     "LB5": ("twin", "L1", "NP for $1,495 a year · photo"),
     "LB6": ("twin", "L6", "OHIP covers labs · photo"),
 }
+# Hormozi pass (Oct 13, 2026): what changed on the image, and why.
+REWRITES = [
+    ("LB1", "Barrie has a new kind of health clinic.", "Your own Nurse Practitioner in Barrie, with same or next-day visits.", "Vague becomes a specific outcome. “New kind of clinic” says nothing; your own NP and next-day visits is the dream outcome."),
+    ("LB2", "Same or next-day visits when something can’t wait.", "Sick today, seen tomorrow, by an NP who knows you.", "A scene the reader has lived, plus the relationship. Time delay goes to almost zero."),
+    ("LB3", "Your body composition, measured every 90 days.", "See what’s working, every 90 days.", "Feature becomes benefit. Nobody wants a scan; they want proof it’s working."),
+    ("LB4", "Every member gets a written 12-month plan.", "Know exactly what to do for your health this year.", "Sell the certainty, not the document."),
+    ("LB5", "Your own Nurse Practitioner for $1,495 a year.", "Your own Nurse Practitioner for about $4 a day.", "The same price reframed per day ($1,495 ÷ 365)."),
+    ("LB6", "Medically necessary labs are still covered by OHIP.", "OHIP still covers your medically necessary labs.", "Lead with the reassurance: the objection is answered in the first three words."),
+    ("MB2", "Brain fog is a common perimenopause symptom.", "Brain fog can be perimenopause, not just a busy life.", "Names the wrong explanation she’s been giving herself, then reframes it. Curiosity, not a textbook line."),
+    ("MB3", "Menopause care in Barrie, led by a Nurse Practitioner.", "Start menopause care in Barrie within days.", "Description becomes outcome plus speed. Cutting the time delay raises perceived value."),
+    ("MB4", "Hot flashes don’t wait for a good time.", "Hot flashes don’t wait, and neither should you.", "Keeps the relatable hook and adds the push to act."),
+    ("MB5", "No referral or family doctor needed.", "No referral, no family doctor, and you start within days.", "Stacks the effort removers and adds speed."),
+    ("MC1", "It starts with a free 15-minute call.", "Menopause care in Barrie starts with a free 15-minute call.", "Card 1 has to say who and where, or nobody swipes."),
+    ("MC4", "You get a written treatment plan.", "You get a written plan and the same NP every visit.", "Adds continuity: the same person at every visit, so the plan comes with someone who knows the history."),
+    ("MC5", "Book your free call at beoptimal.ca.", "No referral needed: book your free call at beoptimal.ca.", "Removes the last objection right at the call to action."),
+    ("LC1", "Here’s what $1,495 a year includes.", "Here’s everything $1,495 a year gets you.", "“Gets you” is about the reader, not the product."),
+    ("LC5", "Book a free intro call at beoptimal.ca.", "Start with a free 15-minute call, no commitment.", "Risk reversal: free, short and no strings."),
+]
+
 SHOW_ID = {"MV1": "MV1-T", "LV1": "LV1-T", "LV2": "LV2-T", "MC": "MC1–5", "LC": "LC1–5"}
 RATIOS = [("9x16", "9:16 · Stories + Reels"), ("4x5", "4:5 · Feed")]
 
@@ -187,6 +206,16 @@ def plan_html(thumbs, titles):
         <h4>Twins <em>· same message, new look, for when one fatigues</em></h4><div class="pchips">{twins}</div>
       </div>''')
     return "".join(cols)
+
+
+def rewrites_html(thumbs):
+    rows = []
+    for k, before, after, why in REWRITES:
+        anchor = k[:2] if k[:2] in ("MC", "LC") else k
+        rows.append(f'''<div class="rw"><a href="#{anchor}"><img src="{thumbs.get(k, "")}" alt="{k}" loading="lazy"></a>
+          <div class="rwt"><span class="id">{SHOW_ID.get(k, k)}</span> {badge(k)}
+            <p class="before">{esc(before)}</p><p class="after">{esc(after)}</p><p class="why">{esc(why)}</p></div></div>''')
+    return "".join(rows)
 
 
 def dl(href, label, size, primary=False):
@@ -347,6 +376,8 @@ def build():
     for key in ("MC", "LC"):
         thumbs[key] = f"static-ads/r2/thumbs/{key}1.jpg"
         titles[key] = "Menopause carousel, 5 cards" if key == "MC" else "Longevity carousel, 5 cards"
+    for k, *_ in REWRITES:   # carousel cards (MC1, LC5…) use their own thumbnails
+        thumbs.setdefault(k, f"static-ads/r2/thumbs/{k}.jpg")
     missing = [k for k in PLAN if not os.path.exists(os.path.join(HERE, thumbs.get(k, "-")))]
     assert not missing, f"plan thumbnails missing: {missing}"
 
@@ -360,7 +391,7 @@ def build():
         "VIDEO_ADS": "".join(vids_html), "REELS": "".join(reels_html),
         "R1_MENO": "".join(r1_html["menopause"]), "R1_LONG": "".join(r1_html["longevity"]),
         "R2_MENO": "".join(r2_html["menopause"]), "R2_LONG": "".join(r2_html["longevity"]), "CAROUSELS": "".join(car_html),
-        "PLAN": plan_html(thumbs, titles), "N_TEST": str(sum(1 for v in PLAN.values() if v[0] == "now")),
+        "PLAN": plan_html(thumbs, titles), "REWRITES": rewrites_html(thumbs), "N_TEST": str(sum(1 for v in PLAN.values() if v[0] == "now")),
         "N_ALL": str(len(PLAN)),
         "M_DEST": SERVICES["menopause"]["dest"], "L_DEST": SERVICES["longevity"]["dest"],
         "M_UTM": esc(SERVICES["menopause"]["utm"]), "L_UTM": esc(SERVICES["longevity"]["utm"]),

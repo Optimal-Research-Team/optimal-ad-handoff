@@ -171,10 +171,40 @@
   .budget th { font: 600 11px "Public Sans"; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
   .budget td:first-child { font-weight: 600; color: var(--ink); white-space: nowrap; }
 
+  /* go-live checklist */
+  .golive { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; }
+  .golive .card { padding: 22px 24px; }
+  .golive h4 { color: var(--ink); margin-bottom: 4px; }
+  .golive .note { margin-bottom: 12px; }
+  .check { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: start; padding: 12px 0; border-top: 1px solid var(--line); cursor: pointer; }
+  .check:first-of-type { border-top: 0; }
+  .check input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--forest); cursor: pointer; }
+  .check b { color: var(--ink); font-weight: 600; }
+  .check span { font-size: 14.5px; }
+  .check small { display: block; color: var(--muted); font-size: 13px; margin-top: 3px; }
+  .check:has(input:checked) span { color: var(--muted); }
+  .check:has(input:checked) b { text-decoration: line-through; text-decoration-color: var(--sage); }
+  .progress { font: 600 12.5px "Public Sans"; color: var(--forest); background: var(--sage-25); border-radius: 999px; padding: 5px 12px; }
+  .warn { border-left: 3px solid #A8462F; }
+
+  /* hormozi pass */
+  .principles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 18px; }
+  .principles .card { padding: 16px 18px; }
+  .principles b { display: block; color: var(--ink); margin-bottom: 4px; font-size: 14.5px; }
+  .principles span { font-size: 13.5px; color: var(--body); }
+  .rws { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 12px; }
+  .rw { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 14px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 12px; }
+  .rw img { width: 96px; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 8px; border: 1px solid var(--line); display: block; }
+  .rwt .plan { margin: 0 0 0 4px; vertical-align: 1px; }
+  .rwt p { margin-top: 6px; font-size: 14px; line-height: 1.4; }
+  .rwt .before { color: var(--muted); text-decoration: line-through; text-decoration-color: rgba(118, 115, 109, .45); }
+  .rwt .after { font: 400 18px/1.25 Castoro, serif; color: var(--ink); }
+  .rwt .why { font-size: 13px; color: var(--body); }
+
   footer { margin: 64px 0 0; padding: 28px 0 56px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13.5px; }
 
   @media (max-width: 920px) {
-    .launch, .adbody, .reel, .pgrid, .prules { grid-template-columns: 1fr; }
+    .launch, .adbody, .reel, .pgrid, .prules, .golive, .principles { grid-template-columns: 1fr; }
     .cuts { grid-template-columns: repeat(2, minmax(0, 1fr)); } .cut video { width: 100%; }
     .reelmedia video, .reelmedia img { width: calc(50% - 6px); }
   }
@@ -187,7 +217,7 @@
     <div class="brand"><img src="files/logo.png" alt="Optimal"><span>Ad hand-off · {{ROUND}}</span></div>
     <div class="eyebrow">For the ads team</div>
     <h1>Everything to launch, <em>in one place.</em></h1>
-    <p class="lede">Every ad made on {{ROUND}}, ready to upload, with the exact text for each one. Don't launch all of them: start with the <b>{{N_TEST}} marked Test now</b>, six per service, then rotate the rest in as the test tells you.</p>
+    <p class="lede">Every ad made on {{ROUND}}, ready to upload, with the exact text for each one. Work through the go-live checklist, then launch the <b>{{N_TEST}} marked Test now</b> (six per service) and rotate the rest in as the test tells you.</p>
     <div class="stats">
       <span class="stat"><b>{{N_TEST}}</b> to test first</span>
       <span class="stat"><b>{{N_VIDEO}}</b> video ads</span>
@@ -204,11 +234,42 @@
 </header>
 
 <nav class="jump"><div class="wrap">
-  <a href="#test">What to test</a><a href="#launch">Launch steps</a><a href="#video">Video ads</a><a href="#round1">Static · round 1</a>
+  <a href="#golive">Go-live checklist</a><a href="#test">What to test</a><a href="#hormozi">Why these words</a><a href="#launch">Launch steps</a><a href="#video">Video ads</a><a href="#round1">Static · round 1</a>
   <a href="#round2">Static · round 2</a><a href="#instagram">Instagram reels</a>
 </div></nav>
 
 <main class="wrap">
+  <section class="block" id="golive">
+    <div class="shead"><div><div class="eyebrow">Start here</div><h2>Go-live <em>checklist</em></h2></div>
+      <p class="note">Tick as you go. Ticks are saved in this browser only. <span class="progress" id="prog">0 of 0 done</span></p></div>
+    <div class="golive">
+      <div class="card">
+        <h4>In Meta Ads Manager</h4>
+        <p class="note">About an hour, start to finish.</p>
+        <label class="check warn"><input type="checkbox" data-k="g-404"><span><b>Fix or pause the three live menopause statics.</b> Their link, beoptimal.ca/womens-health, shows a "Page Not Found" page.
+          <small>Ad Library IDs 4548870122052378, 1707193563843938 and 1436333148369495. Pause them; the new set replaces them.</small></span></label>
+        <label class="check"><input type="checkbox" data-k="g-old"><span><b>Pause the older live ads</b> in the same campaigns so the test isn't diluted.
+          <small>The two older videos: 3267720843438130 (primary care intro) and 28548023041524231 (menopause info call).</small></span></label>
+        <label class="check"><input type="checkbox" data-k="g-sets"><span><b>Set up one ad set per service:</b> Menopause and Longevity membership, with the settings in Launch steps (broad audience, Advantage+ placements, Landing page views).</span></label>
+        <label class="check"><input type="checkbox" data-k="g-m"><span><b>Upload the six Menopause Test now ads</b> in rank order: MV1-T, MB1, M3, MB5, MB2, and the MC carousel.</span></label>
+        <label class="check"><input type="checkbox" data-k="g-l"><span><b>Upload the six Longevity Test now ads</b> in rank order: LV1-T, L1, L2, LB1, LB2, LB3.</span></label>
+        <label class="check"><input type="checkbox" data-k="g-copy"><span><b>Paste the copy and URLs from each card.</b> Name every ad with its ID. Keep the URL parameters exactly as written.
+          <small>Each card's Copy buttons carry the Hormozi-pass text: primary text, headline, description.</small></span></label>
+        <label class="check"><input type="checkbox" data-k="g-pub"><span><b>Publish, then don't touch it for 7 days.</b> Day 7 and day 14 rules are in What to test.</span></label>
+      </div>
+      <div class="card">
+        <h4>Confirm before publishing</h4>
+        <p class="note">Quick yes/no calls for Peter.</p>
+        <label class="check"><input type="checkbox" data-k="c-hst"><span><b>Foundation price wording.</b> M3 says "$895 + HST", matching the consent form. The landing page says "$895 one-time". Make them match.</span></label>
+        <label class="check"><input type="checkbox" data-k="c-cap"><span><b>Capacity.</b> The ads promise "start within days" (menopause) and "same or next-day visits" (longevity). Check the schedule can carry the extra bookings.</span></label>
+        <label class="check"><input type="checkbox" data-k="c-np"><span><b>Clinical read-through.</b> Chantelle reads the symptom lines: MB1, MB2, MB4, M1 and MV1.</span></label>
+        <label class="check"><input type="checkbox" data-k="c-markers"><span><b>Marker count.</b> In LV2 Cheryl says "40-plus biomarkers", while other materials say 26. Settle the number before LV2 runs.
+          <small>LV2 is in Next up, so this doesn't block the first launch.</small></span></label>
+        <label class="check"><input type="checkbox" data-k="c-redirect"><span><b>Site redirect.</b> Jeremy applies the /womens-health redirect patch, so old links and posts land on the menopause page.</span></label>
+      </div>
+    </div>
+  </section>
+
   <section class="block" id="test">
     <div class="shead"><div><div class="eyebrow">Before you launch</div><h2>Test <em>{{N_TEST}}</em> first, not all {{N_ALL}}</h2></div>
       <p class="note">Meta's delivery system groups ads that look or say the same thing and spends on a few of them. A small local budget spread over 29 ads gives none of them enough spend to judge. So launch six distinct ideas per service, learn which angle wins, and rotate the rest in.</p></div>
@@ -239,6 +300,21 @@
         <p class="note" style="margin-top:12px">These are rules of thumb for a single-city clinic. Recalibrate once week-one numbers come in: local CPMs vary a lot by season and audience.</p>
       </div>
     </div>
+  </section>
+
+  <section class="block" id="hormozi">
+    <div class="shead"><div><div class="eyebrow">Hormozi pass · Oct 13</div><h2>Why these <em>words</em></h2></div>
+      <p class="note">Every ad was reviewed the way Alex Hormozi reviews ads: would a stranger stop, know it's for them, want the outcome, believe it, and know the next step? These are the lines that changed on the image. All primary text and headlines were rewritten to the same rules.</p></div>
+    <div class="principles">
+      <div class="card"><b>Hook, then outcome</b><span>The image line has to stop the scroll and promise something concrete. "Sick today, seen tomorrow" beats "a new kind of clinic".</span></div>
+      <div class="card"><b>Cut wait and effort</b><span>Value goes up when time and effort go down: "start within days", "no referral", "free 15-minute call".</span></div>
+      <div class="card"><b>Benefits over features</b><span>Not "body composition scans": "see what's working". Not "a written plan": "know exactly what to do".</span></div>
+      <div class="card"><b>Make the price small</b><span>$1,495 a year is about $4 a day. Every longevity headline or description carries one of the two.</span></div>
+      <div class="card"><b>One offer everywhere</b><span>Image, primary text, headline and button all point at the same thing: a free 15-minute call, no commitment.</span></div>
+      <div class="card"><b>Only true scarcity</b><span>"We cap membership" and "a small panel of patients" both come from the clinic's own pages. Nothing is invented.</span></div>
+    </div>
+    <div class="rws">{{REWRITES}}</div>
+    <p class="note" style="margin-top:14px">Kept as they were: MB1 ("Wide awake at 3 a.m., again." is already a strong hook), M3, L2, MB6 and the round 1 headlines. Primary text everywhere now follows one shape: hook, then what you get and how fast, then the free offer.</p>
   </section>
 
   <section class="block" id="launch">
@@ -317,6 +393,14 @@
     b.textContent = "Copied"; b.classList.add("done");
     setTimeout(() => { b.textContent = "Copy"; b.classList.remove("done"); }, 1400);
   }));
+  const boxes = [...document.querySelectorAll(".check input")];
+  const prog = document.getElementById("prog");
+  const tally = () => { if (prog) prog.textContent = `${boxes.filter(b => b.checked).length} of ${boxes.length} done`; };
+  boxes.forEach(b => {
+    try { b.checked = localStorage.getItem("golive:" + b.dataset.k) === "1"; } catch (e) {}
+    b.addEventListener("change", () => { try { localStorage.setItem("golive:" + b.dataset.k, b.checked ? "1" : "0"); } catch (e) {} tally(); });
+  });
+  tally();
   const vids = [...document.querySelectorAll("video")];
   vids.forEach(v => v.addEventListener("play", () => vids.forEach(o => o !== v && o.pause())));
 </script>
