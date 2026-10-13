@@ -136,10 +136,45 @@
   .igsteps ol { padding-left: 18px; } .igsteps li { margin: 4px 0; }
   .callout { background: var(--sage-25); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin-top: 12px; color: var(--ink); font-size: 14px; }
 
+  /* test plan */
+  .plan { display: inline-block; font: 700 10.5px "Public Sans"; letter-spacing: .1em; text-transform: uppercase; padding: 4px 9px; border-radius: 6px; margin-bottom: 8px; }
+  .plan.now { background: var(--forest); color: var(--cream); }
+  .plan.next { background: var(--sage-25); color: var(--forest); }
+  .plan.twin { background: var(--bone); color: var(--muted); }
+  .adhead .plan { margin-left: 4px; vertical-align: 1px; margin-bottom: 0; }
+  .carousel > .plan { margin-bottom: 10px; }
+  .pgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .pcol { padding: 22px 22px 18px; }
+  .pcol h4 { margin: 18px 0 10px; color: var(--ink); } .pcol h4 em { font-style: normal; font-weight: 400; color: var(--muted); }
+  .prows { display: flex; flex-direction: column; gap: 8px; }
+  .prow { display: grid; grid-template-columns: 26px 52px minmax(0, 1fr); gap: 12px; align-items: center; text-decoration: none;
+          background: var(--cream); border: 1px solid var(--line); border-radius: 12px; padding: 8px 12px 8px 10px; transition: all .15s; }
+  .prow:hover { border-color: var(--forest); background: var(--paper); }
+  .prow .rank { font: 400 22px/1 Castoro, serif; color: var(--forest); text-align: center; }
+  .prow img { width: 52px; height: 65px; object-fit: cover; border-radius: 6px; border: 1px solid var(--line); display: block; }
+  .pt { display: flex; flex-direction: column; min-width: 0; }
+  .pt b { font: 700 12px "Public Sans"; letter-spacing: .04em; color: var(--forest); }
+  .pt span { color: var(--ink); font-size: 14px; line-height: 1.35; }
+  .pt small { color: var(--muted); font-size: 12.5px; }
+  .pchips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .pchip { text-decoration: none; font-size: 13px; color: var(--body); background: var(--sage-25); border-radius: 999px; padding: 6px 12px; }
+  .pchip b { color: var(--forest); font-weight: 700; margin-right: 2px; }
+  .pchip.twin { background: var(--bone); }
+  .pchip:hover { box-shadow: inset 0 0 0 1px var(--forest); }
+  .prules { display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px; margin-top: 16px; }
+  .prules .card { padding: 22px 24px; }
+  .prules h4 { margin-bottom: 10px; color: var(--ink); }
+  .prules ul { padding-left: 18px; display: flex; flex-direction: column; gap: 7px; }
+  .prules li b { color: var(--ink); }
+  .budget { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 4px; }
+  .budget td, .budget th { text-align: left; padding: 8px 8px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .budget th { font: 600 11px "Public Sans"; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .budget td:first-child { font-weight: 600; color: var(--ink); white-space: nowrap; }
+
   footer { margin: 64px 0 0; padding: 28px 0 56px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13.5px; }
 
   @media (max-width: 920px) {
-    .launch, .adbody, .reel { grid-template-columns: 1fr; }
+    .launch, .adbody, .reel, .pgrid, .prules { grid-template-columns: 1fr; }
     .cuts { grid-template-columns: repeat(2, minmax(0, 1fr)); } .cut video { width: 100%; }
     .reelmedia video, .reelmedia img { width: calc(50% - 6px); }
   }
@@ -152,8 +187,9 @@
     <div class="brand"><img src="files/logo.png" alt="Optimal"><span>Ad hand-off · {{ROUND}}</span></div>
     <div class="eyebrow">For the ads team</div>
     <h1>Everything to launch, <em>in one place.</em></h1>
-    <p class="lede">Every ad made on {{ROUND}}, ready to upload, with the exact text for each one. Preview it here, download what you need, then follow the six launch steps.</p>
+    <p class="lede">Every ad made on {{ROUND}}, ready to upload, with the exact text for each one. Don't launch all of them: start with the <b>{{N_TEST}} marked Test now</b>, six per service, then rotate the rest in as the test tells you.</p>
     <div class="stats">
+      <span class="stat"><b>{{N_TEST}}</b> to test first</span>
       <span class="stat"><b>{{N_VIDEO}}</b> video ads</span>
       <span class="stat"><b>{{N_STATIC}}</b> static ads</span>
       <span class="stat"><b>{{N_CAR}}</b> carousels</span>
@@ -168,22 +204,54 @@
 </header>
 
 <nav class="jump"><div class="wrap">
-  <a href="#launch">Launch steps</a><a href="#video">Video ads</a><a href="#round1">Static · round 1</a>
+  <a href="#test">What to test</a><a href="#launch">Launch steps</a><a href="#video">Video ads</a><a href="#round1">Static · round 1</a>
   <a href="#round2">Static · round 2</a><a href="#instagram">Instagram reels</a>
 </div></nav>
 
 <main class="wrap">
+  <section class="block" id="test">
+    <div class="shead"><div><div class="eyebrow">Before you launch</div><h2>Test <em>{{N_TEST}}</em> first, not all {{N_ALL}}</h2></div>
+      <p class="note">Meta's delivery system groups ads that look or say the same thing and spends on a few of them. A small local budget spread over 29 ads gives none of them enough spend to judge. So launch six distinct ideas per service, learn which angle wins, and rotate the rest in.</p></div>
+    <div class="pgrid">{{PLAN}}</div>
+    <div class="prules">
+      <div class="card">
+        <h4>How to run the test</h4>
+        <ul>
+          <li><b>One ad set per service</b>, with all of its Test now ads (video, static and carousel together). Broad audience and Advantage+ placements. Let Meta split the budget, and don't force it evenly.</li>
+          <li><b>Hands off for 7 days.</b> Don't edit a live ad; duplicate it instead. Editing restarts learning.</li>
+          <li><b>Judge on booked intro calls</b> per ad (match <code>utm_content</code> in the booking system). Meta can't optimize health ads on bookings, so your bookings are the real score. Then look at cost per landing page view and link CTR.</li>
+          <li><b>Day 7:</b> pause any ad that spent $40 or more with no bookings and a CTR under half the ad set's average. If Meta barely spent on an ad (under $10), it isn't a loser yet: give it a second week or swap in a Next up ad.</li>
+          <li><b>Day 14:</b> replace the bottom two in each service with Next up ads. Make two new variations of the winning angle (new image, same message).</li>
+          <li><b>Fatigue:</b> when an ad's frequency passes about 3, or its CTR drops about 30% from week one, swap in its Twin.</li>
+          <li><b>Turn off the old ads</b> when these go live: the June menopause statics (their link 404s), the member-testimonial ad and the "73%" ad.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Budget guide</h4>
+        <table class="budget">
+          <thead><tr><th>Per service, per day</th><th>Launch</th></tr></thead>
+          <tbody>
+            <tr><td>$50–60+</td><td>All six Test now ads. Roughly $8–10 a day each gives every ad a fair week.</td></tr>
+            <tr><td>$25–50</td><td>Ranks 1–4 only: the video plus three statics.</td></tr>
+            <tr><td>Under $25</td><td>Ranks 1–3. Rotate in a new one every two weeks instead of testing side by side.</td></tr>
+          </tbody>
+        </table>
+        <p class="note" style="margin-top:12px">These are rules of thumb for a single-city clinic. Recalibrate once week-one numbers come in: local CPMs vary a lot by season and audience.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="block" id="launch">
     <div class="shead"><div><div class="eyebrow">Meta Ads Manager</div><h2>Launch in <em>six steps</em></h2></div>
       <p class="note">Repeat for each ad. Every card below has its own files and copy buttons.</p></div>
     <div class="launch">
       <ol class="card steps">
         <li><b>Download</b> the ad's two files: the <b>4:5 Feed</b> file and the <b>9:16 Stories + Reels</b> file. Carousels have five 4:5 cards.</li>
-        <li>Open the campaign and go to the <b>right ad set</b>: Menopause or Longevity membership. Every ad for a service goes in that service's ad set, video and static alike.</li>
+        <li>Open the campaign and go to the <b>right ad set</b>: Menopause or Longevity membership. Start with the ads marked <b>Test now</b> (see What to test). Every ad for a service goes in that service's ad set, video and static alike.</li>
         <li><b>Create ad.</b> Name it with the ID on its card (e.g. <code>LV2-T</code>, <code>M3</code>, <code>MB1</code>). Identity: the Optimal Facebook Page and @beoptimal.ca.</li>
         <li><b>Media:</b> upload the 4:5 file, then customize placements, choose <b>Stories and Reels</b>, and swap in the 9:16 file.</li>
         <li><b>Text:</b> paste the primary text, headline and description with the Copy buttons. CTA <b>Book now</b>. Paste the website URL and URL parameters from the settings box.</li>
-        <li><b>Videos only:</b> upload the thumbnail jpg, and turn <b>off</b> auto captions (ours are burned in), Advantage+ music and creative enhancements. Then publish, and judge after 7 days.</li>
+        <li><b>Videos only:</b> upload the thumbnail jpg, and turn <b>off</b> auto captions (ours are burned in), Advantage+ music and creative enhancements. Then publish, and judge after 7 days using the rules in What to test.</li>
       </ol>
       <div class="card settings">
         <h4>Ad set settings</h4>

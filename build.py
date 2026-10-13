@@ -37,6 +37,45 @@ VIDEOS = [  # id, service, folder in meta-ad-studio/out, render name, the line o
     ("MV1", "menopause", "menopause-ad1", "MenopauseMyself", "“I just don’t feel like myself.”"),
 ]
 CUTS = [("T", "Tight")]   # Oct 12 (Peter): Tight cuts only
+
+# What to test first (Oct 12, 2026). One ad set per service, ~6 distinct ads each; the rest rotate in later.
+#   ("now", rank, angle)   launch in wave 1, in priority order (tight budget: launch ranks 1-4 only)
+#   ("next", None, angle)  a new angle to swap in when a wave-1 ad is cut
+#   ("twin", "X", angle)   same message as X in a different look: swap in when X fatigues
+PLAN = {
+    # menopause
+    "MV1": ("now", 1, "Emotional hook · video"),
+    "MB1": ("now", 2, "Relatable moment · photo"),
+    "M3":  ("now", 3, "Price transparency · price card"),
+    "MB5": ("now", 4, "Access, no referral · clinic photo"),
+    "MB2": ("now", 5, "Symptom awareness · photo"),
+    "MC":  ("now", 6, "How it works · carousel"),
+    "M2":  ("next", None, "60-minute first visit · big number"),
+    "M1":  ("next", None, "Symptom list · education"),
+    "MB4": ("next", None, "Hot flashes at work · photo"),
+    "MB3": ("next", None, "NP-led, in Barrie · photo"),
+    "M6":  ("twin", "MB1", "3 a.m. · night photo"),
+    "M4":  ("twin", "MB5", "No referral · photo + capsule"),
+    "M5":  ("twin", "MC", "How it works · step diagram"),
+    "MB6": ("twin", "M2", "60-minute visit · consult photo"),
+    # longevity
+    "LV1": ("now", 1, "A real person, trust · video"),
+    "L1":  ("now", 2, "Price and value · ledger"),
+    "L2":  ("now", 3, "Objection: my family doctor · diagram"),
+    "LB1": ("now", 4, "Local awareness · photo"),
+    "LB2": ("now", 5, "Speed · photo"),
+    "LB3": ("now", 6, "Measurement · photo"),
+    "LV2": ("next", None, "A full hour, every year · video"),
+    "LC":  ("next", None, "What $1,495 includes · carousel"),
+    "L6":  ("next", None, "OHIP still covers labs · photo + capsule"),
+    "LB4": ("next", None, "Written 12-month plan · photo"),
+    "L3":  ("twin", "LB2", "Seen by Tuesday · calendar"),
+    "L4":  ("twin", "LB3", "Every 90 days · figure + timeline"),
+    "L5":  ("twin", "LV2", "An hour every year · illustration"),
+    "LB5": ("twin", "L1", "NP for $1,495 a year · photo"),
+    "LB6": ("twin", "L6", "OHIP covers labs · photo"),
+}
+SHOW_ID = {"MV1": "MV1-T", "LV1": "LV1-T", "LV2": "LV2-T", "MC": "MC1–5", "LC": "LC1–5"}
 RATIOS = [("9x16", "9:16 · Stories + Reels"), ("4x5", "4:5 · Feed")]
 
 
@@ -115,6 +154,41 @@ def copy_field(label, text, rows=None):
             f'{body}</div>')
 
 
+def badge(ad):
+    st, x, _ = PLAN.get(ad, (None, None, None))
+    if st == "now":
+        return f'<span class="plan now">Test now · #{x}</span>'
+    if st == "next":
+        return '<span class="plan next">Next up</span>'
+    if st == "twin":
+        return f'<span class="plan twin">Twin of {SHOW_ID.get(x, x)}</span>'
+    return ""
+
+
+def plan_html(thumbs, titles):
+    """The 'what to test first' block: per service, wave 1 in priority order, then next-up and twins."""
+    cols = []
+    for svc, pre in (("menopause", "M"), ("longevity", "L")):
+        ids = [k for k in PLAN if k.startswith(pre)]
+        now = sorted([k for k in ids if PLAN[k][0] == "now"], key=lambda k: PLAN[k][1])
+        nxt = [k for k in ids if PLAN[k][0] == "next"]
+        twn = [k for k in ids if PLAN[k][0] == "twin"]
+        rows = "".join(
+            f'<a class="prow" href="#{k}"><span class="rank">{PLAN[k][1]}</span>'
+            f'<img src="{thumbs.get(k, "")}" alt="" loading="lazy"><span class="pt"><b>{SHOW_ID.get(k, k)}</b>'
+            f'<span>{esc(titles.get(k, ""))}</span><small>{esc(PLAN[k][2])}</small></span></a>' for k in now)
+        nexts = "".join(f'<a class="pchip" href="#{k}"><b>{SHOW_ID.get(k, k)}</b> {esc(PLAN[k][2])}</a>' for k in nxt)
+        twins = "".join(f'<a class="pchip twin" href="#{k}"><b>{SHOW_ID.get(k, k)}</b> twin of {SHOW_ID.get(PLAN[k][1], PLAN[k][1])}</a>'
+                        for k in twn)
+        cols.append(f'''
+      <div class="card pcol"><span class="svc {svc}">{SERVICES[svc]["name"]}</span>
+        <h4>Test now <em>· launch in this order</em></h4><div class="prows">{rows}</div>
+        <h4>Next up <em>· new angles for when you cut one</em></h4><div class="pchips">{nexts}</div>
+        <h4>Twins <em>· same message, new look, for when one fatigues</em></h4><div class="pchips">{twins}</div>
+      </div>''')
+    return "".join(cols)
+
+
 def dl(href, label, size, primary=False):
     return (f'<a class="dl{" primary" if primary else ""}" href="{esc(href)}" download>'
             f'<span>{esc(label)}</span><em>{esc(size)}</em></a>')
@@ -158,7 +232,7 @@ def build():
         alt = copy_field("Alt headline", c["alt"]) if c.get("alt") else ""
         vids_html.append(f'''
     <article class="card ad" id="{vid}">
-      <header class="adhead"><span class="svc {svc}">{SERVICES[svc]["name"]}</span><h3><span class="id">{vid}</span> {esc(line)}</h3>
+      <header class="adhead"><span class="svc {svc}">{SERVICES[svc]["name"]}</span> {badge(vid)}<h3><span class="id">{vid}</span> {esc(line)}</h3>
         <p class="note">Ad name <code>{vid}-T</code>. Upload the 4:5 and 9:16 files as one ad.</p></header>
       <div class="adbody">
         <div class="cuts one">{"".join(cuts_html)}</div>
@@ -214,7 +288,7 @@ def build():
         return f'''
       <article class="card static" id="{ad}">
         <img src="{th}" alt="{esc(ad)}" loading="lazy">
-        <div class="smeta"><h4><span class="id">{ad}</span> {esc(title)}</h4>
+        <div class="smeta">{badge(ad)}<h4><span class="id">{ad}</span> {esc(title)}</h4>
           <div class="dls">{"".join(files)}</div>
           {copy_field("Primary text", primary, 4)}{copy_field("Headline", headline)}{desc}{alt_note}</div>
       </article>'''
@@ -245,7 +319,7 @@ def build():
             cards.append(f'<figure><img src="{th}" alt="{cid}" loading="lazy"><figcaption><b>{cid}</b> {copy_field("Card headline", chead)}'
                          f'{dl(rel, "Card .png", mb(src), True)}</figcaption></figure>')
         car_html.append(f'''
-      <article class="card carousel"><h4><span class="id">{key}1–{key}5</span> {SERVICES[svc]["name"]} carousel · 5 cards, 4:5</h4>
+      <article class="card carousel" id="{key}">{badge(key)}<h4><span class="id">{key}1–{key}5</span> {SERVICES[svc]["name"]} carousel · 5 cards, 4:5</h4>
         <div class="cards">{"".join(cards)}</div>{copy_field("Primary text", car[key]["primary"], 2)}</article>''')
 
     # ---------------- zips (release assets)
@@ -263,6 +337,19 @@ def build():
              "r2": mb(os.path.join(STAGE, f"Optimal-static-ads-round-2_{TAG}.zip"))}
     shutil.copy2(os.path.join(STUDIO, "brand/ds/assets/logos/OptimalLogo-Green.png"), os.path.join(HERE, "files", "logo.png"))
 
+    thumbs, titles = {}, {}
+    for vid, svc, folder, name, line in VIDEOS:
+        thumbs[vid], titles[vid] = f"previews/{name}_Tight_9x16.jpg", line
+    for ad, c in r1.items():
+        thumbs[ad], titles[ad] = f"static-ads/r1/thumbs/{ad}.jpg", c["title"]
+    for ad, c in r2.items():
+        thumbs[ad], titles[ad] = f"static-ads/r2/thumbs/{ad}.jpg", c["title"]
+    for key in ("MC", "LC"):
+        thumbs[key] = f"static-ads/r2/thumbs/{key}1.jpg"
+        titles[key] = "Menopause carousel, 5 cards" if key == "MC" else "Longevity carousel, 5 cards"
+    missing = [k for k in PLAN if not os.path.exists(os.path.join(HERE, thumbs.get(k, "-")))]
+    assert not missing, f"plan thumbnails missing: {missing}"
+
     page = TEMPLATE
     for k, v in {
         "ROUND": ROUND, "TAG": TAG,
@@ -273,6 +360,8 @@ def build():
         "VIDEO_ADS": "".join(vids_html), "REELS": "".join(reels_html),
         "R1_MENO": "".join(r1_html["menopause"]), "R1_LONG": "".join(r1_html["longevity"]),
         "R2_MENO": "".join(r2_html["menopause"]), "R2_LONG": "".join(r2_html["longevity"]), "CAROUSELS": "".join(car_html),
+        "PLAN": plan_html(thumbs, titles), "N_TEST": str(sum(1 for v in PLAN.values() if v[0] == "now")),
+        "N_ALL": str(len(PLAN)),
         "M_DEST": SERVICES["menopause"]["dest"], "L_DEST": SERVICES["longevity"]["dest"],
         "M_UTM": esc(SERVICES["menopause"]["utm"]), "L_UTM": esc(SERVICES["longevity"]["utm"]),
     }.items():
