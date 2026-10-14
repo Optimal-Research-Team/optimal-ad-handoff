@@ -13,6 +13,7 @@
     --cream: #FFFCF7; --paper: #FFFFFF; --bone: #EFE9DF; --line: rgba(44, 78, 37, .12); --line-2: rgba(44, 78, 37, .2);
     --forest: #2C4E25; --deep: #1A500F; --sage: #87A482; --sage-25: rgba(135, 164, 130, .22);
     --ink: #13170F; --body: #3E463C; --muted: #76736D; --plum: #6B4E71; --plum-25: rgba(107, 78, 113, .14);
+    --rust: #8A4B2E; --rust-25: rgba(138, 75, 46, .12);
     --r: 16px;
   }
   * { box-sizing: border-box; margin: 0; }
@@ -42,7 +43,7 @@
   .stats { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
   .stat { background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; font-size: 13.5px; }
   .stat b { color: var(--forest); font-weight: 700; }
-  .bundles { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .bundles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
   .bundle { display: flex; align-items: center; justify-content: space-between; gap: 12px; text-decoration: none;
             background: var(--forest); color: var(--cream); border-radius: 14px; padding: 16px 18px; transition: transform .15s, background .15s; }
   .bundle:hover { background: var(--deep); transform: translateY(-1px); }
@@ -108,6 +109,7 @@
   .adhead h3 { margin: 8px 0 4px; }
   .svc { display: inline-block; font: 700 10.5px "Public Sans"; letter-spacing: .12em; text-transform: uppercase; padding: 4px 9px; border-radius: 6px; }
   .svc.longevity { background: var(--sage-25); color: var(--forest); } .svc.menopause { background: var(--plum-25); color: var(--plum); }
+  .svc.iron { background: var(--rust-25); color: var(--rust); }
   .adbody { display: grid; grid-template-columns: auto minmax(280px, 1fr); gap: 26px; align-items: start; }
   .cuts { display: grid; grid-template-columns: repeat(2, 230px); gap: 18px; }
   .cuts.one { grid-template-columns: 260px; }
@@ -230,13 +232,14 @@
       <a class="bundle" href="{{ZIP_R1}}" download><span><b>Static ads · round 1</b><small>.zip · {{ZS_R1}}</small></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
       <a class="bundle" href="{{ZIP_R2}}" download><span><b>Static ads · round 2</b><small>.zip · {{ZS_R2}}</small></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
       <a class="bundle" href="{{ZIP_R3}}" download><span><b>Static ads · round 3</b><small>.zip · {{ZS_R3}}</small></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="bundle" href="{{ZIP_R4}}" download><span><b>IV iron · pre-launch</b><small>.zip · {{ZS_R4}}</small></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
     </div>
   </div>
 </header>
 
 <nav class="jump"><div class="wrap">
   <a href="#golive">Go-live checklist</a><a href="#test">What to test</a><a href="#hormozi">Why these words</a><a href="#launch">Launch steps</a><a href="#video">Video ads</a><a href="#round1">Static · round 1</a>
-  <a href="#round2">Static · round 2</a><a href="#round3">Static · round 3</a><a href="#instagram">Instagram reels</a>
+  <a href="#round2">Static · round 2</a><a href="#round3">Static · round 3</a><a href="#iron">IV iron</a><a href="#instagram">Instagram reels</a>
 </div></nav>
 
 <main class="wrap">
@@ -375,6 +378,30 @@
       <p class="note">Four AI concepts from Ad Lab: engraved plates in the brand's sage-on-cream style, plus one macro photo. They follow the one-sentence rule. Turn on Meta's AI label when you upload them.</p></div>
     <div class="sub"><span class="svc menopause">Menopause</span></div><div class="grid">{{R3_MENO}}</div>
     <div class="sub"><span class="svc longevity">Longevity membership</span></div><div class="grid">{{R3_LONG}}</div>
+  </section>
+
+  <section class="block" id="iron">
+    <div class="shead"><div><div class="eyebrow">IV iron · pre-launch · October 14</div><h2>The founding <em>waitlist</em></h2></div>
+      <p class="note">Three ideas and the one AI video. IV iron isn't open yet, so these sell the founding waitlist only: no price and no booking. It's a separate campaign from menopause and longevity.</p></div>
+    <div class="launch">
+      <ol class="card steps">
+        <li><b>New campaign, objective Leads</b>, with the conversion location set to <b>Instant forms</b>. There's no IV iron page on beoptimal.ca yet (/iv-iron is a 404), so the waitlist form opens inside Facebook and Instagram.</li>
+        <li><b>One ad set:</b> adults 25–64, about 40 km around Barrie, broad (no interests). $20–30 a day for 7 days, then leave it alone.</li>
+        <li><b>Upload IR1, IR3 and IRV1</b> the same way as the other ads: the 4:5 file, then the 9:16 file for Stories and Reels. Name each with its ID. CTA <b>Sign up</b>. Turn on Meta's <b>AI label</b> for all three.</li>
+        <li><b>Hold IR2</b> until the Clinical Director signs off on "low iron without anemia". The landing page is waiting on the same call.</li>
+        <li><b>Judge on cost per signup</b> and on the share of signups answering "Yes" to drug coverage. Keep the winner, replace the weakest with a new version of the winner, and download the leads every few days, because founding access goes in signup order.</li>
+      </ol>
+      <div class="card settings">
+        <h4>Instant Form · "Join the IV iron founding waitlist"</h4>
+        <div class="field"><div class="flabel">Intro<button class="copy" data-copy="IV iron is coming to Optimal in Barrie. Join the founding waitlist for first access, in signup order, and founding pricing. No referral needed.">Copy</button></div><div class="val">IV iron is coming to Optimal in Barrie. Join the founding waitlist for first access, in signup order, and founding pricing. No referral needed.</div></div>
+        <div class="field"><div class="flabel">Questions</div><div class="val">First name, email, phone (prefilled), plus one multiple-choice question: "Do you have private or workplace drug coverage?" Yes / No / Not sure. No health questions.</div></div>
+        <div class="field"><div class="flabel">Privacy policy<button class="copy" data-copy="https://www.beoptimal.ca/privacy">Copy</button></div><div class="val">https://www.beoptimal.ca/privacy</div></div>
+        <div class="field"><div class="flabel">Thank-you screen<button class="copy" data-copy="You're on the list. We'll email you when booking opens. Questions? Call (437) 370-0291.">Copy</button></div><div class="val">You're on the list. We'll email you when booking opens. Questions? Call (437) 370-0291.</div></div>
+        <p class="note" style="margin-top:10px">When the IV iron page ships on beoptimal.ca, switch the destination to it and add the usual URL parameters. Once the November opening is confirmed, add "Opening November 2026." to each primary text.</p>
+      </div>
+    </div>
+    <div class="sub"><span class="svc iron">IV iron</span></div><div class="grid">{{IRON_STATICS}}</div>
+    <div style="margin-top:16px">{{IRON_VIDEO}}</div>
   </section>
 
   <section class="block" id="instagram">

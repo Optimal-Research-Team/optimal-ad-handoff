@@ -100,6 +100,12 @@ REWRITES = [
     ("LC5", "Book a free intro call at beoptimal.ca.", "Start with a free 15-minute call, no commitment.", "Risk reversal: free, short and no strings."),
 ]
 
+# IV iron (Oct 14, 2026): pre-launch, founding waitlist only, on a Meta Instant Form (no landing page yet).
+IRON = {  # id: (badge class, badge text)
+    "IR1": ("now", "Run now"), "IR3": ("now", "Run now"), "IRV1": ("now", "Run now"),
+    "IR2": ("twin", "Hold · needs clinical sign-off"),
+}
+
 SHOW_ID = {"MV1": "MV1-T", "LV1": "LV1-T", "LV2": "LV2-T", "MC": "MC1–5", "LC": "LC1–5"}
 RATIOS = [("9x16", "9:16 · Stories + Reels"), ("4x5", "4:5 · Feed")]
 
@@ -174,6 +180,12 @@ def static_copy():
     return one, two, car, three
 
 
+def iron_copy():
+    doc = open(os.path.join(STUDIO, "static/COPY-IRON.md")).read()
+    return {m[1]: dict(title=m[2], primary=m[3].strip(), headline=m[4], description=m[5].strip())
+            for m in re.finditer(r'### (IRV?\d) · "(.*?)"[^\n]*\n\*\*Primary text:\*\* (.*?)\n\*\*Headline:\*\* (.*?) · \*\*Description:\*\* (.*?)\n', doc)}
+
+
 # ------------------------------------------------------------------ html pieces
 def copy_field(label, text, rows=None):
     t = esc(text)
@@ -183,6 +195,8 @@ def copy_field(label, text, rows=None):
 
 
 def badge(ad):
+    if ad in IRON:
+        return f'<span class="plan {IRON[ad][0]}">{esc(IRON[ad][1])}</span>'
     st, x, _ = PLAN.get(ad, (None, None, None))
     if st == "now":
         return f'<span class="plan now">Test now · #{x}</span>'
@@ -237,7 +251,8 @@ def build():
         shutil.rmtree(os.path.join(HERE, d), ignore_errors=True)
     vc = video_copy()
     r1, r2, car, r3 = static_copy()
-    zips = {"videos": [], "r1": [], "r2": [], "r3": []}
+    zips = {"videos": [], "r1": [], "r2": [], "r3": [], "r4": []}
+    ir = iron_copy()
     counts = dict(video=0, static=0, reels=0)
 
     # ---------------- video ads
@@ -366,12 +381,43 @@ def build():
       <article class="card carousel" id="{key}">{badge(key)}<h4><span class="id">{key}1–{key}5</span> {SERVICES[svc]["name"]} carousel · 5 cards, 4:5</h4>
         <div class="cards">{"".join(cards)}</div>{copy_field("Primary text", car[key]["primary"], 2)}</article>''')
 
+    # ---------------- IV iron (round 4): three statics + the one AI video, files small enough to live in the repo
+    idir = os.path.join(sdir, "r4", "iron")
+    iron_html = []
+    for ad in ("IR1", "IR3", "IR2"):   # run-now first, the held one last
+        c = ir[ad]
+        imgs = [("4:5 Feed", os.path.join(idir, f"{ad}_4x5.png")), ("9:16 Stories+Reels", os.path.join(idir, f"{ad}_9x16.png"))]
+        iron_html.append(static_card(ad, c["title"], c["primary"], c["headline"], c["description"], imgs, "r4"))
+    c = ir["IRV1"]
+    files = []
+    for r, rlabel in RATIOS:
+        src = os.path.join(idir, f"IRV1_{r}.mp4"); th = os.path.join(idir, f"IRV1_{r}_thumb.jpg")
+        files.append(dl(put(src, f"static-ads/r4/IRV1_{r}.mp4"), rlabel, mb(src), primary=(r == "9x16")))
+        files.append(dl(put(th, f"static-ads/r4/IRV1_thumbnail_{r}.jpg"), f"Thumbnail {r.replace('x', ':')}", mb(th)))
+        zips["r4"] += [(src, f"IRV1_{r}.mp4"), (th, f"IRV1_thumbnail_{r}.jpg")]
+    iron_video = f'''
+    <article class="card ad" id="IRV1">
+      <header class="adhead"><span class="svc iron">IV iron</span> {badge("IRV1")}<h3><span class="id">IRV1</span> {esc(c["title"])}</h3>
+        <p class="note">The one AI video: a 6-second push-in on the empty infusion room, then the waitlist end card. Ad name <code>IRV1</code>. Upload the 4:5 and 9:16 files as one ad.</p></header>
+      <div class="adbody">
+        <div class="cuts one"><div class="cut">
+          <video src="static-ads/r4/IRV1_9x16.mp4" poster="static-ads/r4/IRV1_thumbnail_9x16.jpg" controls playsinline preload="none"></video>
+          <div class="cutmeta"><span class="tag">IRV1</span><b>0:06 · quiet music bed</b></div>
+          <div class="dls">{"".join(files)}</div></div></div>
+        <div class="copyblock">
+          {copy_field("Primary text", c["primary"], 5)}{copy_field("Headline", c["headline"])}{copy_field("Description", c["description"])}
+          <div class="field"><div class="flabel">Call to action</div><div class="val">Sign up</div></div>
+        </div>
+      </div>
+    </article>'''
+
     # ---------------- zips (release assets)
     # Static rounds get a zip each. Videos don't: a video zip would re-upload ~600 MB of files that are
     # already individual release assets, so "all video files" links to the release page instead.
     for key, fname, extra in (("r1", f"Optimal-static-ads-round-1_{TAG}.zip", [(os.path.join(STUDIO, "static/COPY.md"), "COPY.md")]),
                               ("r2", f"Optimal-static-ads-round-2_{TAG}.zip", [(os.path.join(STUDIO, "static/COPY-R2.md"), "COPY.md")]),
-                              ("r3", f"Optimal-static-ads-round-3_{TAG}.zip", [(os.path.join(STUDIO, "static/COPY-R3.md"), "COPY.md")])):
+                              ("r3", f"Optimal-static-ads-round-3_{TAG}.zip", [(os.path.join(STUDIO, "static/COPY-R3.md"), "COPY.md")]),
+                              ("r4", f"Optimal-IV-iron-ads_{TAG}.zip", [(os.path.join(STUDIO, "static/COPY-IRON.md"), "COPY.md")])):
         if not os.path.exists(os.path.join(STAGE, fname)):
             with zipfile.ZipFile(os.path.join(STAGE, fname), "w", zipfile.ZIP_STORED) as z:
                 for src, arc in zips[key] + extra:
@@ -380,7 +426,8 @@ def build():
     zsize = {"videos": f"{len([a for _, a in zips['videos'] if a.endswith('.mp4')])} files · {vid_total / 1e6:.0f} MB",
              "r1": mb(os.path.join(STAGE, f"Optimal-static-ads-round-1_{TAG}.zip")),
              "r2": mb(os.path.join(STAGE, f"Optimal-static-ads-round-2_{TAG}.zip")),
-             "r3": mb(os.path.join(STAGE, f"Optimal-static-ads-round-3_{TAG}.zip"))}
+             "r3": mb(os.path.join(STAGE, f"Optimal-static-ads-round-3_{TAG}.zip")),
+             "r4": mb(os.path.join(STAGE, f"Optimal-IV-iron-ads_{TAG}.zip"))}
     shutil.copy2(os.path.join(STUDIO, "brand/ds/assets/logos/OptimalLogo-Green.png"), os.path.join(HERE, "files", "logo.png"))
 
     thumbs, titles = {}, {}
@@ -411,6 +458,8 @@ def build():
         "R1_MENO": "".join(r1_html["menopause"]), "R1_LONG": "".join(r1_html["longevity"]),
         "R2_MENO": "".join(r2_html["menopause"]), "R2_LONG": "".join(r2_html["longevity"]), "CAROUSELS": "".join(car_html),
         "R3_MENO": "".join(r3_html["menopause"]), "R3_LONG": "".join(r3_html["longevity"]),
+        "IRON_STATICS": "".join(iron_html), "IRON_VIDEO": iron_video,
+        "ZIP_R4": REL + f"Optimal-IV-iron-ads_{TAG}.zip", "ZS_R4": zsize["r4"],
         "PLAN": plan_html(thumbs, titles), "REWRITES": rewrites_html(thumbs), "N_TEST": str(sum(1 for v in PLAN.values() if v[0] == "now")),
         "N_ALL": str(len(PLAN)),
         "M_DEST": SERVICES["menopause"]["dest"], "L_DEST": SERVICES["longevity"]["dest"],
