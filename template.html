@@ -188,7 +188,7 @@
   .warn { border-left: 3px solid #A8462F; }
 
   /* hormozi pass */
-  .principles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 18px; }
+  .principles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 18px; }
   .principles .card { padding: 16px 18px; }
   .principles b { display: block; color: var(--ink); margin-bottom: 4px; font-size: 14.5px; }
   .principles span { font-size: 13.5px; color: var(--body); }
@@ -229,13 +229,14 @@
       <a class="bundle" href="{{ZIP_VIDEOS}}" target="_blank" rel="noopener"><span><b>All video ads + reels</b><small>{{ZS_VIDEOS}} · download page</small></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
       <a class="bundle" href="{{ZIP_R1}}" download><span><b>Static ads · round 1</b><small>.zip · {{ZS_R1}}</small></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
       <a class="bundle" href="{{ZIP_R2}}" download><span><b>Static ads · round 2</b><small>.zip · {{ZS_R2}}</small></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+      <a class="bundle" href="{{ZIP_R3}}" download><span><b>Static ads · round 3</b><small>.zip · {{ZS_R3}}</small></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
     </div>
   </div>
 </header>
 
 <nav class="jump"><div class="wrap">
   <a href="#golive">Go-live checklist</a><a href="#test">What to test</a><a href="#hormozi">Why these words</a><a href="#launch">Launch steps</a><a href="#video">Video ads</a><a href="#round1">Static · round 1</a>
-  <a href="#round2">Static · round 2</a><a href="#instagram">Instagram reels</a>
+  <a href="#round2">Static · round 2</a><a href="#round3">Static · round 3</a><a href="#instagram">Instagram reels</a>
 </div></nav>
 
 <main class="wrap">
@@ -251,9 +252,10 @@
         <label class="check"><input type="checkbox" data-k="g-old"><span><b>Pause the older live ads</b> in the same campaigns so the test isn't diluted.
           <small>The two older videos: 3267720843438130 (primary care intro) and 28548023041524231 (menopause info call).</small></span></label>
         <label class="check"><input type="checkbox" data-k="g-sets"><span><b>Set up one ad set per service:</b> Menopause and Longevity membership, with the settings in Launch steps (broad audience, Advantage+ placements, Landing page views).</span></label>
-        <label class="check"><input type="checkbox" data-k="g-m"><span><b>Upload the six Menopause Test now ads</b> in rank order: MV1-T, MB1, M3, MB5, MB2, and the MC carousel.</span></label>
+        <label class="check"><input type="checkbox" data-k="g-m"><span><b>Upload the six Menopause Test now ads</b> in rank order: M3, MV1-T, MB1, MB5, MB2, and the MC carousel.</span></label>
         <label class="check"><input type="checkbox" data-k="g-l"><span><b>Upload the six Longevity Test now ads</b> in rank order: LV1-T, L1, L2, LB1, LB2, LB3.</span></label>
-        <label class="check"><input type="checkbox" data-k="g-copy"><span><b>Paste the copy and URLs from each card.</b> Name every ad with its ID. Keep the URL parameters exactly as written.
+        <label class="check"><input type="checkbox" data-k="g-ai"><span><b>Turn on Meta's AI label</b> ("AI info") for every round 2 and round 3 ad. Their photos are AI-generated, people included.</span></label>
+        <label class="check"><input type="checkbox" data-k="g-copy"><span><b>Paste the copy and URLs from each card.</b> Name every ad with its ID. The URL parameters are id-based, the same as your live ads, so Ad Lab can match each booking to its ad; keep them exactly as written.
           <small>Each card's Copy buttons carry the Hormozi-pass text: primary text, headline, description.</small></span></label>
         <label class="check"><input type="checkbox" data-k="g-pub"><span><b>Publish, then don't touch it for 7 days.</b> Day 7 and day 14 rules are in What to test.</span></label>
       </div>
@@ -280,7 +282,8 @@
         <ul>
           <li><b>One ad set per service</b>, with all of its Test now ads (video, static and carousel together). Broad audience and Advantage+ placements. Let Meta split the budget, and don't force it evenly.</li>
           <li><b>Hands off for 7 days.</b> Don't edit a live ad; duplicate it instead. Editing restarts learning.</li>
-          <li><b>Judge on booked intro calls</b> per ad (match <code>utm_content</code> in the booking system). Meta can't optimize health ads on bookings, so your bookings are the real score. Then look at cost per landing page view and link CTR.</li>
+          <li><b>Judge on booked intro calls</b> per ad. Ad Lab matches each booking to its ad through the id-based URL parameters. Meta can't optimize health ads on bookings, so your bookings are the real score, not Meta's "results".</li>
+          <li><b>Menopause leads with price.</b> Meta's menopause bookings have mostly been low-intent, so the price card (M3) goes first, and every menopause ad's text now states the program price ($895 + HST for the first 3 months). Fewer but better bookings is the goal.</li>
           <li><b>Day 7:</b> pause any ad that spent $40 or more with no bookings and a CTR under half the ad set's average. If Meta barely spent on an ad (under $10), it isn't a loser yet: give it a second week or swap in a Next up ad.</li>
           <li><b>Day 14:</b> replace the bottom two in each service with Next up ads. Make two new variations of the winning angle (new image, same message).</li>
           <li><b>Fatigue:</b> when an ad's frequency passes about 3, or its CTR drops about 30% from week one, swap in its Twin.</li>
@@ -303,7 +306,7 @@
   </section>
 
   <section class="block" id="hormozi">
-    <div class="shead"><div><div class="eyebrow">Hormozi pass · Oct 13</div><h2>Why these <em>words</em></h2></div>
+    <div class="shead"><div><div class="eyebrow">Hormozi pass · Oct 13, refined Oct 14</div><h2>Why these <em>words</em></h2></div>
       <p class="note">Every ad was reviewed the way Alex Hormozi reviews ads: would a stranger stop, know it's for them, want the outcome, believe it, and know the next step? These are the lines that changed on the image. All primary text and headlines were rewritten to the same rules.</p></div>
     <div class="principles">
       <div class="card"><b>Hook, then outcome</b><span>The image line has to stop the scroll and promise something concrete. "Sick today, seen tomorrow" beats "a new kind of clinic".</span></div>
@@ -311,6 +314,8 @@
       <div class="card"><b>Benefits over features</b><span>Not "body composition scans": "see what's working". Not "a written plan": "know exactly what to do".</span></div>
       <div class="card"><b>Make the price small</b><span>$1,495 a year is about $4 a day. Every longevity headline or description carries one of the two.</span></div>
       <div class="card"><b>One offer everywhere</b><span>Image, primary text, headline and button all point at the same thing: a free 15-minute call, no commitment.</span></div>
+      <div class="card"><b>Qualify on price</b><span>Every menopause ad's text names the program price ($895 + HST to start), so the free call attracts people who are ready for private care.</span></div>
+      <div class="card"><b>Readable on a phone</b><span>Nothing smaller than about 10px on a phone. Unreadable labels were removed, and contrast behind every sentence is measured at 4.5:1 or better.</span></div>
       <div class="card"><b>Only true scarcity</b><span>"We cap membership" and "a small panel of patients" both come from the clinic's own pages. Nothing is invented.</span></div>
     </div>
     <div class="rws">{{REWRITES}}</div>
@@ -363,6 +368,13 @@
     <div class="sub"><span class="svc menopause">Menopause</span></div><div class="grid">{{R2_MENO}}</div>
     <div class="sub"><span class="svc longevity">Longevity membership</span></div><div class="grid">{{R2_LONG}}</div>
     {{CAROUSELS}}
+  </section>
+
+  <section class="block" id="round3">
+    <div class="shead"><div><div class="eyebrow">Static ads · round 3</div><h2>Engraved <em>concepts</em></h2></div>
+      <p class="note">Four AI concepts from Ad Lab: engraved plates in the brand's sage-on-cream style, plus one macro photo. They follow the one-sentence rule. Turn on Meta's AI label when you upload them.</p></div>
+    <div class="sub"><span class="svc menopause">Menopause</span></div><div class="grid">{{R3_MENO}}</div>
+    <div class="sub"><span class="svc longevity">Longevity membership</span></div><div class="grid">{{R3_LONG}}</div>
   </section>
 
   <section class="block" id="instagram">

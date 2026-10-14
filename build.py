@@ -21,15 +21,15 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 STUDIO = os.path.join(HERE, "..", "meta-ad-studio")
 REPO = "Optimal-Research-Team/optimal-ad-handoff"
 TAG = "2026-10-12"
-ROUND = "October 12, 2026"
+ROUND = "October 12–13, 2026"
 REL = f"https://github.com/{REPO}/releases/download/{TAG}/"
 STAGE = os.path.join(HERE, "release")          # git-ignored: what gets uploaded to the release
 
 SERVICES = {
     "longevity": dict(name="Longevity membership", dest="https://www.beoptimal.ca/membership",
-                      utm="utm_source=meta&utm_medium=paid&utm_campaign=opt-b-q4&utm_content={{ad.name}}"),
+                      utm="utm_source={{site_source_name}}&utm_medium=paid&utm_campaign={{campaign.id}}&utm_term={{adset.id}}&utm_content={{ad.id}}"),
     "menopause": dict(name="Menopause", dest="https://www.beoptimal.ca/services/menopause-and-perimenopause-care",
-                      utm="utm_source=meta&utm_medium=paid&utm_campaign=opt-a-q4&utm_content={{ad.name}}"),
+                      utm="utm_source={{site_source_name}}&utm_medium=paid&utm_campaign={{campaign.id}}&utm_term={{adset.id}}&utm_content={{ad.id}}"),
 }
 VIDEOS = [  # id, service, folder in meta-ad-studio/out, render name, the line on screen
     ("LV1", "longevity", "longevity-core-v2", "LongevityCore", "3 things to know before you book."),
@@ -44,9 +44,9 @@ CUTS = [("T", "Tight")]   # Oct 12 (Peter): Tight cuts only
 #   ("twin", "X", angle)   same message as X in a different look: swap in when X fatigues
 PLAN = {
     # menopause
-    "MV1": ("now", 1, "Emotional hook · video"),
-    "MB1": ("now", 2, "Relatable moment · photo"),
-    "M3":  ("now", 3, "Price transparency · price card"),
+    "M3":  ("now", 1, "Price up front, qualifies the booking · price card"),
+    "MV1": ("now", 2, "Emotional hook · video"),
+    "MB1": ("now", 3, "Relatable moment · photo"),
     "MB5": ("now", 4, "Access, no referral · clinic photo"),
     "MB2": ("now", 5, "Symptom awareness · photo"),
     "MC":  ("now", 6, "How it works · carousel"),
@@ -58,13 +58,15 @@ PLAN = {
     "M4":  ("twin", "MB5", "No referral · photo + capsule"),
     "M5":  ("twin", "MC", "How it works · step diagram"),
     "MB6": ("twin", "M2", "60-minute visit · consult photo"),
+    "MA1": ("twin", "M3", "$895 + HST · engraving"),
+    "MA2": ("next", None, "Midlife, planned for · botanical plate"),
     # longevity
     "LV1": ("now", 1, "A real person, trust · video"),
     "L1":  ("now", 2, "Price and value · ledger"),
     "L2":  ("now", 3, "Objection: my family doctor · diagram"),
     "LB1": ("now", 4, "Local awareness · photo"),
     "LB2": ("now", 5, "Speed · photo"),
-    "LB3": ("now", 6, "Measurement · photo"),
+    "LB3": ("now", 6, "Muscle, measured · photo"),
     "LV2": ("next", None, "A full hour, every year · video"),
     "LC":  ("next", None, "What $1,495 includes · carousel"),
     "L6":  ("next", None, "OHIP still covers labs · photo + capsule"),
@@ -74,19 +76,23 @@ PLAN = {
     "L5":  ("twin", "LV2", "An hour every year · illustration"),
     "LB5": ("twin", "L1", "NP for $1,495 a year · photo"),
     "LB6": ("twin", "L6", "OHIP covers labs · photo"),
+    "LA1": ("twin", "LB5", "Two toonies a day · photo"),
+    "LA2": ("next", None, "Normal is a range · gauge plate"),
 }
 # Hormozi pass (Oct 13, 2026): what changed on the image, and why.
 REWRITES = [
     ("LB1", "Barrie has a new kind of health clinic.", "Your own Nurse Practitioner in Barrie, with same or next-day visits.", "Vague becomes a specific outcome. “New kind of clinic” says nothing; your own NP and next-day visits is the dream outcome."),
     ("LB2", "Same or next-day visits when something can’t wait.", "Sick today, seen tomorrow, by an NP who knows you.", "A scene the reader has lived, plus the relationship. Time delay goes to almost zero."),
-    ("LB3", "Your body composition, measured every 90 days.", "See what’s working, every 90 days.", "Feature becomes benefit. Nobody wants a scan; they want proof it’s working."),
+    ("LB3", "Your body composition, measured every 90 days.", "Your muscle, measured every 90 days.", "Concrete beats abstract: it names the one thing worth measuring, and the copy explains why muscle matters more each decade."),
     ("LB4", "Every member gets a written 12-month plan.", "Know exactly what to do for your health this year.", "Sell the certainty, not the document."),
     ("LB5", "Your own Nurse Practitioner for $1,495 a year.", "Your own Nurse Practitioner for about $4 a day.", "The same price reframed per day ($1,495 ÷ 365)."),
     ("LB6", "Medically necessary labs are still covered by OHIP.", "OHIP still covers your medically necessary labs.", "Lead with the reassurance: the objection is answered in the first three words."),
     ("MB2", "Brain fog is a common perimenopause symptom.", "Brain fog can be perimenopause, not just a busy life.", "Names the wrong explanation she’s been giving herself, then reframes it. Curiosity, not a textbook line."),
     ("MB3", "Menopause care in Barrie, led by a Nurse Practitioner.", "Start menopause care in Barrie within days.", "Description becomes outcome plus speed. Cutting the time delay raises perceived value."),
     ("MB4", "Hot flashes don’t wait for a good time.", "Hot flashes don’t wait, and neither should you.", "Keeps the relatable hook and adds the push to act."),
-    ("MB5", "No referral or family doctor needed.", "No referral, no family doctor, and you start within days.", "Stacks the effort removers and adds speed."),
+    ("MB5", "No referral or family doctor needed.", "Menopause care without a referral or a family doctor.", "Says what it is in the first word. The old line never mentioned menopause, so a stranger couldn't tell what was on offer."),
+    ("MA1", "Three months, one Nurse Practitioner, one price: $895.", "Three months, one Nurse Practitioner, one price: $895 + HST.", "Matches the price card and the consent form, so there's no surprise at the first visit."),
+    ("LA2", "Normal is a range. We talk about where you sit in it.", "Normal is a range, and we look at where you sit in it.", "Same idea, held to one sentence."),
     ("MC1", "It starts with a free 15-minute call.", "Menopause care in Barrie starts with a free 15-minute call.", "Card 1 has to say who and where, or nobody swipes."),
     ("MC4", "You get a written treatment plan.", "You get a written plan and the same NP every visit.", "Adds continuity: the same person at every visit, so the plan comes with someone who knows the history."),
     ("MC5", "Book your free call at beoptimal.ca.", "No referral needed: book your free call at beoptimal.ca.", "Removes the last objection right at the call to action."),
@@ -162,7 +168,10 @@ def static_copy():
         body = r2.split(f"## {sec}")[1].split("\n## ")[0]
         car[key] = dict(primary=re.search(r"\*\*Primary text:\*\* (.*)", body)[1],
                         cards=re.findall(rf"^\| ({key}\d) \| (.*?) \| (.*?) \|$", body, re.M))
-    return one, two, car
+    r3 = open(os.path.join(STUDIO, "static/COPY-R3.md")).read()
+    three = {m[1]: dict(title=m[2], primary=m[3].strip(), headline=m[4], description=m[5].strip())
+             for m in re.finditer(r'### ((?:MA|LA)\d) · "(.*?)"\n\*\*Primary text:\*\* (.*?)\n\*\*Headline:\*\* (.*?) · \*\*Description:\*\* (.*?)\n', r3)}
+    return one, two, car, three
 
 
 # ------------------------------------------------------------------ html pieces
@@ -224,11 +233,11 @@ def dl(href, label, size, primary=False):
 
 
 def build():
-    for d in ("previews-web", "files", "static-ads"):
+    for d in ("previews-web", "files", "static-ads"):   # rebuilt every run
         shutil.rmtree(os.path.join(HERE, d), ignore_errors=True)
     vc = video_copy()
-    r1, r2, car = static_copy()
-    zips = {"videos": [], "r1": [], "r2": []}
+    r1, r2, car, r3 = static_copy()
+    zips = {"videos": [], "r1": [], "r2": [], "r3": []}
     counts = dict(video=0, static=0, reels=0)
 
     # ---------------- video ads
@@ -335,6 +344,12 @@ def build():
         imgs = [("4:5 Feed", os.path.join(sdir, "r2", sub, f"{ad}_4x5.png")), ("9:16 Stories+Reels", os.path.join(sdir, "r2", sub, f"{ad}_9x16.png"))]
         r2_html["menopause" if ad[0] == "M" else "longevity"].append(
             static_card(ad, c["title"], c["primary"], c["headline"], None, imgs, "r2"))
+    r3_html = {"menopause": [], "longevity": []}
+    for ad, c in r3.items():
+        sub = "meno" if ad[0] == "M" else "long"
+        imgs = [("4:5 Feed", os.path.join(sdir, "r3", sub, f"{ad}_4x5.png")), ("9:16 Stories+Reels", os.path.join(sdir, "r3", sub, f"{ad}_9x16.png"))]
+        r3_html["menopause" if ad[0] == "M" else "longevity"].append(
+            static_card(ad, c["title"], c["primary"], c["headline"], c["description"], imgs, "r3"))
     car_html = []
     for key, svc in (("MC", "menopause"), ("LC", "longevity")):
         sub = "meno-carousel" if key == "MC" else "long-carousel"
@@ -355,7 +370,8 @@ def build():
     # Static rounds get a zip each. Videos don't: a video zip would re-upload ~600 MB of files that are
     # already individual release assets, so "all video files" links to the release page instead.
     for key, fname, extra in (("r1", f"Optimal-static-ads-round-1_{TAG}.zip", [(os.path.join(STUDIO, "static/COPY.md"), "COPY.md")]),
-                              ("r2", f"Optimal-static-ads-round-2_{TAG}.zip", [(os.path.join(STUDIO, "static/COPY-R2.md"), "COPY.md")])):
+                              ("r2", f"Optimal-static-ads-round-2_{TAG}.zip", [(os.path.join(STUDIO, "static/COPY-R2.md"), "COPY.md")]),
+                              ("r3", f"Optimal-static-ads-round-3_{TAG}.zip", [(os.path.join(STUDIO, "static/COPY-R3.md"), "COPY.md")])):
         if not os.path.exists(os.path.join(STAGE, fname)):
             with zipfile.ZipFile(os.path.join(STAGE, fname), "w", zipfile.ZIP_STORED) as z:
                 for src, arc in zips[key] + extra:
@@ -363,7 +379,8 @@ def build():
     vid_total = sum(os.path.getsize(src) for src, arc in zips["videos"])
     zsize = {"videos": f"{len([a for _, a in zips['videos'] if a.endswith('.mp4')])} files · {vid_total / 1e6:.0f} MB",
              "r1": mb(os.path.join(STAGE, f"Optimal-static-ads-round-1_{TAG}.zip")),
-             "r2": mb(os.path.join(STAGE, f"Optimal-static-ads-round-2_{TAG}.zip"))}
+             "r2": mb(os.path.join(STAGE, f"Optimal-static-ads-round-2_{TAG}.zip")),
+             "r3": mb(os.path.join(STAGE, f"Optimal-static-ads-round-3_{TAG}.zip"))}
     shutil.copy2(os.path.join(STUDIO, "brand/ds/assets/logos/OptimalLogo-Green.png"), os.path.join(HERE, "files", "logo.png"))
 
     thumbs, titles = {}, {}
@@ -373,6 +390,8 @@ def build():
         thumbs[ad], titles[ad] = f"static-ads/r1/thumbs/{ad}.jpg", c["title"]
     for ad, c in r2.items():
         thumbs[ad], titles[ad] = f"static-ads/r2/thumbs/{ad}.jpg", c["title"]
+    for ad, c in r3.items():
+        thumbs[ad], titles[ad] = f"static-ads/r3/thumbs/{ad}.jpg", c["title"]
     for key in ("MC", "LC"):
         thumbs[key] = f"static-ads/r2/thumbs/{key}1.jpg"
         titles[key] = "Menopause carousel, 5 cards" if key == "MC" else "Longevity carousel, 5 cards"
@@ -385,12 +404,13 @@ def build():
     for k, v in {
         "ROUND": ROUND, "TAG": TAG,
         "ZIP_VIDEOS": f"https://github.com/{REPO}/releases/tag/{TAG}", "ZIP_R1": REL + f"Optimal-static-ads-round-1_{TAG}.zip",
-        "ZIP_R2": REL + f"Optimal-static-ads-round-2_{TAG}.zip",
+        "ZIP_R2": REL + f"Optimal-static-ads-round-2_{TAG}.zip", "ZIP_R3": REL + f"Optimal-static-ads-round-3_{TAG}.zip", "ZS_R3": zsize["r3"],
         "ZS_VIDEOS": zsize["videos"], "ZS_R1": zsize["r1"], "ZS_R2": zsize["r2"],
-        "N_VIDEO": str(len(VIDEOS)), "N_STATIC": str(len(r1) + len(r2)), "N_CAR": "2", "N_REELS": str(counts["reels"]),
+        "N_VIDEO": str(len(VIDEOS)), "N_STATIC": str(len(r1) + len(r2) + len(r3)), "N_CAR": "2", "N_REELS": str(counts["reels"]),
         "VIDEO_ADS": "".join(vids_html), "REELS": "".join(reels_html),
         "R1_MENO": "".join(r1_html["menopause"]), "R1_LONG": "".join(r1_html["longevity"]),
         "R2_MENO": "".join(r2_html["menopause"]), "R2_LONG": "".join(r2_html["longevity"]), "CAROUSELS": "".join(car_html),
+        "R3_MENO": "".join(r3_html["menopause"]), "R3_LONG": "".join(r3_html["longevity"]),
         "PLAN": plan_html(thumbs, titles), "REWRITES": rewrites_html(thumbs), "N_TEST": str(sum(1 for v in PLAN.values() if v[0] == "now")),
         "N_ALL": str(len(PLAN)),
         "M_DEST": SERVICES["menopause"]["dest"], "L_DEST": SERVICES["longevity"]["dest"],
