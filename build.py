@@ -37,7 +37,8 @@ VIDEOS = [  # id, service, folder in meta-ad-studio/out, render name, the line o
     ("MV1", "menopause", "menopause-ad1", "MenopauseMyself", "“I just don’t feel like myself.”"),
     ("LV3", "longevity", "health-optimizer", "LongevityOptimize", "An hour with an NP who listens."),   # Oct 15, Rubeana
 ]
-SOCIALS = [  # organic-only reels (Oct 15): id, folder in meta-ad-studio/out, video stem, cover stem, the line
+SOCIALS = [  # organic-only reels: kept OFF the ads site (Peter, Oct 15), so the list stays empty; the format is kept for later
+] and [
     ("RB1", "rubeana-bio", "RubeanaBio_Reel_9x16", "RubeanaBio_cover_9x16", "Meet Rubeana, our Clinical Director."),
     ("CI1", "cholesterol-info", "CholesterolInfo_Reel_9x16", "CholesterolInfo_cover_9x16", "Cholesterol, explained: HDL, LDL, Lp(a) and ApoB."),
 ]
