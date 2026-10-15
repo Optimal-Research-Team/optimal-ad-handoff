@@ -313,7 +313,7 @@ def build():
     for vid, svc, folder, name, line in VIDEOS:
         out = os.path.join(STUDIO, "out", folder)
         src = os.path.join(out, f"{name}_IG_Tight_9x16.mp4")
-        if not os.path.exists(src):
+        if not os.path.exists(src) or "caption" not in vc.get(vid, {}):   # no caption in VIDEO-ADS.md = not for the ads team (LV3 is posted directly)
             continue
         counts["reels"] += 1
         cov = os.path.join(out, f"{name}_IG_cover_9x16.jpg")
