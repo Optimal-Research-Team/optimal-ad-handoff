@@ -35,6 +35,7 @@ VIDEOS = [  # id, service, folder in meta-ad-studio/out, render name, the line o
     ("LV1", "longevity", "longevity-core-v2", "LongevityCore", "3 things to know before you book."),
     ("LV2", "longevity", "longevity-ad2", "LongevityFullHour", "A full hour. Every year."),
     ("MV1", "menopause", "menopause-ad1", "MenopauseMyself", "“I just don’t feel like myself.”"),
+    ("LV3", "longevity", "health-optimizer", "LongevityOptimize", "An hour with an NP who listens."),   # Oct 15, Rubeana
 ]
 CUTS = [("T", "Tight")]   # Oct 12 (Peter): Tight cuts only
 
@@ -74,6 +75,7 @@ PLAN = {
     "L3":  ("twin", "LB2", "Seen by Tuesday · calendar"),
     "L4":  ("twin", "LB3", "Every 90 days · figure + timeline"),
     "L5":  ("twin", "LV2", "An hour every year · illustration"),
+    "LV3": ("twin", "LV2", "An hour with an NP who listens · NP video"),
     "LB5": ("twin", "L1", "NP for $1,495 a year · photo"),
     "LB6": ("twin", "L6", "OHIP covers labs · photo"),
     "LA1": ("twin", "LB5", "Two toonies a day · photo"),
@@ -106,7 +108,7 @@ IRON = {  # id: (badge class, badge text)
     "IR2": ("twin", "Hold · needs clinical sign-off"),
 }
 
-SHOW_ID = {"MV1": "MV1-T", "LV1": "LV1-T", "LV2": "LV2-T", "MC": "MC1–5", "LC": "LC1–5"}
+SHOW_ID = {"MV1": "MV1-T", "LV1": "LV1-T", "LV2": "LV2-T", "LV3": "LV3-T", "MC": "MC1–5", "LC": "LC1–5"}
 RATIOS = [("9x16", "9:16 · Stories + Reels"), ("4x5", "4:5 · Feed")]
 
 
