@@ -37,6 +37,10 @@ VIDEOS = [  # id, service, folder in meta-ad-studio/out, render name, the line o
     ("MV1", "menopause", "menopause-ad1", "MenopauseMyself", "“I just don’t feel like myself.”"),
     ("LV3", "longevity", "health-optimizer", "LongevityOptimize", "An hour with an NP who listens."),   # Oct 15, Rubeana
 ]
+SOCIALS = [  # organic-only reels (Oct 15): id, folder in meta-ad-studio/out, video stem, cover stem, the line
+    ("RB1", "rubeana-bio", "RubeanaBio_Reel_9x16", "RubeanaBio_cover_9x16", "Meet Rubeana, our Clinical Director."),
+    ("CI1", "cholesterol-info", "CholesterolInfo_Reel_9x16", "CholesterolInfo_cover_9x16", "Cholesterol, explained: HDL, LDL, Lp(a) and ApoB."),
+]
 CUTS = [("T", "Tight")]   # Oct 12 (Peter): Tight cuts only
 
 # What to test first (Oct 12, 2026). One ad set per service, ~6 distinct ads each; the rest rotate in later.
@@ -315,7 +319,6 @@ def build():
         reel_url = stage(src, f"IG-REEL_{vid}.mp4")
         cov_rel = put(cov, f"files/IG-REEL_{vid}_cover.jpg")
         zips["videos"] += [(src, f"Instagram reels/IG-REEL_{vid}.mp4"), (cov, f"Instagram reels/IG-REEL_{vid}_cover.jpg")]
-        kw = "LONGEVITY" if svc == "longevity" else "MENOPAUSE"
         reels_html.append(f'''
       <article class="card reel">
         <div class="reelmedia">
@@ -324,9 +327,32 @@ def build():
         </div>
         <div class="reelmeta">
           <h3><span class="id">{vid}</span> {esc(line)}</h3>
-          <p class="note">{dur(src)} · ends on “Comment {kw}”, which triggers the auto-DM.</p>
+          <p class="note">{dur(src)} · Instagram cut of {vid}-T, ending on “Link in bio”.</p>
           <div class="dls">{dl(reel_url, "Reel .mp4", mb(src), True)}{dl(cov_rel, "Cover .jpg", mb(cov))}</div>
           {copy_field("Caption", vc[vid]["caption"], 9)}
+        </div>
+      </article>''')
+
+    social = open(os.path.join(STUDIO, "SOCIAL-VIDEOS.md")).read()
+    for sid, folder, stem, cstem, line in SOCIALS:
+        out = os.path.join(STUDIO, "out", folder)
+        src, cov = os.path.join(out, f"{stem}.mp4"), os.path.join(out, f"{cstem}.jpg")
+        if not os.path.exists(src):
+            continue
+        counts["reels"] += 1
+        cap = re.search(rf"### {sid} caption\n(.*?)(?=\n### |\Z)", social, re.S)[1].strip()
+        url, cov_rel = stage(src, f"SOCIAL_{sid}.mp4"), put(cov, f"files/SOCIAL_{sid}_cover.jpg")
+        reels_html.append(f'''
+      <article class="card reel" id="{sid}">
+        <div class="reelmedia">
+          <video src="previews/{stem}.mp4" poster="{cov_rel}" controls playsinline preload="none"></video>
+          <img src="{cov_rel}" alt="{sid} cover" loading="lazy">
+        </div>
+        <div class="reelmeta">
+          <h3><span class="id">{sid}</span> {esc(line)}</h3>
+          <p class="note">{dur(src)} · organic only (not an ad) · ends on “Link in bio”.</p>
+          <div class="dls">{dl(url, "Reel .mp4", mb(src), True)}{dl(cov_rel, "Cover .jpg", mb(cov))}</div>
+          {copy_field("Caption", cap, 9)}
         </div>
       </article>''')
 
