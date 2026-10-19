@@ -7,12 +7,12 @@ Hi, I’m Cheryl
 I’m a care coordinator
 
 3
-00:00:02,060 --> 00:00:02,820
-at the Optimal
+00:00:02,060 --> 00:00:03,060
+at the Optimal Clinic
 
 4
-00:00:02,820 --> 00:00:04,407
-Clinic in Barrie
+00:00:03,060 --> 00:00:04,407
+in Barrie
 
 5
 00:00:04,407 --> 00:00:04,863
@@ -35,20 +35,20 @@ One
 Every year
 
 10
-00:00:08,000 --> 00:00:09,400
-every member gets access
+00:00:08,000 --> 00:00:08,760
+every member gets
 
 11
-00:00:09,400 --> 00:00:11,000
-to a 60-minute annual
+00:00:08,760 --> 00:00:10,540
+access to a 60-minute
 
 12
-00:00:11,000 --> 00:00:11,880
-longevity assessment
+00:00:10,540 --> 00:00:11,420
+annual longevity
 
 13
-00:00:11,880 --> 00:00:12,540
-with their nurse
+00:00:11,420 --> 00:00:12,540
+assessment with their nurse
 
 14
 00:00:12,540 --> 00:00:13,600
@@ -95,12 +95,12 @@ so that you can get seen
 when you need to be seen
 
 25
-00:00:27,226 --> 00:00:28,207
-Book a free information
+00:00:27,226 --> 00:00:28,567
+Book a free information call
 
 26
-00:00:28,207 --> 00:00:29,878
-call with me now
+00:00:28,567 --> 00:00:29,878
+with me now
 
 27
 00:00:29,878 --> 00:00:30,547

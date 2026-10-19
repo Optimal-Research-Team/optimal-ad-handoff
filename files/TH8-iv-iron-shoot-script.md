@@ -1,0 +1,31 @@
+# TH8 · IV iron · 30-second shoot script (Oct 19, 2026)
+
+**TH8 · IV iron · "Two routes to your iron stores"**, Rubeana, **30 s max** (Meta), added Oct 19
+- **Where:** in front of the real treatment room, with the empty recliner 2 m or more behind her. She's chest-up, seated or standing. Hide any drug box or bag label.
+- **Hook options:**
+  - "Two routes to your iron stores. One skips the gut."
+  - "IV iron is coming to Barrie, and you don't need a referral."
+  - "Iron pills work, just a little at a time."
+- **Script (≈75 words, about 29 s):**
+  - [0–3 s] *Hook.*
+  - [3–6 s] "I'm Rubeana, Clinical Director and nurse practitioner at Optimal."
+  - [6–14 s] "Iron pills work a little at a time, often over months. IV iron can refill your iron stores in as little as one visit."
+  - [14–22 s] "No referral needed. We order your bloodwork first, a nurse practitioner is on site for every infusion, and we recheck at six to eight weeks."
+  - [22–30 s] "IV iron is coming to Barrie. Join the founding waitlist. It's free, and founding members get first access."
+- **Don't say on camera:**
+  - a price
+  - a drug name
+  - "you'll feel better in…"
+  - "1 in 4 women"
+  - anything about hospitals or other clinics
+  - "you have low iron"
+- **Alt ending, recorded once the date is confirmed:** "We open in November. Join the founding waitlist."
+- **B-roll, staff only, 10 s each:**
+  - the IV pole with a blank bag (push in slowly)
+  - the recliner with the blanket and side table
+  - gloved hands labelling a blood tube
+  - the front desk
+- **Overlays it sets up:**
+  - the "a little at a time → one visit" calendar from IRM1
+  - the founding-waitlist end card from IRV2
+- **Source:** `meta-ad-studio/static/COPY-IRON-R2.md` (the IRV3 voiceover, said in her own words).
