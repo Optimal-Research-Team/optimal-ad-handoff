@@ -106,3 +106,38 @@ Use the short primary text by default. The long one is for the second ad in each
   - "First access in signup order" and "founding pricing on your first treatment": both come from the waitlist terms on the landing page.
 - **No people.** That's the content library's house rule for AI imagery, and it sidesteps the employees' objection to AI staff.
 - **No invented rooms.** Clinic spaces come only from real photos or footage, and IR3 and IRV1 (round 1) were re-cut onto the real lounge. The AI imagery stays in home and neutral settings.
+
+## IV iron talking heads: IRT1–IRT4 (Oct 20, 2026)
+
+Cheryl (care coordinator) films four takes in our real lounge. Every ad comes in 1:1, 9:16 and 1.91:1 and runs 30 s or less, with burned-in captions, a hook and graphics: engraving cards above her head and numbered chips. There's no music.
+
+- **Destination:** the same Instant Form and CTA (**Sign up**) as the rest of the iron round. Every take ended on "join the waitlist at beoptimal.ca/iron". That page isn't live yet, so the cuts stop at "Join the waitlist" and the end card carries the action.
+- **November:** Peter recorded "opens in November", so the end card uses it.
+- **Clinical sign-off:** the Clinical Director has approved everything, which covers IRT2's "doesn't always look like anemia" (and IR2) (Oct 20).
+- **Audio:** the DJI Mic Mini wasn't connected, so these were recorded on the iPhone's built-in mics. The voice is cleaned with DeepFilterNet (`tools/enhance_voice.py`), then EQ'd for presence.
+- **Specs:** `ads/iron_pills_dont_work.py`, `iron_not_anemia.py`, `iron_three_things.py` and `iron_what_it_looks_like.py`.
+- **Organic Instagram later:** each spec has an `ig` channel, a 9:16 cut ending on "Link in bio". IRT4's organic cut is the Full version, which keeps the spoken "Opening in November".
+
+### IRT1 · "Iron pills don't work for everyone." (talking head, 29 s)
+**Primary text (short):** Iron pills don't work for everyone. IV iron skips the gut, often in one monitored visit, and it opens in Barrie this November: join the founding waitlist free.
+**Primary text (long):** Iron pills don't work for everyone: some people can't absorb enough through the gut, and others can't handle the side effects. IV iron skips the gut and goes straight into a vein, in a monitored 60–90 minute visit, and many people only need one. A Nurse Practitioner reviews your bloodwork first. IV iron opens at Optimal in Barrie this November. Join the founding waitlist free for first access, in signup order.
+**Headline:** When iron pills don't work · **Description:** IV iron · Barrie · Opening November
+**Instagram caption (organic, later):** Iron pills don't work for everyone. IV iron skips the gut, and many people only need one monitored visit. IV iron opens at Optimal in Barrie this November. Join the founding waitlist through the link in our bio. #Barrie #BarrieOntario #ivtherapy #irondeficiency #womenshealth
+
+### IRT2 · "Low iron doesn't always look like anemia." (talking head, 29 s)
+**Primary text (short):** Low iron doesn't always show up as anemia: ferritin measures your iron stores. Our Nurse Practitioners can order the bloodwork, no referral needed. Join the free founding waitlist.
+**Primary text (long):** Low iron doesn't always show up as anemia. Hemoglobin can come back normal while iron stores, measured by ferritin, run low, and low ferritin is linked with fatigue, hair shedding, restless legs and getting winded on the stairs. When oral iron hasn't helped, IV iron may be an option. Our Nurse Practitioners order the bloodwork and walk you through it, no referral needed. IV iron opens at Optimal in Barrie this November: join the founding waitlist free.
+**Headline:** Ferritin, checked properly · **Description:** No referral · Opening November
+**Instagram caption (organic, later):** Low iron doesn't always show up as anemia. Hemoglobin can look normal while ferritin, your iron stores, runs low. Our Nurse Practitioners can order the bloodwork, no referral needed. IV iron opens at Optimal in Barrie this November. Join the founding waitlist through the link in our bio. Educational content only. Not medical advice. #Barrie #BarrieOntario #ferritin #irondeficiency #womenshealth
+
+### IRT3 · "Three things most people don't know about IV iron." (talking head, 28 s)
+**Primary text (short):** Three things about IV iron: it's often a single visit, the iron is a pharmacy prescription often covered by drug plans, and you don't need a referral. It opens in Barrie this November: join the founding waitlist free.
+**Primary text (long):** Three things most people don't know about IV iron. One: it's often a single visit, and some people need a second a week later. Two: the iron itself is a pharmacy prescription, often covered by drug plans. Three: you don't need a referral, because we order your bloodwork. IV iron opens at Optimal in Barrie this November. Join the founding waitlist free for first access and founding pricing.
+**Headline:** 3 things about IV iron · **Description:** Opening November · Barrie
+**Instagram caption (organic, later):** Three things most people don't know about IV iron: it's often a single visit, the iron is a pharmacy prescription often covered by drug plans, and you don't need a referral. IV iron opens at Optimal in Barrie this November. Join the founding waitlist through the link in our bio. #Barrie #BarrieOntario #ivtherapy #irondeficiency #preventivehealth
+
+### IRT4 · "Here's what getting IV iron actually looks like." (talking head, 28 s)
+**Primary text (short):** Here's what IV iron at Optimal looks like: join the waitlist, an NP assesses you and orders your bloodwork, then one relaxed 60–90 minute infusion with an NP on site. Opening in Barrie this November: join the founding waitlist free.
+**Primary text (long):** Here's what getting IV iron in Barrie actually looks like. One: join the waitlist, no referral needed. Two: our Nurse Practitioner assesses you and orders your bloodwork. Three: if it's right for you, you fill the prescription at your pharmacy, often covered by drug plans. Four: you relax for a 60–90 minute infusion with an NP on site the whole time. Five: we recheck your bloodwork at 6–8 weeks. IV iron opens at Optimal this November. Join the founding waitlist free.
+**Headline:** IV iron, step by step · **Description:** No referral · Opening November
+**Instagram caption (organic, later):** Here's what getting IV iron in Barrie actually looks like, in five steps: join the waitlist, an NP assessment and bloodwork, your prescription from the pharmacy, a relaxed 60–90 minute infusion with an NP on site, and a recheck at 6–8 weeks. Opening in November. Join the founding waitlist through the link in our bio. #Barrie #BarrieOntario #ivtherapy #irondeficiency #womenshealth

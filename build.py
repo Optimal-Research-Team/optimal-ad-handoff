@@ -110,10 +110,13 @@ REWRITES = [
 # IV iron (Oct 14, 2026): pre-launch, founding waitlist only, on a Meta Instant Form (no landing page yet).
 IRON = {  # id: (badge class, badge text)
     "IR1": ("now", "Run now"), "IR3": ("now", "Run now"), "IRV1": ("now", "Run now"),
-    "IR2": ("twin", "Hold · needs clinical sign-off"),
+    "IR2": ("now", "Run now · cleared by the Clinical Director (Oct 20)"),
     # round 2 (Oct 19): one Hormozi lever each, all on the same founding-waitlist offer
     "IR4": ("now", "Test · time"), "IR5": ("now", "Test · effort"), "IR6": ("now", "Test · likelihood"),
     "IRM1": ("now", "Test · motion"), "IRM2": ("now", "Test · offer"), "IRV2": ("now", "Test · film"), "IRV3": ("now", "Test · film"),
+    # Oct 20: Cheryl's four talking heads (real lounge, phone mic cleaned with DeepFilterNet)
+    "IRT1": ("now", "Test · talking head"), "IRT2": ("now", "Test · talking head"), "IRT3": ("now", "Test · talking head"),
+    "IRT4": ("now", "Test · talking head"),
 }
 
 SHOW_ID = {"MV1": "MV1-T", "LV1": "LV1-T", "LV2": "LV2-T", "LV3": "LV3-T", "MC": "MC1–5", "LC": "LC1–5"}
@@ -216,7 +219,7 @@ def static_copy():
 def iron2_copy():
     doc = open(os.path.join(STUDIO, "static/COPY-IRON-R2.md")).read()
     return {m[1]: dict(title=m[2], short=m[3].strip(), long=m[4].strip(), headline=m[5], description=m[6].strip())
-            for m in re.finditer(r'### (IR[MV]?\d) · "(.*?)"[^\n]*\n\*\*Primary text \(short\):\*\* (.*?)\n\*\*Primary text \(long\):\*\* (.*?)\n'
+            for m in re.finditer(r'### (IR[MVT]?\d) · "(.*?)"[^\n]*\n\*\*Primary text \(short\):\*\* (.*?)\n\*\*Primary text \(long\):\*\* (.*?)\n'
                                  r'\*\*Headline:\*\* (.*?) · \*\*Description:\*\* (.*?)\n', doc)}
 
 
@@ -488,7 +491,9 @@ def build():
         c = ir2[ad]
         iron2_statics.append(static_card(ad, c["title"], c["short"], c["headline"], c["description"], simgs(i2dir, ad), "r5",
                                          alt_note=copy_field("Primary text (long)", c["long"], 6)))
-    VID2 = {"IRM1": "HyperFrames motion · silent · drawn graphics only", "IRM2": "HyperFrames motion · silent · the offer stack",
+    VID2 = {"IRT1": "Talking head · Cheryl in our lounge · captions + engraving cards", "IRT2": "Talking head · Cheryl · symptom chips + cards",
+            "IRT3": "Talking head · Cheryl · three numbered points", "IRT4": "Talking head · Cheryl · five numbered steps",
+            "IRM1": "HyperFrames motion · silent · drawn graphics only", "IRM2": "HyperFrames motion · silent · the offer stack",
             "IRV2": "Film · Maeve voiceover · our real waiting lounge and reception + still lifes", "IRV3": "Film · Maeve voiceover · home still lifes + our real waiting lounge"}
     iron2_videos = []
     for ad, kind in VID2.items():
