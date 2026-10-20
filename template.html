@@ -3,450 +3,302 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Optimal ad hand-off · {{ROUND}}</title>
+<title>Optimal ad hand-off · updated {{UPDATED}}</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="files/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  /* Oct 20 2026 rebuild (Peter: "visually clearer and easier to understand, simpler, neater; make it clear when
+     something was added"). One page per service, newest work flagged, instructions folded away at the bottom. */
   :root {
-    --cream: #FFFCF7; --paper: #FFFFFF; --bone: #EFE9DF; --line: rgba(44, 78, 37, .12); --line-2: rgba(44, 78, 37, .2);
-    --forest: #2C4E25; --deep: #1A500F; --sage: #87A482; --sage-25: rgba(135, 164, 130, .22);
-    --ink: #13170F; --body: #3E463C; --muted: #76736D; --plum: #6B4E71; --plum-25: rgba(107, 78, 113, .14);
-    --rust: #8A4B2E; --rust-25: rgba(138, 75, 46, .12);
-    --r: 16px;
+    --cream: #FFFCF7; --paper: #FFFFFF; --bone: #F1ECE3; --line: rgba(44, 78, 37, .11); --line-2: rgba(44, 78, 37, .2);
+    --forest: #2C4E25; --deep: #1E3A18; --sage: #87A482; --sage-25: rgba(135, 164, 130, .2);
+    --ink: #13170F; --body: #3E463C; --muted: #77746E; --new: #B4552D; --new-bg: rgba(180, 85, 45, .1);
+    --r: 14px;
   }
   * { box-sizing: border-box; margin: 0; }
-  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  html { scroll-behavior: smooth; scroll-padding-top: 64px; }
   body { background: var(--cream); color: var(--body); font: 15px/1.55 "Public Sans", system-ui, sans-serif;
-         -webkit-font-smoothing: antialiased; font-feature-settings: "tnum" 1, "ss01" 1; }
+         -webkit-font-smoothing: antialiased; font-feature-settings: "tnum" 1; }
   a { color: var(--forest); }
-  code { font: 500 13px ui-monospace, "JetBrains Mono", monospace; background: var(--sage-25); color: var(--forest); padding: 1px 6px; border-radius: 6px; }
-  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  code { font: 500 12.5px ui-monospace, "JetBrains Mono", monospace; background: var(--sage-25); color: var(--forest); padding: 1px 6px; border-radius: 6px; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
   h1, h2, h3, h4 { color: var(--ink); font-weight: 400; }
-  h1 { font: 400 clamp(38px, 6vw, 64px)/1.02 Castoro, serif; letter-spacing: -.035em; }
-  h1 em, h2 em { color: var(--forest); }
-  h2 { font: 400 clamp(28px, 4vw, 40px)/1.08 Castoro, serif; letter-spacing: -.025em; }
-  h3 { font: 400 24px/1.2 Castoro, serif; letter-spacing: -.015em; }
-  h4 { font: 600 15px/1.35 "Public Sans"; }
-  .eyebrow { font: 700 11px "Public Sans"; letter-spacing: .16em; text-transform: uppercase; color: var(--forest); }
-  .id { font: 700 12px "Public Sans"; letter-spacing: .04em; color: var(--paper); background: var(--forest);
-        padding: 3px 8px; border-radius: 7px; vertical-align: 3px; margin-right: 4px; }
-  .note { color: var(--muted); font-size: 13.5px; }
+  h1 { font: 400 clamp(34px, 5vw, 52px)/1.04 Castoro, serif; letter-spacing: -.03em; }
+  h2 { font: 400 clamp(28px, 3.6vw, 38px)/1.1 Castoro, serif; letter-spacing: -.02em; }
+  h3 { font: 400 21px/1.25 Castoro, serif; letter-spacing: -.01em; }
+  h4 { font: 600 14.5px/1.35 "Public Sans"; color: var(--ink); }
+  em { font-style: italic; }
+  .muted { color: var(--muted); }
+  .small { font-size: 13px; }
 
-  /* hero */
-  .hero { padding: 56px 0 36px; border-bottom: 1px solid var(--line); }
-  .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; }
-  .brand img { height: 30px; }
+  /* header */
+  header.top { padding: 40px 0 28px; }
+  .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+  .brand img { height: 26px; }
   .brand span { color: var(--muted); font-size: 13px; padding-left: 12px; border-left: 1px solid var(--line-2); }
-  .hero p.lede { max-width: 640px; font-size: 17px; margin: 18px 0 28px; color: var(--body); }
-  .stats { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
-  .stat { background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; font-size: 13.5px; }
-  .stat b { color: var(--forest); font-weight: 700; }
-  .bundles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
-  .bundle { display: flex; align-items: center; justify-content: space-between; gap: 12px; text-decoration: none;
-            background: var(--forest); color: var(--cream); border-radius: 14px; padding: 16px 18px; transition: transform .15s, background .15s; }
-  .bundle:hover { background: var(--deep); transform: translateY(-1px); }
-  .bundle b { display: block; font-weight: 600; } .bundle small { opacity: .7; font-size: 12.5px; }
-  .bundle svg { flex: none; }
+  .toprow { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; }
+  .lede { max-width: 600px; margin-top: 12px; font-size: 16px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font: 600 14px "Public Sans"; background: var(--forest);
+         color: var(--cream); padding: 11px 16px; border-radius: 10px; }
+  .btn:hover { background: var(--deep); }
+  .zips { margin-top: 10px; font-size: 13px; color: var(--muted); }
+  .zips a { color: var(--forest); margin-right: 10px; white-space: nowrap; }
 
-  /* jump nav */
-  .jump { position: sticky; top: 0; z-index: 5; background: rgba(255, 252, 247, .86); backdrop-filter: blur(14px) saturate(1.4);
-          -webkit-backdrop-filter: blur(14px) saturate(1.4); border-bottom: 1px solid var(--line); }
-  .jump .wrap { display: flex; gap: 6px; overflow-x: auto; padding-top: 12px; padding-bottom: 12px; scrollbar-width: none; }
-  .jump a { flex: none; text-decoration: none; color: var(--body); font: 600 13px "Public Sans"; padding: 8px 14px;
-            border-radius: 999px; border: 1px solid var(--line); background: var(--paper); }
-  .jump a:hover { border-color: var(--forest); color: var(--forest); }
+  /* what's new */
+  .news { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 6px 22px; margin-top: 26px; }
+  .day { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 18px; padding: 16px 0; border-top: 1px solid var(--line); }
+  .day:first-child { border-top: 0; }
+  .day .date { font: 700 12px "Public Sans"; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+  .day.latest .date { color: var(--new); }
+  .day p { color: var(--ink); }
+  .ids { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .ids a { text-decoration: none; font: 700 12px "Public Sans"; letter-spacing: .03em; color: var(--forest); border: 1px solid var(--line-2);
+           border-radius: 7px; padding: 3px 8px; background: var(--cream); }
+  .ids a:hover { border-color: var(--forest); }
+  .ids .gone { font: 700 12px "Public Sans"; color: var(--muted); text-decoration: line-through; padding: 3px 8px; }
 
-  section.block { padding: 56px 0 8px; }
-  .shead { display: flex; align-items: end; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 22px; }
-  .shead p { max-width: 560px; }
-  .sub { margin: 30px 0 14px; display: flex; align-items: center; gap: 10px; }
-  .sub h3 { font-size: 20px; }
+  /* nav */
+  nav.tabs { position: sticky; top: 0; z-index: 5; background: rgba(255, 252, 247, .9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+             border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  nav.tabs .wrap { display: flex; gap: 4px; overflow-x: auto; padding-top: 8px; padding-bottom: 8px; scrollbar-width: none; }
+  nav.tabs a { flex: none; text-decoration: none; color: var(--body); font: 600 13.5px "Public Sans"; padding: 8px 14px; border-radius: 9px; }
+  nav.tabs a:hover { background: var(--sage-25); color: var(--forest); }
+  nav.tabs a b { font-weight: 600; color: var(--muted); margin-left: 4px; }
 
-  /* launch steps */
-  .launch { display: grid; grid-template-columns: 1.35fr 1fr; gap: 16px; }
-  .card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); }
-  .steps { padding: 26px 28px; counter-reset: s; }
-  .steps li { list-style: none; position: relative; padding: 0 0 16px 44px; }
-  .steps li:last-child { padding-bottom: 0; }
-  .steps li::before { counter-increment: s; content: counter(s); position: absolute; left: 0; top: -1px; width: 28px; height: 28px;
-                      border-radius: 50%; background: var(--sage-25); color: var(--forest); font: 700 13px/28px "Public Sans"; text-align: center; }
-  .steps li b { color: var(--ink); }
-  .settings { padding: 24px 24px 18px; }
-  .settings h4 { margin-bottom: 12px; }
-  .svcset { border-top: 1px solid var(--line); padding: 14px 0 6px; }
-  .svcset:first-of-type { border-top: 0; padding-top: 0; }
+  /* sections */
+  section.svc { padding: 52px 0 10px; }
+  .shead { margin-bottom: 18px; }
+  .shead p { max-width: 640px; margin-top: 6px; }
+  .setup { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; background: var(--paper); border: 1px solid var(--line);
+           border-radius: var(--r); padding: 14px 16px; margin: 16px 0 6px; }
+  .kv .k { font: 600 11px "Public Sans"; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; gap: 8px; }
+  .kv .v { color: var(--ink); font-size: 13.5px; word-break: break-word; margin-top: 2px; }
+  .group { margin: 30px 0 12px; display: flex; align-items: baseline; gap: 10px; }
+  .group h3 { font-size: 22px; }
+  .group span { color: var(--muted); font-size: 13px; }
 
-  /* fields */
+  /* pills */
+  .id { font: 700 12px "Public Sans"; letter-spacing: .04em; color: var(--paper); background: var(--forest); padding: 3px 8px; border-radius: 7px; margin-right: 6px; vertical-align: 2px; }
+  .pill { display: inline-block; font: 700 10.5px "Public Sans"; letter-spacing: .08em; text-transform: uppercase; padding: 3px 8px; border-radius: 6px; vertical-align: 2px; }
+  .pill.now { background: var(--forest); color: var(--cream); }
+  .pill.next { background: var(--sage-25); color: var(--forest); }
+  .pill.twin { background: var(--bone); color: var(--muted); }
+  .pill.new { background: var(--new); color: #fff; }
+  .pill.posted { background: var(--sage-25); color: var(--forest); }
+  .pill.hold { background: var(--bone); color: var(--ink); }
+  .when { display: block; color: var(--muted); font-size: 12.5px; margin-top: 4px; }
+  .when b { color: var(--new); font-weight: 600; }
+
+  /* copy fields */
   .field { margin-top: 10px; }
-  .flabel { display: flex; align-items: center; justify-content: space-between; gap: 8px; font: 600 11.5px "Public Sans";
-            letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
-  .val, textarea { width: 100%; background: var(--cream); border: 1px solid var(--line); border-radius: 10px; padding: 9px 11px;
+  .flabel { display: flex; align-items: center; justify-content: space-between; gap: 8px; font: 600 11px "Public Sans"; letter-spacing: .07em;
+            text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .val, textarea { width: 100%; background: var(--cream); border: 1px solid var(--line); border-radius: 9px; padding: 8px 10px;
                    font: 400 14px/1.5 "Public Sans"; color: var(--ink); word-break: break-word; }
   textarea { resize: vertical; white-space: pre-wrap; }
-  .copy { font: 600 11.5px "Public Sans"; letter-spacing: .02em; text-transform: none; color: var(--forest); background: transparent;
-          border: 1px solid var(--line-2); border-radius: 999px; padding: 3px 10px; cursor: pointer; transition: all .15s; }
+  .copy { font: 600 11.5px "Public Sans"; text-transform: none; letter-spacing: 0; color: var(--forest); background: transparent;
+          border: 1px solid var(--line-2); border-radius: 999px; padding: 2px 10px; cursor: pointer; }
   .copy:hover { background: var(--forest); color: var(--cream); border-color: var(--forest); }
-  .copy.done { background: var(--sage); color: var(--paper); border-color: var(--sage); }
+  .copy.done { background: var(--sage); color: #fff; border-color: var(--sage); }
 
   /* downloads */
-  .dls { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
-  .dl { display: flex; justify-content: space-between; align-items: center; gap: 10px; text-decoration: none; font: 500 13px "Public Sans";
-        color: var(--forest); background: var(--cream); border: 1px solid var(--line); border-radius: 10px; padding: 8px 11px; transition: all .15s; }
-  .dl::before { content: ""; width: 14px; height: 14px; flex: none; background: currentColor; opacity: .85;
-                -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>') center/contain no-repeat;
-                mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>') center/contain no-repeat; }
-  .dl span { flex: 1; } .dl em { font-style: normal; color: var(--muted); font-size: 12px; }
+  .dls { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .dl { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font: 600 12.5px "Public Sans"; color: var(--forest);
+        background: var(--cream); border: 1px solid var(--line-2); border-radius: 8px; padding: 6px 10px; }
+  .dl::before { content: ""; width: 12px; height: 12px; flex: none; background: currentColor;
+                -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>') center/contain no-repeat;
+                mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>') center/contain no-repeat; }
+  .dl em { font-style: normal; font-weight: 500; color: var(--muted); font-size: 11.5px; }
   .dl:hover { border-color: var(--forest); background: var(--paper); }
   .dl.primary { background: var(--forest); color: var(--cream); border-color: var(--forest); }
   .dl.primary em { color: rgba(255, 252, 247, .7); }
-  .dl.primary:hover { background: var(--deep); }
+  details.more { margin-top: 8px; }
+  details > summary { cursor: pointer; font: 600 12.5px "Public Sans"; color: var(--forest); list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  details > summary::before { content: "+ "; }
+  details[open] > summary::before { content: "– "; }
+
+  .card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); }
 
   /* video ads */
-  .ad { padding: 26px; margin-bottom: 16px; }
-  .adhead { margin-bottom: 18px; }
-  .adhead h3 { margin: 8px 0 4px; }
-  .svc { display: inline-block; font: 700 10.5px "Public Sans"; letter-spacing: .12em; text-transform: uppercase; padding: 4px 9px; border-radius: 6px; }
-  .svc.longevity { background: var(--sage-25); color: var(--forest); } .svc.menopause { background: var(--plum-25); color: var(--plum); }
-  .svc.iron { background: var(--rust-25); color: var(--rust); }
-  .adbody { display: grid; grid-template-columns: auto minmax(280px, 1fr); gap: 26px; align-items: start; }
-  .cuts { display: grid; grid-template-columns: repeat(2, 230px); gap: 18px; }
-  .cuts.one { grid-template-columns: 260px; }
-  .cut video { width: 100%; aspect-ratio: 9 / 16; border-radius: 12px; background: #000; display: block; }
-  .cutmeta { margin-top: 10px; display: flex; align-items: center; gap: 4px; color: var(--ink); }
+  .ad { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 24px; padding: 22px; margin-bottom: 14px; }
+  .ad.isnew { border-color: rgba(180, 85, 45, .35); }
+  .cuts { display: flex; gap: 14px; }
+  .cut { width: 210px; }
+  .cut video { width: 100%; aspect-ratio: 9 / 16; border-radius: 10px; background: #000; display: block; }
+  .cutname { margin-top: 8px; font: 600 13px "Public Sans"; color: var(--ink); }
+  .adtext h3 { margin: 6px 0 2px; }
+  .adtext .note { color: var(--muted); font-size: 13.5px; margin-top: 8px; }
+  .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
 
-  /* static ads */
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
-  .static { overflow: hidden; display: flex; flex-direction: column; }
-  .static > img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; border-bottom: 1px solid var(--line); }
-  .smeta { padding: 14px 16px 16px; }
-  .smeta .dls { flex-direction: row; flex-wrap: wrap; } .smeta .dl { flex: 1 1 120px; }
-  .carousel { padding: 22px; margin-top: 14px; }
-  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; margin: 14px 0 6px; }
-  .cards img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 10px; border: 1px solid var(--line); display: block; }
-  .cards figcaption { font-size: 13px; margin-top: 8px; color: var(--ink); }
-  .cards .dl { margin-top: 8px; }
+  /* static ads + instagram */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+  .tile { overflow: hidden; display: flex; flex-direction: column; }
+  .tile.isnew { border-color: rgba(180, 85, 45, .35); }
+  .tile > img, .tile > video { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; border-bottom: 1px solid var(--line); background: var(--bone); }
+  .tile.ig > video { aspect-ratio: 4 / 5; background: #000; }
+  .tbody { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 2px; }
+  .tbody h4 { margin-top: 6px; font: 400 17px/1.3 Castoro, serif; }
+  .carousel { padding: 18px; margin-top: 14px; }
+  .cards { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 12px 0 4px; }
+  .cards img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 9px; border: 1px solid var(--line); display: block; }
+  .cards figcaption { font-size: 12.5px; margin-top: 6px; color: var(--ink); }
 
-  /* instagram */
-  .reels { display: grid; gap: 16px; }
-  .reel { display: grid; grid-template-columns: auto 1fr; gap: 26px; padding: 24px; }
-  .reelmedia { display: flex; gap: 12px; }
-  .reelmedia video, .reelmedia img { width: 200px; aspect-ratio: 9 / 16; border-radius: 12px; object-fit: cover; background: #000; display: block; }
-  .reelmeta h3 { margin-bottom: 4px; }
-  .igsteps { padding: 22px 26px; margin-bottom: 16px; }
-  .igsteps ol { padding-left: 18px; } .igsteps li { margin: 4px 0; }
-  .callout { background: var(--sage-25); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin-top: 12px; color: var(--ink); font-size: 14px; }
-
-  /* test plan */
-  .plan { display: inline-block; font: 700 10.5px "Public Sans"; letter-spacing: .1em; text-transform: uppercase; padding: 4px 9px; border-radius: 6px; margin-bottom: 8px; }
-  .plan.now { background: var(--forest); color: var(--cream); }
-  .plan.next { background: var(--sage-25); color: var(--forest); }
-  .plan.twin { background: var(--bone); color: var(--muted); }
-  .adhead .plan { margin-left: 4px; vertical-align: 1px; margin-bottom: 0; }
-  .carousel > .plan { margin-bottom: 10px; }
-  .pgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-  .pcol { padding: 22px 22px 18px; }
-  .pcol h4 { margin: 18px 0 10px; color: var(--ink); } .pcol h4 em { font-style: normal; font-weight: 400; color: var(--muted); }
-  .prows { display: flex; flex-direction: column; gap: 8px; }
-  .prow { display: grid; grid-template-columns: 26px 52px minmax(0, 1fr); gap: 12px; align-items: center; text-decoration: none;
-          background: var(--cream); border: 1px solid var(--line); border-radius: 12px; padding: 8px 12px 8px 10px; transition: all .15s; }
-  .prow:hover { border-color: var(--forest); background: var(--paper); }
-  .prow .rank { font: 400 22px/1 Castoro, serif; color: var(--forest); text-align: center; }
-  .prow img { width: 52px; height: 65px; object-fit: cover; border-radius: 6px; border: 1px solid var(--line); display: block; }
-  .pt { display: flex; flex-direction: column; min-width: 0; }
-  .pt b { font: 700 12px "Public Sans"; letter-spacing: .04em; color: var(--forest); }
-  .pt span { color: var(--ink); font-size: 14px; line-height: 1.35; }
-  .pt small { color: var(--muted); font-size: 12.5px; }
-  .pchips { display: flex; flex-wrap: wrap; gap: 6px; }
-  .pchip { text-decoration: none; font-size: 13px; color: var(--body); background: var(--sage-25); border-radius: 999px; padding: 6px 12px; }
-  .pchip b { color: var(--forest); font-weight: 700; margin-right: 2px; }
-  .pchip.twin { background: var(--bone); }
-  .pchip:hover { box-shadow: inset 0 0 0 1px var(--forest); }
-  .prules { display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px; margin-top: 16px; }
-  .prules .card { padding: 22px 24px; }
-  .prules h4 { margin-bottom: 10px; color: var(--ink); }
-  .prules ul { padding-left: 18px; display: flex; flex-direction: column; gap: 7px; }
-  .prules li b { color: var(--ink); }
-  .budget { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 4px; }
-  .budget td, .budget th { text-align: left; padding: 8px 8px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
-  .budget th { font: 600 11px "Public Sans"; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-  .budget td:first-child { font-weight: 600; color: var(--ink); white-space: nowrap; }
-
-  /* go-live checklist */
-  .golive { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; }
-  .golive .card { padding: 22px 24px; }
-  .golive h4 { color: var(--ink); margin-bottom: 4px; }
-  .golive .note { margin-bottom: 12px; }
-  .check { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: start; padding: 12px 0; border-top: 1px solid var(--line); cursor: pointer; }
+  /* how to launch */
+  .howto details.box { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 16px 20px; margin-bottom: 10px; }
+  .howto details.box > summary { font: 400 20px Castoro, serif; color: var(--ink); }
+  .howto details.box > summary::before { color: var(--forest); }
+  .howto .inner { margin-top: 14px; }
+  .steps { counter-reset: s; padding: 0; }
+  .steps li { list-style: none; position: relative; padding: 0 0 12px 38px; }
+  .steps li::before { counter-increment: s; content: counter(s); position: absolute; left: 0; top: 0; width: 24px; height: 24px; border-radius: 50%;
+                      background: var(--sage-25); color: var(--forest); font: 700 12px/24px "Public Sans"; text-align: center; }
+  .steps b, .rules b { color: var(--ink); }
+  .rules { padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+  .check { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; padding: 10px 0; border-top: 1px solid var(--line); cursor: pointer; }
   .check:first-of-type { border-top: 0; }
-  .check input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--forest); cursor: pointer; }
-  .check b { color: var(--ink); font-weight: 600; }
-  .check span { font-size: 14.5px; }
-  .check small { display: block; color: var(--muted); font-size: 13px; margin-top: 3px; }
-  .check:has(input:checked) span { color: var(--muted); }
+  .check input { width: 17px; height: 17px; margin-top: 2px; accent-color: var(--forest); }
+  .check b { color: var(--ink); }
+  .check small { display: block; color: var(--muted); font-size: 12.5px; margin-top: 2px; }
   .check:has(input:checked) b { text-decoration: line-through; text-decoration-color: var(--sage); }
-  .progress { font: 600 12.5px "Public Sans"; color: var(--forest); background: var(--sage-25); border-radius: 999px; padding: 5px 12px; }
-  .warn { border-left: 3px solid #A8462F; }
+  .pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .pcol { padding: 16px 18px; }
+  .pcol h4 { margin: 14px 0 8px; } .pcol h4 em { font-weight: 400; color: var(--muted); font-style: normal; }
+  .prows { display: flex; flex-direction: column; gap: 6px; }
+  .prow { display: grid; grid-template-columns: 22px 44px minmax(0, 1fr); gap: 10px; align-items: center; text-decoration: none;
+          background: var(--cream); border: 1px solid var(--line); border-radius: 10px; padding: 6px 10px; }
+  .prow:hover { border-color: var(--forest); }
+  .prow .rank { font: 400 20px/1 Castoro, serif; color: var(--forest); text-align: center; }
+  .prow img { width: 44px; height: 56px; object-fit: cover; border-radius: 6px; display: block; }
+  .pt { display: flex; flex-direction: column; min-width: 0; font-size: 13.5px; }
+  .pt b { font: 700 12px "Public Sans"; color: var(--forest); } .pt small { color: var(--muted); font-size: 12px; }
+  .pchips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .pchip { text-decoration: none; font-size: 12.5px; color: var(--body); background: var(--sage-25); border-radius: 999px; padding: 5px 11px; }
+  .pchip b { color: var(--forest); } .pchip.twin { background: var(--bone); }
+  .rws { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 10px; }
+  .rw { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 12px; border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+  .rw img { width: 72px; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 8px; display: block; }
+  .rwt p { margin-top: 4px; font-size: 13.5px; line-height: 1.4; }
+  .rwt .before { color: var(--muted); text-decoration: line-through; } .rwt .after { font: 400 16px/1.25 Castoro, serif; color: var(--ink); }
+  .rwt .plan { display: none; }
+  .budget { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .budget td, .budget th { text-align: left; padding: 7px 8px 7px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .budget th { font: 600 11px "Public Sans"; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
 
-  /* hormozi pass */
-  .principles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 18px; }
-  .principles .card { padding: 16px 18px; }
-  .principles b { display: block; color: var(--ink); margin-bottom: 4px; font-size: 14.5px; }
-  .principles span { font-size: 13.5px; color: var(--body); }
-  .rws { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 12px; }
-  .rw { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 14px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 12px; }
-  .rw img { width: 96px; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 8px; border: 1px solid var(--line); display: block; }
-  .rwt .plan { margin: 0 0 0 4px; vertical-align: 1px; }
-  .rwt p { margin-top: 6px; font-size: 14px; line-height: 1.4; }
-  .rwt .before { color: var(--muted); text-decoration: line-through; text-decoration-color: rgba(118, 115, 109, .45); }
-  .rwt .after { font: 400 18px/1.25 Castoro, serif; color: var(--ink); }
-  .rwt .why { font-size: 13px; color: var(--body); }
+  .svc { display: inline-block; font: 700 11px "Public Sans"; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  section.svc { display: block; font: inherit; letter-spacing: normal; text-transform: none; color: inherit; }
+  .adtext > .pill, .tbody .pill { margin-right: 4px; }
+  footer { margin: 56px 0 0; padding: 24px 0 48px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
 
-  footer { margin: 64px 0 0; padding: 28px 0 56px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13.5px; }
-
-  @media (max-width: 920px) {
-    .launch, .adbody, .reel, .pgrid, .prules, .golive, .principles { grid-template-columns: 1fr; }
-    .cuts { grid-template-columns: repeat(2, minmax(0, 1fr)); } .cut video { width: 100%; }
-    .reelmedia video, .reelmedia img { width: calc(50% - 6px); }
+  @media (max-width: 860px) {
+    .ad { grid-template-columns: 1fr; } .cuts { overflow-x: auto; } .cut { flex: none; width: 46%; min-width: 160px; }
+    .pgrid, .twocol { grid-template-columns: 1fr; } .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .day { grid-template-columns: 1fr; gap: 4px; }
   }
-  @media (max-width: 520px) { .wrap { padding: 0 16px; } .ad, .reel { padding: 18px; } }
+  @media (max-width: 520px) { .wrap { padding: 0 16px; } .ad { padding: 16px; } .grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .tbody { padding: 10px; } .tbody h4 { font-size: 15px; } }
 </style>
 </head>
 <body>
-<header class="hero">
-  <div class="wrap">
-    <div class="brand"><img src="files/logo.png" alt="Optimal"><span>Ad hand-off · {{ROUND}}</span></div>
-    <div class="eyebrow">For the ads team</div>
-    <h1>Everything to launch, <em>in one place.</em></h1>
-    <p class="lede">Every ad made on {{ROUND}}, ready to upload, with the exact text for each one. Work through the go-live checklist, then launch the <b>{{N_TEST}} marked Test now</b> (six per service) and rotate the rest in as the test tells you.</p>
-    <div class="stats">
-      <span class="stat"><b>{{N_TEST}}</b> to test first</span>
-      <span class="stat"><b>{{N_VIDEO}}</b> video ads</span>
-      <span class="stat"><b>{{N_STATIC}}</b> static ads</span>
-      <span class="stat"><b>{{N_CAR}}</b> carousels</span>
-      <span class="stat"><b>{{N_REELS}}</b> Instagram reels</span>
+<header class="top"><div class="wrap">
+  <div class="brand"><img src="files/logo.png" alt="Optimal"><span>Ad hand-off · updated {{UPDATED}}</span></div>
+  <div class="toprow">
+    <div>
+      <h1>Every ad, ready to upload.</h1>
+      <p class="lede">Grouped by service. Each card has the files in Meta's three ratios and the exact text to paste.
+        <b style="color:var(--new)">New</b> marks anything added or changed on {{UPDATED}}. Setup and the test plan are in <a href="#howto">How to launch</a>.</p>
     </div>
-    <div class="bundles">
-      <a class="bundle" href="{{ZIP_VIDEOS}}" target="_blank" rel="noopener"><span><b>All video ads + reels</b><small>{{ZS_VIDEOS}} · download page</small></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
-      <a class="bundle" href="{{ZIP_R1}}" download><span><b>Static ads · round 1</b><small>.zip · {{ZS_R1}}</small></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
-      <a class="bundle" href="{{ZIP_R2}}" download><span><b>Static ads · round 2</b><small>.zip · {{ZS_R2}}</small></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
-      <a class="bundle" href="{{ZIP_R3}}" download><span><b>Static ads · round 3</b><small>.zip · {{ZS_R3}}</small></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
-      <a class="bundle" href="{{ZIP_R4}}" download><span><b>IV iron · pre-launch</b><small>.zip · {{ZS_R4}}</small></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
-      <a class="bundle" href="{{ZIP_R5}}" download><span><b>IV iron · round 2 statics</b><small>.zip · {{ZS_R5}}</small></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg></a>
+    <div>
+      <a class="btn" href="{{RELEASE}}" target="_blank" rel="noopener">All full-quality files ↗</a>
+      <div class="zips">Zips: {{ZIPS}}</div>
     </div>
   </div>
-</header>
+  <div class="news" id="new">{{WHATSNEW}}</div>
+</div></header>
 
-<nav class="jump"><div class="wrap">
-  <a href="#golive">Go-live checklist</a><a href="#test">What to test</a><a href="#hormozi">Why these words</a><a href="#launch">Launch steps</a><a href="#video">Video ads</a><a href="#round1">Static · round 1</a>
-  <a href="#round2">Static · round 2</a><a href="#round3">Static · round 3</a><a href="#iron">IV iron</a><a href="#iron2">IV iron · round 2</a><a href="#instagram">Instagram reels</a>
+<nav class="tabs"><div class="wrap">
+  <a href="#new">What's new</a>
+  <a href="#menopause">Menopause<b>{{N_MENO}}</b></a>
+  <a href="#longevity">Longevity<b>{{N_LONG}}</b></a>
+  <a href="#iron">IV iron<b>{{N_IRON}}</b></a>
+  <a href="#instagram">Instagram posts<b>{{N_IG}}</b></a>
+  <a href="#howto">How to launch</a>
 </div></nav>
 
 <main class="wrap">
-  <section class="block" id="golive">
-    <div class="shead"><div><div class="eyebrow">Start here</div><h2>Go-live <em>checklist</em></h2></div>
-      <p class="note">Tick as you go. Ticks are saved in this browser only. <span class="progress" id="prog">0 of 0 done</span></p></div>
-    <div class="golive">
-      <div class="card">
-        <h4>In Meta Ads Manager</h4>
-        <p class="note">About an hour, start to finish.</p>
-        <label class="check warn"><input type="checkbox" data-k="g-404"><span><b>Fix or pause the three live menopause statics.</b> Their link, beoptimal.ca/womens-health, shows a "Page Not Found" page.
-          <small>Ad Library IDs 4548870122052378, 1707193563843938 and 1436333148369495. Pause them; the new set replaces them.</small></span></label>
-        <label class="check"><input type="checkbox" data-k="g-old"><span><b>Pause the older live ads</b> in the same campaigns so the test isn't diluted.
-          <small>The two older videos: 3267720843438130 (primary care intro) and 28548023041524231 (menopause info call).</small></span></label>
-        <label class="check"><input type="checkbox" data-k="g-sets"><span><b>Set up one ad set per service:</b> Menopause and Longevity membership, with the settings in Launch steps (broad audience, Advantage+ placements, Landing page views).</span></label>
-        <label class="check"><input type="checkbox" data-k="g-m"><span><b>Upload the six Menopause Test now ads</b> in rank order: M3, MV1-T, MB1, MB5, MB2, and the MC carousel.</span></label>
-        <label class="check"><input type="checkbox" data-k="g-l"><span><b>Upload the six Longevity Test now ads</b> in rank order: LV1-T, L1, L2, LB1, LB2, LB3.</span></label>
-        <label class="check"><input type="checkbox" data-k="g-ai"><span><b>Turn on Meta's AI label</b> ("AI info") for every round 2 and round 3 ad. Their photos are AI-generated, people included.</span></label>
-        <label class="check"><input type="checkbox" data-k="g-copy"><span><b>Paste the copy and URLs from each card.</b> Name every ad with its ID. The URL parameters are id-based, the same as your live ads, so Ad Lab can match each booking to its ad; keep them exactly as written.
-          <small>Each card's Copy buttons carry the Hormozi-pass text: primary text, headline, description.</small></span></label>
-        <label class="check"><input type="checkbox" data-k="g-pub"><span><b>Publish, then don't touch it for 7 days.</b> Day 7 and day 14 rules are in What to test.</span></label>
-      </div>
-      <div class="card">
-        <h4>Confirm before publishing</h4>
-        <p class="note">Quick yes/no calls for Peter.</p>
-        <label class="check"><input type="checkbox" data-k="c-hst"><span><b>Foundation price wording.</b> M3 says "$895 + HST", matching the consent form. The landing page says "$895 one-time". Make them match.</span></label>
-        <label class="check"><input type="checkbox" data-k="c-cap"><span><b>Capacity.</b> The ads promise "start within days" (menopause) and "same or next-day visits" (longevity). Check the schedule can carry the extra bookings.</span></label>
-        <label class="check"><input type="checkbox" data-k="c-np"><span><b>Clinical read-through.</b> Chantelle reads the symptom lines: MB1, MB2, MB4, M1 and MV1.</span></label>
-        <label class="check"><input type="checkbox" data-k="c-markers"><span><b>Marker count.</b> In LV2 Cheryl says "40-plus biomarkers", while other materials say 26. Settle the number before LV2 runs.
-          <small>LV2 is in Next up, so this doesn't block the first launch.</small></span></label>
-        <label class="check"><input type="checkbox" data-k="c-redirect"><span><b>Site redirect.</b> Jeremy applies the /womens-health redirect patch, so old links and posts land on the menopause page.</span></label>
-      </div>
-    </div>
+  <section class="svc" id="menopause">
+    <div class="shead"><h2>Menopause</h2>
+      <p class="muted">One ad set. Every ad points to the menopause page with the CTA <b>Book now</b>. Launch the ads marked Test now, in rank order.</p></div>
+    <div class="setup">{{MENO_SETUP}}</div>
+    <div class="group"><h3>Video ads</h3><span>9:16, 1:1 and 1.91:1 per cut. Previews are compressed; downloads are full quality.</span></div>
+    {{MENO_VIDEOS}}
+    <div class="group"><h3>Static ads</h3><span>1:1 for Feed, 9:16 for Stories and Reels, 1.91:1 for the right column.</span></div>
+    <div class="grid">{{MENO_STATICS}}</div>
+    {{MENO_CAROUSEL}}
   </section>
 
-  <section class="block" id="test">
-    <div class="shead"><div><div class="eyebrow">Before you launch</div><h2>Test <em>{{N_TEST}}</em> first, not all {{N_ALL}}</h2></div>
-      <p class="note">Meta's delivery system groups ads that look or say the same thing and spends on a few of them. A small local budget spread over 29 ads gives none of them enough spend to judge. So launch six distinct ideas per service, learn which angle wins, and rotate the rest in.</p></div>
-    <div class="pgrid">{{PLAN}}</div>
-    <div class="prules">
-      <div class="card">
-        <h4>How to run the test</h4>
-        <ul>
-          <li><b>One ad set per service</b>, with all of its Test now ads (video, static and carousel together). Broad audience and Advantage+ placements. Let Meta split the budget, and don't force it evenly.</li>
-          <li><b>Hands off for 7 days.</b> Don't edit a live ad; duplicate it instead. Editing restarts learning.</li>
-          <li><b>Judge on booked intro calls</b> per ad. Ad Lab matches each booking to its ad through the id-based URL parameters. Meta can't optimize health ads on bookings, so your bookings are the real score, not Meta's "results".</li>
-          <li><b>Menopause leads with price.</b> Meta's menopause bookings have mostly been low-intent, so the price card (M3) goes first, and every menopause ad's text now states the program price ($895 + HST for the first 3 months). Fewer but better bookings is the goal.</li>
-          <li><b>Day 7:</b> pause any ad that spent $40 or more with no bookings and a CTR under half the ad set's average. If Meta barely spent on an ad (under $10), it isn't a loser yet: give it a second week or swap in a Next up ad.</li>
-          <li><b>Day 14:</b> replace the bottom two in each service with Next up ads. Make two new variations of the winning angle (new image, same message).</li>
-          <li><b>Fatigue:</b> when an ad's frequency passes about 3, or its CTR drops about 30% from week one, swap in its Twin.</li>
-          <li><b>Turn off the old ads</b> when these go live: the June menopause statics (their link 404s), the member-testimonial ad and the "73%" ad.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h4>Budget guide</h4>
-        <table class="budget">
-          <thead><tr><th>Per service, per day</th><th>Launch</th></tr></thead>
-          <tbody>
-            <tr><td>$50–60+</td><td>All six Test now ads. Roughly $8–10 a day each gives every ad a fair week.</td></tr>
-            <tr><td>$25–50</td><td>Ranks 1–4 only: the video plus three statics.</td></tr>
-            <tr><td>Under $25</td><td>Ranks 1–3. Rotate in a new one every two weeks instead of testing side by side.</td></tr>
-          </tbody>
-        </table>
-        <p class="note" style="margin-top:12px">These are rules of thumb for a single-city clinic. Recalibrate once week-one numbers come in: local CPMs vary a lot by season and audience.</p>
-      </div>
-    </div>
+  <section class="svc" id="longevity">
+    <div class="shead"><h2>Longevity membership</h2>
+      <p class="muted">One ad set. Every ad points to the membership page with the CTA <b>Book now</b>.</p></div>
+    <div class="setup">{{LONG_SETUP}}</div>
+    <div class="group"><h3>Video ads</h3><span>9:16, 1:1 and 1.91:1 per cut.</span></div>
+    {{LONG_VIDEOS}}
+    <div class="group"><h3>Static ads</h3><span>1:1, 9:16 and 1.91:1 per ad.</span></div>
+    <div class="grid">{{LONG_STATICS}}</div>
+    {{LONG_CAROUSEL}}
   </section>
 
-  <section class="block" id="hormozi">
-    <div class="shead"><div><div class="eyebrow">Hormozi pass · Oct 13, refined Oct 14</div><h2>Why these <em>words</em></h2></div>
-      <p class="note">Every ad was reviewed the way Alex Hormozi reviews ads: would a stranger stop, know it's for them, want the outcome, believe it, and know the next step? These are the lines that changed on the image. All primary text and headlines were rewritten to the same rules.</p></div>
-    <div class="principles">
-      <div class="card"><b>Hook, then outcome</b><span>The image line has to stop the scroll and promise something concrete. "Sick today, seen tomorrow" beats "a new kind of clinic".</span></div>
-      <div class="card"><b>Cut wait and effort</b><span>Value goes up when time and effort go down: "start within days", "no referral", "free 15-minute call".</span></div>
-      <div class="card"><b>Benefits over features</b><span>Not "body composition scans": "see what's working". Not "a written plan": "know exactly what to do".</span></div>
-      <div class="card"><b>Make the price small</b><span>$1,495 a year is about $4 a day. Every longevity headline or description carries one of the two.</span></div>
-      <div class="card"><b>One offer everywhere</b><span>Image, primary text, headline and button all point at the same thing: a free 15-minute call, no commitment.</span></div>
-      <div class="card"><b>Qualify on price</b><span>Every menopause ad's text names the program price ($895 + HST to start), so the free call attracts people who are ready for private care.</span></div>
-      <div class="card"><b>Readable on a phone</b><span>Nothing smaller than about 10px on a phone. Unreadable labels were removed, and contrast behind every sentence is measured at 4.5:1 or better.</span></div>
-      <div class="card"><b>Only true scarcity</b><span>"We cap membership" and "a small panel of patients" both come from the clinic's own pages. Nothing is invented.</span></div>
-    </div>
-    <div class="rws">{{REWRITES}}</div>
-    <p class="note" style="margin-top:14px">Kept as they were: MB1 ("Wide awake at 3 a.m., again." is already a strong hook), M3, L2, MB6 and the round 1 headlines. Primary text everywhere now follows one shape: hook, then what you get and how fast, then the free offer.</p>
+  <section class="svc" id="iron">
+    <div class="shead"><h2>IV iron <em class="muted" style="font-size:.6em">· pre-launch, opening November</em></h2>
+      <p class="muted">A separate Leads campaign on a Meta Instant Form ("Join the founding waitlist"). CTA <b>Sign up</b>. No price, no booking. Turn on Meta's AI label where a card says so.</p></div>
+    <div class="setup">{{IRON_SETUP}}</div>
+    <div class="group"><h3>Video ads</h3><span>Launch the four talking heads (IRT) plus IRV2 first, then rotate the rest in.</span></div>
+    {{IRON_VIDEOS}}
+    <div class="group"><h3>Static ads</h3></div>
+    <div class="grid">{{IRON_STATICS}}</div>
   </section>
 
-  <section class="block" id="launch">
-    <div class="shead"><div><div class="eyebrow">Meta Ads Manager</div><h2>Launch in <em>six steps</em></h2></div>
-      <p class="note">Repeat for each ad. Every card below has its own files and copy buttons.</p></div>
-    <div class="launch">
-      <ol class="card steps">
-        <li><b>Download</b> the ad's three files: <b>1:1</b> (Feed), <b>9:16</b> (Stories + Reels) and <b>1.91:1</b> (right column, in-stream, search). Carousels have five 1:1 cards. These are Meta's own ratios, so nothing gets cropped or boxed.</li>
-        <li>Open the campaign and go to the <b>right ad set</b>: Menopause or Longevity membership. Start with the ads marked <b>Test now</b> (see What to test). Every ad for a service goes in that service's ad set, video and static alike.</li>
-        <li><b>Create ad.</b> Name it with the ID on its card (e.g. <code>LV2-T</code>, <code>M3</code>, <code>MB1</code>). Identity: the Optimal Facebook Page and @beoptimal.ca.</li>
-        <li><b>Media:</b> upload the 1:1 file, then customize placements: <b>Stories and Reels</b> → the 9:16 file; <b>Right column, Search results and In-stream</b> → the 1.91:1 file.</li>
-        <li><b>Text:</b> paste the primary text, headline and description with the Copy buttons. CTA <b>Book now</b>. Paste the website URL and URL parameters from the settings box.</li>
-        <li><b>Videos only:</b> upload the thumbnail jpg, and turn <b>off</b> auto captions (ours are burned in), Advantage+ music and creative enhancements. Then publish, and judge after 7 days using the rules in What to test.</li>
-      </ol>
-      <div class="card settings">
-        <h4>Ad set settings</h4>
-        <div class="svcset"><span class="svc menopause">Menopause</span>
-          <div class="field"><div class="flabel">Website URL<button class="copy" data-copy="{{M_DEST}}">Copy</button></div><div class="val">{{M_DEST}}</div></div>
-          <div class="field"><div class="flabel">URL parameters<button class="copy" data-copy="{{M_UTM}}">Copy</button></div><div class="val">{{M_UTM}}</div></div>
-          <p class="note" style="margin-top:8px">Audience: women 35–60, about 40 km around Barrie, broad.</p></div>
-        <div class="svcset"><span class="svc longevity">Longevity membership</span>
-          <div class="field"><div class="flabel">Website URL<button class="copy" data-copy="{{L_DEST}}">Copy</button></div><div class="val">{{L_DEST}}</div></div>
-          <div class="field"><div class="flabel">URL parameters<button class="copy" data-copy="{{L_UTM}}">Copy</button></div><div class="val">{{L_UTM}}</div></div>
-          <p class="note" style="margin-top:8px">Audience: adults 35–70, about 40 km around Barrie, broad.</p></div>
-        <p class="note" style="margin-top:10px">Optimization: Landing page views. Keep URL parameters exactly as written, because they're deliberately neutral (Meta restricts health advertisers).</p>
-      </div>
-    </div>
+  <section class="svc" id="instagram">
+    <div class="shead"><h2>Instagram posts <em class="muted" style="font-size:.6em">· organic, not ads</em></h2>
+      <p class="muted">For @beoptimal.ca. Feed posts are 4:5 videos, with a 9:16 reel cut too. They end on “Link in bio”. Don't add Instagram music.
+        <b>Hold:</b> Peter said not to post anything new yet (Oct 20). Each card says whether it's already live.</p></div>
+    <div class="grid">{{IG_POSTS}}</div>
   </section>
 
-  <section class="block" id="video">
-    <div class="shead"><div><div class="eyebrow">Video ads · Cheryl, care coordinator</div><h2>Video ads</h2></div>
-      <p class="note">One cut per ad, each in 9:16, 1:1 and 1.91:1. Previews are compressed; the downloads are full quality.</p></div>
-    {{VIDEO_ADS}}
-  </section>
-
-  <section class="block" id="round1">
-    <div class="shead"><div><div class="eyebrow">Static ads · round 1</div><h2>Six formats <em>per service</em></h2></div>
-      <p class="note">Lists, stats, price cards, photos, diagrams and objections. Upload each as one ad: the 1:1 file for Feed, 9:16 for Stories and Reels, 1.91:1 for the right column and in-stream.</p></div>
-    <div class="sub"><span class="svc menopause">Menopause</span></div><div class="grid">{{R1_MENO}}</div>
-    <div class="sub"><span class="svc longevity">Longevity membership</span></div><div class="grid">{{R1_LONG}}</div>
-  </section>
-
-  <section class="block" id="round2">
-    <div class="shead"><div><div class="eyebrow">Static ads · round 2</div><h2>One sentence <em>per image</em></h2></div>
-      <p class="note">Each image carries the logo and one sentence, and Meta's Book now button does the rest. Carousels are five 1:1 cards.</p></div>
-    <div class="sub"><span class="svc menopause">Menopause</span></div><div class="grid">{{R2_MENO}}</div>
-    <div class="sub"><span class="svc longevity">Longevity membership</span></div><div class="grid">{{R2_LONG}}</div>
-    {{CAROUSELS}}
-  </section>
-
-  <section class="block" id="round3">
-    <div class="shead"><div><div class="eyebrow">Static ads · round 3</div><h2>Engraved <em>concepts</em></h2></div>
-      <p class="note">Four AI concepts from Ad Lab: engraved plates in the brand's sage-on-cream style, plus one macro photo. They follow the one-sentence rule. Turn on Meta's AI label when you upload them.</p></div>
-    <div class="sub"><span class="svc menopause">Menopause</span></div><div class="grid">{{R3_MENO}}</div>
-    <div class="sub"><span class="svc longevity">Longevity membership</span></div><div class="grid">{{R3_LONG}}</div>
-  </section>
-
-  <section class="block" id="iron">
-    <div class="shead"><div><div class="eyebrow">IV iron · pre-launch · October 14</div><h2>The founding <em>waitlist</em></h2></div>
-      <p class="note">Three ideas and the one AI video. IV iron isn't open yet, so these sell the founding waitlist only: no price and no booking. It's a separate campaign from menopause and longevity.</p></div>
-    <div class="launch">
-      <ol class="card steps">
-        <li><b>New campaign, objective Leads</b>, with the conversion location set to <b>Instant forms</b>. There's no IV iron page on beoptimal.ca yet (/iv-iron is a 404), so the waitlist form opens inside Facebook and Instagram.</li>
-        <li><b>One ad set:</b> adults 25–64, about 40 km around Barrie, broad (no interests). $20–30 a day for 7 days, then leave it alone.</li>
-        <li><b>Upload IR1, IR2, IR3 and IRV1</b> the same way as the other ads: the 1:1 file, then 9:16 for Stories and Reels and 1.91:1 for the right column. Revised Oct 20: IR1 is the IV-bag engraving ("Iron pills not working?"), IR2 and IRV1 use the IV iron page's hero close-up (IRV1 animated), and IR3 is our real front desk with the November date. Name each with its ID. CTA <b>Sign up</b>. Turn on Meta's <b>AI label</b> for IR1, IR2 and IRV1. It stays off for IR3 (a real photo).</li>
-        <li><b>IR2 is cleared</b>: the Clinical Director approved "low iron without anemia" (Oct 20), so it runs with the others.</li>
-        <li><b>Judge on cost per signup</b> and on the share of signups answering "Yes" to drug coverage. Keep the winner, replace the weakest with a new version of the winner, and download the leads every few days, because founding access goes in signup order.</li>
-      </ol>
-      <div class="card settings">
-        <h4>Instant Form · "Join the IV iron founding waitlist"</h4>
-        <div class="field"><div class="flabel">Intro<button class="copy" data-copy="IV iron is coming to Optimal in Barrie. Join the founding waitlist for first access, in signup order, and founding pricing. No referral needed.">Copy</button></div><div class="val">IV iron is coming to Optimal in Barrie. Join the founding waitlist for first access, in signup order, and founding pricing. No referral needed.</div></div>
-        <div class="field"><div class="flabel">Questions</div><div class="val">First name, email, phone (prefilled), plus one multiple-choice question: "Do you have private or workplace drug coverage?" Yes / No / Not sure. No health questions.</div></div>
-        <div class="field"><div class="flabel">Privacy policy<button class="copy" data-copy="https://www.beoptimal.ca/privacy">Copy</button></div><div class="val">https://www.beoptimal.ca/privacy</div></div>
-        <div class="field"><div class="flabel">Thank-you screen<button class="copy" data-copy="You're on the list. We'll email you when booking opens. Questions? Call (437) 370-0291.">Copy</button></div><div class="val">You're on the list. We'll email you when booking opens. Questions? Call (437) 370-0291.</div></div>
-        <p class="note" style="margin-top:10px">When the IV iron page ships on beoptimal.ca, switch the destination to it and add the usual URL parameters. Once the November opening is confirmed, add "Opening November 2026." to each primary text.</p>
-      </div>
-    </div>
-    <div class="sub"><span class="svc iron">IV iron</span></div><div class="grid">{{IRON_STATICS}}</div>
-    <div style="margin-top:16px">{{IRON_VIDEO}}</div>
-  </section>
-
-
-  <section class="block" id="iron2">
-    <div class="shead"><div><div class="eyebrow">IV iron · round 2 · October 19</div><h2>Seven ads, <em>one free offer</em></h2></div>
-      <p class="note">Same founding waitlist and the same Instant Form as round 1. Each ad pulls one lever: time (as little as one visit), effort (no referral, we order the bloodwork) or likelihood (bloodwork before and after, an NP on site). Clinic shots are our real waiting lounge and reception; everything else is a home or still-life setting, with no people.</p></div>
-    <div class="launch">
-      <ol class="card steps">
-        <li><b>Same campaign as round 1</b> (Leads → the Instant Form above), with <b>two ad sets</b> so statics and video don't share one learning pool: <b>Statics</b> IR1, IR3, IR4, IR5, IR6 · <b>Video</b> IRT1–IRT4 (Cheryl's talking heads, new Oct 20), IRV1, IRM1, IRM2, IRV2, IRV3. With ten videos, launch the four talking heads plus IRV2 first and rotate the rest in. $15–20 a day each for 7 days, then leave them alone.</li>
-        <li><b>Upload each ad</b> with its three files (1:1, 9:16, 1.91:1). Name it with its ID. CTA <b>Sign up</b>. Turn on Meta's <b>AI label</b>. For videos, turn off auto captions (ours are burned in), Advantage+ music and creative enhancements.</li>
-        <li><b>Use the short primary text</b> by default; the long one is for a second ad in the same set.</li>
-        <li><b>Judge on</b> cost per signup, the share answering "Yes" on drug coverage, and for video the 3-second hold rate and ThruPlay. Keep the winning lever; the next round is variations of it.</li>
-      </ol>
-      <div class="card settings">
-        <h4>Also for this launch</h4>
-        <div class="field"><div class="flabel">Google Ads build sheet</div><div class="val"><a href="{{GH_FILES}}GOOGLE-ADS-IRON.md" target="_blank" rel="noopener">GOOGLE-ADS-IRON.md</a>: Search campaign, 3 ad groups, 15 headlines + 4 descriptions each, negatives, assets. <b>Ready to build:</b> the page is live (beoptimal.ca/iron redirects to /services/iron, Oct 20). Use the canonical /services/iron as the final URL, and add a Google Ads conversion on the waitlist submit first.</div></div>
-        <div class="field"><div class="flabel">All the copy, in one file</div><div class="val"><a href="{{GH_FILES}}COPY-IRON-R2.md" target="_blank" rel="noopener">COPY-IRON-R2.md</a> (setup, primary text, headlines, guardrails)</div></div>
-        <div class="field"><div class="flabel">30-second shoot script (TH8)</div><div class="val"><a href="{{GH_FILES}}TH8-iv-iron-shoot-script.md" target="_blank" rel="noopener">TH8-iv-iron-shoot-script.md</a>, for the Oct 20 shoot</div></div>
-      </div>
-    </div>
-    <div class="sub"><span class="svc iron">IV iron · statics</span></div><div class="grid">{{IRON2_STATICS}}</div>
-    <div class="sub" style="margin-top:20px"><span class="svc iron">IV iron · video</span></div>
-    {{IRON2_VIDEOS}}
-  </section>
-
-  <section class="block" id="instagram">
-    <div class="shead"><div><div class="eyebrow">Instagram · organic</div><h2>Reels for <em>@beoptimal.ca</em></h2></div>
-      <p class="note">Instagram cuts of the video ads end on “Link in bio” instead of a Book button, because a drawn button can't be tapped.</p></div>
-    <div class="card igsteps">
-      <h4>Posting (Meta Business Suite, on a computer)</h4>
-      <ol>
-        <li>Create reel → upload the reel .mp4 → upload the cover .jpg as the cover → paste the caption.</li>
-        <li>Don't add Instagram music. The reels are voice-only on purpose.</li>
-        <li>Facebook: post the same reel, but swap “the link in our bio” for book.beoptimal.ca.</li>
-      </ol>
-      <div class="callout">Posting the full Instagram relaunch pack? These three reels are already in it as <b>L7</b> (LV1), <b>L8</b> (LV2) and <b>M7</b> (MV1). Follow the pack's order instead of posting them separately.</div>
-    </div>
-    <div class="reels">{{REELS}}</div>
+  <section class="svc howto" id="howto">
+    <div class="shead"><h2>How to launch</h2><p class="muted">Folded away so the ads stay up top. Open what you need.</p></div>
+    <details class="box"><summary>Go-live checklist</summary><div class="inner">{{CHECKLIST}}</div></details>
+    <details class="box"><summary>Upload an ad in Meta Ads Manager</summary><div class="inner">
+      <ol class="steps">
+        <li><b>Download</b> the ad's three files: <b>1:1</b> (Feed), <b>9:16</b> (Stories + Reels) and <b>1.91:1</b> (right column, in-stream, search).</li>
+        <li>Go to the <b>service's ad set</b> (Menopause, Longevity, or the IV iron campaign). Start with the ads marked <b>Test now</b>.</li>
+        <li><b>Create ad</b> and name it with the ID on its card (e.g. <code>MV3-T</code>, <code>M3</code>). Identity: the Optimal Facebook Page and @beoptimal.ca.</li>
+        <li><b>Media:</b> upload the 1:1 file, then customize placements: Stories and Reels get the 9:16 file; right column, search and in-stream get the 1.91:1 file.</li>
+        <li><b>Text:</b> paste the primary text, headline and description with the Copy buttons. Use the service's website URL, URL parameters and CTA from the box at the top of its section.</li>
+        <li><b>Videos:</b> upload the matching thumbnail, and turn <b>off</b> auto captions (ours are burned in), Advantage+ music and creative enhancements. Publish, then leave it alone for 7 days.</li>
+      </ol></div></details>
+    <details class="box"><summary>What to test first (and when to swap)</summary><div class="inner">
+      <div class="pgrid">{{PLAN}}</div>
+      <ul class="rules" style="margin-top:14px">
+        <li><b>One ad set per service</b> with its Test now ads, broad audience, Advantage+ placements. Hands off for 7 days, and duplicate instead of editing.</li>
+        <li><b>Judge on booked intro calls</b> per ad (Ad Lab matches bookings through the URL parameters), not on Meta's "results".</li>
+        <li><b>Day 7:</b> pause any ad that spent $40+ with no bookings and a CTR under half the ad set's. <b>Day 14:</b> swap the bottom two for Next up ads.</li>
+        <li><b>Fatigue:</b> when frequency passes about 3 or CTR drops about 30%, swap in the ad's Twin.</li>
+        <li><b>Chantelle vs Cheryl:</b> run <code>MV1-T</code> against <code>MV3-T</code> as a Meta A/B test with equal budgets. They're the same length, end card and page, so the only difference is who's on camera.</li>
+      </ul>
+      <table class="budget" style="margin-top:14px"><thead><tr><th>Per service, per day</th><th>Launch</th></tr></thead><tbody>
+        <tr><td>$50–60+</td><td>All six Test now ads.</td></tr><tr><td>$25–50</td><td>Ranks 1–4 only.</td></tr><tr><td>Under $25</td><td>Ranks 1–3; rotate a new one in every two weeks.</td></tr></tbody></table>
+    </div></details>
+    <details class="box"><summary>IV iron campaign setup (Instant Form, Google Ads)</summary><div class="inner">{{IRON_HOWTO}}</div></details>
+    <details class="box"><summary>Why these words (the Hormozi pass, Oct 13)</summary><div class="inner">
+      <p class="muted" style="margin-bottom:12px">Each image line was reviewed the way Alex Hormozi reviews ads: would a stranger stop, know it's for them, want the outcome, believe it, and know the next step? These lines changed.</p>
+      <div class="rws">{{REWRITES}}</div></div></details>
   </section>
 </main>
 
-<footer><div class="wrap">
-  Optimal Health · 630 Huronia Rd, Unit 5, Barrie · Ad round {{ROUND}} (release <code>{{TAG}}</code>). Questions about the ads: Peter.
-</div></footer>
+<footer><div class="wrap">Optimal Health · 630 Huronia Rd, Unit 5, Barrie · files on the release <code>{{TAG}}</code> · questions: Peter.</div></footer>
 
 <script>
   document.querySelectorAll(".copy").forEach(b => b.addEventListener("click", async () => {
@@ -456,14 +308,10 @@
     b.textContent = "Copied"; b.classList.add("done");
     setTimeout(() => { b.textContent = "Copy"; b.classList.remove("done"); }, 1400);
   }));
-  const boxes = [...document.querySelectorAll(".check input")];
-  const prog = document.getElementById("prog");
-  const tally = () => { if (prog) prog.textContent = `${boxes.filter(b => b.checked).length} of ${boxes.length} done`; };
-  boxes.forEach(b => {
+  document.querySelectorAll(".check input").forEach(b => {
     try { b.checked = localStorage.getItem("golive:" + b.dataset.k) === "1"; } catch (e) {}
-    b.addEventListener("change", () => { try { localStorage.setItem("golive:" + b.dataset.k, b.checked ? "1" : "0"); } catch (e) {} tally(); });
+    b.addEventListener("change", () => { try { localStorage.setItem("golive:" + b.dataset.k, b.checked ? "1" : "0"); } catch (e) {} });
   });
-  tally();
   const vids = [...document.querySelectorAll("video")];
   vids.forEach(v => v.addEventListener("play", () => vids.forEach(o => o !== v && o.pause())));
 </script>
