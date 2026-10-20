@@ -2,14 +2,18 @@
 
 A build sheet for whoever on the team pushes this live. Every headline is ≤30 characters and every description ≤90 (checked). Copy follows the same guardrails as the Meta ads (`COPY-IRON-R2.md`): waitlist only, no price, no drug brand names, no feel-better timelines, no provider comparisons.
 
-## ⚠️ Before launch: the landing page has to exist
+## Before launch: the landing page is live (Oct 20)
 
-Google Search can't send people to a Meta Instant Form. **`beoptimal.ca/iron` currently serves the homepage**, so it's not live yet.
+**`https://www.beoptimal.ca/iron` is live.** It redirects to `https://www.beoptimal.ca/services/iron` ("Save my founding spot" email form, symptom quick-check, pills vs hospital vs Optimal table, both referral paths, the real clinic photos). Peter confirmed it on Oct 20, and I checked the rendered page the same day.
 
-1. **The page.** Ship the IV iron waitlist page (the Claude Design canvas "IV Iron Waitlist Landing Page") at `https://www.beoptimal.ca/iron`, with the email form wired.
-   - Two changes before it goes live with ads pointing at it. The canvas has a hospital-clinic comparison table and "Exhausted by low iron?" / "1 in 4 women" lines. Those are fine on the page itself, but Google reviews the landing page, and CNO doesn't allow comparisons. Ask the Clinical Director about both.
-2. **Conversion tracking.** Fire a Google Ads conversion (or a GA4 `generate_lead` imported into Ads) on a successful waitlist signup. Start with **Maximize clicks**, then switch to **Maximize conversions** after about 30 signups.
-3. **Lead form asset (optional).** Once the page is live, add a Google lead form asset so people can join without leaving the search results. Fields: name, email, phone. Download the leads every few days, because founding access goes in signup order.
+1. **Final URL.** Use the canonical `https://www.beoptimal.ca/services/iron`, not the `/iron` redirect. Google flags redirecting final URLs, and the redirect can drop the UTM suffix.
+2. **Conversion tracking (still to do, ~15 min).** The page loads GA4 (`G-FP790P5JK8`) and the Meta pixel, but no Google Ads conversion tag. Two options:
+   - fire a Google Ads conversion on a successful "Save my founding spot" submit, or
+   - mark the GA4 `generate_lead` (or the form-submit event) as a key event and import it into Ads.
+
+   Start on **Maximize clicks**, then switch to **Maximize conversions** after about 30 signups.
+3. **Landing-page review.** The page has the hospital-infusion comparison table and the "1 in 4 women" line. The Clinical Director signed off all clinical claims (Oct 20), so they're not a blocker. Google reviews the page against its healthcare policy, so if an ad is limited, check the policy note first.
+4. **Lead form asset (optional).** Add a Google lead form asset (name, email, phone) so people can join from the results page. Download the leads every few days, because founding access goes in signup order.
 
 ## Campaign settings
 
@@ -23,7 +27,7 @@ Google Search can't send people to a Meta Instant Form. **`beoptimal.ca/iron` cu
 | Budget | $15–25/day to start |
 | Bidding | Maximize clicks with a $4.00 max CPC cap, then Maximize conversions once tracking has data |
 | Ad schedule | All days, 6 AM–11 PM |
-| Final URL | `https://www.beoptimal.ca/iron` |
+| Final URL | `https://www.beoptimal.ca/services/iron` (canonical; `/iron` redirects here) |
 | Display path | `beoptimal.ca/iv-iron/barrie` |
 | Final URL suffix | `utm_source=google&utm_medium=cpc&utm_campaign={campaignid}&utm_term={keyword}&utm_content={creative}` |
 

@@ -36,6 +36,9 @@ VIDEOS = [  # id, service, folder in meta-ad-studio/out, render name, the line o
     ("LV2", "longevity", "longevity-ad2", "LongevityFullHour", "A full hour. Every year."),
     ("MV1", "menopause", "menopause-ad1", "MenopauseMyself", "“I just don’t feel like myself.”"),
     ("LV3", "longevity", "health-optimizer", "LongevityOptimize", "An hour with an NP who listens."),   # Oct 15, Rubeana
+    # Oct 20, Chantelle Oostwoud, NP: a Tight cut (~MV1's length, so NP vs care coordinator is the one change) + a Flow cut
+    ("MV2", "menopause", "meno-time-to-talk", "MenoTimeToTalk", "Menopause affects nearly every system.", [("T", "Tight"), ("F", "Flow")]),
+    ("MV3", "menopause", "meno-three-things", "MenoThreeThings", "Patients tell me the same three things.", [("T", "Tight"), ("F", "Flow")]),
 ]
 SOCIALS = [  # organic-only reels: kept OFF the ads site (Peter, Oct 15), so the list stays empty; the format is kept for later
 ] and [
@@ -52,6 +55,8 @@ PLAN = {
     # menopause
     "M3":  ("now", 1, "Price up front, qualifies the booking · price card"),
     "MV1": ("now", 2, "Emotional hook · video"),
+    "MV3": ("next", None, "A/B vs MV1: the NP on camera, same offer · video"),
+    "MV2": ("next", None, "NP explains the full-hour first visit · video"),
     "MB1": ("now", 3, "Relatable moment · photo"),
     "MB5": ("now", 4, "Access, no referral · clinic photo"),
     "MB2": ("now", 5, "Symptom awareness · photo"),
@@ -237,6 +242,14 @@ def copy_field(label, text, rows=None):
             f'{body}</div>')
 
 
+def ad_names(vid, cuts):
+    if len(cuts) == 1:
+        return f"Ad name <code>{vid}-T</code>."
+    return (f"Two ads: <code>{vid}-T</code> (Tight, about MV1's length: the NP-vs-care-coordinator test against "
+            f"<code>MV1-T</code>, same end card, offer and page) and <code>{vid}-F</code> (Flow, runs past 30 s: the length "
+            f"test against {vid}-T). Same ad set, Meta A/B test, equal budgets; judge on cost per booked intro call.")
+
+
 def badge(ad):
     if ad in IRON:
         return f'<span class="plan {IRON[ad][0]}">{esc(IRON[ad][1])}</span>'
@@ -301,11 +314,12 @@ def build():
 
     # ---------------- video ads
     vids_html = []
-    for vid, svc, folder, name, line in VIDEOS:
+    for vid, svc, folder, name, line, *rest in VIDEOS:
         out = os.path.join(STUDIO, "out", folder)
         c = vc[vid]
+        cuts = rest[0] if rest else CUTS
         cuts_html = []
-        for k, cut in CUTS:
+        for k, cut in cuts:
             files, d = [], None
             for r, rlabel in RATIOS:
                 src = os.path.join(out, f"{name}_{cut}_{r}.mp4")
@@ -321,6 +335,8 @@ def build():
                 counts["video"] += 1
             srt = os.path.join(out, f"{name}_{cut}.srt")
             files.append(dl(put(srt, f"files/{vid}-{k}_captions.srt"), "Captions .srt (optional)", mb(srt)))
+            if os.path.exists(os.path.join(out, f"{name}_{cut}_9x16.mp4")):   # page preview + poster (re-encoded when newer)
+                web_preview(os.path.join(out, f"{name}_{cut}_9x16.mp4"), f"previews/{name}_{cut}_9x16.mp4")
             poster = f"previews/{name}_{cut}_9x16.jpg"
             cuts_html.append(f'''
         <div class="cut">
@@ -332,9 +348,9 @@ def build():
         vids_html.append(f'''
     <article class="card ad" id="{vid}">
       <header class="adhead"><span class="svc {svc}">{SERVICES[svc]["name"]}</span> {badge(vid)}<h3><span class="id">{vid}</span> {esc(line)}</h3>
-        <p class="note">Ad name <code>{vid}-T</code>. Upload the 1:1, 9:16 and 1.91:1 files as one ad (placement asset customization).</p></header>
+        <p class="note">{ad_names(vid, cuts)} Upload the 1:1, 9:16 and 1.91:1 files as one ad (placement asset customization).</p></header>
       <div class="adbody">
-        <div class="cuts one">{"".join(cuts_html)}</div>
+        <div class="cuts{" one" if len(cuts) == 1 else ""}">{"".join(cuts_html)}</div>
         <div class="copyblock">
           {copy_field("Primary text (short)", c["short"], 3)}
           {copy_field("Primary text (long)", c["long"], 8)}
@@ -349,7 +365,7 @@ def build():
 
     # ---------------- instagram reels
     reels_html = []
-    for vid, svc, folder, name, line in VIDEOS:
+    for vid, svc, folder, name, line, *rest in VIDEOS:
         out = os.path.join(STUDIO, "out", folder)
         src = os.path.join(out, f"{name}_IG_Tight_9x16.mp4")
         if not os.path.exists(src) or "caption" not in vc.get(vid, {}):   # no caption in VIDEO-ADS.md = not for the ads team (LV3 is posted directly)
@@ -454,7 +470,7 @@ def build():
     # ---------------- IV iron (round 4): three statics + the one AI video, files small enough to live in the repo
     idir = os.path.join(sdir, "r4", "iron")
     iron_html = []
-    for ad in ("IR1", "IR3", "IR2"):   # run-now first, the held one last
+    for ad in ("IR1", "IR2", "IR3"):   # Oct 20: all cleared, so in ID order
         c = ir[ad]
         imgs = simgs(idir, ad)
         iron_html.append(static_card(ad, c["title"], c["primary"], c["headline"], c["description"], imgs, "r4"))
@@ -471,7 +487,7 @@ def build():
     iron_video = f'''
     <article class="card ad" id="IRV1">
       <header class="adhead"><span class="svc iron">IV iron</span> {badge("IRV1")}<h3><span class="id">IRV1</span> {esc(c["title"])}</h3>
-        <p class="note">A 6-second push-in on our real waiting lounge with the waitlist line, then the end card (re-cut Oct 19: the AI-made infusion room is retired, because ads only show rooms that exist). Ad name <code>IRV1</code>. Upload the 1:1, 9:16 and 1.91:1 files as one ad.</p></header>
+        <p class="note">The IV iron page's hero, animated: she turns a page while the infusion runs, close-up only (Oct 20, Peter: an animated version of the hero, no fake room background). Then the end card. The hero is AI imagery, so turn on Meta's AI label. Ad name <code>IRV1</code>. Upload the 1:1, 9:16 and 1.91:1 files as one ad.</p></header>
       <div class="adbody">
         <div class="cuts one"><div class="cut">
           <video src="{irv1_prev}" poster="{irv1_prev[:-4]}.jpg" controls playsinline preload="none"></video>
@@ -558,7 +574,7 @@ def build():
     shutil.copy2(os.path.join(STUDIO, "brand/ds/assets/logos/OptimalLogo-Green.png"), os.path.join(HERE, "files", "logo.png"))
 
     thumbs, titles = {}, {}
-    for vid, svc, folder, name, line in VIDEOS:
+    for vid, svc, folder, name, line, *rest in VIDEOS:
         thumbs[vid], titles[vid] = f"previews/{name}_Tight_9x16.jpg", line
     for ad, c in r1.items():
         thumbs[ad], titles[ad] = f"static-ads/r1/thumbs/{ad}.jpg", c["title"]

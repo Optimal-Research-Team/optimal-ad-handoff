@@ -111,7 +111,7 @@ Use the short primary text by default. The long one is for the second ad in each
 
 Cheryl (care coordinator) films four takes in our real lounge. Every ad comes in 1:1, 9:16 and 1.91:1 and runs 30 s or less, with burned-in captions, a hook and graphics: engraving cards above her head and numbered chips. There's no music.
 
-- **Destination:** the same Instant Form and CTA (**Sign up**) as the rest of the iron round. Every take ended on "join the waitlist at beoptimal.ca/iron". That page isn't live yet, so the cuts stop at "Join the waitlist" and the end card carries the action.
+- **Destination:** the same Instant Form and CTA (**Sign up**) as the rest of the iron round. Every take ended on "join the waitlist at beoptimal.ca/iron". That page isn't live yet, so the cuts stop at "Join the waitlist" and the end card carries the action. **Update, Oct 20:** the page is live (`beoptimal.ca/iron`, which redirects to `/services/iron`). Keep the Instant Form as the default destination, since it has less friction on mobile. A second ad set can test the landing page as a website-conversion destination (`https://www.beoptimal.ca/services/iron?utm_source=meta&utm_medium=paid&utm_campaign=iv-iron-waitlist&utm_content={{ad.name}}`). The "at beoptimal.ca/iron" line can come back into the cuts on request.
 - **November:** Peter recorded "opens in November", so the end card uses it.
 - **Clinical sign-off:** the Clinical Director has approved everything, which covers IRT2's "doesn't always look like anemia" (and IR2) (Oct 20).
 - **Audio:** the DJI Mic Mini wasn't connected, so these were recorded on the iPhone's built-in mics. The voice is cleaned with DeepFilterNet (`tools/enhance_voice.py`), then EQ'd for presence.
