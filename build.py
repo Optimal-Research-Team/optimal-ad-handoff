@@ -303,9 +303,10 @@ def dl(href, label, size, primary=False):
 
 
 # ------------------------------------------------------------------ Oct 20 2026 rebuild: by service, dated, IR3 gone
-UPDATED = "Oct 20, 2026"
-LATEST = "2026-10-20"
-D12, D13, D14, D15, D19, D20 = "2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-19", "2026-10-20"
+UPDATED = "Oct 21, 2026"
+LATEST = "2026-10-21"
+D12, D13, D14, D15, D19, D20, D21 = ("2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-19", "2026-10-20",
+                                     "2026-10-21")
 ADDED = {**{k: D12 for k in ("M1 M2 M3 M4 M5 M6 L1 L2 L3 L4 L5 L6 MB1 MB2 MB3 MB4 MB5 MB6 LB1 LB2 LB3 LB4 LB5 LB6 "
                              "MC LC LV1 LV2 MV1").split()},
          **{k: D13 for k in ("MA1", "MA2", "LA1", "LA2")},
@@ -314,10 +315,17 @@ ADDED = {**{k: D12 for k in ("M1 M2 M3 M4 M5 M6 L1 L2 L3 L4 L5 L6 MB1 MB2 MB3 MB
          **{k: D19 for k in ("IR4", "IR5", "IR6", "IRM1", "IRM2", "IRV2", "IRV3")},
          **{k: D20 for k in ("IRT1", "IRT2", "IRT3", "IRT4", "MV2", "MV3")}}
 CHANGED = {"IR1": (D20, "new image and headline"), "IR2": (D20, "new image: the website hero"),
-           "IRV1": (D20, "rebuilt from the website hero, animated")}
+           "IRV1": (D20, "rebuilt from the website hero, animated"),
+           "MV2": (D21, "blood-draw and body-scan pictures; softer opening"),
+           "MV3": (D21, "hormone-levels chart from the menopause page; softer opening"),
+           "CB2": (D21, "pause at 0:42 cut; softer opening"),
+           **{k: (D21, "softer opening (room tone, not silence)") for k in ("MI1", "MI2", "MI3", "CB1")}}
 REMOVED = {"IR3": D20}
 SHORT = {"9x16": "9:16", "1x1": "1:1", "1-91x1": "1.91:1"}
 NEWS = [  # (date, what happened, ids that link to cards, ids removed)
+    (D21, "Chantelle's videos: her name title now opens over the room's sound instead of dead silence. MV2 shows a "
+          "blood draw, then the body composition scan. MV3 uses the hormone-levels chart from the menopause page. CB2 "
+          "loses the pause at 0:42.", ["MV2", "MV3", "ig-CB2", "ig-MI1", "ig-MI2", "ig-MI3", "ig-CB1"], []),
     (D20, "Chantelle's menopause video ads, each in a Tight and a Flow cut. Cheryl's four IV iron talking heads. IR1 and IR2 "
           "redone with clearer images (IR2 uses the website hero), and IRV1 rebuilt from the hero. IR3 removed. Nine Instagram "
           "posts added, most not posted yet.",
