@@ -319,13 +319,16 @@ CHANGED = {"IR1": (D20, "new image and headline"), "IR2": (D20, "new image: the 
            "MV2": (D21, "blood-draw and body-scan pictures; softer opening"),
            "MV3": (D21, "hormone-levels chart from the menopause page; softer opening"),
            "CB2": (D21, "pause at 0:42 cut; softer opening"),
-           **{k: (D21, "softer opening (room tone, not silence)") for k in ("MI1", "MI2", "MI3", "CB1")}}
+           "CB1": (D21, "opening shot and the 0:30 graphic cut"),
+           **{k: (D21, "softer opening (room tone, not silence)") for k in ("MI1", "MI2", "MI3")}}
 REMOVED = {"IR3": D20}
 SHORT = {"9x16": "9:16", "1x1": "1:1", "1-91x1": "1.91:1"}
 NEWS = [  # (date, what happened, ids that link to cards, ids removed)
-    (D21, "Chantelle's videos: her name title now opens over the room's sound instead of dead silence. MV2 shows a "
-          "blood draw, then the body composition scan. MV3 uses the hormone-levels chart from the menopause page. CB2 "
-          "loses the pause at 0:42.", ["MV2", "MV3", "ig-CB2", "ig-MI1", "ig-MI2", "ig-MI3", "ig-CB1"], []),
+    (D21, "Eight Instagram posts went live, alternating menopause and IV iron: CB1, CB2, MI1, IRT2, MI2, IRT3, MI3, IRT4 "
+          "(IRT1 was already up). None are on Facebook yet. Chantelle's videos: her name title now opens over the room's "
+          "sound instead of dead silence. MV2 shows a blood draw, then the body composition scan. MV3 uses the "
+          "hormone-levels chart from the menopause page. CB1 loses its opening shot and the 0:30 graphic, and CB2 loses the "
+          "pause at 0:42.", ["ig-CB1", "ig-CB2", "ig-MI1", "ig-IRT2", "ig-MI2", "ig-IRT3", "ig-MI3", "ig-IRT4", "MV2", "MV3"], []),
     (D20, "Chantelle's menopause video ads, each in a Tight and a Flow cut. Cheryl's four IV iron talking heads. IR1 and IR2 "
           "redone with clearer images (IR2 uses the website hero), and IRV1 rebuilt from the hero. IR3 removed. Nine Instagram "
           "posts added, most not posted yet.",
@@ -340,16 +343,18 @@ NEWS = [  # (date, what happened, ids that link to cards, ids removed)
      ["MV1", "LV1", "LV2", "M3", "MB1", "MB5", "MC", "L1", "L2", "LB1", "LC"], []),
 ]
 # organic Instagram posts (not ads): id, folder in meta-ad-studio/out, render name, line, added, status
+IG_LINK = {"IRT1": "DeuqtE3ux0g", "CB1": "DexGHdyuXk0", "CB2": "DexGpqDuUb-", "MI1": "DexHDf2ulLf", "IRT2": "DexHYHRuWz5",
+           "MI2": "DexHtjyuKa9", "IRT3": "DexIED5u8No", "MI3": "DexId1Pusbd", "IRT4": "DexI9NouTrG"}   # posted Oct 20-21
 POSTS = [
-    ("MI1", "meno-not-stupider", "MenoNotStupider", "You're not getting stupider.", D20, "hold"),
-    ("MI2", "meno-brain-fog", "MenoBrainFog", "Your brain fog has an explanation.", D20, "hold"),
-    ("MI3", "meno-in-your-head", "MenoInYourHead", "It is all in your head, just not the way you think.", D20, "hold"),
-    ("CB1", "chantelle-bio", "ChantelleBio", "Meet Chantelle, Nurse Practitioner.", D20, "hold"),
-    ("CB2", "chantelle-four-things", "ChantelleFourThings", "4 things I tell every new patient.", D20, "hold"),
+    ("MI1", "meno-not-stupider", "MenoNotStupider", "You're not getting stupider.", D20, "posted Oct 21"),
+    ("MI2", "meno-brain-fog", "MenoBrainFog", "Your brain fog has an explanation.", D20, "posted Oct 21"),
+    ("MI3", "meno-in-your-head", "MenoInYourHead", "It is all in your head, just not the way you think.", D20, "posted Oct 21"),
+    ("CB1", "chantelle-bio", "ChantelleBio", "Meet Chantelle, PHC-NP.", D20, "posted Oct 21"),
+    ("CB2", "chantelle-four-things", "ChantelleFourThings", "4 things I tell every new patient.", D20, "posted Oct 21"),
     ("IRT1", "iron-pills-dont-work", "IronPills", "Iron pills don't work for everyone.", D20, "posted Oct 20"),
-    ("IRT2", "iron-not-anemia", "IronNotAnemia", "Low iron doesn't always look like anemia.", D20, "hold"),
-    ("IRT3", "iron-three-things", "IronThreeThings", "3 things about IV iron.", D20, "hold"),
-    ("IRT4", "iron-what-it-looks-like", "IronWhatItLooksLike", "What IV iron actually looks like.", D20, "hold"),
+    ("IRT2", "iron-not-anemia", "IronNotAnemia", "Low iron doesn't always look like anemia.", D20, "posted Oct 21"),
+    ("IRT3", "iron-three-things", "IronThreeThings", "3 things about IV iron.", D20, "posted Oct 21"),
+    ("IRT4", "iron-what-it-looks-like", "IronWhatItLooksLike", "What IV iron actually looks like.", D20, "posted Oct 21"),
     ("RB1", "rubeana-bio", "RubeanaBio", "Meet Rubeana, our Clinical Director.", D15, "posted Oct 15"),
     ("CI1", "cholesterol-info", "CholesterolInfo", "Cholesterol, explained: HDL, LDL, Lp(a) and ApoB.", D15, "posted Oct 15"),
 ]
@@ -593,7 +598,10 @@ def build():
         if os.path.exists(cov45):
             files.append(dl(cov_rel, "Cover 4:5", mb(cov45)))
         isnew, newpill, whenline = when(pid, added)
-        pill = (f'<span class="pill posted">Posted {esc(st.split(" ", 1)[1])}</span>' if st.startswith("posted")
+        posted = f'<span class="pill posted">IG · Posted {esc(st.split(" ", 1)[1])}</span>'
+        if pid in IG_LINK:
+            posted = f'<a href="https://www.instagram.com/reel/{IG_LINK[pid]}/" target="_blank" rel="noopener">{posted}</a>'
+        pill = (posted + ' <span class="pill hold">FB · not yet</span>' if st.startswith("posted")
                 else '<span class="pill hold">Not posted yet</span>')
         n["ig"] += 1
         ig_html.append(f'''
