@@ -332,8 +332,9 @@ CHANGED = {"IR1": (D20, "new image and headline"), "IR2": (D20, "new image: the 
 REMOVED = {"IR3": D20}
 SHORT = {"9x16": "9:16", "1x1": "1:1", "1-91x1": "1.91:1"}
 NEWS = [  # (date, what happened, ids that link to cards, ids removed)
-    (D22, "New service: Cycle & Hormone Care. Cheryl's three video ads, each labelled with the program from the first frame. "
-          "Hold them until the Cycle & Hormone Care page is live (the URL 404s today).", ["CV1", "CV2", "CV3"], []),
+    (D22, "New service: Cycle & Hormone Care. Cheryl's three video ads, each labelled with the program from the first frame, "
+          "polished the same day: cleaner voice, closer framing, bigger chart labels, better thumbnails. Hold them until the "
+          "Cycle & Hormone Care page is live (the URL 404s today).", ["CV1", "CV2", "CV3"], []),
     (D21, "Eight Instagram posts went live, alternating menopause and IV iron: CB1, CB2, MI1, IRT2, MI2, IRT3, MI3, IRT4 "
           "(IRT1 was already up). None are on Facebook yet. Chantelle's videos: her name title now opens over the room's "
           "sound instead of dead silence. MV2 shows a blood draw, then the body composition scan. MV3 uses the "
