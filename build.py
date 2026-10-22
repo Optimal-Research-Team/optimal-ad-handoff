@@ -520,7 +520,7 @@ def build():
     </article>''')
 
     # ---------------- static ads
-    def static_tile(ad, title, primary, headline, description, imgs, round_key, extra="", svc=None):
+    def static_tile(ad, title, primary, headline, description, imgs, round_key, extra="", svc=None, fmt=""):
         files = []
         for label, src in imgs:
             rel = put(src, f"static-ads/{round_key}/{os.path.basename(src)}")
@@ -534,7 +534,7 @@ def build():
         return f'''
       <article class="card tile{" isnew" if isnew else ""}" id="{ad}">
         <img src="{th}" alt="{esc(ad)}" loading="lazy">
-        <div class="tbody"><div>{status(ad)} {newpill}</div><h4><span class="id">{ad}</span>{esc(title)}</h4>{whenline}
+        <div class="tbody"><div>{f'<span class="pill fmt">{esc(fmt)}</span> ' if fmt else ""}{status(ad)} {newpill}</div><h4><span class="id">{ad}</span>{esc(title)}</h4>{whenline}
           <div class="dls">{"".join(files)}</div>
           <details class="more"><summary>Ad copy</summary>{copy_field("Primary text", primary, 4)}{copy_field("Headline", headline)}{desc}{extra}</details>
         </div>
@@ -623,7 +623,7 @@ def build():
     cdir = os.path.join(sdir, "r9", "cycle")
     cyc = cycle_copy()
     cycle_statics = [static_tile(ad, cyc[ad]["title"], cyc[ad]["primary"], cyc[ad]["headline"], cyc[ad]["description"],
-                                 simgs(cdir, ad), "r9", svc="cycle") for ad in sorted(cyc)]
+                                 simgs(cdir, ad), "r9", svc="cycle", fmt="Single image · its own ad") for ad in sorted(cyc)]
     cc = cycle_carousel()
     cards = []
     for i, (cid, onimg, chead) in enumerate(cc["cards"], 1):
@@ -631,14 +631,14 @@ def build():
         rel = put(src, f"static-ads/r9/{os.path.basename(src)}")
         zips["r9"].append((src, f"CC carousel/{os.path.basename(src)}"))
         th = thumb(src, f"static-ads/r9/thumbs/{cid}.jpg", 360)
-        cards.append(f'<figure><img src="{th}" alt="{cid}" loading="lazy"><figcaption><b>{cid}</b> · {esc(chead)}'
-                     f'<div class="dls">{dl(rel, "Card", mb(src), True)}</div></figcaption></figure>')
+        cards.append(f'<figure><img src="{th}" alt="{cid}" loading="lazy"><figcaption><span class="cardno">Card {i} of {len(cc["cards"])}</span>'
+                     f'<b>{cid}</b> · {esc(chead)}<div class="dls">{dl(rel, "Card", mb(src), True)}</div></figcaption></figure>')
     isnew, newpill, whenline = when("CC")
     n["cycle"] += 1
     cycle_carousel_html = f'''
-    <div class="group"><h3>Carousel</h3><span>Five 1:1 cards, uploaded as ONE carousel ad, in this order. Use each card's headline; the primary text is shared.</span></div>
-    <article class="card carousel" id="CC">{status("CC")} {newpill}<h3 style="margin-top:6px"><span class="id">CC1–CC5</span>Cycle &amp; Hormone Care carousel</h3>{whenline}
-      <div class="cards">{"".join(cards)}</div>{copy_field("Primary text", cc["primary"], 3)}</article>'''
+    <div class="group"><h3>Carousel ad: 1 ad, 5 cards</h3><span>These five are NOT separate ads. In Ads Manager pick the <b>Carousel</b> format and add the cards in this order (1 → 5), each with its card headline. The primary text is shared. Every card shows a Stories-style progress bar, and card 1 says "Swipe".</span></div>
+    <article class="card carousel" id="CC"><span class="pill fmt">Carousel · 1 ad · 5 cards</span> {status("CC")} {newpill}<h3 style="margin-top:6px"><span class="id">CC1–CC5</span>Cycle &amp; Hormone Care carousel</h3>{whenline}
+      <div class="cards seq">{"".join(cards)}</div>{copy_field("Primary text (shared by all 5 cards)", cc["primary"], 3)}</article>'''
     cycle_google = []
     for gid, title, kws, hs, ds, pin in google_groups():
         isnew, newpill, whenline = when(gid)

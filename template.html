@@ -145,6 +145,11 @@
   .cards { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 12px 0 4px; }
   .cards img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 9px; border: 1px solid var(--line); display: block; }
   .cards figcaption { font-size: 12.5px; margin-top: 6px; color: var(--ink); }
+  .pill.fmt { background: var(--ink); color: var(--cream); }
+  .cards.seq figure { position: relative; margin: 0; }
+  .cards.seq figure:not(:last-child)::after { content: "→"; position: absolute; right: -9px; top: calc(50% - 40px); transform: translateX(50%);
+    width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: #fffcf7; font: 600 13px/22px "Public Sans", sans-serif; text-align: center; z-index: 2; }
+  .cards .cardno { display: block; font: 700 10.5px "Public Sans", sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--muted, #76736D); margin-bottom: 2px; }
 
   /* how to launch */
   .howto details.box { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 16px 20px; margin-bottom: 10px; }
@@ -246,7 +251,7 @@
     <div class="setup">{{CYCLE_SETUP}}</div>
     <div class="group"><h3>Video ads</h3><span>9:16, 1:1 and 1.91:1 per ad. Each opens with the CYCLE &amp; HORMONE CARE badge.</span></div>
     {{CYCLE_VIDEOS}}
-    <div class="group"><h3>Static ads</h3><span>Each single stands on its own: one sentence, one Hormozi lever. 1:1, 9:16 and 1.91:1. AI label on for CS3 and CS5 (engravings).</span></div>
+    <div class="group"><h3>Single-image ads: 4 separate ads</h3><span>Each one is its own ad and makes sense alone: one sentence, one Hormozi lever. Upload its 1:1, 9:16 and 1.91:1 files as one ad. AI label on for CS3 and CS5 (engravings).</span></div>
     <div class="grid">{{CYCLE_STATICS}}</div>
     {{CYCLE_CAROUSEL}}
     <div class="group"><h3>Google Ads (Search)</h3><span>Campaign <code>CHC · Cycle &amp; Hormone Care · Barrie · Search</code>: four ad groups, one RSA each. Full build sheet with settings, sitelinks, callouts and negatives: <a href="files/GOOGLE-ADS-CYCLE.md" target="_blank" rel="noopener">GOOGLE-ADS-CYCLE.md</a>.</span></div>
