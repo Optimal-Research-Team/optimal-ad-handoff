@@ -714,7 +714,7 @@ def build():
     left = re.findall(r"\{\{[A-Z0-9_]+\}\}", page)
     assert not left, f"unfilled placeholders: {left}"
     open(os.path.join(HERE, "index.html"), "w").write(page)
-    print(f"built: menopause {n['menopause']}, longevity {n['longevity']}, iron {n['iron']}, instagram {n['ig']}; "
+    print(f"built: menopause {n['menopause']}, longevity {n['longevity']}, cycle {n['cycle']}, iron {n['iron']}, instagram {n['ig']}; "
           f"release staging {sum(os.path.getsize(os.path.join(STAGE, f)) for f in os.listdir(STAGE)) / 1e6:.0f} MB")
 
 
