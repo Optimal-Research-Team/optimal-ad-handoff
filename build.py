@@ -46,8 +46,8 @@ VIDEOS = [  # id, service, folder in meta-ad-studio/out, render name, the line o
     ("CV2", "cycle", "cycle-told-normal", "CycleToldNormal", "“That’s just part of being a woman.”", [("A", "Ad")]),
     ("CV3", "cycle", "cycle-program-intro", "CycleProgramIntro", "Hormone care isn’t just for menopause.", [("A", "Ad")]),
 ]
-WAITING = {k: "Waiting on the landing page" for k in ("CV1", "CV2", "CV3", "CS1", "CS2", "CS3", "CS4", "CS5", "CS6",
-                                                    "CS7", "CG1", "CG2", "CG3", "CG4")}   # /services/cycle-and-hormone-care 404s (Oct 22)
+WAITING = {k: "Waiting on the landing page" for k in ("CV1", "CV2", "CV3", "CS3", "CS4", "CS5", "CS6", "CC",
+                                                    "CG1", "CG2", "CG3", "CG4")}   # /services/cycle-and-hormone-care 404s (Oct 22)
 SOCIALS = [  # organic-only reels: kept OFF the ads site (Peter, Oct 15), so the list stays empty; the format is kept for later
 ] and [
     ("RB1", "rubeana-bio", "RubeanaBio_Reel_9x16", "RubeanaBio_cover_9x16", "Meet Rubeana, our Clinical Director."),
@@ -249,6 +249,13 @@ def cycle_copy():
             for m in re.finditer(r'### (CS\d) · "(.*?)"[^\n]*\n\*\*Primary text:\*\* (.*?)\n\*\*Headline:\*\* (.*?) · \*\*Description:\*\* (.*?)\n', doc)}
 
 
+def cycle_carousel():
+    """Cycle & Hormone Care carousel CC1-CC5 (Oct 22, round 3): shared primary text + one headline per card"""
+    doc = open(os.path.join(STUDIO, "static/COPY-CYCLE.md")).read()
+    return dict(primary=re.search(r"\*\*Carousel primary text:\*\* (.*)", doc)[1].strip(),
+                cards=re.findall(r"^\| (CC\d) \| (.*?) \| (.*?) \|$", doc, re.M))
+
+
 def google_groups(name="GOOGLE-ADS-CYCLE.md"):
     """Ad groups of a Google build sheet: [(id, title, keywords, headlines, descriptions)]"""
     doc = open(os.path.join(STUDIO, "static", name)).read()
@@ -346,7 +353,7 @@ ADDED = {**{k: D12 for k in ("M1 M2 M3 M4 M5 M6 L1 L2 L3 L4 L5 L6 MB1 MB2 MB3 MB
          "LV3": D15,
          **{k: D19 for k in ("IR4", "IR5", "IR6", "IRM1", "IRM2", "IRV2", "IRV3")},
          **{k: D20 for k in ("IRT1", "IRT2", "IRT3", "IRT4", "MV2", "MV3")},
-         **{k: D22 for k in ("CV1", "CV2", "CV3", "CS1", "CS2", "CS3", "CS4", "CS5", "CS6", "CS7", "CG1", "CG2", "CG3", "CG4")}}
+         **{k: D22 for k in ("CV1", "CV2", "CV3", "CS3", "CS4", "CS5", "CS6", "CC", "CG1", "CG2", "CG3", "CG4")}}
 CHANGED = {"IR1": (D20, "new image and headline"), "IR2": (D20, "new image: the website hero"),
            "IRV1": (D20, "rebuilt from the website hero, animated"),
            "MV2": (D21, "blood-draw and body-scan pictures; softer opening"),
@@ -357,10 +364,11 @@ CHANGED = {"IR1": (D20, "new image and headline"), "IR2": (D20, "new image: the 
 REMOVED = {"IR3": D20}
 SHORT = {"9x16": "9:16", "1x1": "1:1", "1-91x1": "1.91:1"}
 NEWS = [  # (date, what happened, ids that link to cards, ids removed)
-    (D22, "New service: Cycle & Hormone Care. Cheryl's three video ads (labelled with the program from the first frame), seven "
-          "one-sentence statics (one Hormozi lever each, funnel-ordered, all pointing to the free 3-minute Cycle Check) and a Google search "
-          "campaign in four ad groups. Hold everything until the Cycle & Hormone Care page is live (the URL 404s today).",
-     ["CV1", "CV2", "CV3", "CS1", "CS2", "CS3", "CS4", "CS5", "CS6", "CS7", "CG1", "CG2", "CG3", "CG4"], []),
+    (D22, "New service: Cycle & Hormone Care. Cheryl's three video ads (labelled with the program from the first frame), four "
+          "single statics that each stand alone, one 5-card carousel that tells the story in order (hook, symptoms can "
+          "connect, how we look, 12 weeks, free Cycle Check), and a Google search campaign in four ad groups. Hold everything "
+          "until the Cycle & Hormone Care page is live (the URL 404s today).",
+     ["CV1", "CV2", "CV3", "CC", "CS3", "CS4", "CS5", "CS6", "CG1", "CG2", "CG3", "CG4"], []),
     (D21, "Eight Instagram posts went live, alternating menopause and IV iron: CB1, CB2, MI1, IRT2, MI2, IRT3, MI3, IRT4 "
           "(IRT1 was already up). None are on Facebook yet. Chantelle's videos: her name title now opens over the room's "
           "sound instead of dead silence. MV2 shows a blood draw, then the body composition scan. MV3 uses the "
@@ -448,7 +456,7 @@ CHECKLIST = '''
   <label class="check"><input type="checkbox" data-k="g-l"><span><b>Upload the Longevity Test now ads</b> in rank order: LV1-T, L1, L2, LB1, LB2, LB3.</span></label>
   <label class="check"><input type="checkbox" data-k="g-ab"><span><b>Set up the Chantelle vs Cheryl test:</b> MV1-T against MV3-T as a Meta A/B test (equal budgets).</span></label>
   <label class="check"><input type="checkbox" data-k="g-ai"><span><b>Turn on Meta's AI label</b> for every round 2 and round 3 ad, CV2 and MV2, and wherever an IV iron card says so.</span></label>
-  <label class="check"><input type="checkbox" data-k="g-cv"><span><b>Cycle & Hormone Care (CV1–CV3, CS1–CS7, CG1–CG4):</b> launch only once beoptimal.ca/services/cycle-and-hormone-care is live. Meta: own ad set, women 18–45, AI label on CV2, CS3 and CS5. Google: build from GOOGLE-ADS-CYCLE.md (CHC campaign).</span></label>
+  <label class="check"><input type="checkbox" data-k="g-cv"><span><b>Cycle & Hormone Care (CV1–CV3, CS3–CS6, CC, CG1–CG4):</b> launch only once beoptimal.ca/services/cycle-and-hormone-care is live. Meta: own ad set, women 18–45, AI label on CV2, CS3, CS5 and the CC carousel. Google: build from GOOGLE-ADS-CYCLE.md (CHC campaign).</span></label>
   <label class="check"><input type="checkbox" data-k="g-copy"><span><b>Name every ad with its ID</b> and paste the copy from its card. Keep the URL parameters exactly as written.</span></label>
   <label class="check"><input type="checkbox" data-k="g-pub"><span><b>Publish, then don't touch it for 7 days.</b></span></label>'''
 
@@ -616,6 +624,21 @@ def build():
     cyc = cycle_copy()
     cycle_statics = [static_tile(ad, cyc[ad]["title"], cyc[ad]["primary"], cyc[ad]["headline"], cyc[ad]["description"],
                                  simgs(cdir, ad), "r9", svc="cycle") for ad in sorted(cyc)]
+    cc = cycle_carousel()
+    cards = []
+    for i, (cid, onimg, chead) in enumerate(cc["cards"], 1):
+        src = os.path.join(sdir, "r9", "cycle-carousel", f"{cid}_card{i}_1x1.png")
+        rel = put(src, f"static-ads/r9/{os.path.basename(src)}")
+        zips["r9"].append((src, f"CC carousel/{os.path.basename(src)}"))
+        th = thumb(src, f"static-ads/r9/thumbs/{cid}.jpg", 360)
+        cards.append(f'<figure><img src="{th}" alt="{cid}" loading="lazy"><figcaption><b>{cid}</b> · {esc(chead)}'
+                     f'<div class="dls">{dl(rel, "Card", mb(src), True)}</div></figcaption></figure>')
+    isnew, newpill, whenline = when("CC")
+    n["cycle"] += 1
+    cycle_carousel_html = f'''
+    <div class="group"><h3>Carousel</h3><span>Five 1:1 cards, uploaded as ONE carousel ad, in this order. Use each card's headline; the primary text is shared.</span></div>
+    <article class="card carousel" id="CC">{status("CC")} {newpill}<h3 style="margin-top:6px"><span class="id">CC1–CC5</span>Cycle &amp; Hormone Care carousel</h3>{whenline}
+      <div class="cards">{"".join(cards)}</div>{copy_field("Primary text", cc["primary"], 3)}</article>'''
     cycle_google = []
     for gid, title, kws, hs, ds, pin in google_groups():
         isnew, newpill, whenline = when(gid)
@@ -748,7 +771,7 @@ def build():
                         + kv("Call to action", "Learn more (CV1, CV2) · Book now (CV3)")
                         + kv("Audience", "Women 18–45, about 40 km around Barrie, broad")),
         "CYCLE_VIDEOS": "".join(vids["cycle"]), "N_CYCLE": str(n["cycle"]),
-        "CYCLE_STATICS": "".join(cycle_statics), "CYCLE_GOOGLE": "".join(cycle_google),
+        "CYCLE_STATICS": "".join(cycle_statics), "CYCLE_GOOGLE": "".join(cycle_google), "CYCLE_CAROUSEL": cycle_carousel_html,
         "LONG_SETUP": setup("longevity", "Adults 35–70, about 40 km around Barrie, broad"),
         "IRON_SETUP": iron_setup, "IRON_HOWTO": iron_howto,
         "MENO_VIDEOS": "".join(vids["menopause"]), "LONG_VIDEOS": "".join(vids["longevity"]),
