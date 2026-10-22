@@ -46,7 +46,8 @@ VIDEOS = [  # id, service, folder in meta-ad-studio/out, render name, the line o
     ("CV2", "cycle", "cycle-told-normal", "CycleToldNormal", "“That’s just part of being a woman.”", [("A", "Ad")]),
     ("CV3", "cycle", "cycle-program-intro", "CycleProgramIntro", "Hormone care isn’t just for menopause.", [("A", "Ad")]),
 ]
-WAITING = {k: "Waiting on the landing page" for k in ("CV1", "CV2", "CV3")}   # /services/cycle-and-hormone-care 404s (Oct 22)
+WAITING = {k: "Waiting on the landing page" for k in ("CV1", "CV2", "CV3", "CS1", "CS2", "CS3", "CS4", "CS5", "CS6",
+                                                    "CG1", "CG2", "CG3", "CG4")}   # /services/cycle-and-hormone-care 404s (Oct 22)
 SOCIALS = [  # organic-only reels: kept OFF the ads site (Peter, Oct 15), so the list stays empty; the format is kept for later
 ] and [
     ("RB1", "rubeana-bio", "RubeanaBio_Reel_9x16", "RubeanaBio_cover_9x16", "Meet Rubeana, our Clinical Director."),
@@ -241,6 +242,30 @@ def iron_copy():
             for m in re.finditer(r'### (IRV?\d) · "(.*?)"[^\n]*\n\*\*Primary text:\*\* (.*?)\n\*\*Headline:\*\* (.*?) · \*\*Description:\*\* (.*?)\n', doc)}
 
 
+def cycle_copy():
+    """Cycle & Hormone Care statics CS1-CS6 (Oct 22): COPY-CYCLE.md"""
+    doc = open(os.path.join(STUDIO, "static/COPY-CYCLE.md")).read()
+    return {m[1]: dict(title=m[2], primary=m[3].strip(), headline=m[4], description=m[5].strip())
+            for m in re.finditer(r'### (CS\d) · "(.*?)"[^\n]*\n\*\*Primary text:\*\* (.*?)\n\*\*Headline:\*\* (.*?) · \*\*Description:\*\* (.*?)\n', doc)}
+
+
+def google_groups(name="GOOGLE-ADS-CYCLE.md"):
+    """Ad groups of a Google build sheet: [(id, title, keywords, headlines, descriptions)]"""
+    doc = open(os.path.join(STUDIO, "static", name)).read()
+    out = []
+    for g in re.split(r"\n## ", doc):
+        m = re.match(r"(CG\d) · ([^\n]+)", g)
+        if not m:
+            continue
+        kw = re.findall(r"^- `(.*?)`", g.split("**Headlines")[0], re.M)
+        clean = lambda l: re.sub(r"\s*\*\(.*?\)\*", "", re.sub(r"^\d+\.\s*", "", l)).strip()
+        hs = [clean(l) for l in re.search(r"\*\*Headlines \(15\):\*\*\n(.*?)\n\n", g, re.S)[1].splitlines()]
+        ds = [clean(l) for l in re.search(r"\*\*Descriptions \(4\):\*\*\n(.*?)(?:\n\n|\Z)", g, re.S)[1].splitlines()]
+        pin = re.search(r"^1\. (.*?) \*\(pin", g, re.M)
+        out.append((m[1], m[2], kw, hs, ds, pin[1] if pin else None))
+    return out
+
+
 # ------------------------------------------------------------------ html pieces
 def copy_field(label, text, rows=None):
     t = esc(text)
@@ -321,7 +346,7 @@ ADDED = {**{k: D12 for k in ("M1 M2 M3 M4 M5 M6 L1 L2 L3 L4 L5 L6 MB1 MB2 MB3 MB
          "LV3": D15,
          **{k: D19 for k in ("IR4", "IR5", "IR6", "IRM1", "IRM2", "IRV2", "IRV3")},
          **{k: D20 for k in ("IRT1", "IRT2", "IRT3", "IRT4", "MV2", "MV3")},
-         **{k: D22 for k in ("CV1", "CV2", "CV3")}}
+         **{k: D22 for k in ("CV1", "CV2", "CV3", "CS1", "CS2", "CS3", "CS4", "CS5", "CS6", "CG1", "CG2", "CG3", "CG4")}}
 CHANGED = {"IR1": (D20, "new image and headline"), "IR2": (D20, "new image: the website hero"),
            "IRV1": (D20, "rebuilt from the website hero, animated"),
            "MV2": (D21, "blood-draw and body-scan pictures; softer opening"),
@@ -332,9 +357,10 @@ CHANGED = {"IR1": (D20, "new image and headline"), "IR2": (D20, "new image: the 
 REMOVED = {"IR3": D20}
 SHORT = {"9x16": "9:16", "1x1": "1:1", "1-91x1": "1.91:1"}
 NEWS = [  # (date, what happened, ids that link to cards, ids removed)
-    (D22, "New service: Cycle & Hormone Care. Cheryl's three video ads, each labelled with the program from the first frame, "
-          "polished the same day: cleaner voice, closer framing, bigger chart labels, better thumbnails. Hold them until the "
-          "Cycle & Hormone Care page is live (the URL 404s today).", ["CV1", "CV2", "CV3"], []),
+    (D22, "New service: Cycle & Hormone Care. Cheryl's three video ads (labelled with the program from the first frame), six "
+          "one-sentence statics (one Hormozi lever each, all pointing to the free 3-minute Cycle Check) and a Google search "
+          "campaign in four ad groups. Hold everything until the Cycle & Hormone Care page is live (the URL 404s today).",
+     ["CV1", "CV2", "CV3", "CS1", "CS2", "CS3", "CS4", "CS5", "CS6", "CG1", "CG2", "CG3", "CG4"], []),
     (D21, "Eight Instagram posts went live, alternating menopause and IV iron: CB1, CB2, MI1, IRT2, MI2, IRT3, MI3, IRT4 "
           "(IRT1 was already up). None are on Facebook yet. Chantelle's videos: her name title now opens over the room's "
           "sound instead of dead silence. MV2 shows a blood draw, then the body composition scan. MV3 uses the "
@@ -422,7 +448,7 @@ CHECKLIST = '''
   <label class="check"><input type="checkbox" data-k="g-l"><span><b>Upload the Longevity Test now ads</b> in rank order: LV1-T, L1, L2, LB1, LB2, LB3.</span></label>
   <label class="check"><input type="checkbox" data-k="g-ab"><span><b>Set up the Chantelle vs Cheryl test:</b> MV1-T against MV3-T as a Meta A/B test (equal budgets).</span></label>
   <label class="check"><input type="checkbox" data-k="g-ai"><span><b>Turn on Meta's AI label</b> for every round 2 and round 3 ad, CV2 and MV2, and wherever an IV iron card says so.</span></label>
-  <label class="check"><input type="checkbox" data-k="g-cv"><span><b>Cycle & Hormone Care (CV1–CV3):</b> launch only once beoptimal.ca/services/cycle-and-hormone-care is live. Own ad set, women 18–45.</span></label>
+  <label class="check"><input type="checkbox" data-k="g-cv"><span><b>Cycle & Hormone Care (CV1–CV3, CS1–CS6, CG1–CG4):</b> launch only once beoptimal.ca/services/cycle-and-hormone-care is live. Meta: own ad set, women 18–45, AI label on CV2, CS3 and CS5. Google: build from GOOGLE-ADS-CYCLE.md (CHC campaign).</span></label>
   <label class="check"><input type="checkbox" data-k="g-copy"><span><b>Name every ad with its ID</b> and paste the copy from its card. Keep the URL parameters exactly as written.</span></label>
   <label class="check"><input type="checkbox" data-k="g-pub"><span><b>Publish, then don't touch it for 7 days.</b></span></label>'''
 
@@ -432,7 +458,7 @@ def build():
         shutil.rmtree(os.path.join(HERE, d), ignore_errors=True)
     vc = video_copy()
     r1, r2, car, r3 = static_copy()
-    zips = {"videos": [], "r1": [], "r2": [], "r3": [], "r4": [], "r5": []}
+    zips = {"videos": [], "r1": [], "r2": [], "r3": [], "r4": [], "r5": [], "r9": []}
     ir = iron_copy()
     ir2 = iron2_copy()
     social = open(os.path.join(STUDIO, "SOCIAL-VIDEOS.md")).read()
@@ -582,8 +608,25 @@ def build():
         c = ir2[ad]
         iron_statics.append(static_tile(ad, c["title"], c["short"], c["headline"], c["description"], simgs(i2dir, ad), "r5",
                                         extra=copy_field("Primary text (long)", c["long"], 6), svc="iron"))
-    for name in ("COPY-IRON-R2.md", "GOOGLE-ADS-IRON.md", "COPY-IRON.md"):
+    for name in ("COPY-IRON-R2.md", "GOOGLE-ADS-IRON.md", "COPY-IRON.md", "COPY-CYCLE.md", "GOOGLE-ADS-CYCLE.md"):
         put(os.path.join(STUDIO, "static", name), f"files/{name}")
+
+    # ---------------- Cycle & Hormone Care: statics CS1-CS6 + Google search ad groups CG1-CG4 (Oct 22)
+    cdir = os.path.join(sdir, "r9", "cycle")
+    cyc = cycle_copy()
+    cycle_statics = [static_tile(ad, cyc[ad]["title"], cyc[ad]["primary"], cyc[ad]["headline"], cyc[ad]["description"],
+                                 simgs(cdir, ad), "r9", svc="cycle") for ad in sorted(cyc)]
+    cycle_google = []
+    for gid, title, kws, hs, ds, pin in google_groups():
+        isnew, newpill, whenline = when(gid)
+        n["cycle"] += 1
+        cycle_google.append(f'''
+      <article class="card tile{" isnew" if isnew else ""}" id="{gid}">
+        <div class="tbody"><div>{status(gid)} {newpill}</div><h4><span class="id">{gid}</span>{esc(title)}</h4>{whenline}
+          <p class="note">One responsive search ad, named <code>{gid}-RSA</code>. {f"Pin “{esc(pin)}” to headline position 1. " if pin else ""}{len(hs)} headlines, {len(ds)} descriptions, {len(kws)} keywords.</p>
+          <details class="more"><summary>Headlines, descriptions, keywords</summary>{copy_field("Headlines (one per line)", chr(10).join(hs), 8)}{copy_field("Descriptions", chr(10).join(ds), 4)}{copy_field("Keywords", chr(10).join(kws), 5)}</details>
+        </div>
+      </article>''')
     th8 = open(os.path.join(STUDIO, "..", "optimal-content-library", "SHOTLIST.md")).read()
     th8 = th8[th8.index("**TH8"):th8.index("### Strongly want")].strip()
     open(os.path.join(HERE, "files", "TH8-iv-iron-shoot-script.md"), "w").write("# TH8 · IV iron · 30-second shoot script (Oct 19, 2026)\n\n" + th8 + "\n")
@@ -633,7 +676,9 @@ def build():
                               ("r1", f"Optimal-static-ads-round-1_{TAG}.zip", [(os.path.join(STUDIO, "static/COPY.md"), "COPY.md")]),
                               ("r2", f"Optimal-static-ads-round-2_{TAG}.zip", [(os.path.join(STUDIO, "static/COPY-R2.md"), "COPY.md")]),
                               ("r3", f"Optimal-static-ads-round-3_{TAG}.zip", [(os.path.join(STUDIO, "static/COPY-R3.md"), "COPY.md")]),
-                              ("r4", f"Optimal-IV-iron-ads_{TAG}.zip", [(os.path.join(STUDIO, "static/COPY-IRON.md"), "COPY.md")])):
+                              ("r4", f"Optimal-IV-iron-ads_{TAG}.zip", [(os.path.join(STUDIO, "static/COPY-IRON.md"), "COPY.md")]),
+                              ("r9", f"Optimal-cycle-hormone-statics_{TAG}.zip", [(os.path.join(STUDIO, "static/COPY-CYCLE.md"), "COPY.md"),
+                                                                                    (os.path.join(STUDIO, "static/GOOGLE-ADS-CYCLE.md"), "GOOGLE-ADS.md")])):
         zp = os.path.join(STAGE, fname)
         names = sorted(arc for _, arc in zips[key] + extra)
         stale = not os.path.exists(zp) or any(os.path.getmtime(src) > os.path.getmtime(zp) for src, _ in zips[key] + extra)
@@ -646,7 +691,7 @@ def build():
                     z.write(src, arc)
     zl = [("Static round 1", f"Optimal-static-ads-round-1_{TAG}.zip"), ("Static round 2", f"Optimal-static-ads-round-2_{TAG}.zip"),
           ("Static round 3", f"Optimal-static-ads-round-3_{TAG}.zip"), ("IV iron round 1", f"Optimal-IV-iron-ads_{TAG}.zip"),
-          ("IV iron round 2", f"Optimal-IV-iron-ads-round-2_{TAG}.zip")]
+          ("IV iron round 2", f"Optimal-IV-iron-ads-round-2_{TAG}.zip"), ("Cycle & Hormone statics", f"Optimal-cycle-hormone-statics_{TAG}.zip")]
     zips_html = " ".join(f'<a href="{REL + f}" download>{esc(lbl)} · {mb(os.path.join(STAGE, f))}</a>' for lbl, f in zl)
     shutil.copy2(os.path.join(STUDIO, "brand/ds/assets/logos/OptimalLogo-Green.png"), os.path.join(HERE, "files", "logo.png"))
 
@@ -703,6 +748,7 @@ def build():
                         + kv("Call to action", "Learn more (CV1, CV2) · Book now (CV3)")
                         + kv("Audience", "Women 18–45, about 40 km around Barrie, broad")),
         "CYCLE_VIDEOS": "".join(vids["cycle"]), "N_CYCLE": str(n["cycle"]),
+        "CYCLE_STATICS": "".join(cycle_statics), "CYCLE_GOOGLE": "".join(cycle_google),
         "LONG_SETUP": setup("longevity", "Adults 35–70, about 40 km around Barrie, broad"),
         "IRON_SETUP": iron_setup, "IRON_HOWTO": iron_howto,
         "MENO_VIDEOS": "".join(vids["menopause"]), "LONG_VIDEOS": "".join(vids["longevity"]),
