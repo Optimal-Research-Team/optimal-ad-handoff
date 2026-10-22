@@ -47,7 +47,7 @@ VIDEOS = [  # id, service, folder in meta-ad-studio/out, render name, the line o
     ("CV3", "cycle", "cycle-program-intro", "CycleProgramIntro", "Hormone care isn’t just for menopause.", [("A", "Ad")]),
 ]
 WAITING = {k: "Waiting on the landing page" for k in ("CV1", "CV2", "CV3", "CS1", "CS2", "CS3", "CS4", "CS5", "CS6",
-                                                    "CG1", "CG2", "CG3", "CG4")}   # /services/cycle-and-hormone-care 404s (Oct 22)
+                                                    "CS7", "CG1", "CG2", "CG3", "CG4")}   # /services/cycle-and-hormone-care 404s (Oct 22)
 SOCIALS = [  # organic-only reels: kept OFF the ads site (Peter, Oct 15), so the list stays empty; the format is kept for later
 ] and [
     ("RB1", "rubeana-bio", "RubeanaBio_Reel_9x16", "RubeanaBio_cover_9x16", "Meet Rubeana, our Clinical Director."),
@@ -346,7 +346,7 @@ ADDED = {**{k: D12 for k in ("M1 M2 M3 M4 M5 M6 L1 L2 L3 L4 L5 L6 MB1 MB2 MB3 MB
          "LV3": D15,
          **{k: D19 for k in ("IR4", "IR5", "IR6", "IRM1", "IRM2", "IRV2", "IRV3")},
          **{k: D20 for k in ("IRT1", "IRT2", "IRT3", "IRT4", "MV2", "MV3")},
-         **{k: D22 for k in ("CV1", "CV2", "CV3", "CS1", "CS2", "CS3", "CS4", "CS5", "CS6", "CG1", "CG2", "CG3", "CG4")}}
+         **{k: D22 for k in ("CV1", "CV2", "CV3", "CS1", "CS2", "CS3", "CS4", "CS5", "CS6", "CS7", "CG1", "CG2", "CG3", "CG4")}}
 CHANGED = {"IR1": (D20, "new image and headline"), "IR2": (D20, "new image: the website hero"),
            "IRV1": (D20, "rebuilt from the website hero, animated"),
            "MV2": (D21, "blood-draw and body-scan pictures; softer opening"),
@@ -357,10 +357,10 @@ CHANGED = {"IR1": (D20, "new image and headline"), "IR2": (D20, "new image: the 
 REMOVED = {"IR3": D20}
 SHORT = {"9x16": "9:16", "1x1": "1:1", "1-91x1": "1.91:1"}
 NEWS = [  # (date, what happened, ids that link to cards, ids removed)
-    (D22, "New service: Cycle & Hormone Care. Cheryl's three video ads (labelled with the program from the first frame), six "
-          "one-sentence statics (one Hormozi lever each, all pointing to the free 3-minute Cycle Check) and a Google search "
+    (D22, "New service: Cycle & Hormone Care. Cheryl's three video ads (labelled with the program from the first frame), seven "
+          "one-sentence statics (one Hormozi lever each, funnel-ordered, all pointing to the free 3-minute Cycle Check) and a Google search "
           "campaign in four ad groups. Hold everything until the Cycle & Hormone Care page is live (the URL 404s today).",
-     ["CV1", "CV2", "CV3", "CS1", "CS2", "CS3", "CS4", "CS5", "CS6", "CG1", "CG2", "CG3", "CG4"], []),
+     ["CV1", "CV2", "CV3", "CS1", "CS2", "CS3", "CS4", "CS5", "CS6", "CS7", "CG1", "CG2", "CG3", "CG4"], []),
     (D21, "Eight Instagram posts went live, alternating menopause and IV iron: CB1, CB2, MI1, IRT2, MI2, IRT3, MI3, IRT4 "
           "(IRT1 was already up). None are on Facebook yet. Chantelle's videos: her name title now opens over the room's "
           "sound instead of dead silence. MV2 shows a blood draw, then the body composition scan. MV3 uses the "
@@ -448,7 +448,7 @@ CHECKLIST = '''
   <label class="check"><input type="checkbox" data-k="g-l"><span><b>Upload the Longevity Test now ads</b> in rank order: LV1-T, L1, L2, LB1, LB2, LB3.</span></label>
   <label class="check"><input type="checkbox" data-k="g-ab"><span><b>Set up the Chantelle vs Cheryl test:</b> MV1-T against MV3-T as a Meta A/B test (equal budgets).</span></label>
   <label class="check"><input type="checkbox" data-k="g-ai"><span><b>Turn on Meta's AI label</b> for every round 2 and round 3 ad, CV2 and MV2, and wherever an IV iron card says so.</span></label>
-  <label class="check"><input type="checkbox" data-k="g-cv"><span><b>Cycle & Hormone Care (CV1–CV3, CS1–CS6, CG1–CG4):</b> launch only once beoptimal.ca/services/cycle-and-hormone-care is live. Meta: own ad set, women 18–45, AI label on CV2, CS3 and CS5. Google: build from GOOGLE-ADS-CYCLE.md (CHC campaign).</span></label>
+  <label class="check"><input type="checkbox" data-k="g-cv"><span><b>Cycle & Hormone Care (CV1–CV3, CS1–CS7, CG1–CG4):</b> launch only once beoptimal.ca/services/cycle-and-hormone-care is live. Meta: own ad set, women 18–45, AI label on CV2, CS3 and CS5. Google: build from GOOGLE-ADS-CYCLE.md (CHC campaign).</span></label>
   <label class="check"><input type="checkbox" data-k="g-copy"><span><b>Name every ad with its ID</b> and paste the copy from its card. Keep the URL parameters exactly as written.</span></label>
   <label class="check"><input type="checkbox" data-k="g-pub"><span><b>Publish, then don't touch it for 7 days.</b></span></label>'''
 
