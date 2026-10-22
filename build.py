@@ -30,6 +30,8 @@ SERVICES = {
                       utm="utm_source={{site_source_name}}&utm_medium=paid&utm_campaign={{campaign.id}}&utm_term={{adset.id}}&utm_content={{ad.id}}"),
     "menopause": dict(name="Menopause", dest="https://www.beoptimal.ca/services/menopause-and-perimenopause-care",
                       utm="utm_source={{site_source_name}}&utm_medium=paid&utm_campaign={{campaign.id}}&utm_term={{adset.id}}&utm_content={{ad.id}}"),
+    "cycle": dict(name="Cycle & Hormone Care", dest="https://www.beoptimal.ca/services/cycle-and-hormone-care",
+                  utm="utm_source={{site_source_name}}&utm_medium=paid&utm_campaign={{campaign.id}}&utm_term={{adset.id}}&utm_content={{ad.id}}"),
 }
 VIDEOS = [  # id, service, folder in meta-ad-studio/out, render name, the line on screen
     ("LV1", "longevity", "longevity-core-v2", "LongevityCore", "3 things to know before you book."),
@@ -39,7 +41,12 @@ VIDEOS = [  # id, service, folder in meta-ad-studio/out, render name, the line o
     # Oct 20, Chantelle Oostwoud, NP: a Tight cut (~MV1's length, so NP vs care coordinator is the one change) + a Flow cut
     ("MV2", "menopause", "meno-time-to-talk", "MenoTimeToTalk", "Menopause affects nearly every system.", [("T", "Tight"), ("F", "Flow")]),
     ("MV3", "menopause", "meno-three-things", "MenoThreeThings", "Patients tell me the same three things.", [("T", "Tight"), ("F", "Flow")]),
+    # Oct 22, Cheryl: Cycle & Hormone Care, one cut each, labelled with the program badge from frame 0
+    ("CV1", "cycle", "cycle-signs", "CycleSigns", "3 or more of these?", [("A", "Ad")]),
+    ("CV2", "cycle", "cycle-told-normal", "CycleToldNormal", "“That’s just part of being a woman.”", [("A", "Ad")]),
+    ("CV3", "cycle", "cycle-program-intro", "CycleProgramIntro", "Hormone care isn’t just for menopause.", [("A", "Ad")]),
 ]
+WAITING = {k: "Waiting on the landing page" for k in ("CV1", "CV2", "CV3")}   # /services/cycle-and-hormone-care 404s (Oct 22)
 SOCIALS = [  # organic-only reels: kept OFF the ads site (Peter, Oct 15), so the list stays empty; the format is kept for later
 ] and [
     ("RB1", "rubeana-bio", "RubeanaBio_Reel_9x16", "RubeanaBio_cover_9x16", "Meet Rubeana, our Clinical Director."),
@@ -244,7 +251,7 @@ def copy_field(label, text, rows=None):
 
 def ad_names(vid, cuts):
     if len(cuts) == 1:
-        return f"Ad name <code>{vid}-T</code>."
+        return f"Ad name <code>{vid}-{cuts[0][0]}</code>."
     return (f"Two ads: <code>{vid}-T</code> (Tight, about MV1's length: the NP-vs-care-coordinator test against "
             f"<code>MV1-T</code>, same end card, offer and page) and <code>{vid}-F</code> (Flow, runs past 30 s: the length "
             f"test against {vid}-T). Same ad set, Meta A/B test, equal budgets; judge on cost per booked intro call.")
@@ -303,17 +310,18 @@ def dl(href, label, size, primary=False):
 
 
 # ------------------------------------------------------------------ Oct 20 2026 rebuild: by service, dated, IR3 gone
-UPDATED = "Oct 21, 2026"
-LATEST = "2026-10-21"
-D12, D13, D14, D15, D19, D20, D21 = ("2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-19", "2026-10-20",
-                                     "2026-10-21")
+UPDATED = "Oct 22, 2026"
+LATEST = "2026-10-22"
+D12, D13, D14, D15, D19, D20, D21, D22 = ("2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-19", "2026-10-20",
+                                          "2026-10-21", "2026-10-22")
 ADDED = {**{k: D12 for k in ("M1 M2 M3 M4 M5 M6 L1 L2 L3 L4 L5 L6 MB1 MB2 MB3 MB4 MB5 MB6 LB1 LB2 LB3 LB4 LB5 LB6 "
                              "MC LC LV1 LV2 MV1").split()},
          **{k: D13 for k in ("MA1", "MA2", "LA1", "LA2")},
          **{k: D14 for k in ("IR1", "IR2", "IRV1")},
          "LV3": D15,
          **{k: D19 for k in ("IR4", "IR5", "IR6", "IRM1", "IRM2", "IRV2", "IRV3")},
-         **{k: D20 for k in ("IRT1", "IRT2", "IRT3", "IRT4", "MV2", "MV3")}}
+         **{k: D20 for k in ("IRT1", "IRT2", "IRT3", "IRT4", "MV2", "MV3")},
+         **{k: D22 for k in ("CV1", "CV2", "CV3")}}
 CHANGED = {"IR1": (D20, "new image and headline"), "IR2": (D20, "new image: the website hero"),
            "IRV1": (D20, "rebuilt from the website hero, animated"),
            "MV2": (D21, "blood-draw and body-scan pictures; softer opening"),
@@ -324,6 +332,8 @@ CHANGED = {"IR1": (D20, "new image and headline"), "IR2": (D20, "new image: the 
 REMOVED = {"IR3": D20}
 SHORT = {"9x16": "9:16", "1x1": "1:1", "1-91x1": "1.91:1"}
 NEWS = [  # (date, what happened, ids that link to cards, ids removed)
+    (D22, "New service: Cycle & Hormone Care. Cheryl's three video ads, each labelled with the program from the first frame. "
+          "Hold them until the Cycle & Hormone Care page is live (the URL 404s today).", ["CV1", "CV2", "CV3"], []),
     (D21, "Eight Instagram posts went live, alternating menopause and IV iron: CB1, CB2, MI1, IRT2, MI2, IRT3, MI3, IRT4 "
           "(IRT1 was already up). None are on Facebook yet. Chantelle's videos: her name title now opens over the room's "
           "sound instead of dead silence. MV2 shows a blood draw, then the body composition scan. MV3 uses the "
@@ -377,6 +387,8 @@ def when(ad, added=None):
 
 
 def status(ad):
+    if ad in WAITING:
+        return f'<span class="pill hold">{esc(WAITING[ad])}</span>'
     if ad in IRON:
         return f'<span class="pill now">{esc(IRON[ad][1])}</span>'
     st, x, _ = PLAN.get(ad, (None, None, None))
@@ -408,7 +420,8 @@ CHECKLIST = '''
   <label class="check"><input type="checkbox" data-k="g-m"><span><b>Upload the Menopause Test now ads</b> in rank order: M3, MV1-T, MB1, MB5, MB2, MC.</span></label>
   <label class="check"><input type="checkbox" data-k="g-l"><span><b>Upload the Longevity Test now ads</b> in rank order: LV1-T, L1, L2, LB1, LB2, LB3.</span></label>
   <label class="check"><input type="checkbox" data-k="g-ab"><span><b>Set up the Chantelle vs Cheryl test:</b> MV1-T against MV3-T as a Meta A/B test (equal budgets).</span></label>
-  <label class="check"><input type="checkbox" data-k="g-ai"><span><b>Turn on Meta's AI label</b> for every round 2 and round 3 ad, and wherever an IV iron card says so.</span></label>
+  <label class="check"><input type="checkbox" data-k="g-ai"><span><b>Turn on Meta's AI label</b> for every round 2 and round 3 ad, CV2 and MV2, and wherever an IV iron card says so.</span></label>
+  <label class="check"><input type="checkbox" data-k="g-cv"><span><b>Cycle & Hormone Care (CV1–CV3):</b> launch only once beoptimal.ca/services/cycle-and-hormone-care is live. Own ad set, women 18–45.</span></label>
   <label class="check"><input type="checkbox" data-k="g-copy"><span><b>Name every ad with its ID</b> and paste the copy from its card. Keep the URL parameters exactly as written.</span></label>
   <label class="check"><input type="checkbox" data-k="g-pub"><span><b>Publish, then don't touch it for 7 days.</b></span></label>'''
 
@@ -423,7 +436,7 @@ def build():
     ir2 = iron2_copy()
     social = open(os.path.join(STUDIO, "SOCIAL-VIDEOS.md")).read()
     iron2_doc = open(os.path.join(STUDIO, "static/COPY-IRON-R2.md")).read()
-    n = dict(menopause=0, longevity=0, iron=0, ig=0)
+    n = dict(menopause=0, longevity=0, cycle=0, iron=0, ig=0)
 
     def thumbs_more(more):
         return f'<details class="more"><summary>Thumbnails + captions</summary><div class="dls">{"".join(more)}</div></details>' if more else ""
@@ -444,7 +457,7 @@ def build():
         return files, more, d
 
     # ---------------- video ads (menopause + longevity)
-    vids = {"menopause": [], "longevity": []}
+    vids = {"menopause": [], "longevity": [], "cycle": []}
     for vid, svc, folder, name, line, *rest in sorted(VIDEOS, key=lambda v: order(v[0])):
         out = os.path.join(STUDIO, "out", folder)
         c = vc[vid]
@@ -685,6 +698,10 @@ def build():
         "UPDATED": UPDATED, "TAG": TAG, "RELEASE": f"https://github.com/{REPO}/releases/tag/{TAG}", "ZIPS": zips_html,
         "WHATSNEW": news, "N_MENO": str(n["menopause"]), "N_LONG": str(n["longevity"]), "N_IRON": str(n["iron"]), "N_IG": str(n["ig"]),
         "MENO_SETUP": setup("menopause", "Women 35–60, about 40 km around Barrie, broad"),
+        "CYCLE_SETUP": (kv("Website URL", SERVICES["cycle"]["dest"], True) + kv("URL parameters", SERVICES["cycle"]["utm"], True)
+                        + kv("Call to action", "Learn more (CV1, CV2) · Book now (CV3)")
+                        + kv("Audience", "Women 18–45, about 40 km around Barrie, broad")),
+        "CYCLE_VIDEOS": "".join(vids["cycle"]), "N_CYCLE": str(n["cycle"]),
         "LONG_SETUP": setup("longevity", "Adults 35–70, about 40 km around Barrie, broad"),
         "IRON_SETUP": iron_setup, "IRON_HOWTO": iron_howto,
         "MENO_VIDEOS": "".join(vids["menopause"]), "LONG_VIDEOS": "".join(vids["longevity"]),
