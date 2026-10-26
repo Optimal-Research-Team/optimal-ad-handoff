@@ -342,10 +342,10 @@ def dl(href, label, size, primary=False):
 
 
 # ------------------------------------------------------------------ Oct 20 2026 rebuild: by service, dated, IR3 gone
-UPDATED = "Oct 22, 2026"
-LATEST = "2026-10-22"
-D12, D13, D14, D15, D19, D20, D21, D22 = ("2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-19", "2026-10-20",
-                                          "2026-10-21", "2026-10-22")
+UPDATED = "Oct 26, 2026"
+LATEST = "2026-10-26"
+D12, D13, D14, D15, D19, D20, D21, D22, D26 = ("2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-19", "2026-10-20",
+                                               "2026-10-21", "2026-10-22", "2026-10-26")
 ADDED = {**{k: D12 for k in ("M1 M2 M3 M4 M5 M6 L1 L2 L3 L4 L5 L6 MB1 MB2 MB3 MB4 MB5 MB6 LB1 LB2 LB3 LB4 LB5 LB6 "
                              "MC LC LV1 LV2 MV1").split()},
          **{k: D13 for k in ("MA1", "MA2", "LA1", "LA2")},
@@ -364,6 +364,10 @@ CHANGED = {"IR1": (D20, "new image and headline"), "IR2": (D20, "new image: the 
 REMOVED = {"IR3": D20}
 SHORT = {"9x16": "9:16", "1x1": "1:1", "1-91x1": "1.91:1"}
 NEWS = [  # (date, what happened, ids that link to cards, ids removed)
+    (D26, "Instagram check: nothing new has gone up since Oct 24. MA2 is live as an organic feed post (since Oct 23), and its card "
+          "now says so. Two drawn 3-D equipment reels went up on Oct 24 (the InBody 580 and the KICKR BIKE); they aren't ads, so "
+          "they have no cards here. New rule for organic posts (Peter, Oct 24): nothing that needs Meta's AI label goes on "
+          "Instagram or Facebook.", ["MA2"], []),
     (D22, "New service: Cycle & Hormone Care. Cheryl's three video ads (labelled with the program from the first frame), four "
           "single statics that each stand alone, one 5-card carousel that tells the story in order (hook, symptoms can "
           "connect, how we look, 12 weeks, free Cycle Check), and a Google search campaign in four ad groups. Hold everything "
@@ -388,6 +392,8 @@ NEWS = [  # (date, what happened, ids that link to cards, ids removed)
      ["MV1", "LV1", "LV2", "M3", "MB1", "MB5", "MC", "L1", "L2", "LB1", "LC"], []),
 ]
 # organic Instagram posts (not ads): id, folder in meta-ad-studio/out, render name, line, added, status
+# static ads that also went up on Instagram as organic feed posts: id -> (post shortcode, date)
+IG_STATIC = {"MA2": ("De2kqQAFkhP", "Oct 23")}
 IG_LINK = {"IRT1": "DeuqtE3ux0g", "CB1": "DexGHdyuXk0", "CB2": "DexGpqDuUb-", "MI1": "DexHDf2ulLf", "IRT2": "DexHYHRuWz5",
            "MI2": "DexHtjyuKa9", "IRT3": "DexIED5u8No", "MI3": "DexId1Pusbd", "IRT4": "DexI9NouTrG"}   # posted Oct 20-21
 POSTS = [
@@ -529,12 +535,14 @@ def build():
         th = thumb(imgs[0][1], f"static-ads/{round_key}/thumbs/{ad}.jpg")
         isnew, newpill, whenline = when(ad)
         desc = copy_field("Description", description) if description else ""
+        igpill = (f'<a href="https://www.instagram.com/p/{IG_STATIC[ad][0]}/" target="_blank" rel="noopener">'
+                  f'<span class="pill posted">IG · Posted {IG_STATIC[ad][1]}</span></a>' if ad in IG_STATIC else "")
         if svc:
             n[svc] += 1
         return f'''
       <article class="card tile{" isnew" if isnew else ""}" id="{ad}">
         <img src="{th}" alt="{esc(ad)}" loading="lazy">
-        <div class="tbody"><div>{f'<span class="pill fmt">{esc(fmt)}</span> ' if fmt else ""}{status(ad)} {newpill}</div><h4><span class="id">{ad}</span>{esc(title)}</h4>{whenline}
+        <div class="tbody"><div>{f'<span class="pill fmt">{esc(fmt)}</span> ' if fmt else ""}{status(ad)} {igpill} {newpill}</div><h4><span class="id">{ad}</span>{esc(title)}</h4>{whenline}
           <div class="dls">{"".join(files)}</div>
           <details class="more"><summary>Ad copy</summary>{copy_field("Primary text", primary, 4)}{copy_field("Headline", headline)}{desc}{extra}</details>
         </div>
