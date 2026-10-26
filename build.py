@@ -366,7 +366,7 @@ REMOVED = {"IR3": D20}
 SHORT = {"9x16": "9:16", "1x1": "1:1", "1-91x1": "1.91:1"}
 NEWS = [  # (date, what happened, ids that link to cards, ids removed)
     (D26, "Instagram check: nothing new has gone up since Oct 24. MI2 (brain fog) was taken down for its cover, which caught "
-          "Chantelle mid-word; it has a new cover (a smiling frame) and is ready to repost. MA2 is live as an organic feed post (since Oct 23), and its card "
+          "Chantelle mid-word, and reposted on Oct 26 with a new cover (a smiling frame). MA2 is live as an organic feed post (since Oct 23), and its card "
           "now says so. Two drawn 3-D equipment reels went up on Oct 24 (the InBody 580 and the KICKR BIKE); they aren't ads, so "
           "they have no cards here. New rule for organic posts (Peter, Oct 24): nothing that needs Meta's AI label goes on "
           "Instagram or Facebook.", ["ig-MI2", "MA2"], []),
@@ -397,10 +397,10 @@ NEWS = [  # (date, what happened, ids that link to cards, ids removed)
 # static ads that also went up on Instagram as organic feed posts: id -> (post shortcode, date)
 IG_STATIC = {"MA2": ("De2kqQAFkhP", "Oct 23")}
 IG_LINK = {"IRT1": "DeuqtE3ux0g", "CB1": "DexGHdyuXk0", "CB2": "DexGpqDuUb-", "MI1": "DexHDf2ulLf", "IRT2": "DexHYHRuWz5",
-           "IRT3": "DexIED5u8No", "MI3": "DexId1Pusbd", "IRT4": "DexI9NouTrG"}   # posted Oct 20-21
+           "MI2": "De-Ln2wOrGr", "IRT3": "DexIED5u8No", "MI3": "DexId1Pusbd", "IRT4": "DexI9NouTrG"}   # posted Oct 20-21
 POSTS = [
     ("MI1", "meno-not-stupider", "MenoNotStupider", "You're not getting stupider.", D20, "posted Oct 21"),
-    ("MI2", "meno-brain-fog", "MenoBrainFog", "Your brain fog has an explanation.", D20, "taken down; new cover, ready to repost"),
+    ("MI2", "meno-brain-fog", "MenoBrainFog", "Your brain fog has an explanation.", D20, "posted Oct 26"),
     ("MI3", "meno-in-your-head", "MenoInYourHead", "It is all in your head, just not the way you think.", D20, "posted Oct 21"),
     ("CB1", "chantelle-bio", "ChantelleBio", "Meet Chantelle, PHC-NP.", D20, "posted Oct 21"),
     ("CB2", "chantelle-four-things", "ChantelleFourThings", "4 things I tell every new patient.", D20, "posted Oct 21"),
