@@ -361,13 +361,15 @@ CHANGED = {"IR1": (D20, "new image and headline"), "IR2": (D20, "new image: the 
            "CB2": (D21, "pause at 0:42 cut; softer opening"),
            "CB1": (D21, "opening shot and the 0:30 graphic cut"),
            **{k: (D21, "softer opening (room tone, not silence)") for k in ("MI1", "MI2", "MI3")}}
+CHANGED["MI2"] = (D26, "new cover: Chantelle smiling, not mid-word")
 REMOVED = {"IR3": D20}
 SHORT = {"9x16": "9:16", "1x1": "1:1", "1-91x1": "1.91:1"}
 NEWS = [  # (date, what happened, ids that link to cards, ids removed)
-    (D26, "Instagram check: nothing new has gone up since Oct 24. MA2 is live as an organic feed post (since Oct 23), and its card "
+    (D26, "Instagram check: nothing new has gone up since Oct 24. MI2 (brain fog) was taken down for its cover, which caught "
+          "Chantelle mid-word; it has a new cover (a smiling frame) and is ready to repost. MA2 is live as an organic feed post (since Oct 23), and its card "
           "now says so. Two drawn 3-D equipment reels went up on Oct 24 (the InBody 580 and the KICKR BIKE); they aren't ads, so "
           "they have no cards here. New rule for organic posts (Peter, Oct 24): nothing that needs Meta's AI label goes on "
-          "Instagram or Facebook.", ["MA2"], []),
+          "Instagram or Facebook.", ["ig-MI2", "MA2"], []),
     (D22, "New service: Cycle & Hormone Care. Cheryl's three video ads (labelled with the program from the first frame), four "
           "single statics that each stand alone, one 5-card carousel that tells the story in order (hook, symptoms can "
           "connect, how we look, 12 weeks, free Cycle Check), and a Google search campaign in four ad groups. Hold everything "
@@ -395,10 +397,10 @@ NEWS = [  # (date, what happened, ids that link to cards, ids removed)
 # static ads that also went up on Instagram as organic feed posts: id -> (post shortcode, date)
 IG_STATIC = {"MA2": ("De2kqQAFkhP", "Oct 23")}
 IG_LINK = {"IRT1": "DeuqtE3ux0g", "CB1": "DexGHdyuXk0", "CB2": "DexGpqDuUb-", "MI1": "DexHDf2ulLf", "IRT2": "DexHYHRuWz5",
-           "MI2": "DexHtjyuKa9", "IRT3": "DexIED5u8No", "MI3": "DexId1Pusbd", "IRT4": "DexI9NouTrG"}   # posted Oct 20-21
+           "IRT3": "DexIED5u8No", "MI3": "DexId1Pusbd", "IRT4": "DexI9NouTrG"}   # posted Oct 20-21
 POSTS = [
     ("MI1", "meno-not-stupider", "MenoNotStupider", "You're not getting stupider.", D20, "posted Oct 21"),
-    ("MI2", "meno-brain-fog", "MenoBrainFog", "Your brain fog has an explanation.", D20, "posted Oct 21"),
+    ("MI2", "meno-brain-fog", "MenoBrainFog", "Your brain fog has an explanation.", D20, "taken down; new cover, ready to repost"),
     ("MI3", "meno-in-your-head", "MenoInYourHead", "It is all in your head, just not the way you think.", D20, "posted Oct 21"),
     ("CB1", "chantelle-bio", "ChantelleBio", "Meet Chantelle, PHC-NP.", D20, "posted Oct 21"),
     ("CB2", "chantelle-four-things", "ChantelleFourThings", "4 things I tell every new patient.", D20, "posted Oct 21"),
