@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="files/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&family=Public+Sans:wght@400;500;600;700&family=Google+Sans:wght@400;500&family=Roboto:wght@400&display=swap" rel="stylesheet">
 <style>
   /* Oct 20 2026 rebuild (Peter: "visually clearer and easier to understand, simpler, neater; make it clear when
      something was added"). One page per service, newest work flagged, instructions folded away at the bottom. */
@@ -349,6 +349,43 @@
   }
   @media (max-width: 520px) { .chcard b { font-size: 32px; } .filters { width: 100%; } .search { flex: 1; width: auto; } .views button { font-size: 19px; }
     .brand .toplink { display: none; } }
+
+  /* Google search ads, shown the way Google renders them (styles measured on a live results page, Oct 28 2026) */
+  .gads { display: flex; flex-direction: column; gap: 14px; }
+  .gad { padding: 20px 22px; }
+  .gadtop { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 20px; align-items: start; }
+  .gadtop h4 { font: 400 19px/1.3 Castoro, serif; margin-top: 2px; }
+  .gadtop .note { color: var(--muted); font-size: 13px; margin: 0; }
+  .gprev { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 18px; margin-top: 16px; align-items: start; }
+  .gprev figure { margin: 0; }
+  .gprev figcaption { font: 600 10.5px "Public Sans"; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .gnote { font-size: 12.5px; color: var(--muted); margin-top: 10px; }
+  .serp { background: #fff; border: 1px solid #ecedef; border-radius: 12px; padding: 20px 22px 18px; color: #202124; font: 14px/22px Arial, sans-serif;
+          -webkit-font-smoothing: auto; font-feature-settings: normal; text-align: left; }
+  .serp .g-spons { font: 700 14px/20px "Google Sans", Arial, sans-serif; color: #202124; margin-bottom: 10px; }
+  .serp .g-head { display: flex; align-items: center; gap: 12px; }
+  .serp .g-fav { width: 28px; height: 28px; border-radius: 50%; background: #f3f5f6; border: 1px solid #d2d2d2; display: grid; place-items: center; flex: none; box-sizing: border-box; }
+  .serp .g-fav img { width: 18px; height: 18px; display: block; }
+  .serp .g-site { display: flex; flex-direction: column; min-width: 0; }
+  .serp .g-name { font: 400 14px/20px Roboto, Arial, sans-serif; color: #202124; }
+  .serp .g-url { font: 400 12px/16px Arial, sans-serif; color: #4d5156; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .serp .g-dots { color: #4d5156; font-size: 16px; margin-left: 2px; }
+  .serp .g-title { font: 400 22px/28px "Google Sans", Arial, sans-serif; color: #1a0dab; margin: 8px 0 4px; }
+  .serp .g-desc { font: 400 14px/22px Arial, sans-serif; color: #474747; }
+  .serp .g-ext { color: #474747; }
+  .serp .g-sl { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 28px; margin-top: 12px; padding-left: 16px; }
+  .serp .g-sl div { display: flex; flex-direction: column; }
+  .serp .g-sl span { font: 400 14px/20px Arial, sans-serif; color: #474747; }
+  .serp .g-sl .g-slt { font: 400 18px/24px "Google Sans", Arial, sans-serif; color: #1a0dab; margin-bottom: 2px; }
+  .phone { width: 360px; border-radius: 28px; padding: 10px; background: #e9eaec; box-sizing: border-box; }
+  .serp.m { border-radius: 20px; border: 0; padding: 16px 16px 6px; }
+  .serp.m .g-title { font-size: 20px; line-height: 26px; margin-top: 10px; }
+  .serp.m .g-desc { line-height: 20px; }
+  .serp .g-slm { margin: 10px -16px 0; border-top: 1px solid #ecedef; }
+  .serp .g-slm div { display: flex; justify-content: space-between; align-items: center; padding: 11px 16px; border-bottom: 1px solid #ecedef; font: 400 16px/22px "Google Sans", Arial, sans-serif; color: #1a0dab; }
+  .serp .g-slm div:last-child { border-bottom: 0; }
+  .serp .g-slm i { font-style: normal; color: #70757a; font-size: 20px; }
+  @media (max-width: 860px) { .gadtop, .gprev { grid-template-columns: 1fr; } .gprev .gdesk { display: none; } .phone { width: 100%; max-width: 360px; } }
 </style>
 </head>
 <body>
@@ -422,7 +459,7 @@
 
   <section class="svc" id="cycle">
     <div class="shead"><h2>Cycle &amp; Hormone Care</h2>
-      <p class="muted">Two ad sets: <b>Set 1 · General</b> (the videos, five single images and the carousel) and <b>Set 2 · By condition</b> (PMOS, PMDD, endometriosis). Every ad points to the Cycle &amp; Hormone Care page. <b>Hold until that page is live</b>: the URL showed a 404 on Oct 22.</p></div>
+      <p class="muted">Two ad sets: <b>Set 1 · General</b> (the videos, five single images and the carousel) and <b>Set 2 · By condition</b> (PMOS, PMDD, endometriosis). Every ad points to the Cycle &amp; Hormone Care page, which is live (checked Oct 28).</p></div>
     <div class="setup">{{CYCLE_SETUP}}</div>
     <div class="group"><h3>Video ads</h3><span>9:16, 1:1 and 1.91:1 per ad. Each opens with the CYCLE &amp; HORMONE CARE badge.</span></div>
     {{CYCLE_VIDEOS}}
@@ -431,8 +468,10 @@
     {{CYCLE_CAROUSEL}}
     <div class="group"><h3>Set 2 · By condition: 6 separate ads</h3><span>Two each for PMOS (formerly PCOS), PMDD and endometriosis. They name the signs (“…can be a sign of endometriosis”) and never ask “Do you have…?”, which Meta's personal-attributes policy rejects. Their own ad set.</span></div>
     <div class="grid">{{CYCLE_SET2}}</div>
-    <div class="group"><h3>Google Ads (Search)</h3><span>Campaign <code>CHC · Cycle &amp; Hormone Care · Barrie · Search</code>: four ad groups, one RSA each. Full build sheet with settings, sitelinks, callouts and negatives: <a href="files/GOOGLE-ADS-CYCLE.md" target="_blank" rel="noopener">GOOGLE-ADS-CYCLE.md</a>.</span></div>
-    <div class="grid">{{CYCLE_GOOGLE}}</div>
+    <div class="group"><h3>Google search · General</h3><span>Campaign <code>CHC · Cycle &amp; Hormone Care · Barrie · Search</code>, five ad groups with one responsive search ad each. Each card shows how the ad can look on Google. Full build sheet (settings, sitelinks, callouts, negatives): <a href="files/GOOGLE-ADS-CYCLE.md" target="_blank" rel="noopener">GOOGLE-ADS-CYCLE.md</a>.</span></div>
+    <div class="gads">{{CYCLE_GOOGLE_GEN}}</div>
+    <div class="group"><h3>Google search · By condition</h3><span>PMOS (formerly PCOS), PMDD, endometriosis and adenomyosis: one ad group each, in the same campaign.</span></div>
+    <div class="gads">{{CYCLE_GOOGLE_COND}}</div>
   </section>
 
   <section class="svc" id="longevity">
@@ -448,7 +487,7 @@
 
   <section class="svc" id="iron">
     <div class="shead"><h2>IV iron <em class="muted" style="font-size:.6em">· pre-launch, opening November</em></h2>
-      <p class="muted">A separate Leads campaign on a Meta Instant Form ("Join the founding waitlist"). CTA <b>Sign up</b>. No price, no booking. Turn on Meta's AI label where a card says so.</p></div>
+      <p class="muted">A separate Leads campaign on a Meta Instant Form ("Join the founding waitlist"). CTA <b>Sign up</b>. No price, no booking. Meta's AI label stays off.</p></div>
     <div class="setup">{{IRON_SETUP}}</div>
     <div class="group"><h3>Video ads</h3><span>Launch the four talking heads (IRT) plus IRV2 first, then rotate the rest in.</span></div>
     {{IRON_VIDEOS}}
@@ -565,7 +604,7 @@
     const out = CATALOG.map((e, i) => { const t = by.get(e.code.toUpperCase()) || {}; by.delete(e.code.toUpperCase()); return rowFor(e, t, i); });
     let i = out.length;
     for (const [, t] of by) out.push(rowFor({ code: t.Code, line: t["What it says"] || "", svc: svcKey(t.Service), fmt: t.Format || "Other",
-      anchor: "", thumb: "", plan: t.Plan || "", ai: /^on/i.test(t["AI label"] || ""), added: "", kind: kindOf(t.Format) }, t, i++));
+      anchor: "", thumb: "", plan: t.Plan || "", added: "", kind: kindOf(t.Format) }, t, i++));
     return out;
   }
 
@@ -597,7 +636,7 @@
       { k: "review", name: "In review at Meta", sort: bySvc },
       { k: "running", name: "Running now", sort: bySvc },
       { k: "ready", name: "Ready to upload", hint: "per service, in launch order", sort: (a, b) => bySvc(a, b) || PLAN_RANK(a.plan) - PLAN_RANK(b.plan) || a.i - b.i },
-      { k: "hold", name: "On hold", hint: "waiting for the Cycle & Hormone Care page to go live", closed: true, sort: bySvc },
+      { k: "hold", name: "On hold", closed: true, sort: bySvc },
       { k: "stopped", name: "Paused or switched off", closed: true, sort: bySvc }] },
     posts: { group: postGroup, head: ["Post", "Instagram", "Facebook Page"], groups: [
       { k: "fbgap", name: "On Instagram, not on Facebook yet", hint: "post these to the Facebook Page", sort: byPost },
@@ -625,7 +664,7 @@
     const th = r.thumb ? `<img src="${esc(r.thumb)}" alt="" loading="lazy">` : `<span class="gl">${r.kind === "google" ? ICON.g : ICON.ig}</span>`;
     const note = noteText(r.notes);
     const sub = list === "ads"
-      ? [r.fmt, `<span class="sn"><i class="sv ${r.svc}"></i>${esc(SVC[r.svc])}</span>`, r.plan && !r.plan.startsWith("Hold") ? esc(r.plan) : "", r.ai ? "AI label on" : ""]
+      ? [r.fmt, `<span class="sn"><i class="sv ${r.svc}"></i>${esc(SVC[r.svc])}</span>`, r.plan && !r.plan.startsWith("Hold") ? esc(r.plan) : ""]
       : [KIND_POST(r), `<span class="sn"><i class="sv ${r.svc}"></i>${esc(SVC[r.svc])}</span>`, r.kind !== "organic" ? "also a paid ad" : ""];
     const main = `<span class="main"><span class="t"><b>${esc(r.code)}</b>${esc(r.line)}${r.added === LATEST ? '<span class="new">New</span>' : ""}</span>
       <span class="sub">${sub.filter(Boolean).join(" · ")}</span>${isFlag(r) ? `<span class="note">${esc(note)}</span>` : ""}</span>`;
@@ -705,14 +744,14 @@
     $("#k-fb").textContent = fb; $("#k-fb-s").textContent = gap ? `${gap} Instagram posts not copied over` : "Up to date with Instagram";
     const g = rows.filter(r => r.kind === "google"), gl = g.filter(r => on(r.google)).length;
     $("#k-g").textContent = `${gl}`; $("#k-g-u").textContent = `of ${g.length} live`;
-    $("#k-g-s").textContent = g.every(r => r.plan.startsWith("Hold")) ? "Built when the Cycle & Hormone page is live" : `${g.length - gl} not live yet`;
+    $("#k-g-s").textContent = gl === g.length ? "All live" : `${g.length - gl} ad groups ready to build`;
 
     const fixFirst = (a, b) => /^fix/i.test(noteText(b.notes)) - /^fix/i.test(noteText(a.notes)) || bySvc(a, b);
     const items = rows.filter(isFlag).sort(fixFirst).map(r =>
-      `<li><span><b>${esc(r.code)}</b> · ${esc(noteText(r.notes).replace(/^(fix|check):\s*/i, ""))}</span><a href="${esc(href(r))}"${r.anchor ? "" : ' target="_blank" rel="noopener"'}>Open ${r.anchor ? "" : "↗"}</a></li>`);
+      `<li><span><b>${esc(r.code)}</b> · ${esc(noteText(r.notes).replace(/^(fix|check):\s*/i, ""))}</span>${href(r) ? `<a href="${esc(href(r))}"${r.anchor ? "" : ' target="_blank" rel="noopener"'}>Open ${r.anchor ? "" : "↗"}</a>` : "<span></span>"}</li>`);
     if (gap) items.push(`<li class="soft"><span>${gap} Instagram posts aren't on the Facebook Page yet.</span><a href="#summary" data-go="posts">See them</a></li>`);
     const held = rows.filter(r => adGroup(r) === "hold");
-    if (held.length) items.push(`<li class="soft"><span>${held.length} ${held.every(r => r.svc === "cycle") ? "Cycle &amp; Hormone Care ads are" : "ads are"} on hold until beoptimal.ca/services/cycle-and-hormone-care is live.</span><a href="#summary" data-go="hold">See them</a></li>`);
+    if (held.length) items.push(`<li class="soft"><span>${held.length} ads are on hold.</span><a href="#summary" data-go="hold">See them</a></li>`);
     if (!live) items.push(`<li class="soft"><span>This page is showing a saved copy of the tracker. In the sheet, set Share → General access → Anyone with the link → Viewer so it updates by itself.</span><a href="${esc(SHEET_EDIT)}" target="_blank" rel="noopener">Open sheet ↗</a></li>`);
     $("#attn").hidden = !items.length;
     $("#attn ol").innerHTML = items.join("");

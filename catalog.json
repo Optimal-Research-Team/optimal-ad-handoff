@@ -7,7 +7,6 @@
   "anchor": "LV1",
   "thumb": "previews/LongevityCore_Tight_9x16.jpg",
   "plan": "Test now #1",
-  "ai": false,
   "added": "2026-10-12",
   "kind": "ad"
  },
@@ -18,8 +17,7 @@
   "fmt": "Video ad",
   "anchor": "MV1",
   "thumb": "previews/MenopauseMyself_Tight_9x16.jpg",
-  "plan": "Test now #2",
-  "ai": false,
+  "plan": "Test now #1",
   "added": "2026-10-12",
   "kind": "ad"
  },
@@ -31,7 +29,6 @@
   "anchor": "LV2",
   "thumb": "previews/LongevityFullHour_Tight_9x16.jpg",
   "plan": "Next up",
-  "ai": false,
   "added": "2026-10-12",
   "kind": "ad"
  },
@@ -43,7 +40,6 @@
   "anchor": "MV2",
   "thumb": "previews/MenoTimeToTalk_Tight_9x16.jpg",
   "plan": "Next up",
-  "ai": true,
   "added": "2026-10-20",
   "kind": "ad"
  },
@@ -55,7 +51,6 @@
   "anchor": "MV2",
   "thumb": "previews/MenoTimeToTalk_Flow_9x16.jpg",
   "plan": "Next up",
-  "ai": true,
   "added": "2026-10-20",
   "kind": "ad"
  },
@@ -67,7 +62,6 @@
   "anchor": "MV3",
   "thumb": "previews/MenoThreeThings_Tight_9x16.jpg",
   "plan": "Next up",
-  "ai": false,
   "added": "2026-10-20",
   "kind": "ad"
  },
@@ -79,7 +73,6 @@
   "anchor": "MV3",
   "thumb": "previews/MenoThreeThings_Flow_9x16.jpg",
   "plan": "Next up",
-  "ai": false,
   "added": "2026-10-20",
   "kind": "ad"
  },
@@ -91,7 +84,6 @@
   "anchor": "LV3",
   "thumb": "previews/LongevityOptimize_Tight_9x16.jpg",
   "plan": "Twin of LV2-T",
-  "ai": false,
   "added": "2026-10-15",
   "kind": "ad"
  },
@@ -102,8 +94,7 @@
   "fmt": "Video ad",
   "anchor": "CV1",
   "thumb": "previews/CycleSigns_Ad_9x16.jpg",
-  "plan": "Hold: page not live",
-  "ai": false,
+  "plan": "Set 1 · general",
   "added": "2026-10-22",
   "kind": "ad"
  },
@@ -114,8 +105,7 @@
   "fmt": "Video ad",
   "anchor": "CV2",
   "thumb": "previews/CycleToldNormal_Ad_9x16.jpg",
-  "plan": "Hold: page not live",
-  "ai": true,
+  "plan": "Set 1 · general",
   "added": "2026-10-22",
   "kind": "ad"
  },
@@ -126,21 +116,8 @@
   "fmt": "Video ad",
   "anchor": "CV3",
   "thumb": "previews/CycleProgramIntro_Ad_9x16.jpg",
-  "plan": "Hold: page not live",
-  "ai": false,
+  "plan": "Set 1 · general",
   "added": "2026-10-22",
-  "kind": "ad"
- },
- {
-  "code": "M3",
-  "line": "Know the cost before you start",
-  "svc": "menopause",
-  "fmt": "Image ad",
-  "anchor": "M3",
-  "thumb": "static-ads/r1/thumbs/M3.jpg",
-  "plan": "Test now #1",
-  "ai": false,
-  "added": "2026-10-12",
   "kind": "ad"
  },
  {
@@ -151,7 +128,17 @@
   "anchor": "L1",
   "thumb": "static-ads/r1/thumbs/L1.jpg",
   "plan": "Test now #2",
-  "ai": false,
+  "added": "2026-10-12",
+  "kind": "ad"
+ },
+ {
+  "code": "MB1",
+  "line": "Wide awake at 3 a.m., again.",
+  "svc": "menopause",
+  "fmt": "Image ad",
+  "anchor": "MB1",
+  "thumb": "static-ads/r2/thumbs/MB1.jpg",
+  "plan": "Test now #2",
   "added": "2026-10-12",
   "kind": "ad"
  },
@@ -163,19 +150,17 @@
   "anchor": "L2",
   "thumb": "static-ads/r1/thumbs/L2.jpg",
   "plan": "Test now #3",
-  "ai": false,
   "added": "2026-10-12",
   "kind": "ad"
  },
  {
-  "code": "MB1",
-  "line": "Wide awake at 3 a.m., again.",
+  "code": "MB5",
+  "line": "Menopause care without a referral or a family doctor.",
   "svc": "menopause",
   "fmt": "Image ad",
-  "anchor": "MB1",
-  "thumb": "static-ads/r2/thumbs/MB1.jpg",
+  "anchor": "MB5",
+  "thumb": "static-ads/r2/thumbs/MB5.jpg",
   "plan": "Test now #3",
-  "ai": true,
   "added": "2026-10-12",
   "kind": "ad"
  },
@@ -187,19 +172,17 @@
   "anchor": "LB1",
   "thumb": "static-ads/r2/thumbs/LB1.jpg",
   "plan": "Test now #4",
-  "ai": true,
   "added": "2026-10-12",
   "kind": "ad"
  },
  {
-  "code": "MB5",
-  "line": "Menopause care without a referral or a family doctor.",
+  "code": "MB2",
+  "line": "Brain fog can be perimenopause, not just a busy life.",
   "svc": "menopause",
   "fmt": "Image ad",
-  "anchor": "MB5",
-  "thumb": "static-ads/r2/thumbs/MB5.jpg",
+  "anchor": "MB2",
+  "thumb": "static-ads/r2/thumbs/MB2.jpg",
   "plan": "Test now #4",
-  "ai": true,
   "added": "2026-10-12",
   "kind": "ad"
  },
@@ -211,19 +194,6 @@
   "anchor": "LB2",
   "thumb": "static-ads/r2/thumbs/LB2.jpg",
   "plan": "Test now #5",
-  "ai": true,
-  "added": "2026-10-12",
-  "kind": "ad"
- },
- {
-  "code": "MB2",
-  "line": "Brain fog can be perimenopause, not just a busy life.",
-  "svc": "menopause",
-  "fmt": "Image ad",
-  "anchor": "MB2",
-  "thumb": "static-ads/r2/thumbs/MB2.jpg",
-  "plan": "Test now #5",
-  "ai": true,
   "added": "2026-10-12",
   "kind": "ad"
  },
@@ -235,7 +205,6 @@
   "anchor": "LB3",
   "thumb": "static-ads/r2/thumbs/LB3.jpg",
   "plan": "Test now #6",
-  "ai": true,
   "added": "2026-10-12",
   "kind": "ad"
  },
@@ -247,7 +216,6 @@
   "anchor": "L6",
   "thumb": "static-ads/r1/thumbs/L6.jpg",
   "plan": "Next up",
-  "ai": false,
   "added": "2026-10-12",
   "kind": "ad"
  },
@@ -259,7 +227,6 @@
   "anchor": "LA2",
   "thumb": "static-ads/r3/thumbs/LA2.jpg",
   "plan": "Next up",
-  "ai": true,
   "added": "2026-10-13",
   "kind": "ad"
  },
@@ -271,7 +238,6 @@
   "anchor": "LB4",
   "thumb": "static-ads/r2/thumbs/LB4.jpg",
   "plan": "Next up",
-  "ai": true,
   "added": "2026-10-12",
   "kind": "ad"
  },
@@ -283,7 +249,6 @@
   "anchor": "M1",
   "thumb": "static-ads/r1/thumbs/M1.jpg",
   "plan": "Next up",
-  "ai": false,
   "added": "2026-10-12",
   "kind": "ad"
  },
@@ -295,19 +260,17 @@
   "anchor": "M2",
   "thumb": "static-ads/r1/thumbs/M2.jpg",
   "plan": "Next up",
-  "ai": false,
   "added": "2026-10-12",
   "kind": "ad"
  },
  {
-  "code": "MA2",
+  "code": "MA1",
   "line": "Midlife is a stage, and stages can be planned for.",
   "svc": "menopause",
   "fmt": "Image ad",
-  "anchor": "MA2",
-  "thumb": "static-ads/r3/thumbs/MA2.jpg",
+  "anchor": "MA1",
+  "thumb": "static-ads/r3/thumbs/MA1.jpg",
   "plan": "Next up",
-  "ai": true,
   "added": "2026-10-13",
   "kind": "ad",
   "seed": {
@@ -324,7 +287,6 @@
   "anchor": "MB3",
   "thumb": "static-ads/r2/thumbs/MB3.jpg",
   "plan": "Next up",
-  "ai": true,
   "added": "2026-10-12",
   "kind": "ad"
  },
@@ -336,7 +298,6 @@
   "anchor": "MB4",
   "thumb": "static-ads/r2/thumbs/MB4.jpg",
   "plan": "Next up",
-  "ai": true,
   "added": "2026-10-12",
   "kind": "ad"
  },
@@ -348,7 +309,6 @@
   "anchor": "L3",
   "thumb": "static-ads/r1/thumbs/L3.jpg",
   "plan": "Twin of LB2",
-  "ai": false,
   "added": "2026-10-12",
   "kind": "ad"
  },
@@ -360,7 +320,6 @@
   "anchor": "L4",
   "thumb": "static-ads/r1/thumbs/L4.jpg",
   "plan": "Twin of LB3",
-  "ai": false,
   "added": "2026-10-12",
   "kind": "ad"
  },
@@ -372,7 +331,6 @@
   "anchor": "L5",
   "thumb": "static-ads/r1/thumbs/L5.jpg",
   "plan": "Twin of LV2-T",
-  "ai": false,
   "added": "2026-10-12",
   "kind": "ad"
  },
@@ -384,7 +342,6 @@
   "anchor": "LA1",
   "thumb": "static-ads/r3/thumbs/LA1.jpg",
   "plan": "Twin of LB5",
-  "ai": true,
   "added": "2026-10-13",
   "kind": "ad"
  },
@@ -396,7 +353,6 @@
   "anchor": "LB5",
   "thumb": "static-ads/r2/thumbs/LB5.jpg",
   "plan": "Twin of L1",
-  "ai": true,
   "added": "2026-10-12",
   "kind": "ad"
  },
@@ -408,67 +364,28 @@
   "anchor": "LB6",
   "thumb": "static-ads/r2/thumbs/LB6.jpg",
   "plan": "Twin of L6",
-  "ai": true,
+  "added": "2026-10-12",
+  "kind": "ad"
+ },
+ {
+  "code": "M3",
+  "line": "No referral. No family doctor needed.",
+  "svc": "menopause",
+  "fmt": "Image ad",
+  "anchor": "M3",
+  "thumb": "static-ads/r1/thumbs/M3.jpg",
+  "plan": "Twin of MB5",
   "added": "2026-10-12",
   "kind": "ad"
  },
  {
   "code": "M4",
-  "line": "No referral. No family doctor needed.",
+  "line": "3 a.m. Wide awake. Again.",
   "svc": "menopause",
   "fmt": "Image ad",
   "anchor": "M4",
   "thumb": "static-ads/r1/thumbs/M4.jpg",
-  "plan": "Twin of MB5",
-  "ai": false,
-  "added": "2026-10-12",
-  "kind": "ad"
- },
- {
-  "code": "M5",
-  "line": "A clear plan, start to finish",
-  "svc": "menopause",
-  "fmt": "Image ad",
-  "anchor": "M5",
-  "thumb": "static-ads/r1/thumbs/M5.jpg",
-  "plan": "Twin of MC1–5",
-  "ai": false,
-  "added": "2026-10-12",
-  "kind": "ad"
- },
- {
-  "code": "M6",
-  "line": "3 a.m. Wide awake. Again.",
-  "svc": "menopause",
-  "fmt": "Image ad",
-  "anchor": "M6",
-  "thumb": "static-ads/r1/thumbs/M6.jpg",
   "plan": "Twin of MB1",
-  "ai": false,
-  "added": "2026-10-12",
-  "kind": "ad"
- },
- {
-  "code": "MA1",
-  "line": "Three months, one Nurse Practitioner, one price: $895 + HST.",
-  "svc": "menopause",
-  "fmt": "Image ad",
-  "anchor": "MA1",
-  "thumb": "static-ads/r3/thumbs/MA1.jpg",
-  "plan": "Twin of M3",
-  "ai": true,
-  "added": "2026-10-13",
-  "kind": "ad"
- },
- {
-  "code": "MB6",
-  "line": "Your first NP visit is a full 60 minutes.",
-  "svc": "menopause",
-  "fmt": "Image ad",
-  "anchor": "MB6",
-  "thumb": "static-ads/r2/thumbs/MB6.jpg",
-  "plan": "Twin of M2",
-  "ai": true,
   "added": "2026-10-12",
   "kind": "ad"
  },
@@ -479,8 +396,7 @@
   "fmt": "Carousel ad",
   "anchor": "MC",
   "thumb": "static-ads/r2/thumbs/MC1.jpg",
-  "plan": "Test now #6",
-  "ai": true,
+  "plan": "Test now #5",
   "added": "2026-10-12",
   "kind": "ad"
  },
@@ -492,7 +408,6 @@
   "anchor": "LC",
   "thumb": "static-ads/r2/thumbs/LC1.jpg",
   "plan": "Next up",
-  "ai": true,
   "added": "2026-10-12",
   "kind": "ad"
  },
@@ -504,7 +419,6 @@
   "anchor": "IRT1",
   "thumb": "previews/iron/IRT1_9x16.jpg",
   "plan": "Test · talking head",
-  "ai": true,
   "added": "2026-10-20",
   "kind": "ad",
   "seed": {
@@ -521,7 +435,6 @@
   "anchor": "IRT2",
   "thumb": "previews/iron/IRT2_9x16.jpg",
   "plan": "Test · talking head",
-  "ai": true,
   "added": "2026-10-20",
   "kind": "ad",
   "seed": {
@@ -538,7 +451,6 @@
   "anchor": "IRT3",
   "thumb": "previews/iron/IRT3_9x16.jpg",
   "plan": "Test · talking head",
-  "ai": true,
   "added": "2026-10-20",
   "kind": "ad",
   "seed": {
@@ -555,7 +467,6 @@
   "anchor": "IRT4",
   "thumb": "previews/iron/IRT4_9x16.jpg",
   "plan": "Test · talking head",
-  "ai": true,
   "added": "2026-10-20",
   "kind": "ad",
   "seed": {
@@ -572,7 +483,6 @@
   "anchor": "IRV1",
   "thumb": "previews/iron/IRV1_9x16.jpg",
   "plan": "Run now",
-  "ai": true,
   "added": "2026-10-14",
   "kind": "ad"
  },
@@ -584,7 +494,6 @@
   "anchor": "IRV2",
   "thumb": "previews/iron/IRV2_9x16.jpg",
   "plan": "Test · film",
-  "ai": true,
   "added": "2026-10-19",
   "kind": "ad"
  },
@@ -596,7 +505,6 @@
   "anchor": "IRV3",
   "thumb": "previews/iron/IRV3_9x16.jpg",
   "plan": "Test · film",
-  "ai": true,
   "added": "2026-10-19",
   "kind": "ad"
  },
@@ -608,7 +516,6 @@
   "anchor": "IRM1",
   "thumb": "previews/iron/IRM1_9x16.jpg",
   "plan": "Test · motion",
-  "ai": true,
   "added": "2026-10-19",
   "kind": "ad"
  },
@@ -620,7 +527,6 @@
   "anchor": "IRM2",
   "thumb": "previews/iron/IRM2_9x16.jpg",
   "plan": "Test · offer",
-  "ai": true,
   "added": "2026-10-19",
   "kind": "ad"
  },
@@ -632,7 +538,6 @@
   "anchor": "IR1",
   "thumb": "static-ads/r4/thumbs/IR1.jpg",
   "plan": "Run now",
-  "ai": true,
   "added": "2026-10-14",
   "kind": "ad"
  },
@@ -644,7 +549,6 @@
   "anchor": "IR2",
   "thumb": "static-ads/r4/thumbs/IR2.jpg",
   "plan": "Run now",
-  "ai": true,
   "added": "2026-10-14",
   "kind": "ad"
  },
@@ -656,7 +560,6 @@
   "anchor": "IR4",
   "thumb": "static-ads/r5/thumbs/IR4.jpg",
   "plan": "Test · time",
-  "ai": true,
   "added": "2026-10-19",
   "kind": "ad"
  },
@@ -668,7 +571,6 @@
   "anchor": "IR5",
   "thumb": "static-ads/r5/thumbs/IR5.jpg",
   "plan": "Test · effort",
-  "ai": true,
   "added": "2026-10-19",
   "kind": "ad"
  },
@@ -680,7 +582,6 @@
   "anchor": "IR6",
   "thumb": "static-ads/r5/thumbs/IR6.jpg",
   "plan": "Test · likelihood",
-  "ai": true,
   "added": "2026-10-19",
   "kind": "ad"
  },
@@ -691,8 +592,7 @@
   "fmt": "Image ad",
   "anchor": "CA1",
   "thumb": "static-ads/r9/thumbs/CA1.jpg",
-  "plan": "Hold: page not live",
-  "ai": false,
+  "plan": "Set 1 · general",
   "added": "2026-10-28",
   "kind": "ad"
  },
@@ -703,8 +603,7 @@
   "fmt": "Image ad",
   "anchor": "CA2",
   "thumb": "static-ads/r9/thumbs/CA2.jpg",
-  "plan": "Hold: page not live",
-  "ai": true,
+  "plan": "Set 1 · general",
   "added": "2026-10-28",
   "kind": "ad"
  },
@@ -715,8 +614,7 @@
   "fmt": "Image ad",
   "anchor": "CA3",
   "thumb": "static-ads/r9/thumbs/CA3.jpg",
-  "plan": "Hold: page not live",
-  "ai": true,
+  "plan": "Set 1 · general",
   "added": "2026-10-28",
   "kind": "ad"
  },
@@ -727,20 +625,18 @@
   "fmt": "Image ad",
   "anchor": "CA4",
   "thumb": "static-ads/r9/thumbs/CA4.jpg",
-  "plan": "Hold: page not live",
-  "ai": false,
+  "plan": "Set 1 · general",
   "added": "2026-10-28",
   "kind": "ad"
  },
  {
   "code": "CA5",
-  "line": "A free 3-minute Cycle Check shows which care fits.",
+  "line": "A free 3-minute check of your menstrual cycle shows which care fits.",
   "svc": "cycle",
   "fmt": "Image ad",
   "anchor": "CA5",
   "thumb": "static-ads/r9/thumbs/CA5.jpg",
-  "plan": "Hold: page not live",
-  "ai": false,
+  "plan": "Set 1 · general",
   "added": "2026-10-28",
   "kind": "ad"
  },
@@ -751,8 +647,7 @@
   "fmt": "Image ad",
   "anchor": "CP1",
   "thumb": "static-ads/r9/thumbs/CP1.jpg",
-  "plan": "Hold: page not live",
-  "ai": true,
+  "plan": "Set 2 · PMOS",
   "added": "2026-10-28",
   "kind": "ad"
  },
@@ -763,8 +658,7 @@
   "fmt": "Image ad",
   "anchor": "CP2",
   "thumb": "static-ads/r9/thumbs/CP2.jpg",
-  "plan": "Hold: page not live",
-  "ai": false,
+  "plan": "Set 2 · PMOS",
   "added": "2026-10-28",
   "kind": "ad"
  },
@@ -775,8 +669,7 @@
   "fmt": "Image ad",
   "anchor": "CD1",
   "thumb": "static-ads/r9/thumbs/CD1.jpg",
-  "plan": "Hold: page not live",
-  "ai": false,
+  "plan": "Set 2 · PMDD",
   "added": "2026-10-28",
   "kind": "ad"
  },
@@ -787,8 +680,7 @@
   "fmt": "Image ad",
   "anchor": "CD2",
   "thumb": "static-ads/r9/thumbs/CD2.jpg",
-  "plan": "Hold: page not live",
-  "ai": false,
+  "plan": "Set 2 · PMDD",
   "added": "2026-10-28",
   "kind": "ad"
  },
@@ -799,81 +691,85 @@
   "fmt": "Image ad",
   "anchor": "CE1",
   "thumb": "static-ads/r9/thumbs/CE1.jpg",
-  "plan": "Hold: page not live",
-  "ai": true,
+  "plan": "Set 2 · endometriosis",
   "added": "2026-10-28",
   "kind": "ad"
  },
  {
   "code": "CE2",
-  "line": "Pelvic pain, heavy periods or pain with sex can point to endometriosis or adenomyosis.",
+  "line": "Pelvic pain, heavy periods or pain with intimacy can point to endometriosis or adenomyosis.",
   "svc": "cycle",
   "fmt": "Image ad",
   "anchor": "CE2",
   "thumb": "static-ads/r9/thumbs/CE2.jpg",
-  "plan": "Hold: page not live",
-  "ai": true,
+  "plan": "Set 2 · endometriosis",
   "added": "2026-10-28",
   "kind": "ad"
  },
  {
   "code": "CC",
-  "line": "Carousel, 6 cards: “It's just part of being a woman.” Not always.",
+  "line": "Carousel, 6 cards: Irregular periods, acne and mood swings deserve real answers.",
   "svc": "cycle",
   "fmt": "Carousel ad",
   "anchor": "CC",
   "thumb": "static-ads/r9/thumbs/CC1.jpg",
-  "plan": "Hold: page not live",
-  "ai": true,
+  "plan": "Set 1 · general",
   "added": "2026-10-22",
   "kind": "ad"
  },
  {
   "code": "CG1",
-  "line": "Cycle & hormone care (core)",
+  "line": "Cycle & hormone care (general)",
   "svc": "cycle",
   "fmt": "Google search ad",
   "anchor": "CG1",
   "thumb": "",
-  "plan": "Hold: page not live",
-  "ai": false,
+  "plan": "Google · general",
   "added": "2026-10-22",
   "kind": "google"
  },
  {
   "code": "CG2",
-  "line": "PCOS / PMOS",
+  "line": "Period problems (irregular, heavy or painful)",
   "svc": "cycle",
   "fmt": "Google search ad",
   "anchor": "CG2",
   "thumb": "",
-  "plan": "Hold: page not live",
-  "ai": false,
+  "plan": "Google · general",
   "added": "2026-10-22",
   "kind": "google"
  },
  {
   "code": "CG3",
-  "line": "PMS / PMDD",
+  "line": "PMOS (formerly PCOS)",
   "svc": "cycle",
   "fmt": "Google search ad",
   "anchor": "CG3",
   "thumb": "",
-  "plan": "Hold: page not live",
-  "ai": false,
+  "plan": "Google · PMOS",
   "added": "2026-10-22",
   "kind": "google"
  },
  {
   "code": "CG4",
-  "line": "Painful or heavy periods (endometriosis, adenomyosis)",
+  "line": "PMDD and severe PMS",
   "svc": "cycle",
   "fmt": "Google search ad",
   "anchor": "CG4",
   "thumb": "",
-  "plan": "Hold: page not live",
-  "ai": false,
+  "plan": "Google · PMDD",
   "added": "2026-10-22",
+  "kind": "google"
+ },
+ {
+  "code": "CG5",
+  "line": "Endometriosis and adenomyosis",
+  "svc": "cycle",
+  "fmt": "Google search ad",
+  "anchor": "CG5",
+  "thumb": "",
+  "plan": "Google · endometriosis",
+  "added": "2026-10-28",
   "kind": "google"
  },
  {
@@ -884,7 +780,6 @@
   "anchor": "ig-MI1",
   "thumb": "files/IG_MI1_cover_4x5.jpg",
   "plan": "",
-  "ai": false,
   "added": "",
   "kind": "organic",
   "seed": {
@@ -901,7 +796,6 @@
   "anchor": "ig-MI2",
   "thumb": "files/IG_MI2_cover_4x5.jpg",
   "plan": "",
-  "ai": false,
   "added": "",
   "kind": "organic",
   "seed": {
@@ -918,7 +812,6 @@
   "anchor": "ig-MI3",
   "thumb": "files/IG_MI3_cover_4x5.jpg",
   "plan": "",
-  "ai": false,
   "added": "",
   "kind": "organic",
   "seed": {
@@ -935,7 +828,6 @@
   "anchor": "ig-CB1",
   "thumb": "files/IG_CB1_cover_4x5.jpg",
   "plan": "",
-  "ai": false,
   "added": "",
   "kind": "organic",
   "seed": {
@@ -952,7 +844,6 @@
   "anchor": "ig-CB2",
   "thumb": "files/IG_CB2_cover_4x5.jpg",
   "plan": "",
-  "ai": false,
   "added": "",
   "kind": "organic",
   "seed": {
@@ -969,7 +860,6 @@
   "anchor": "ig-RB1",
   "thumb": "files/IG_RB1_cover_4x5.jpg",
   "plan": "",
-  "ai": false,
   "added": "",
   "kind": "organic",
   "seed": {
@@ -985,7 +875,6 @@
   "anchor": "ig-CI1",
   "thumb": "files/IG_CI1_cover_4x5.jpg",
   "plan": "",
-  "ai": false,
   "added": "",
   "kind": "organic",
   "seed": {

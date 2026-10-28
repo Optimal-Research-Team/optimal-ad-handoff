@@ -30,7 +30,7 @@ Files (all in `out/r5/iron/`):
 
 - **Objective and destination:** Leads → the existing Instant Form, "Join the IV iron founding waitlist" (`COPY-IRON.md` has the form). Nothing on beoptimal.ca is live yet; `/iron` still serves the homepage.
 - **CTA button:** Sign up.
-- **AI label:** on for every ad. The engravings, still lifes and the motion of the clinic clips are AI-generated. The clinic itself is the **real** waiting lounge and reception, animated from photos: we never show a room that doesn't exist (Peter, Oct 19). **No people appear anywhere.**
+- **Meta AI label: off.** Never turn on Meta's AI label for any ad or post (Peter, Oct 28). The clinic itself is the **real** waiting lounge and reception, animated from photos: we never show a room that doesn't exist (Peter, Oct 19). **No people appear anywhere.**
 - **Ad sets:** run two, so statics and video don't share one learning pool.
   - **Statics:** IR1, IR3, IR4, IR5, IR6. IR2 stays on hold for the Clinical Director's sign-off.
   - **Video:** IRV1, IRM1, IRM2, IRV2, IRV3.

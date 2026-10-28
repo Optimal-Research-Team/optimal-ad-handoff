@@ -41,17 +41,18 @@ SERVICES = {
 TRACKER_ID = "10I29jiV4DCNSixJbTqPjM06sUSQxTZO7swV3yMabFxs"
 TRACKER_EDIT = f"https://docs.google.com/spreadsheets/d/{TRACKER_ID}/edit"
 TRACKER_BASE = f"https://docs.google.com/spreadsheets/d/{TRACKER_ID}/gviz/tq?tqx=out:csv&headers=1&sheet="   # + Tracker | Sync%20log
-# Meta's AI label ("AI info"): the copy docs say which ads use AI imagery or AI motion
-AI_ON = set(("MB1 MB2 MB3 MB4 MB5 MB6 LB1 LB2 LB3 LB4 LB5 LB6 MC LC MA1 MA2 LA1 LA2 MV2 CV2 "        # round 2 + 3, two videos
-             "IR1 IR2 IRV1 IR4 IR5 IR6 IRM1 IRM2 IRV2 IRV3 IRT1 IRT2 IRT3 IRT4 "                     # IV iron: every ad
-             "CA2 CA3 CC CP1 CE1 CE2").split())                                                     # cycle round 4 engravings
+# Meta's AI label ("AI info"): never turned on, for any ad or post (Peter, Oct 28), so the page doesn't track it.
+# Oct 28 (Peter): cut the ads that weren't good enough, then close the gaps so codes run in order. The copy docs keep the
+# original IDs; the page, the files and the tracker use the new ones.
+CUT = {"M3": "price card only", "M5": "too abstract, no clear value", "MA1": "too abstract", "MB6": "looks too AI"}
+RENAME = {"M4": "M3", "M6": "M4", "MA2": "MA1"}
 CATALOG = []   # one entry per tracker row, filled while the page is built
 
 
 def cat(code, line, svc, fmt, anchor, thumb, base=None, kind="ad"):
     b = base or code
     CATALOG.append(dict(code=code, line=re.sub(r"[*{}]", "", line).replace("|", " "), svc=svc, fmt=fmt, anchor=anchor,
-                        thumb=thumb, plan=plan_label(b), ai=b in AI_ON, added=ADDED.get(b, ""), kind=kind))
+                        thumb=thumb, plan=plan_label(b), added=ADDED.get(b, ""), kind=kind))
 
 
 def track(*codes):
@@ -73,8 +74,12 @@ VIDEOS = [  # id, service, folder in meta-ad-studio/out, render name, the line o
     ("CV3", "cycle", "cycle-program-intro", "CycleProgramIntro", "Hormone care isn’t just for menopause.", [("A", "Ad")]),
 ]
 CYCLE_R4 = ("CA1", "CA2", "CA3", "CA4", "CA5", "CP1", "CP2", "CD1", "CD2", "CE1", "CE2")   # Oct 28 round 4 singles (+ the CC carousel)
-WAITING = {k: "Waiting on the landing page" for k in ("CV1", "CV2", "CV3", "CC", "CG1", "CG2", "CG3", "CG4") + CYCLE_R4}
-# /services/cycle-and-hormone-care 404s (Oct 22)
+WAITING = {}   # was the Cycle & Hormone set; /services/cycle-and-hormone-care went live (Oct 28), so nothing is held
+CYCLE_PLAN = {**{k: "Set 1 · general" for k in ("CV1", "CV2", "CV3", "CA1", "CA2", "CA3", "CA4", "CA5", "CC")},
+              "CP1": "Set 2 · PMOS", "CP2": "Set 2 · PMOS", "CD1": "Set 2 · PMDD", "CD2": "Set 2 · PMDD",
+              "CE1": "Set 2 · endometriosis", "CE2": "Set 2 · endometriosis",
+              "CG1": "Google · general", "CG2": "Google · general", "CG3": "Google · PMOS", "CG4": "Google · PMDD",
+              "CG5": "Google · endometriosis"}
 SOCIALS = [  # organic-only reels: kept OFF the ads site (Peter, Oct 15), so the list stays empty; the format is kept for later
 ] and [
     ("RB1", "rubeana-bio", "RubeanaBio_Reel_9x16", "RubeanaBio_cover_9x16", "Meet Rubeana, our Clinical Director."),
@@ -87,25 +92,21 @@ CUTS = [("T", "Tight")]   # Oct 12 (Peter): Tight cuts only
 #   ("next", None, angle)  a new angle to swap in when a wave-1 ad is cut
 #   ("twin", "X", angle)   same message as X in a different look: swap in when X fatigues
 PLAN = {
-    # menopause
-    "M3":  ("now", 1, "Price up front, qualifies the booking · price card"),
-    "MV1": ("now", 2, "Emotional hook · video"),
+    # menopause (Oct 28: M3, M5, MA1, MB6 cut; old M4 → M3, M6 → M4, MA2 → MA1)
+    "MV1": ("now", 1, "Emotional hook · video"),
+    "MB1": ("now", 2, "Relatable moment · photo"),
+    "MB5": ("now", 3, "Access, no referral · clinic photo"),
+    "MB2": ("now", 4, "Symptom awareness · photo"),
+    "MC":  ("now", 5, "How it works · carousel"),
     "MV3": ("next", None, "A/B vs MV1: the NP on camera, same offer · video"),
     "MV2": ("next", None, "NP explains the full-hour first visit · video"),
-    "MB1": ("now", 3, "Relatable moment · photo"),
-    "MB5": ("now", 4, "Access, no referral · clinic photo"),
-    "MB2": ("now", 5, "Symptom awareness · photo"),
-    "MC":  ("now", 6, "How it works · carousel"),
     "M2":  ("next", None, "60-minute first visit · big number"),
     "M1":  ("next", None, "Symptom list · education"),
     "MB4": ("next", None, "Hot flashes at work · photo"),
     "MB3": ("next", None, "NP-led, in Barrie · photo"),
-    "M6":  ("twin", "MB1", "3 a.m. · night photo"),
-    "M4":  ("twin", "MB5", "No referral · photo + capsule"),
-    "M5":  ("twin", "MC", "How it works · step diagram"),
-    "MB6": ("twin", "M2", "60-minute visit · consult photo"),
-    "MA1": ("twin", "M3", "$895 + HST · engraving"),
-    "MA2": ("next", None, "Midlife, planned for · botanical plate"),
+    "MA1": ("next", None, "Midlife, planned for · botanical plate"),
+    "M4":  ("twin", "MB1", "3 a.m. · night photo"),
+    "M3":  ("twin", "MB5", "No referral · photo + capsule"),
     # longevity
     "LV1": ("now", 1, "A real person, trust · video"),
     "L1":  ("now", 2, "Price and value · ledger"),
@@ -138,7 +139,6 @@ REWRITES = [
     ("MB3", "Menopause care in Barrie, led by a Nurse Practitioner.", "Start menopause care in Barrie within days.", "Description becomes outcome plus speed. Cutting the time delay raises perceived value."),
     ("MB4", "Hot flashes don’t wait for a good time.", "Hot flashes don’t wait, and neither should you.", "Keeps the relatable hook and adds the push to act."),
     ("MB5", "No referral or family doctor needed.", "Menopause care without a referral or a family doctor.", "Says what it is in the first word. The old line never mentioned menopause, so a stranger couldn't tell what was on offer."),
-    ("MA1", "Three months, one Nurse Practitioner, one price: $895.", "Three months, one Nurse Practitioner, one price: $895 + HST.", "Matches the price card and the consent form, so there's no surprise at the first visit."),
     ("LA2", "Normal is a range. We talk about where you sit in it.", "Normal is a range, and we look at where you sit in it.", "Same idea, held to one sentence."),
     ("MC1", "It starts with a free 15-minute call.", "Menopause care in Barrie starts with a free 15-minute call.", "Card 1 has to say who and where, or nobody swipes."),
     ("MC4", "You get a written treatment plan.", "You get a written plan and the same NP every visit.", "Adds continuity: the same person at every visit, so the plan comes with someone who knows the history."),
@@ -296,8 +296,40 @@ def google_groups(name="GOOGLE-ADS-CYCLE.md"):
         hs = [clean(l) for l in re.search(r"\*\*Headlines \(15\):\*\*\n(.*?)\n\n", g, re.S)[1].splitlines()]
         ds = [clean(l) for l in re.search(r"\*\*Descriptions \(4\):\*\*\n(.*?)(?:\n\n|\Z)", g, re.S)[1].splitlines()]
         pin = re.search(r"^1\. (.*?) \*\(pin", g, re.M)
-        out.append((m[1], m[2], kw, hs, ds, pin[1] if pin else None))
+        path = re.search(r"\*\*Display path:\*\* `beoptimal\.ca/(.*?)`", g)
+        out.append((m[1], m[2], kw, hs, ds, pin[1] if pin else None, path[1] if path else "cycle-care/barrie"))
     return out
+
+
+def google_assets(name="GOOGLE-ADS-CYCLE.md"):
+    """Campaign-level assets: sitelinks [(text, line 1, line 2)] (ones still waiting on a check left out), callouts, snippet"""
+    doc = open(os.path.join(STUDIO, "static", name)).read()
+    table = re.search(r"\*\*Sitelinks:\*\*\n\n\|.*?\n\|.*?\n(.*?)\n\n", doc, re.S)[1]
+    links = [[c.strip() for c in row.strip("|").split("|")] for row in table.splitlines()]
+    snip = re.search(r"\*\*Structured snippet\*\* \(header: (.*?)\): (.*)", doc)
+    return dict(sitelinks=[l for l in links if "*(" not in l[0]],
+                callouts=[c.strip() for c in re.search(r"\*\*Callouts:\*\* (.*)", doc)[1].split("·")],
+                snippet=(snip[1], [v.strip() for v in snip[2].split("·")]))
+
+
+def serp(hs, ds, path, assets, mobile=False):
+    """How a responsive search ad can look on Google (desktop or phone), from the measured SERP styles (Oct 28, 2026)."""
+    title = " | ".join([hs[0], hs[1], hs[2]] if not mobile else [hs[0], hs[3]])
+    desc = (f"{ds[0]} {ds[1]}" if not mobile else ds[2])
+    crumbs = " › ".join(path.split("/"))
+    head = (f'<div class="g-spons">Sponsored</div><div class="g-head"><span class="g-fav"><img src="files/g-favicon.png" alt=""></span>'
+            f'<span class="g-site"><span class="g-name">Optimal Health</span><span class="g-url">https://www.beoptimal.ca › {esc(crumbs)}</span></span>'
+            f'<span class="g-dots" aria-hidden="true">⋮</span></div>')
+    body = f'<div class="g-title">{esc(title)}</div><div class="g-desc">{esc(desc)}</div>'
+    if not mobile:
+        hdr, vals = assets["snippet"]
+        body += (f'<div class="g-desc g-ext">{esc(" · ".join(assets["callouts"][:4]))}</div>'
+                 f'<div class="g-desc g-ext">{esc(hdr)}: {esc(", ".join(vals[:5]))}</div>')
+        body += '<div class="g-sl">' + "".join(f'<div><span class="g-slt">{esc(t)}</span><span>{esc(a)}</span><span>{esc(b)}</span></div>'
+                                               for t, a, b in assets["sitelinks"][:4]) + "</div>"
+    else:
+        body += '<div class="g-slm">' + "".join(f'<div><span>{esc(t)}</span><i>›</i></div>' for t, *_ in assets["sitelinks"][:3]) + "</div>"
+    return f'<div class="serp{" m" if mobile else ""}">{head}{body}</div>'
 
 
 # ------------------------------------------------------------------ html pieces
@@ -382,6 +414,7 @@ ADDED = {**{k: D12 for k in ("M1 M2 M3 M4 M5 M6 L1 L2 L3 L4 L5 L6 MB1 MB2 MB3 MB
          **{k: D20 for k in ("IRT1", "IRT2", "IRT3", "IRT4", "MV2", "MV3")},
          **{k: D22 for k in ("CV1", "CV2", "CV3", "CC", "CG1", "CG2", "CG3", "CG4")},
          **{k: D28 for k in CYCLE_R4}}
+ADDED = {RENAME.get(k, k): v for k, v in ADDED.items() if k not in CUT}
 CHANGED = {"IR1": (D20, "new image and headline"), "IR2": (D20, "new image: the website hero"),
            "IRV1": (D20, "rebuilt from the website hero, animated"),
            "MV2": (D21, "blood-draw and body-scan pictures; softer opening"),
@@ -390,10 +423,23 @@ CHANGED = {"IR1": (D20, "new image and headline"), "IR2": (D20, "new image: the 
            "CB1": (D21, "opening shot and the 0:30 graphic cut"),
            **{k: (D21, "softer opening (room tone, not silence)") for k in ("MI1", "MI2", "MI3")}}
 CHANGED["MI2"] = (D26, "new cover: Chantelle smiling, not mid-word")
-CHANGED["CC"] = (D28, "redone as 6 cards, one symptom group per card")
+CHANGED["CC"] = (D28, "redone as 6 cards; card 1 now names the symptoms")
+CHANGED["CA5"] = (D28, "says \u201cmenstrual cycle\u201d")
+CHANGED["CE2"] = (D28, "\u201cpain with intimacy\u201d")
+CHANGED.update({new: (D28, f"renamed from {old}") for old, new in RENAME.items()})
+CHANGED.update({g: (D28, "rewritten: five ad groups, two general and three by condition") for g in ("CG1", "CG2", "CG3", "CG4")})
+ADDED["CG5"] = D28
 REMOVED = {"IR3": D20}
 SHORT = {"9x16": "9:16", "1x1": "1:1", "1-91x1": "1.91:1"}
 NEWS = [  # (date, what happened, ids that link to cards, ids removed)
+    (D28, "Cut four ads that weren't good enough: M3 (just a price card), M5 and MA1 (too abstract) and MB6 (looks too AI). "
+          "The rest were renamed so the codes run in order: M4 is now M3, M6 is now M4, MA2 is now MA1. The old M3 is still "
+          "running in Ads Manager, so switch it off. The Cycle & Hormone Care page is live, so nothing is on hold any more. "
+          "CA5 now says \u201cmenstrual cycle\u201d, the carousel's first card names the symptoms, and CE2 and CC5 say "
+          "\u201cpain with intimacy\u201d. Google search for Cycle & Hormone Care is now five ad groups, two general (CG1, CG2) and "
+          "three by condition (CG3 PMOS, CG4 PMDD, CG5 endometriosis), each shown the way it looks on Google. "
+          "Meta's AI label stays off for every ad and post.",
+     ["M3", "M4", "MA1", "CA5", "CC", "CE2", "CG1", "CG2", "CG3", "CG4", "CG5"], ["M5", "MB6", "old M3", "old MA1"]),
     (D28, "Cycle & Hormone Care statics redone in two sets. Set 1 (general) covers every symptom the program looks at: five "
           "single-image ads (CA1–CA5) and a 6-card carousel (CC1–CC6) with one symptom group per card. Set 2 (by condition) "
           "has two ads each for PMOS (formerly PCOS), PMDD and endometriosis (CP, CD, CE). They describe the signs and never "
@@ -427,9 +473,12 @@ NEWS = [  # (date, what happened, ids that link to cards, ids removed)
     (D12, "The first set: Cheryl's three videos, round 1 and round 2 statics for both services, and both carousels.",
      ["MV1", "LV1", "LV2", "M3", "MB1", "MB5", "MC", "L1", "L2", "LB1", "LC"], []),
 ]
+NEWS = [(d, re.sub(r"\b(" + "|".join(RENAME) + r")\b", lambda m: f"{m[1]} (now {RENAME[m[1]]})", t) if d < D28 else t,
+         ["ig-" + RENAME.get(i[3:], i[3:]) if i.startswith("ig-") else RENAME.get(i, i) for i in ids if i not in CUT or d == D28],
+         gone) for d, t, ids, gone in NEWS]
 # organic Instagram posts (not ads): id, folder in meta-ad-studio/out, render name, line, added, status
 # static ads that also went up on Instagram as organic feed posts: id -> (post shortcode, date)
-IG_STATIC = {"MA2": ("De2kqQAFkhP", "Oct 23")}
+IG_STATIC = {"MA1": ("De2kqQAFkhP", "Oct 23")}   # MA1 was MA2 until Oct 28
 IG_LINK = {"IRT1": "DeuqtE3ux0g", "CB1": "DexGHdyuXk0", "CB2": "DexGpqDuUb-", "MI1": "DexHDf2ulLf", "IRT2": "DexHYHRuWz5",
            "MI2": "De-Ln2wOrGr", "IRT3": "DexIED5u8No", "MI3": "DexId1Pusbd", "IRT4": "DexI9NouTrG"}   # posted Oct 20-21
 POSTS = [
@@ -484,6 +533,8 @@ def plan_label(ad):
         return "Hold: page not live"
     if ad in IRON:
         return IRON[ad][1].split(" · cleared")[0]
+    if ad in CYCLE_PLAN:
+        return CYCLE_PLAN[ad]
     st, x, _ = PLAN.get(ad, (None, None, None))
     return {"now": f"Test now #{x}", "next": "Next up", "twin": f"Twin of {SHOW_ID.get(x, x)}"}.get(st, "")
 
@@ -504,11 +555,11 @@ CHECKLIST = '''
   <label class="check"><input type="checkbox" data-k="g-old"><span><b>Pause the older live ads</b> in the same campaigns so the test isn't diluted.
     <small>3267720843438130 (primary care intro), 28548023041524231 (menopause info call).</small></span></label>
   <label class="check"><input type="checkbox" data-k="g-sets"><span><b>One ad set per service</b> (Menopause, Longevity membership): broad audience, Advantage+ placements, Landing page views.</span></label>
-  <label class="check"><input type="checkbox" data-k="g-m"><span><b>Upload the Menopause Test now ads</b> in rank order: M3, MV1-T, MB1, MB5, MB2, MC.</span></label>
+  <label class="check"><input type="checkbox" data-k="g-m"><span><b>Upload the Menopause Test now ads</b> in rank order: MV1-T, MB1, MB5, MB2, MC. <small>The old M3 (the price card) was cut on Oct 28: switch it off. The code M3 now belongs to the old M4.</small></span></label>
   <label class="check"><input type="checkbox" data-k="g-l"><span><b>Upload the Longevity Test now ads</b> in rank order: LV1-T, L1, L2, LB1, LB2, LB3.</span></label>
   <label class="check"><input type="checkbox" data-k="g-ab"><span><b>Set up the Chantelle vs Cheryl test:</b> MV1-T against MV3-T as a Meta A/B test (equal budgets).</span></label>
-  <label class="check"><input type="checkbox" data-k="g-ai"><span><b>Turn on Meta's AI label</b> for every round 2 and round 3 ad, CV2 and MV2, and wherever an IV iron card says so.</span></label>
-  <label class="check"><input type="checkbox" data-k="g-cv"><span><b>Cycle & Hormone Care (CV1–CV3, CA1–CA5, CC, CP/CD/CE, CG1–CG4):</b> launch only once beoptimal.ca/services/cycle-and-hormone-care is live. Meta: two ad sets, women 18–45: Set 1 (general: CA, CC, CV) and Set 2 (by condition: CP, CD, CE). AI label on CV2, CA2, CA3, the CC carousel, CP1, CE1 and CE2. Google: build from GOOGLE-ADS-CYCLE.md (CHC campaign).</span></label>
+  <label class="check"><input type="checkbox" data-k="g-ai"><span><b>Leave Meta's AI label off</b> for every ad and post (Peter, Oct 28).</span></label>
+  <label class="check"><input type="checkbox" data-k="g-cv"><span><b>Cycle &amp; Hormone Care (CV1–CV3, CA1–CA5, CC, CP/CD/CE, CG1–CG5):</b> the landing page is live (Oct 28). Meta: two ad sets, women 18–45: Set 1 (general: CV, CA, CC) and Set 2 (by condition: CP, CD, CE). Google: build from GOOGLE-ADS-CYCLE.md (CHC campaign, five ad groups).</span></label>
   <label class="check"><input type="checkbox" data-k="g-track"><span><b>Mark it in the tracker</b> when an ad goes into Ads Manager, goes live, or is paused: one row per ad name, in the Google Sheet linked from the Summary tab. The page reads it live.</span></label>
   <label class="check"><input type="checkbox" data-k="g-copy"><span><b>Name every ad with its ID</b> and paste the copy from its card. Keep the URL parameters exactly as written.</span></label>
   <label class="check"><input type="checkbox" data-k="g-pub"><span><b>Publish, then don't touch it for 7 days.</b></span></label>'''
@@ -575,23 +626,23 @@ def build():
     </article>''')
 
     # ---------------- static ads
-    def static_tile(ad, title, primary, headline, description, imgs, round_key, extra="", svc=None, fmt=""):
+    def static_tile(ad, title, primary, headline, description, imgs, round_key, extra="", svc=None, fmt="", src_id=None):
         files = []
         for label, src in imgs:
-            rel = put(src, f"static-ads/{round_key}/{os.path.basename(src)}")
+            base = os.path.basename(src).replace(src_id, ad, 1) if src_id else os.path.basename(src)   # renamed ads ship under the new code
+            rel = put(src, f"static-ads/{round_key}/{base}")
             files.append(dl(rel, label.split(" ")[0], mb(src), primary=label.startswith(("1:1", "4:5"))))
-            zips[round_key].append((src, os.path.basename(src)))
+            zips[round_key].append((src, base))
         th = thumb(imgs[0][1], f"static-ads/{round_key}/thumbs/{ad}.jpg")
         isnew, newpill, whenline = when(ad)
         desc = copy_field("Description", description) if description else ""
-        ai = f'<span class="when">Meta AI label: <b class="ai">{"on" if ad in AI_ON else "off"}</b></span>'
         if svc:
             n[svc] += 1
             cat(ad, title, svc, "Image ad", ad, th)
         return f'''
       <article class="card tile{" isnew" if isnew else ""}" id="{ad}">
         <img src="{th}" alt="{esc(ad)}" loading="lazy">
-        <div class="tbody"><div>{f'<span class="pill fmt">{esc(fmt)}</span> ' if fmt else ""}{status(ad)} {newpill}</div><h4><span class="id">{ad}</span>{esc(title)}</h4>{whenline}{ai}
+        <div class="tbody"><div>{f'<span class="pill fmt">{esc(fmt)}</span> ' if fmt else ""}{status(ad)} {newpill}</div><h4><span class="id">{ad}</span>{esc(title)}</h4>{whenline}
           {track(ad)}
           <div class="dls">{"".join(files)}</div>
           <details class="more"><summary>Ad copy</summary>{copy_field("Primary text", primary, 4)}{copy_field("Headline", headline)}{desc}{extra}</details>
@@ -600,19 +651,20 @@ def build():
 
     sdir = os.path.join(STUDIO, "static/out")
     statics = {"menopause": [], "longevity": []}
-    rows = []
+    rows = []   # (new id, title, primary, headline, description, images, round, original id); cut ads are left out
     for ad, c in r1.items():
-        rows.append((ad, c["title"], c["primary"], c["headline"], c["description"],
-                     simgs(os.path.join(sdir, "meno" if ad[0] == "M" else "long"), ad), "r1"))
+        rows.append((RENAME.get(ad, ad), c["title"], c["primary"], c["headline"], c["description"],
+                     simgs(os.path.join(sdir, "meno" if ad[0] == "M" else "long"), ad), "r1", ad))
     for ad, c in r2.items():
-        rows.append((ad, c["title"], c["primary"], c["headline"], None,
-                     simgs(os.path.join(sdir, "r2", "meno" if ad[0] == "M" else "long"), ad), "r2"))
+        rows.append((RENAME.get(ad, ad), c["title"], c["primary"], c["headline"], None,
+                     simgs(os.path.join(sdir, "r2", "meno" if ad[0] == "M" else "long"), ad), "r2", ad))
     for ad, c in r3.items():
-        rows.append((ad, c["title"], c["primary"], c["headline"], c["description"],
-                     simgs(os.path.join(sdir, "r3", "meno" if ad[0] == "M" else "long"), ad), "r3"))
-    for row in sorted(rows, key=lambda r: order(r[0])):
+        rows.append((RENAME.get(ad, ad), c["title"], c["primary"], c["headline"], c["description"],
+                     simgs(os.path.join(sdir, "r3", "meno" if ad[0] == "M" else "long"), ad), "r3", ad))
+    rows = [r for r in rows if r[7] not in CUT]
+    for *row, src in sorted(rows, key=lambda r: order(r[0])):
         svc = "menopause" if row[0][0] == "M" else "longevity"
-        statics[svc].append(static_tile(*row, svc=svc))
+        statics[svc].append(static_tile(*row, svc=svc, src_id=src if src != row[0] else None))
 
     carousels = {}
     for key, svc in (("MC", "menopause"), ("LC", "longevity")):
@@ -640,9 +692,9 @@ def build():
     idir, i2dir = os.path.join(sdir, "r4", "iron"), os.path.join(sdir, "r5", "iron")
     KIND = {"IRT1": "Talking head · Cheryl in our lounge · captions + engraving cards", "IRT2": "Talking head · Cheryl · symptom chips + cards",
             "IRT3": "Talking head · Cheryl · three numbered points", "IRT4": "Talking head · Cheryl · five numbered steps",
-            "IRV1": "The IV iron page's hero, animated (close-up only), then the end card · silent · AI label on",
-            "IRV2": "Film · Maeve voiceover · our real waiting lounge and reception + still lifes · AI label on",
-            "IRV3": "Film · Maeve voiceover · home still lifes + our real waiting lounge · AI label on",
+            "IRV1": "The IV iron page's hero, animated (close-up only), then the end card · silent",
+            "IRV2": "Film · Maeve voiceover · our real waiting lounge and reception + still lifes",
+            "IRV3": "Film · Maeve voiceover · home still lifes + our real waiting lounge",
             "IRM1": "HyperFrames motion · silent · drawn graphics only", "IRM2": "HyperFrames motion · silent · the offer stack"}
     iron_videos = []
     for ad in ("IRT1", "IRT2", "IRT3", "IRT4", "IRV1", "IRV2", "IRV3", "IRM1", "IRM2"):
@@ -704,20 +756,25 @@ def build():
     n["cycle"] += 1
     cat("CC", f"Carousel, {nc} cards: " + cc["cards"][0][1], "cycle", "Carousel ad", "CC", f"static-ads/r9/thumbs/{cc['cards'][0][0]}.jpg")
     cycle_carousel_html = f'''
-    <div class="group"><h3>Set 1 · Carousel ad: 1 ad, {nc} cards</h3><span>These {nc} are NOT separate ads. In Ads Manager pick the <b>Carousel</b> format and add the cards in this order (1 → {nc}), each with its card headline. The primary text is shared. Every card shows a Stories-style progress bar, and card 1 says "Swipe". AI label on.</span></div>
+    <div class="group"><h3>Set 1 · Carousel ad: 1 ad, {nc} cards</h3><span>These {nc} are NOT separate ads. In Ads Manager pick the <b>Carousel</b> format and add the cards in this order (1 → {nc}), each with its card headline. The primary text is shared. Every card shows a Stories-style progress bar, and card 1 says "Swipe".</span></div>
     <article class="card carousel{" isnew" if isnew else ""}" id="CC"><span class="pill fmt">Carousel · 1 ad · {nc} cards</span> {status("CC")} {newpill}<h3 style="margin-top:6px"><span class="id">CC1–CC{nc}</span>Cycle &amp; Hormone Care carousel</h3>{whenline}{track("CC")}
       <div class="cards seq n{nc}">{"".join(cards)}</div>{copy_field(f"Primary text (shared by all {nc} cards)", cc["primary"], 3)}</article>'''
-    cycle_google = []
-    for gid, title, kws, hs, ds, pin in google_groups():
+    gassets = google_assets()
+    cycle_google = {"gen": [], "cond": []}
+    for gid, title, kws, hs, ds, pin, path in google_groups():
         isnew, newpill, whenline = when(gid)
         n["cycle"] += 1
         cat(gid, title, "cycle", "Google search ad", gid, "", kind="google")
-        cycle_google.append(f'''
-      <article class="card tile{" isnew" if isnew else ""}" id="{gid}">
-        <div class="tbody"><div>{status(gid)} {newpill}</div><h4><span class="id">{gid}</span>{esc(title)}</h4>{whenline}{track(gid)}
-          <p class="note">One responsive search ad, named <code>{gid}-RSA</code>. {f"Pin “{esc(pin)}” to headline position 1. " if pin else ""}{len(hs)} headlines, {len(ds)} descriptions, {len(kws)} keywords.</p>
-          <details class="more"><summary>Headlines, descriptions, keywords</summary>{copy_field("Headlines (one per line)", chr(10).join(hs), 8)}{copy_field("Descriptions", chr(10).join(ds), 4)}{copy_field("Keywords", chr(10).join(kws), 5)}</details>
+        cycle_google["gen" if gid in ("CG1", "CG2") else "cond"].append(f'''
+      <article class="card gad{" isnew" if isnew else ""}" id="{gid}">
+        <div class="gadtop"><div>{newpill}<h4><span class="id">{gid}</span>{esc(title)}</h4>{whenline}{track(gid)}</div>
+          <p class="note">One responsive search ad, named <code>{gid}-RSA</code>. {f"Pin “{esc(pin)}” to headline position 1. " if pin else ""}Display path <code>beoptimal.ca/{esc(path)}</code>. {len(hs)} headlines, {len(ds)} descriptions, {len(kws)} keywords.</p></div>
+        <div class="gprev">
+          <figure class="gdesk"><figcaption>Google on a computer</figcaption>{serp(hs, ds, path, gassets)}</figure>
+          <figure class="gmob"><figcaption>Google on a phone</figcaption><div class="phone">{serp(hs, ds, path, gassets, mobile=True)}</div></figure>
         </div>
+        <p class="gnote">A preview. Google mixes the {len(hs)} headlines and {len(ds)} descriptions and picks which extras to show, so live ads vary.</p>
+        <details class="more"><summary>Headlines, descriptions, keywords to paste</summary>{copy_field("Headlines (one per line)", chr(10).join(hs), 8)}{copy_field("Descriptions", chr(10).join(ds), 4)}{copy_field("Keywords", chr(10).join(kws), 5)}</details>
       </article>''')
     th8 = open(os.path.join(STUDIO, "..", "optimal-content-library", "SHOTLIST.md")).read()
     th8 = th8[th8.index("**TH8"):th8.index("### Strongly want")].strip()
@@ -784,6 +841,8 @@ def build():
           ("IV iron round 2", f"Optimal-IV-iron-ads-round-2_{TAG}.zip"), ("Cycle & Hormone statics", f"Optimal-cycle-hormone-statics_{TAG}.zip")]
     zips_html = " ".join(f'<a href="{REL + f}" download>{esc(lbl)} · {mb(os.path.join(STAGE, f))}</a>' for lbl, f in zl)
     shutil.copy2(os.path.join(STUDIO, "brand/ds/assets/logos/OptimalLogo-Green.png"), os.path.join(HERE, "files", "logo.png"))
+    Image.open(os.path.join(STUDIO, "brand/ds/assets/logos/optimal-symbol-green.png")).convert("RGBA").resize((36, 36), Image.LANCZOS).save(
+        os.path.join(HERE, "files", "g-favicon.png"))
 
     # ---------------- what's new
     def chip(i):
@@ -798,8 +857,11 @@ def build():
     for vid, svc, folder, name, line, *rest in VIDEOS:
         thumbs[vid], titles[vid] = f"previews/{name}_Tight_9x16.jpg", line
     for ad, c in list(r1.items()) + list(r2.items()) + list(r3.items()):
+        if ad in CUT:
+            continue
         rk = "r1" if ad in r1 else "r2" if ad in r2 else "r3"
-        thumbs[ad], titles[ad] = f"static-ads/{rk}/thumbs/{ad}.jpg", c["title"]
+        new = RENAME.get(ad, ad)
+        thumbs[new], titles[new] = f"static-ads/{rk}/thumbs/{new}.jpg", c["title"]
     for key in ("MC", "LC"):
         thumbs[key] = f"static-ads/r2/thumbs/{key}1.jpg"
         titles[key] = "Menopause carousel, 5 cards" if key == "MC" else "Longevity carousel, 5 cards"
@@ -866,7 +928,8 @@ def build():
                         + kv("Call to action", "Learn more · Book now on CV3") + kv("Ad sets", "Set 1 general: CV, CA, CC · Set 2 by condition: CP, CD, CE")
                         + kv("Audience", "Women 18–45, about 40 km around Barrie, broad")),
         "CYCLE_VIDEOS": "".join(vids["cycle"]), "N_CYCLE": str(n["cycle"]),
-        "CYCLE_SET1": "".join(cycle_set1), "CYCLE_SET2": "".join(cycle_set2), "CYCLE_GOOGLE": "".join(cycle_google), "CYCLE_CAROUSEL": cycle_carousel_html,
+        "CYCLE_SET1": "".join(cycle_set1), "CYCLE_SET2": "".join(cycle_set2),
+        "CYCLE_GOOGLE_GEN": "".join(cycle_google["gen"]), "CYCLE_GOOGLE_COND": "".join(cycle_google["cond"]), "CYCLE_CAROUSEL": cycle_carousel_html,
         "LONG_SETUP": setup("longevity", "Adults 35–70, about 40 km around Barrie, broad"),
         "IRON_SETUP": iron_setup, "IRON_HOWTO": iron_howto,
         "MENO_VIDEOS": "".join(vids["menopause"]), "LONG_VIDEOS": "".join(vids["longevity"]),

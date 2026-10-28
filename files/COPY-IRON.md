@@ -34,7 +34,7 @@ IRV1 lives at `out/r4/iron/IRV1_{9x16,1x1,1-91x1}.mp4`, with thumbnails. It's re
 | Audience | Adults 25–64, about 40 km around Barrie, broad (no interests) |
 | Ads | IR1, IR2 and IRV1 in one ad set; placement asset customization (1:1 Feed, 9:16 Stories/Reels, 1.91:1 right column) |
 | CTA button | Sign up |
-| AI label | **On** for IR1 (AI engraving), IR2 and IRV1 (AI hero image / its animation). **Off** for IR3 (a real photo of our front desk) |
+| Meta AI label | **Off** for every ad. Never turn it on (Peter, Oct 28) |
 | URL parameters (only once a website destination exists) | `utm_source={{site_source_name}}&utm_medium=paid&utm_campaign={{campaign.id}}&utm_term={{adset.id}}&utm_content={{ad.id}}` |
 
 **Instant Form ("Join the IV iron founding waitlist")**
@@ -80,4 +80,4 @@ IRV1 lives at `out/r4/iron/IRV1_{9x16,1x1,1-91x1}.mp4`, with thumbnails. It's re
 - **No drug brand names** (the iron is a separate prescription). No feel-better timelines. No "1 in 4 women".
 - **Third person only.** No "Exhausted by low iron?" or "you have…" phrasing (Meta's personal-attributes policy).
 - **No provider comparisons** (CNO): no drip bars, no other clinics. **Pills vs IV is described neutrally**, since pills are the right first step for many people. The NP decides whether IV iron fits, after bloodwork.
-- **AI label on.** The engraving is AI-generated, and the lounge clip is animated from a real photo. Ads never show a clinic room that doesn't exist.
+- **Meta AI label: off.** Never turn on Meta's AI label for any ad or post (Peter, Oct 28). The lounge clip is animated from a real photo. Ads never show a clinic room that doesn't exist.

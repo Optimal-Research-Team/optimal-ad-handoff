@@ -1,18 +1,31 @@
-# Google Ads: Cycle & Hormone Care (Search), Oct 22, 2026
+# Google Ads: Cycle & Hormone Care (Search), Oct 28, 2026
 
-A build sheet for whoever on the team pushes this live.
-- **Character limits:** every headline is ≤30 characters, every description ≤90, every callout and sitelink ≤25, and every sitelink line ≤35. All are checked by `gen/r9/check_google.py`.
-- **Approach:** Hormozi-style and simple. Each ad group leads with the searcher's problem, makes the outcome concrete ("a plan you understand", "in 12 weeks"), cuts effort ("no referral", "free 3-minute Cycle Check") and adds proof of thoroughness ("bloodwork timed to your cycle", "same NP every visit").
-- **Guardrails, same as the Meta set (`COPY-CYCLE.md`):** no drug names (Google restricts prescription drugs in ad text), no "specialist" or "cure", no testimonials, no provider comparisons, no outcome promises beyond the landing page.
+A build sheet for whoever on the team pushes this live. The landing page is live (checked Oct 28).
+
+The campaign has five ad groups in two sets, matching the Meta ads:
+
+| Set | Ad groups |
+|---|---|
+| **General** | CG1 cycle & hormone care · CG2 period problems |
+| **By condition** | CG3 PMOS (formerly PCOS) · CG4 PMDD · CG5 endometriosis & adenomyosis |
+
+- **Character limits:** every headline is ≤30 characters, every description ≤90, every callout and sitelink ≤25, every sitelink line ≤35, and every path ≤15. All are checked by `gen/r9/check_google.py`.
+- **Approach:** Hormozi-style and simple.
+  - Lead with the searcher's problem.
+  - Make the outcome concrete ("real answers in 12 weeks", "a plan you understand").
+  - Cut effort and wait ("no referral", "free 3-minute Cycle Check", "start within days").
+  - Add proof of thoroughness ("bloodwork timed to your cycle", "same NP every visit").
+- **Guardrails, the same as the Meta set:**
+  - no drug names (Google restricts prescription drugs in ad text);
+  - no "specialist" or "cure";
+  - no testimonials or provider comparisons;
+  - no outcome promises beyond the landing page;
+  - "pain with intimacy", not "pain with sex".
 
 ## Before launch
 
-1. **The landing page must be live.** `https://www.beoptimal.ca/services/cycle-and-hormone-care` showed "404 – Page Not Found" on Oct 22, because the page is only on Jeremy's preview branch. Google disapproves ads with broken final URLs.
-2. **Conversion tracking.** Fire a Google Ads conversion (or a GA4 key event imported into Ads) on:
-   - a completed **Cycle Check** (primary), and
-   - a **Book intro** submit (secondary).
-   Start on **Maximize clicks**, then switch to **Maximize conversions** after about 30 conversions.
-3. **Price.** The page shows $895, or 3 × $325. Confirm whether HST applies before adding the price asset or the "Pricing" sitelink below.
+1. **Conversion tracking.** Fire a Google Ads conversion (or a GA4 key event imported into Ads) on a completed **Cycle Check** (primary) and on a **Book intro** submit (secondary). Start on **Maximize clicks**, then switch to **Maximize conversions** after about 30 conversions.
+2. **Price.** The page shows $895, or 3 × $325. Confirm whether HST applies before adding the price asset or the "Pricing" sitelink below.
 
 ## Campaign settings
 
@@ -23,26 +36,27 @@ A build sheet for whoever on the team pushes this live.
 | Networks | Search only. Turn **off** Search partners and the Display Network. |
 | Locations | Barrie + 40 km radius, **"Presence: people in or regularly in"** |
 | Language | English |
-| Budget | $20–30/day to start |
+| Budget | $20–30/day to start, shared across the five ad groups |
 | Bidding | Maximize clicks with a $4.00 max CPC cap, then Maximize conversions once tracking has data |
 | Ad schedule | All days, 6 AM–11 PM |
 | Final URL | `https://www.beoptimal.ca/services/cycle-and-hormone-care` |
 | Display path | `beoptimal.ca/cycle-care/barrie` |
 | Final URL suffix | `utm_source=google&utm_medium=cpc&utm_campaign={campaignid}&utm_term={keyword}&utm_content={creative}` |
-| Ad names | `CG1-RSA` … `CG4-RSA` (one responsive search ad per ad group) |
+| Ad names | `CG1-RSA` … `CG5-RSA` (one responsive search ad per ad group) |
 
-## CG1 · Cycle & hormone care (core)
+## CG1 · Cycle & hormone care (general)
+
+**Display path:** `beoptimal.ca/cycle-care/barrie`
 
 **Keywords** (phrase match unless the brackets mean exact):
 - `[hormone doctor barrie]`
 - `[womens hormone clinic barrie]`
 - `"hormone testing for women"`
 - `"hormone imbalance treatment women"`
-- `"irregular periods doctor"`
-- `"missed periods not pregnant"`
-- `"hormonal acne treatment barrie"`
 - `"female hormone specialist near me"`
 - `"womens health clinic barrie"`
+- `"hormonal acne treatment barrie"`
+- `"nurse practitioner barrie women"`
 
 **Headlines (15):**
 1. Cycle & Hormone Care, Barrie *(pin to position 1)*
@@ -56,18 +70,57 @@ A build sheet for whoever on the team pushes this live.
 9. A Plan You Understand
 10. Same NP Every Visit
 11. Start Within Days
-12. PCOS, PMDD & Endometriosis
-13. Irregular or Missed Periods
-14. Acne & Hair Changes Assessed
+12. PMOS, PMDD & Endometriosis
+13. Periods, Skin & Mood Assessed
+14. Hormonal Acne & Hair Changes
 15. Local Clinic in Barrie, ON
 
 **Descriptions (4):**
 1. Take the free 3-minute Cycle Check, then a 60-minute visit with our Nurse Practitioner.
 2. No referral needed. We time your bloodwork to your cycle, and OHIP covers the bloodwork.
 3. In 12 weeks, know what's driving your symptoms and leave with a plan you understand.
-4. For premenopausal women 18+: PCOS, PMDD, endometriosis, adenomyosis, irregular cycles.
+4. For women 18 to 45 who still have periods: PMOS, PMDD, endometriosis, irregular cycles.
 
-## CG2 · PCOS / PMOS
+## CG2 · Period problems (irregular, heavy or painful)
+
+**Display path:** `beoptimal.ca/periods/barrie`
+
+**Keywords:**
+- `[irregular periods doctor barrie]`
+- `"irregular periods treatment"`
+- `"missed periods not pregnant"`
+- `"no period for months"`
+- `"heavy periods treatment"`
+- `"heavy menstrual bleeding treatment"`
+- `"painful periods doctor"`
+- `"period pain clinic"`
+
+**Headlines (15):**
+1. Irregular or Painful Periods? *(pin to position 1)*
+2. Missed Periods, Not Pregnant?
+3. Heavy Periods Can Drain Iron
+4. Periods Deserve a Proper Look
+5. Take the Free Cycle Check
+6. No Referral Needed
+7. 60-Minute Visit With an NP
+8. Bloodwork Timed to Your Cycle
+9. Ferritin and CBC Checked
+10. Imaging & Referral if Needed
+11. A Plan You Understand
+12. Same NP Every Visit
+13. OHIP-Covered Bloodwork
+14. Real Answers in 12 Weeks
+15. Local Clinic in Barrie, ON
+
+**Descriptions (4):**
+1. Irregular, heavy, painful or missing periods deserve a proper look, not "that's normal".
+2. We check iron, time your bloodwork to your cycle and arrange imaging when it's needed.
+3. No referral needed. Free 3-minute Cycle Check, then a 60-minute visit with your NP.
+4. In 12 weeks, know what's driving your symptoms and leave with a plan you understand.
+
+## CG3 · PMOS (formerly PCOS)
+
+**Display path:** `beoptimal.ca/pmos-pcos/barrie`
 
 **Keywords:**
 - `[pcos doctor barrie]`
@@ -80,8 +133,8 @@ A build sheet for whoever on the team pushes this live.
 - `"pcos testing"`
 
 **Headlines (15):**
-1. PCOS Care in Barrie *(pin to position 1)*
-2. PCOS & PMOS, No Referral
+1. PMOS (PCOS) Care in Barrie *(pin to position 1)*
+2. PCOS, Now Called PMOS
 3. Cycles, Skin, Hair: Together
 4. Androgen + Insulin Bloodwork
 5. Take the Free Cycle Check
@@ -92,17 +145,19 @@ A build sheet for whoever on the team pushes this live.
 10. A Plan You Understand
 11. Same NP Every Visit
 12. Options Chosen With You
-13. Start Within Days
+13. No Referral Needed
 14. 12-Week Foundation Program
 15. Local Clinic in Barrie, ON
 
 **Descriptions (4):**
-1. PCOS care that looks at cycles, skin, hair and metabolism together, with one NP.
+1. PMOS, formerly called PCOS: cycles, skin, hair and metabolism, looked at together.
 2. We check androgens, insulin and thyroid, timed to your cycle. OHIP covers the bloodwork.
 3. No referral needed. Free 3-minute Cycle Check, then a 60-minute visit with your NP.
 4. Options are chosen with you: cycle regulation, skin and hair care, metabolic support.
 
-## CG3 · PMS / PMDD
+## CG4 · PMDD and severe PMS
+
+**Display path:** `beoptimal.ca/pmdd/barrie`
 
 **Keywords:**
 - `[pmdd treatment barrie]`
@@ -116,13 +171,13 @@ A build sheet for whoever on the team pushes this live.
 **Headlines (15):**
 1. PMDD & Severe PMS Care *(pin to position 1)*
 2. Mood That Tanks Before Periods
-3. There Are Options for PMDD
-4. We Track the Pattern With You
-5. Take the Free Cycle Check
-6. No Referral Needed
-7. 60-Minute Visit With an NP
-8. Same NP Every Visit
-9. Bloodwork Timed to Your Cycle
+3. More Than Bad PMS
+4. There Are Options for PMDD
+5. We Track the Pattern With You
+6. Take the Free Cycle Check
+7. No Referral Needed
+8. 60-Minute Visit With an NP
+9. Same NP Every Visit
 10. Virtual Follow-Ups Available
 11. A Plan You Understand
 12. OHIP-Covered Bloodwork
@@ -131,44 +186,46 @@ A build sheet for whoever on the team pushes this live.
 15. Local Clinic in Barrie, ON
 
 **Descriptions (4):**
-1. When mood shifts before a period affect work and relationships, there are options.
+1. When mood crashes the week before a period and lifts once it starts, there are options.
 2. We confirm the pattern with daily tracking, then build a plan with your NP.
 3. No referral needed. Free 3-minute Cycle Check, then a 60-minute visit with your NP.
 4. Options are chosen with you, from sleep and stress support to medication when it helps.
 
-## CG4 · Painful or heavy periods (endometriosis, adenomyosis)
+## CG5 · Endometriosis and adenomyosis
+
+**Display path:** `beoptimal.ca/endometriosis/barrie`
 
 **Keywords:**
 - `[endometriosis doctor barrie]`
 - `"endometriosis treatment barrie"`
+- `"endometriosis clinic near me"`
+- `"suspected endometriosis"`
 - `"adenomyosis treatment"`
-- `"painful periods doctor"`
-- `"heavy periods treatment"`
-- `"heavy menstrual bleeding treatment"`
-- `"period pain clinic"`
+- `"endometriosis pain help"`
+- `"pelvic pain clinic women"`
 
 **Headlines (15):**
-1. Painful or Heavy Periods? *(pin to position 1)*
+1. Endometriosis Care in Barrie *(pin to position 1)*
 2. Pain That Cancels Plans?
-3. Endometriosis Concerns?
-4. Heavy Periods Can Drain Iron
-5. Ferritin and CBC Checked
+3. Pelvic Pain Deserves Answers
+4. Suspected Endometriosis?
+5. Adenomyosis Assessed Too
 6. Imaging & Referral if Needed
-7. No Referral Needed
-8. Take the Free Cycle Check
-9. 60-Minute Visit With an NP
-10. Same NP Every Visit
-11. A Plan You Understand
-12. OHIP-Covered Bloodwork
-13. Your Symptoms Are Real
-14. 12-Week Foundation Program
+7. Heavy Periods Can Drain Iron
+8. No Referral Needed
+9. Take the Free Cycle Check
+10. 60-Minute Visit With an NP
+11. Same NP Every Visit
+12. A Plan You Understand
+13. OHIP-Covered Bloodwork
+14. Real Answers in 12 Weeks
 15. Local Clinic in Barrie, ON
 
 **Descriptions (4):**
-1. Periods that cancel plans or soak a pad every hour or two deserve a proper look.
-2. We check iron, assess pain and bleeding, and arrange imaging or referral when needed.
+1. Painful periods, pelvic pain or pain with intimacy can point to endometriosis.
+2. We assess pain and bleeding, check iron, and arrange imaging or referral when needed.
 3. No referral needed. Free 3-minute Cycle Check, then a 60-minute visit with your NP.
-4. In 12 weeks, know what's driving your symptoms and leave with a plan you understand.
+4. Suspected or already diagnosed: a plan you understand, with the same NP every visit.
 
 ## Assets (campaign level)
 
@@ -187,6 +244,8 @@ A build sheet for whoever on the team pushes this live.
 
 ## Negative keywords (campaign level)
 
-`jobs` · `job` · `career` · `salary` · `course` · `training` · `school` · `nursing care plan` · `icd 10` · `pdf` · `wiki` · `reddit` · `menopause` · `perimenopause` · `hot flashes` · `pregnancy` · `pregnant` · `ivf` · `egg freezing` · `fertility clinic` · `men` · `male` · `trt` · `testosterone for men` · `birth control online` · `diet plan`
+`jobs` · `job` · `career` · `salary` · `course` · `training` · `school` · `nursing care plan` · `icd 10` · `pdf` · `wiki` · `reddit` · `menopause` · `perimenopause` · `hot flashes` · `pregnancy` · `pregnancy test` · `am i pregnant` · `early pregnancy` · `ivf` · `egg freezing` · `fertility clinic` · `men` · `male` · `trt` · `testosterone for men` · `birth control online` · `diet plan`
 
 Menopause has its own campaign, so negating it here keeps the two from bidding against each other. Fertility searches go to fertility clinics, and the program refers out when that's the right next step.
+
+There's no plain `pregnant` negative on purpose: it would block CG2's `"missed periods not pregnant"`. The pregnancy negatives above catch the searches we don't want instead.
