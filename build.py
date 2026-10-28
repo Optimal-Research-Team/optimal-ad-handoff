@@ -40,6 +40,7 @@ SERVICES = {
 # The page reads it live (gviz CSV: the sheet is link-viewable) and falls back to the copy fetched at build time.
 TRACKER_ID = "10I29jiV4DCNSixJbTqPjM06sUSQxTZO7swV3yMabFxs"
 TRACKER_EDIT = f"https://docs.google.com/spreadsheets/d/{TRACKER_ID}/edit"
+TRACKER_KPI = f"https://docs.google.com/spreadsheets/d/{TRACKER_ID}/edit#gid=1126991466"   # Weekly KPIs tab (moved in Oct 28)
 TRACKER_BASE = f"https://docs.google.com/spreadsheets/d/{TRACKER_ID}/gviz/tq?tqx=out:csv&headers=1&sheet="   # + Tracker | Sync%20log
 # Meta's AI label ("AI info"): never turned on, for any ad or post (Peter, Oct 28), so the page doesn't track it.
 # Oct 28 (Peter): cut the ads that weren't good enough, then close the gaps so codes run in order. The copy docs keep the
@@ -938,7 +939,7 @@ def build():
     page = TEMPLATE
     for k, v in {
         "CATALOG_JSON": jsdump(CATALOG), "SNAPSHOT_JSON": jsdump(dict(csv=snap, log=snaps["sync-log-snapshot.csv"], at=snap_at)),
-        "TRACKER_EDIT": TRACKER_EDIT, "TRACKER_BASE": TRACKER_BASE, "N_ALL": str(len(CATALOG)),
+        "TRACKER_EDIT": TRACKER_EDIT, "TRACKER_BASE": TRACKER_BASE, "TRACKER_KPI": TRACKER_KPI, "N_ALL": str(len(CATALOG)),
         "UPDATED": UPDATED, "TAG": TAG, "RELEASE": f"https://github.com/{REPO}/releases/tag/{TAG}", "ZIPS": zips_html,
         "WHATSNEW": news, "N_MENO": str(n["menopause"]), "N_LONG": str(n["longevity"]), "N_IRON": str(n["iron"]), "N_IG": str(n["ig"]),
         "MENO_SETUP": setup("menopause", "Women 35–60, about 40 km around Barrie, broad"),

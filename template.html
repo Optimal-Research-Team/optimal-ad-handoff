@@ -506,6 +506,10 @@
     header.top { padding-top: 28px; }
   }
   @media (max-width: 520px) { .wrap { padding: 0 16px; } .tb-brand span { display: none; } }
+
+  .st-links { display: flex; justify-content: space-between; gap: 8px; }
+  .st-links a { font: 600 12.5px "Public Sans"; color: var(--forest); text-decoration: none; }
+  .st-links a:hover { text-decoration: underline; text-underline-offset: 3px; }
 </style>
 </head>
 <body>
@@ -533,7 +537,7 @@
     <span class="st-label">Tracker</span>
     <p class="st-state" id="side-checked"><i class="d wait"></i>Reading the tracker…</p>
     <a class="btn st-btn" href="{{TRACKER_EDIT}}" target="_blank" rel="noopener">Open tracker sheet ↗</a>
-    <a class="st-files" href="{{RELEASE}}" target="_blank" rel="noopener">All full-quality files ↗</a>
+    <div class="st-links"><a href="{{TRACKER_KPI}}" target="_blank" rel="noopener">Weekly KPIs ↗</a><a href="{{RELEASE}}" target="_blank" rel="noopener">All files ↗</a></div>
   </div>
 </aside>
 <div class="col">
@@ -598,6 +602,7 @@
     <div class="howto2"><h2>Keeping it up to date</h2>
       <p>Every day at 4:30 PM Claude checks the public Instagram, the Facebook Page and the Meta Ad Library, updates the tracker, and logs what changed. Things it can't see from outside (Meta's In review, Paused or Rejected states, and Google Ads) are updated by hand in the tracker; there's a reminder in #marketing-and-growth every Friday.</p>
       <p>Start a note with <b>Fix:</b> or <b>Check:</b> and it appears under Needs attention.</p>
+      <p>Weekly marketing KPIs live in the same sheet, on the <a href="{{TRACKER_KPI}}" target="_blank" rel="noopener">Weekly KPIs</a> tab. Ads launched, Instagram posts and Facebook cross-posts count themselves from the tracker.</p>
       <a class="btn ghost" href="{{TRACKER_EDIT}}" target="_blank" rel="noopener">Open the tracker sheet ↗</a></div>
   </div>
   <details class="news" id="new"><summary>Changes to this page and its files</summary>{{WHATSNEW}}</details>
