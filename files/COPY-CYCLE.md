@@ -1,70 +1,110 @@
-# Cycle & Hormone Care: Meta statics, 4 singles (CS3–CS6) + 1 carousel (CC1–CC5), Oct 22, 2026
+# Cycle & Hormone Care: Meta statics, round 4 (Oct 28, 2026)
 
-There are three rounds, all on Oct 22:
-- **Round 1:** six one-sentence singles, one Hormozi lever each.
-- **Round 2:** the program badge, two dark frames, a quote poster.
-- **Round 3:** Peter said "CS1, CS2, CS6, CS7 literally don't make sense in isolation". They were written as one funnel sequence and shipped as singles. Now the lines that lean on each other are **one 5-card carousel**, and **every single stands alone**: it says what it is, who provides it and why it matters, plus the CYCLE & HORMONE CARE badge.
+Peter's brief: "re-do static ads. Set 1: GENERAL ads that catch ALL potential symptoms of the various conditions this program addresses. Set 2: disease-state specific ads, e.g. PMOS (formerly PCOS), PMDD, endometriosis (do you think you have this?)".
 
-**Singles (each makes sense on its own):**
+**Set 1: general (catches every symptom the program covers).** Five single-image ads, plus a 6-card carousel that walks through one symptom cluster per card.
 
-| Ad | Lever | On the image | Art |
+| Ad | Format | On the image | Art |
 |---|---|---|---|
-| CS3 | Problem, specific | Painful, heavy or missing periods deserve *a proper look*. | Engraving: uterus and ovaries (AI) |
-| CS4 | Dream outcome + time | 12 weeks to *a plan you understand*. | The program in 3 big steps: Free Cycle Check → bloodwork + 60-min NP visit → your plan |
-| CS5 | Likelihood + cost | Bloodwork *timed to your cycle*, covered by OHIP. | Engraving: blood tubes and a calendar with two dates circled (AI) |
-| CS6 | Effort: no referral | Nurse practitioner care for PCOS, PMDD and endometriosis, *no referral needed*. | **Real** front desk under the Optimal logo wall |
+| CA1 | Single | Common cycle symptoms still deserve *a proper look*. | A wall of 12 symptom tags (drawn) |
+| CA2 | Single | Irregular, heavy, painful or missing periods deserve *a proper look*. | Engraving: uterus and ovaries (AI) |
+| CA3 | Single | Jawline acne, thinning hair or unwanted hair growth can be *hormonal*. | Engraving: hairbrush with shed hair, hand mirror (AI) |
+| CA4 | Single | Mood swings, sugar crashes and exhaustion can share *a hormonal cause*. | Three linked symptoms (drawn) |
+| CA5 | Single | A free 3-minute Cycle Check shows *which care fits*. | The Cycle Check's first screen on deep forest (drawn) |
+| CC1–CC6 | Carousel, 1 ad | Hook → periods → skin & hair → mood & energy → pain → free Cycle Check | Progress bar on every card, "Swipe" on card 1 |
 
-**Carousel CC1 → CC5 (one ad, swipe order, 1:1 cards).** The order runs hook → problem → mechanism → outcome → offer:
+**Set 2: by condition.** Peter asked "do you think you have this?". The answer is the *signs*, so a woman can recognize herself, worded "…can be a sign of…". The ads never ask "Do you have…?", because Meta's personal-attributes policy rejects ads that assert or ask about a viewer's health condition.
 
-| Card | On the image | Card headline |
-|---|---|---|
-| CC1 | “It's just part of being a woman.” *Not always.* | Common isn't the same as normal |
-| CC2 | Acne, irregular periods and sugar crashes *can be connected*. | Symptoms can share a cause |
-| CC3 | So we look at them together, with bloodwork *timed to your cycle*. | Bloodwork timed to your cycle |
-| CC4 | In 12 weeks, *a plan you understand*. | 12 weeks to a clear plan |
-| CC5 | No referral needed: start with a free *3‑minute Cycle Check*. | Take the free 3-min Cycle Check |
-
-**Carousel primary text:** “It's just part of being a woman.” Not always. Painful, heavy or irregular periods, acne, sugar crashes and mood that crashes before a period can be connected, and they deserve a proper look. Swipe to see how Optimal's Cycle & Hormone Care program in Barrie works, then start with the free 3-minute Cycle Check. No referral needed.
-
-**Retired as singles:** CS1 (became CC1), CS2 (became CC2) and CS7 (became CC5).
+| Ad | Condition | On the image | Art |
+|---|---|---|---|
+| CP1 | PMOS (formerly PCOS) | PMOS, formerly called PCOS, can mean irregular periods, acne and *unwanted hair*. | Engraving: ovary, whole and in cross-section (AI) |
+| CP2 | PMOS | PMOS care that looks at cycles, skin, hair and *metabolism together*. | Four linked parts: cycles, skin, hair, metabolism (drawn) |
+| CD1 | PMDD | Mood that crashes the week before a period and lifts once it starts can be *PMDD*. | Mood across one cycle, dipping the week before (drawn) |
+| CD2 | PMDD | PMDD is more than bad PMS, *and there are options*. | A tracked month: period days and the week before (drawn) |
+| CE1 | Endometriosis | Periods so painful they cancel plans can be a sign of *endometriosis*. | Engraving: uterus close-up, endometriosis spots (AI) |
+| CE2 | Endometriosis / adenomyosis | Pelvic pain, heavy periods or pain with sex can point to *endometriosis or adenomyosis*. | Engraving: hot-water bottle in a knitted cover (AI) |
 
 ```
-python3 gen/r9/art.py && python3 render.py --page cycle   # art -> assets/r9, ads -> out/r9/cycle/CS3–CS6 + out/r9/cycle-carousel/CC1–CC5 _1x1 _9x16 _1-91x1, QA
+python3 gen/r9/art.py && python3 render.py --page cycle   # art -> assets/r9, ads -> out/r9/cycle/ + out/r9/cycle-carousel/, QA
 ```
 
-**Guardrails.** These apply to the images and to the copy below.
-- **Meta personal-attributes policy:** no "you have…", "your PCOS" or "Do you suffer from…".
-- **CNO:** no testimonials, and no comparisons with other providers. The landing page's "standard referral clinics" table stays off the ads.
-- **Claims:** no outcome promises beyond the landing page's own words, and no drug names.
-- **Price:** none on the images. The page shows $895; confirm whether HST applies before any price goes in an ad.
+**Retired:** rounds 1–3 (CS1–CS7, the 5-card CC). These are replaced by the sets above.
+
+**Guardrails.**
+- **Meta's personal-attributes policy:** no "you have…", no "your PMOS", no condition questions.
+- **CNO:** no testimonials, and no comparisons with other providers.
+- **Claims:** no outcome promises beyond the landing page's own words.
+- **No drug names and no price.** The page shows $895; confirm whether HST applies first.
+- **Naming:** PMOS is written "PMOS, formerly called PCOS" wherever it first appears, so people who know the old name find it.
 
 ## Setup
 
 | | Cycle & Hormone Care |
 |---|---|
 | Campaign objective | Traffic → landing page views to start; switch to Leads once the Cycle Check completion fires as a conversion |
-| Website URL | `https://www.beoptimal.ca/services/cycle-and-hormone-care`. **It 404s on Oct 22** (Jeremy's preview branch only), so don't launch until it's live |
+| Website URL | `https://www.beoptimal.ca/services/cycle-and-hormone-care` (it 404'd on Oct 22, so check it's live before launch) |
 | URL parameters | `utm_source={{site_source_name}}&utm_medium=paid&utm_campaign={{campaign.id}}&utm_term={{adset.id}}&utm_content={{ad.id}}` |
+| Ad sets | **Set 1 (general):** CA1–CA5 + the CC carousel + the videos CV1–CV3. **Set 2 (by condition):** CP, CD and CE. Each condition can get its own ad set once there's spend data. |
 | Audience | Women 18–45, about 40 km around Barrie, broad (no interests) |
-| Ads | Singles CS3–CS6 + the carousel CC + the videos CV1–CV3 in one ad set. Singles use placement asset customization (1:1 Feed, 9:16 Stories/Reels, 1.91:1 right column); the carousel is five 1:1 cards |
+| Formats | Singles: placement asset customization (1:1 Feed, 9:16 Stories/Reels, 1.91:1 right column). Carousel: six 1:1 cards in order |
 | CTA button | Learn more |
-| AI label | **On** for CS3, CS5 and the carousel CC (card 3 is the AI tube engraving). **Off** for CS4 (drawn) and CS6 (real photo) |
+| AI label | **On:** CA2, CA3, the CC carousel, CP1, CE1, CE2 (AI engravings). **Off:** CA1, CA4, CA5, CP2, CD1, CD2 (drawn graphics) |
+
+## Set 1 carousel (CC1 → CC6)
+
+| Card | On the image | Card headline |
+|---|---|---|
+| CC1 | “It's just part of being a woman.” *Not always.* | Common isn't the same as normal |
+| CC2 | Irregular, heavy or missing periods *are worth a proper look*. | Periods deserve a proper look |
+| CC3 | Jawline acne, thinning hair or unwanted hair *can be hormonal*. | Skin and hair can be hormonal |
+| CC4 | Mood swings, sugar crashes and exhaustion *can share a cause*. | Symptoms can share a cause |
+| CC5 | Painful periods, pelvic pain or pain with sex *deserve answers*. | Pain deserves answers |
+| CC6 | No referral needed: start with a free *3‑minute Cycle Check*. | Take the free 3-min Cycle Check |
+
+**Carousel primary text:** “It's just part of being a woman.” Not always. Swipe through the symptoms Optimal's Cycle & Hormone Care program in Barrie looks at, from irregular, heavy or painful periods to jawline acne, mood crashes and pelvic pain. Start with the free 3-minute Cycle Check. No referral needed.
 
 ## Singles: copy
 
-### CS3 · "Painful, heavy or missing periods deserve a proper look." (problem, specific)
-**Primary text:** Painful, heavy or missing periods are common, but they deserve a proper look. Our nurse practitioner assesses pain, bleeding and iron, and arranges imaging or a referral when it's needed. Start with the free 3-minute Cycle Check. No referral needed.
+### CA1 · "Common cycle symptoms still deserve a proper look." (Set 1 · general)
+**Primary text:** Irregular, heavy or painful periods, pelvic pain, jawline acne, thinning or unwanted hair, mood that crashes before a period, sugar cravings and exhaustion are common, and they still deserve a proper look. Optimal's Cycle & Hormone Care program in Barrie looks at them together. Start with the free 3-minute Cycle Check. No referral needed.
+**Headline:** Common doesn't mean normal · **Description:** Free 3-min Cycle Check · Barrie
+
+### CA2 · "Irregular, heavy, painful or missing periods deserve a proper look." (Set 1 · periods)
+**Primary text:** Irregular, heavy, painful or missing periods deserve a proper look. Our nurse practitioner reviews the cycle, orders bloodwork timed to it (covered by OHIP), and arranges imaging or a referral when it's needed. Start with the free 3-minute Cycle Check. No referral needed.
 **Headline:** Periods deserve a proper look · **Description:** Free 3-min Cycle Check · Barrie
 
-### CS4 · "12 weeks to a plan you understand." (dream outcome + time)
-**Primary text:** In 12 weeks, find out what's driving cycle and hormone symptoms and leave with a plan you understand: a 60-minute nurse practitioner visit, bloodwork timed to your cycle, two InBody scans and two follow-ups. Start with the free 3-minute Cycle Check.
-**Headline:** 12 weeks to a clear plan · **Description:** NP-led · Barrie · No referral
+### CA3 · "Jawline acne, thinning hair or unwanted hair growth can be hormonal." (Set 1 · skin & hair)
+**Primary text:** Jawline acne, thinning hair and unwanted hair growth can be driven by hormones such as androgens. Our nurse practitioner checks the hormones behind them, with bloodwork timed to the cycle, and builds a plan with you. Start with the free 3-minute Cycle Check. No referral needed.
+**Headline:** Skin and hair can be hormonal · **Description:** Free 3-min Cycle Check · Barrie
 
-### CS5 · "Bloodwork timed to your cycle, covered by OHIP." (likelihood + cost)
-**Primary text:** Some hormone tests only make sense on certain days of the cycle, so we time the bloodwork to it. OHIP covers the bloodwork, and our nurse practitioner walks through every result with you in a 60-minute visit. Start with the free 3-minute Cycle Check.
-**Headline:** Bloodwork timed to your cycle · **Description:** OHIP-covered · NP-reviewed · Barrie
+### CA4 · "Mood swings, sugar crashes and exhaustion can share a hormonal cause." (Set 1 · mood & energy)
+**Primary text:** Mood swings, sugar crashes and exhaustion often get treated as separate problems. They can share a hormonal cause, from insulin and thyroid to iron and the cycle hormones, so we look at them together. Start with the free 3-minute Cycle Check. No referral needed.
+**Headline:** Looked at together, in Barrie · **Description:** Cycle & Hormone Care · No referral
 
-### CS6 · "Nurse practitioner care for PCOS, PMDD and endometriosis, no referral needed." (effort)
-**Primary text:** Cycle & Hormone Care in Barrie for PCOS/PMOS, PMS/PMDD, endometriosis and adenomyosis, irregular periods, and hormonal acne or hair changes. The same nurse practitioner every visit. No referral needed. Start with the free 3-minute Cycle Check.
-**Headline:** No referral needed · **Description:** PCOS · PMDD · Endometriosis · Barrie
+### CA5 · "A free 3-minute Cycle Check shows which care fits." (Set 1 · the free offer)
+**Primary text:** You don't have to diagnose yourself before asking for help. The free 3-minute Cycle Check shows which care fits, then our care coordinator calls to talk it through. No referral needed.
+**Headline:** Take the free Cycle Check · **Description:** 3 minutes · No referral · Barrie
 
+### CP1 · "PMOS, formerly called PCOS, can mean irregular periods, acne and unwanted hair." (Set 2 · PMOS)
+**Primary text:** PMOS, formerly called PCOS, can show up as irregular or missed periods, acne, thinning hair or unwanted hair growth, and changes in weight or energy. Our nurse practitioner checks the hormones and metabolism behind it, with bloodwork timed to the cycle. Start with the free 3-minute Cycle Check. No referral needed.
+**Headline:** PMOS (formerly PCOS) care in Barrie · **Description:** No referral · Free Cycle Check
+
+### CP2 · "PMOS care that looks at cycles, skin, hair and metabolism together." (Set 2 · PMOS)
+**Primary text:** PMOS care that looks at the whole picture, with one nurse practitioner: cycles, skin, hair and metabolism, androgen, insulin and thyroid bloodwork, and an InBody scan at the start and the end. A plan you understand in 12 weeks. Start with the free 3-minute Cycle Check.
+**Headline:** PMOS care, the whole picture · **Description:** NP-led · Barrie · No referral
+
+### CD1 · "Mood that crashes the week before a period and lifts once it starts can be PMDD." (Set 2 · PMDD)
+**Primary text:** Mood that crashes in the week before a period and lifts once bleeding starts can be PMDD, a recognized condition that's more than bad PMS. Our nurse practitioner tracks the pattern with you over 2–3 cycles and talks through the options. Start with the free 3-minute Cycle Check. No referral needed.
+**Headline:** When PMS is more than PMS · **Description:** Free 3-min Cycle Check · Barrie
+
+### CD2 · "PMDD is more than bad PMS, and there are options." (Set 2 · PMDD)
+**Primary text:** PMDD is more than bad PMS, and there are options. We confirm the pattern with daily tracking, then your nurse practitioner builds a plan with you, from sleep and stress support to hormonal options or medication when it helps. Start with the free 3-minute Cycle Check.
+**Headline:** There are options for PMDD · **Description:** NP-led · Barrie · No referral
+
+### CE1 · "Periods so painful they cancel plans can be a sign of endometriosis." (Set 2 · endometriosis)
+**Primary text:** Periods so painful they cancel plans are common, but they can be a sign of endometriosis or adenomyosis, and they deserve a proper look. Our nurse practitioner assesses pain and bleeding, checks iron, and arranges imaging or a gynecology referral when it's needed. Start with the free 3-minute Cycle Check.
+**Headline:** Painful periods deserve answers · **Description:** Free 3-min Cycle Check · Barrie
+
+### CE2 · "Pelvic pain, heavy periods or pain with sex can point to endometriosis or adenomyosis." (Set 2 · endometriosis)
+**Primary text:** Pelvic pain, heavy periods or pain with sex can point to endometriosis or adenomyosis. Getting it looked at starts here: a 60-minute nurse practitioner visit, bloodwork including iron, and imaging or a referral when it's needed. No referral needed to start. Take the free 3-minute Cycle Check.
+**Headline:** Pelvic pain deserves a proper look · **Description:** No referral · Barrie
