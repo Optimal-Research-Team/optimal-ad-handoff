@@ -28,11 +28,11 @@ Files (all in `out/r5/iron/`):
 
 ## Setup (same campaign as round 1)
 
-- **Objective and destination:** Leads → the existing Instant Form, "Join the IV iron founding waitlist" (`COPY-IRON.md` has the form). Nothing on beoptimal.ca is live yet; `/iron` still serves the homepage.
+- **Objective and destination:** Leads → the existing Instant Form, "Join the IV iron founding waitlist" (`COPY-IRON.md` has the form). The waitlist page is live too (beoptimal.ca/services/iron, since Oct 20); the Instant Form stays the default.
 - **CTA button:** Sign up.
 - **Meta AI label: off.** Never turn on Meta's AI label for any ad or post (Peter, Oct 28). The clinic itself is the **real** waiting lounge and reception, animated from photos: we never show a room that doesn't exist (Peter, Oct 19). **No people appear anywhere.**
 - **Ad sets:** run two, so statics and video don't share one learning pool.
-  - **Statics:** IR1, IR3, IR4, IR5, IR6. IR2 stays on hold for the Clinical Director's sign-off.
+  - **Statics:** IR1, IR2, IR4, IR5, IR6. IR3 was removed on Oct 20; the Clinical Director cleared IR2 the same day.
   - **Video:** IRV1, IRM1, IRM2, IRV2, IRV3.
 - **Budget:** $15–20 a day each, for 7 days, hands off. Adults 25–64, about 40 km around Barrie, broad targeting.
 - **Placement asset customization:**

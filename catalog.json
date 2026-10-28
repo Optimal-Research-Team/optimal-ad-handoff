@@ -8,7 +8,8 @@
   "thumb": "previews/LongevityCore_Tight_9x16.jpg",
   "plan": "Test now #1",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": true
  },
  {
   "code": "MV1-T",
@@ -19,7 +20,8 @@
   "thumb": "previews/MenopauseMyself_Tight_9x16.jpg",
   "plan": "Test now #1",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": true
  },
  {
   "code": "LV2-T",
@@ -30,7 +32,8 @@
   "thumb": "previews/LongevityFullHour_Tight_9x16.jpg",
   "plan": "Next up",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": true
  },
  {
   "code": "MV2-T",
@@ -41,7 +44,8 @@
   "thumb": "previews/MenoTimeToTalk_Tight_9x16.jpg",
   "plan": "Next up",
   "added": "2026-10-20",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": true
  },
  {
   "code": "MV2-F",
@@ -52,7 +56,8 @@
   "thumb": "previews/MenoTimeToTalk_Flow_9x16.jpg",
   "plan": "Next up",
   "added": "2026-10-20",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": true
  },
  {
   "code": "MV3-T",
@@ -63,7 +68,8 @@
   "thumb": "previews/MenoThreeThings_Tight_9x16.jpg",
   "plan": "Next up",
   "added": "2026-10-20",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": true
  },
  {
   "code": "MV3-F",
@@ -74,7 +80,8 @@
   "thumb": "previews/MenoThreeThings_Flow_9x16.jpg",
   "plan": "Next up",
   "added": "2026-10-20",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": true
  },
  {
   "code": "LV3-T",
@@ -85,7 +92,8 @@
   "thumb": "previews/LongevityOptimize_Tight_9x16.jpg",
   "plan": "Twin of LV2-T",
   "added": "2026-10-15",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": true
  },
  {
   "code": "CV1-A",
@@ -96,7 +104,8 @@
   "thumb": "previews/CycleSigns_Ad_9x16.jpg",
   "plan": "Set 1 · general",
   "added": "2026-10-22",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": true
  },
  {
   "code": "CV2-A",
@@ -107,7 +116,8 @@
   "thumb": "previews/CycleToldNormal_Ad_9x16.jpg",
   "plan": "Set 1 · general",
   "added": "2026-10-22",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": true
  },
  {
   "code": "CV3-A",
@@ -118,7 +128,8 @@
   "thumb": "previews/CycleProgramIntro_Ad_9x16.jpg",
   "plan": "Set 1 · general",
   "added": "2026-10-22",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": true
  },
  {
   "code": "L1",
@@ -129,7 +140,8 @@
   "thumb": "static-ads/r1/thumbs/L1.jpg",
   "plan": "Test now #2",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "MB1",
@@ -140,7 +152,8 @@
   "thumb": "static-ads/r2/thumbs/MB1.jpg",
   "plan": "Test now #2",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "L2",
@@ -151,7 +164,8 @@
   "thumb": "static-ads/r1/thumbs/L2.jpg",
   "plan": "Test now #3",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "MB5",
@@ -162,7 +176,8 @@
   "thumb": "static-ads/r2/thumbs/MB5.jpg",
   "plan": "Test now #3",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "LB1",
@@ -173,7 +188,8 @@
   "thumb": "static-ads/r2/thumbs/LB1.jpg",
   "plan": "Test now #4",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "MB2",
@@ -184,7 +200,8 @@
   "thumb": "static-ads/r2/thumbs/MB2.jpg",
   "plan": "Test now #4",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "LB2",
@@ -195,7 +212,8 @@
   "thumb": "static-ads/r2/thumbs/LB2.jpg",
   "plan": "Test now #5",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "LB3",
@@ -206,7 +224,8 @@
   "thumb": "static-ads/r2/thumbs/LB3.jpg",
   "plan": "Test now #6",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "L6",
@@ -217,7 +236,8 @@
   "thumb": "static-ads/r1/thumbs/L6.jpg",
   "plan": "Next up",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "LA2",
@@ -228,7 +248,8 @@
   "thumb": "static-ads/r3/thumbs/LA2.jpg",
   "plan": "Next up",
   "added": "2026-10-13",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "LB4",
@@ -239,7 +260,8 @@
   "thumb": "static-ads/r2/thumbs/LB4.jpg",
   "plan": "Next up",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "M1",
@@ -250,7 +272,8 @@
   "thumb": "static-ads/r1/thumbs/M1.jpg",
   "plan": "Next up",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "M2",
@@ -261,7 +284,8 @@
   "thumb": "static-ads/r1/thumbs/M2.jpg",
   "plan": "Next up",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "MA1",
@@ -273,6 +297,7 @@
   "plan": "Next up",
   "added": "2026-10-13",
   "kind": "ad",
+  "organic_ok": true,
   "seed": {
    "ig": "Posted",
    "ig_date": "Oct 23, 2026",
@@ -288,7 +313,8 @@
   "thumb": "static-ads/r2/thumbs/MB3.jpg",
   "plan": "Next up",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "MB4",
@@ -299,7 +325,8 @@
   "thumb": "static-ads/r2/thumbs/MB4.jpg",
   "plan": "Next up",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "L3",
@@ -310,7 +337,8 @@
   "thumb": "static-ads/r1/thumbs/L3.jpg",
   "plan": "Twin of LB2",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "L4",
@@ -321,7 +349,8 @@
   "thumb": "static-ads/r1/thumbs/L4.jpg",
   "plan": "Twin of LB3",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "L5",
@@ -332,7 +361,8 @@
   "thumb": "static-ads/r1/thumbs/L5.jpg",
   "plan": "Twin of LV2-T",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "LA1",
@@ -343,7 +373,8 @@
   "thumb": "static-ads/r3/thumbs/LA1.jpg",
   "plan": "Twin of LB5",
   "added": "2026-10-13",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "LB5",
@@ -354,7 +385,8 @@
   "thumb": "static-ads/r2/thumbs/LB5.jpg",
   "plan": "Twin of L1",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "LB6",
@@ -365,7 +397,8 @@
   "thumb": "static-ads/r2/thumbs/LB6.jpg",
   "plan": "Twin of L6",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "M3",
@@ -376,7 +409,8 @@
   "thumb": "static-ads/r1/thumbs/M3.jpg",
   "plan": "Twin of MB5",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "M4",
@@ -387,7 +421,8 @@
   "thumb": "static-ads/r1/thumbs/M4.jpg",
   "plan": "Twin of MB1",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "MC",
@@ -398,7 +433,8 @@
   "thumb": "static-ads/r2/thumbs/MC1.jpg",
   "plan": "Test now #5",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "LC",
@@ -409,7 +445,20 @@
   "thumb": "static-ads/r2/thumbs/LC1.jpg",
   "plan": "Next up",
   "added": "2026-10-12",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
+ },
+ {
+  "code": "IRV1",
+  "line": "IV iron is coming to Barrie this November.",
+  "svc": "iron",
+  "fmt": "Video ad",
+  "anchor": "IRV1",
+  "thumb": "previews/iron/IRV1_9x16.jpg",
+  "plan": "Run now",
+  "added": "2026-10-14",
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "IRT1",
@@ -421,6 +470,7 @@
   "plan": "Test · talking head",
   "added": "2026-10-20",
   "kind": "ad",
+  "organic_ok": true,
   "seed": {
    "ig": "Posted",
    "ig_date": "Oct 20, 2026",
@@ -437,6 +487,7 @@
   "plan": "Test · talking head",
   "added": "2026-10-20",
   "kind": "ad",
+  "organic_ok": true,
   "seed": {
    "ig": "Posted",
    "ig_date": "Oct 21, 2026",
@@ -453,6 +504,7 @@
   "plan": "Test · talking head",
   "added": "2026-10-20",
   "kind": "ad",
+  "organic_ok": true,
   "seed": {
    "ig": "Posted",
    "ig_date": "Oct 21, 2026",
@@ -469,22 +521,12 @@
   "plan": "Test · talking head",
   "added": "2026-10-20",
   "kind": "ad",
+  "organic_ok": true,
   "seed": {
    "ig": "Posted",
    "ig_date": "Oct 21, 2026",
    "ig_link": "https://www.instagram.com/reel/DexI9NouTrG/"
   }
- },
- {
-  "code": "IRV1",
-  "line": "IV iron is coming to Barrie this November.",
-  "svc": "iron",
-  "fmt": "Video ad",
-  "anchor": "IRV1",
-  "thumb": "previews/iron/IRV1_9x16.jpg",
-  "plan": "Run now",
-  "added": "2026-10-14",
-  "kind": "ad"
  },
  {
   "code": "IRV2",
@@ -495,7 +537,8 @@
   "thumb": "previews/iron/IRV2_9x16.jpg",
   "plan": "Test · film",
   "added": "2026-10-19",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "IRV3",
@@ -506,7 +549,8 @@
   "thumb": "previews/iron/IRV3_9x16.jpg",
   "plan": "Test · film",
   "added": "2026-10-19",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "IRM1",
@@ -517,7 +561,8 @@
   "thumb": "previews/iron/IRM1_9x16.jpg",
   "plan": "Test · motion",
   "added": "2026-10-19",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "IRM2",
@@ -528,7 +573,8 @@
   "thumb": "previews/iron/IRM2_9x16.jpg",
   "plan": "Test · offer",
   "added": "2026-10-19",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "IR1",
@@ -539,7 +585,8 @@
   "thumb": "static-ads/r4/thumbs/IR1.jpg",
   "plan": "Run now",
   "added": "2026-10-14",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "IR2",
@@ -550,7 +597,8 @@
   "thumb": "static-ads/r4/thumbs/IR2.jpg",
   "plan": "Run now",
   "added": "2026-10-14",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "IR4",
@@ -561,7 +609,8 @@
   "thumb": "static-ads/r5/thumbs/IR4.jpg",
   "plan": "Test · time",
   "added": "2026-10-19",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "IR5",
@@ -572,7 +621,8 @@
   "thumb": "static-ads/r5/thumbs/IR5.jpg",
   "plan": "Test · effort",
   "added": "2026-10-19",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "IR6",
@@ -583,7 +633,8 @@
   "thumb": "static-ads/r5/thumbs/IR6.jpg",
   "plan": "Test · likelihood",
   "added": "2026-10-19",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "CA1",
@@ -594,7 +645,8 @@
   "thumb": "static-ads/r9/thumbs/CA1.jpg",
   "plan": "Set 1 · general",
   "added": "2026-10-28",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "CA2",
@@ -605,7 +657,8 @@
   "thumb": "static-ads/r9/thumbs/CA2.jpg",
   "plan": "Set 1 · general",
   "added": "2026-10-28",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "CA3",
@@ -616,7 +669,8 @@
   "thumb": "static-ads/r9/thumbs/CA3.jpg",
   "plan": "Set 1 · general",
   "added": "2026-10-28",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "CA4",
@@ -627,7 +681,8 @@
   "thumb": "static-ads/r9/thumbs/CA4.jpg",
   "plan": "Set 1 · general",
   "added": "2026-10-28",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "CA5",
@@ -638,7 +693,8 @@
   "thumb": "static-ads/r9/thumbs/CA5.jpg",
   "plan": "Set 1 · general",
   "added": "2026-10-28",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "CP1",
@@ -649,7 +705,8 @@
   "thumb": "static-ads/r9/thumbs/CP1.jpg",
   "plan": "Set 2 · PMOS",
   "added": "2026-10-28",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "CP2",
@@ -660,7 +717,8 @@
   "thumb": "static-ads/r9/thumbs/CP2.jpg",
   "plan": "Set 2 · PMOS",
   "added": "2026-10-28",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "CD1",
@@ -671,7 +729,8 @@
   "thumb": "static-ads/r9/thumbs/CD1.jpg",
   "plan": "Set 2 · PMDD",
   "added": "2026-10-28",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "CD2",
@@ -682,7 +741,8 @@
   "thumb": "static-ads/r9/thumbs/CD2.jpg",
   "plan": "Set 2 · PMDD",
   "added": "2026-10-28",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "CE1",
@@ -693,7 +753,8 @@
   "thumb": "static-ads/r9/thumbs/CE1.jpg",
   "plan": "Set 2 · endometriosis",
   "added": "2026-10-28",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "CE2",
@@ -704,7 +765,8 @@
   "thumb": "static-ads/r9/thumbs/CE2.jpg",
   "plan": "Set 2 · endometriosis",
   "added": "2026-10-28",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "CC",
@@ -715,7 +777,8 @@
   "thumb": "static-ads/r9/thumbs/CC1.jpg",
   "plan": "Set 1 · general",
   "added": "2026-10-22",
-  "kind": "ad"
+  "kind": "ad",
+  "organic_ok": false
  },
  {
   "code": "CG1",
@@ -726,7 +789,8 @@
   "thumb": "",
   "plan": "Google · general",
   "added": "2026-10-22",
-  "kind": "google"
+  "kind": "google",
+  "organic_ok": false
  },
  {
   "code": "CG2",
@@ -737,7 +801,8 @@
   "thumb": "",
   "plan": "Google · general",
   "added": "2026-10-22",
-  "kind": "google"
+  "kind": "google",
+  "organic_ok": false
  },
  {
   "code": "CG3",
@@ -748,7 +813,8 @@
   "thumb": "",
   "plan": "Google · PMOS",
   "added": "2026-10-22",
-  "kind": "google"
+  "kind": "google",
+  "organic_ok": false
  },
  {
   "code": "CG4",
@@ -759,7 +825,8 @@
   "thumb": "",
   "plan": "Google · PMDD",
   "added": "2026-10-22",
-  "kind": "google"
+  "kind": "google",
+  "organic_ok": false
  },
  {
   "code": "CG5",
@@ -770,7 +837,56 @@
   "thumb": "",
   "plan": "Google · endometriosis",
   "added": "2026-10-28",
-  "kind": "google"
+  "kind": "google",
+  "organic_ok": false
+ },
+ {
+  "code": "IRG1",
+  "line": "IV iron (people looking for it)",
+  "svc": "iron",
+  "fmt": "Google search ad",
+  "anchor": "IRG1",
+  "thumb": "",
+  "plan": "Google · IV iron",
+  "added": "2026-10-28",
+  "kind": "google",
+  "organic_ok": false
+ },
+ {
+  "code": "IRG2",
+  "line": "Low ferritin / iron deficiency",
+  "svc": "iron",
+  "fmt": "Google search ad",
+  "anchor": "IRG2",
+  "thumb": "",
+  "plan": "Google · IV iron",
+  "added": "2026-10-28",
+  "kind": "google",
+  "organic_ok": false
+ },
+ {
+  "code": "IRG3",
+  "line": "Iron pills not working",
+  "svc": "iron",
+  "fmt": "Google search ad",
+  "anchor": "IRG3",
+  "thumb": "",
+  "plan": "Google · IV iron",
+  "added": "2026-10-28",
+  "kind": "google",
+  "organic_ok": false
+ },
+ {
+  "code": "IRG4",
+  "line": "Tired all the time (symptom searches)",
+  "svc": "iron",
+  "fmt": "Google search ad",
+  "anchor": "IRG4",
+  "thumb": "",
+  "plan": "Google · IV iron",
+  "added": "2026-10-28",
+  "kind": "google",
+  "organic_ok": false
  },
  {
   "code": "MI1",
@@ -782,6 +898,7 @@
   "plan": "",
   "added": "",
   "kind": "organic",
+  "organic_ok": false,
   "seed": {
    "ig": "Posted",
    "ig_date": "Oct 21, 2026",
@@ -798,6 +915,7 @@
   "plan": "",
   "added": "",
   "kind": "organic",
+  "organic_ok": false,
   "seed": {
    "ig": "Posted",
    "ig_date": "Oct 26, 2026",
@@ -814,6 +932,7 @@
   "plan": "",
   "added": "",
   "kind": "organic",
+  "organic_ok": false,
   "seed": {
    "ig": "Posted",
    "ig_date": "Oct 21, 2026",
@@ -830,6 +949,7 @@
   "plan": "",
   "added": "",
   "kind": "organic",
+  "organic_ok": false,
   "seed": {
    "ig": "Posted",
    "ig_date": "Oct 21, 2026",
@@ -846,6 +966,7 @@
   "plan": "",
   "added": "",
   "kind": "organic",
+  "organic_ok": false,
   "seed": {
    "ig": "Posted",
    "ig_date": "Oct 21, 2026",
@@ -862,6 +983,7 @@
   "plan": "",
   "added": "",
   "kind": "organic",
+  "organic_ok": false,
   "seed": {
    "ig": "Posted",
    "ig_date": "Oct 15, 2026"
@@ -877,6 +999,7 @@
   "plan": "",
   "added": "",
   "kind": "organic",
+  "organic_ok": false,
   "seed": {
    "ig": "Posted",
    "ig_date": "Oct 15, 2026"

@@ -393,6 +393,52 @@
   ol.glens li span { margin-right: 6px; }
   ol.glens li em { font-style: normal; color: var(--muted); font-size: 12px; }
   @media (max-width: 860px) { ol.glens { columns: 1; } }
+
+  /* ---------------- Oct 28 polish: one quiet line above each title (code · what · plan), no badge pills, copy folded away */
+  .shead p { max-width: 680px; margin-top: 8px; color: var(--body); font-size: 15px; }
+  .shead p a { color: var(--forest); }
+  .khead { display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px 10px; margin-bottom: 4px; }
+  .kcode { font: 700 12px/1.4 "Public Sans"; letter-spacing: .04em; color: var(--forest); }
+  .kmeta { font: 500 12.5px/1.4 "Public Sans"; color: var(--muted); }
+  .stamp { display: inline-block; font: 600 12px/1.4 "Public Sans"; color: var(--muted); margin-top: 2px; }
+  .stamp.new { color: var(--new); }
+  .adtext h3, .carousel h3, .gadtop h4 { margin: 0 0 2px; }
+  .tbody h4 { margin-top: 2px; }
+  .adtext .note, .tbody .note { font-size: 13px; color: var(--muted); margin-top: 10px; line-height: 1.5; }
+  .tbody .note a { color: var(--forest); text-decoration: none; font-weight: 600; }
+  details.copybox { margin-top: 14px; border-top: 1px solid var(--line); padding-top: 10px; }
+  details.copybox > summary, details.more > summary { font: 600 13px "Public Sans"; color: var(--forest); }
+  details.copybox[open] > summary { margin-bottom: 4px; }
+  .pill { background: none !important; color: var(--muted) !important; padding: 0; font: 600 11px "Public Sans"; letter-spacing: .06em; }
+  .pill.new { color: var(--new) !important; }
+  .id { background: none; color: var(--forest); padding: 0; margin-right: 8px; font-size: 12px; }
+  .card.ad, .card.carousel, .card.gad { padding: 22px 24px; }
+  .ad.isnew, .tile.isnew { border-color: var(--line); box-shadow: inset 3px 0 0 var(--new); }
+  .tile.isnew { box-shadow: inset 0 3px 0 var(--new); }
+  .setup { gap: 14px 22px; padding: 16px 18px; }
+  .setup .kv .v { font-size: 13px; color: var(--body); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .group { flex-wrap: wrap; row-gap: 4px; margin: 38px 0 14px; }
+  .group h3 { flex: 0 1 auto; min-width: 0; }
+  .group span { flex: 1 1 320px; min-width: 0; font-size: 13.5px; }
+  .dls { gap: 6px; }
+  .track .tk, .track .tk em { white-space: nowrap; }
+  textarea { field-sizing: content; min-height: 3.2lh; max-height: 18lh; }
+  .tile.adpost > a > img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; border-bottom: 1px solid var(--line); background: var(--bone); }
+  .gprev { grid-template-columns: minmax(0, 1fr) 360px; }
+  .gprev figure { min-width: 0; }
+  footer a { color: var(--forest); }
+  footer .zips, footer a { white-space: nowrap; }
+  @media (max-width: 860px) {
+    .gprev { grid-template-columns: minmax(0, 1fr); }
+    .cards.seq figure:nth-child(3n)::after { display: none; }
+    nav.tabs .wrap { -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
+  }
+  @media (max-width: 520px) {
+    .group { display: block; } .group span { display: block; margin-top: 4px; }
+    .filters { flex-wrap: wrap; } #svcsel { flex: 1 1 100%; }
+    .card.ad, .card.carousel, .card.gad { padding: 16px; }
+    .phone { max-width: 100%; }
+  }
 </style>
 </head>
 <body>
@@ -455,85 +501,87 @@
 <main class="wrap">
   <section class="svc" id="menopause">
     <div class="shead"><h2>Menopause</h2>
-      <p class="muted">One ad set. Every ad points to the menopause page with the CTA <b>Book now</b>. Launch the ads marked Test now, in rank order.</p></div>
+      <p>One ad set. Every ad goes to the menopause page with the button <b>Book now</b>. Start with the ads marked Test now, in order.</p></div>
     <div class="setup">{{MENO_SETUP}}</div>
-    <div class="group"><h3>Video ads</h3><span>9:16, 1:1 and 1.91:1 per cut. Previews are compressed; downloads are full quality.</span></div>
+    <div class="group"><h3>Video ads</h3><span>Each cut comes in 9:16, 1:1 and 1.91:1. Previews are compressed; downloads are full quality.</span></div>
     {{MENO_VIDEOS}}
-    <div class="group"><h3>Static ads</h3><span>1:1 for Feed, 9:16 for Stories and Reels, 1.91:1 for the right column.</span></div>
+    <div class="group"><h3>Image ads</h3><span>Each comes in 1:1, 9:16 and 1.91:1, uploaded together as one ad.</span></div>
     <div class="grid">{{MENO_STATICS}}</div>
     {{MENO_CAROUSEL}}
   </section>
 
   <section class="svc" id="cycle">
     <div class="shead"><h2>Cycle &amp; Hormone Care</h2>
-      <p class="muted">Two ad sets: <b>Set 1 · General</b> (the videos, five single images and the carousel) and <b>Set 2 · By condition</b> (PMOS, PMDD, endometriosis). Every ad points to the Cycle &amp; Hormone Care page, which is live (checked Oct 28).</p></div>
+      <p>Two ad sets: <b>Set 1 · General</b> (videos, five image ads and the carousel) and <b>Set 2 · By condition</b> (PMOS, PMDD, endometriosis). Every ad goes to the Cycle &amp; Hormone Care page. All copy: <a href="files/COPY-CYCLE.md" target="_blank" rel="noopener">COPY-CYCLE.md</a>.</p></div>
     <div class="setup">{{CYCLE_SETUP}}</div>
-    <div class="group"><h3>Video ads</h3><span>9:16, 1:1 and 1.91:1 per ad. Each opens with the CYCLE &amp; HORMONE CARE badge.</span></div>
+    <div class="group"><h3>Video ads</h3><span>Set 1. Each opens with the Cycle &amp; Hormone Care badge.</span></div>
     {{CYCLE_VIDEOS}}
-    <div class="group"><h3>Set 1 · Single-image ads: 5 separate ads</h3><span>General: together they cover every symptom the program looks at, and each one makes sense alone. Upload its 1:1, 9:16 and 1.91:1 files as one ad.</span></div>
+    <div class="group"><h3>Set 1 · Image ads</h3><span>Five separate ads that together cover every symptom the program looks at.</span></div>
     <div class="grid">{{CYCLE_SET1}}</div>
     {{CYCLE_CAROUSEL}}
-    <div class="group"><h3>Set 2 · By condition: 6 separate ads</h3><span>Two each for PMOS (formerly PCOS), PMDD and endometriosis. They name the signs (“…can be a sign of endometriosis”) and never ask “Do you have…?”, which Meta's personal-attributes policy rejects. Their own ad set.</span></div>
+    <div class="group"><h3>Set 2 · By condition</h3><span>Two ads each for PMOS, PMDD and endometriosis, in their own ad set. They describe the signs and never ask “Do you have…?”, which Meta rejects.</span></div>
     <div class="grid">{{CYCLE_SET2}}</div>
-    <div class="group"><h3>Google search · General</h3><span>Campaign <code>CHC · Cycle &amp; Hormone Care · Barrie · Search</code>, five ad groups with one responsive search ad each. Each card shows how the ad can look on Google. Full build sheet (settings, sitelinks, callouts, negatives): <a href="files/GOOGLE-ADS-CYCLE.md" target="_blank" rel="noopener">GOOGLE-ADS-CYCLE.md</a>.</span></div>
+    <div class="group"><h3>Google search · General</h3><span>One campaign, five ad groups. Build sheet with settings, sitelinks and negatives: <a href="files/GOOGLE-ADS-CYCLE.md" target="_blank" rel="noopener">GOOGLE-ADS-CYCLE.md</a>.</span></div>
     <div class="gads">{{CYCLE_GOOGLE_GEN}}</div>
-    <div class="group"><h3>Google search · By condition</h3><span>PMOS (formerly PCOS), PMDD, endometriosis and adenomyosis: one ad group each, in the same campaign.</span></div>
+    <div class="group"><h3>Google search · By condition</h3><span>Three ad groups: PMOS, PMDD, and endometriosis with adenomyosis.</span></div>
     <div class="gads">{{CYCLE_GOOGLE_COND}}</div>
   </section>
 
   <section class="svc" id="longevity">
     <div class="shead"><h2>Longevity membership</h2>
-      <p class="muted">One ad set. Every ad points to the membership page with the CTA <b>Book now</b>.</p></div>
+      <p>One ad set. Every ad goes to the membership page with the button <b>Book now</b>.</p></div>
     <div class="setup">{{LONG_SETUP}}</div>
-    <div class="group"><h3>Video ads</h3><span>9:16, 1:1 and 1.91:1 per cut.</span></div>
+    <div class="group"><h3>Video ads</h3><span>Each cut comes in 9:16, 1:1 and 1.91:1.</span></div>
     {{LONG_VIDEOS}}
-    <div class="group"><h3>Static ads</h3><span>1:1, 9:16 and 1.91:1 per ad.</span></div>
+    <div class="group"><h3>Image ads</h3><span>Each comes in 1:1, 9:16 and 1.91:1, uploaded together as one ad.</span></div>
     <div class="grid">{{LONG_STATICS}}</div>
     {{LONG_CAROUSEL}}
   </section>
 
   <section class="svc" id="iron">
-    <div class="shead"><h2>IV iron <em class="muted" style="font-size:.6em">· pre-launch, opening November</em></h2>
-      <p class="muted">A separate Leads campaign on a Meta Instant Form ("Join the founding waitlist"). CTA <b>Sign up</b>. No price, no booking. Meta's AI label stays off.</p></div>
+    <div class="shead"><h2>IV iron</h2>
+      <p>Opens in Barrie in November. Until then, every ad collects founding-waitlist signups on a Meta Instant Form, with the button <b>Sign up</b>. No price, no booking.</p></div>
     <div class="setup">{{IRON_SETUP}}</div>
-    <div class="group"><h3>Video ads</h3><span>Launch the four talking heads (IRT) plus IRV2 first, then rotate the rest in.</span></div>
+    <div class="group"><h3>Video ads</h3><span>Start with IRV1 (marked Run now), then test the four talking heads (IRT) and the rest.</span></div>
     {{IRON_VIDEOS}}
-    <div class="group"><h3>Static ads</h3></div>
+    <div class="group"><h3>Image ads</h3><span>IR1 and IR2 run first; IR4–IR6 are tests.</span></div>
     <div class="grid">{{IRON_STATICS}}</div>
+    <div class="group"><h3>Google search</h3><span>One campaign, four ad groups, all sending people to the waitlist page. Build sheet: <a href="files/GOOGLE-ADS-IRON.md" target="_blank" rel="noopener">GOOGLE-ADS-IRON.md</a>.</span></div>
+    <div class="gads">{{IRON_GOOGLE}}</div>
   </section>
 
   <section class="svc" id="instagram">
-    <div class="shead"><h2>Instagram posts <em class="muted" style="font-size:.6em">· organic, not ads</em></h2>
-      <p class="muted">For @beoptimal.ca. Feed posts are 4:5 videos, with a 9:16 reel cut too. They end on “Link in bio”. Don't add Instagram music.
-        <b>Nothing that needs Meta's AI label goes on Instagram or Facebook</b> (Peter, Oct 24). Each card shows where it's live, from the tracker. Static ads that also went up as organic feed posts show it on their ad card (MA2 so far).
-        <b>Facebook: post each Instagram post to the Optimal Health Clinic Facebook Page too</b>
-        (Meta Business Suite → Create reel; on Facebook, swap “link in bio” for book.beoptimal.ca, which is clickable there).</p></div>
+    <div class="shead"><h2>Organic posts</h2>
+      <p>For Instagram (@beoptimal.ca) and the Facebook Page. Each card shows where it's posted, from the tracker. On Facebook, swap “link in bio” for book.beoptimal.ca, which is clickable there. Nothing that would need Meta's AI label goes up, and the label is never turned on.</p></div>
+    <div class="group"><h3>Posts</h3><span>Feed videos are 4:5, with a 9:16 reel cut.</span></div>
     <div class="grid">{{IG_POSTS}}</div>
+    <div class="group"><h3>Paid ads that also work as posts</h3><span>Listed here too so they're not missed. Their files and copy are on their ad cards.</span></div>
+    <div class="grid">{{IG_ADS}}</div>
   </section>
 
   <section class="svc howto" id="howto">
-    <div class="shead"><h2>How to launch</h2><p class="muted">Folded away so the ads stay up top. Open what you need.</p></div>
+    <div class="shead"><h2>How to launch</h2><p>Reference for whoever uploads. Open what you need.</p></div>
     <details class="box"><summary>Go-live checklist</summary><div class="inner">{{CHECKLIST}}</div></details>
     <details class="box"><summary>Upload an ad in Meta Ads Manager</summary><div class="inner">
       <ol class="steps">
         <li><b>Download</b> the ad's three files: <b>1:1</b> (Feed), <b>9:16</b> (Stories + Reels) and <b>1.91:1</b> (right column, in-stream, search).</li>
-        <li>Go to the <b>service's ad set</b> (Menopause, Longevity, or the IV iron campaign). Start with the ads marked <b>Test now</b>.</li>
+        <li>Go to the <b>right ad set</b>: Menopause, Longevity, Cycle &amp; Hormone Care Set 1 or Set 2, or the IV iron campaign. Start with the ads marked <b>Test now</b> or <b>Run now</b>.</li>
         <li><b>Create ad</b> and name it with the ID on its card (e.g. <code>MV3-T</code>, <code>M3</code>). Identity: the Optimal Facebook Page and @beoptimal.ca.</li>
         <li><b>Media:</b> upload the 1:1 file, then customize placements: Stories and Reels get the 9:16 file; right column, search and in-stream get the 1.91:1 file.</li>
         <li><b>Text:</b> paste the primary text, headline and description with the Copy buttons. Use the service's website URL, URL parameters and CTA from the box at the top of its section.</li>
-        <li><b>Videos:</b> upload the matching thumbnail, and turn <b>off</b> auto captions (ours are burned in), Advantage+ music and creative enhancements. Publish, then leave it alone for 7 days.</li>
+        <li><b>Videos:</b> upload the matching thumbnail, and turn <b>off</b> auto captions (ours are burned in), Advantage+ music and creative enhancements. Leave Meta's AI label off. Publish, then leave it alone for 7 days.</li>
       </ol></div></details>
     <details class="box"><summary>What to test first (and when to swap)</summary><div class="inner">
       <div class="pgrid">{{PLAN}}</div>
       <ul class="rules" style="margin-top:14px">
-        <li><b>One ad set per service</b> with its Test now ads, broad audience, Advantage+ placements. Hands off for 7 days, and duplicate instead of editing.</li>
-        <li><b>Judge on booked intro calls</b> per ad (Ad Lab matches bookings through the URL parameters), not on Meta's "results".</li>
+        <li><b>Broad audience, Advantage+ placements.</b> Hands off for 7 days, and duplicate instead of editing.</li>
+        <li><b>Judge on booked intro calls</b> per ad (bookings are matched to ads through the URL parameters), not on Meta's "results".</li>
         <li><b>Day 7:</b> pause any ad that spent $40+ with no bookings and a CTR under half the ad set's. <b>Day 14:</b> swap the bottom two for Next up ads.</li>
         <li><b>Fatigue:</b> when frequency passes about 3 or CTR drops about 30%, swap in the ad's Twin.</li>
         <li><b>Chantelle vs Cheryl:</b> run <code>MV1-T</code> against <code>MV3-T</code> as a Meta A/B test with equal budgets. They're the same length, end card and page, so the only difference is who's on camera.</li>
       </ul>
       <table class="budget" style="margin-top:14px"><thead><tr><th>Per service, per day</th><th>Launch</th></tr></thead><tbody>
-        <tr><td>$50–60+</td><td>All six Test now ads.</td></tr><tr><td>$25–50</td><td>Ranks 1–4 only.</td></tr><tr><td>Under $25</td><td>Ranks 1–3; rotate a new one in every two weeks.</td></tr></tbody></table>
+        <tr><td>$50–60+</td><td>All the Test now ads.</td></tr><tr><td>$25–50</td><td>Ranks 1–4 only.</td></tr><tr><td>Under $25</td><td>Ranks 1–3; rotate a new one in every two weeks.</td></tr></tbody></table>
     </div></details>
     <details class="box"><summary>IV iron campaign setup (Instant Form, Google Ads)</summary><div class="inner">{{IRON_HOWTO}}</div></details>
     <details class="box"><summary>Why these words (the Hormozi pass, Oct 13)</summary><div class="inner">
@@ -542,7 +590,7 @@
   </section>
 </main>
 
-<footer><div class="wrap">Optimal Health · 630 Huronia Rd, Unit 5, Barrie · files on the release <code>{{TAG}}</code> · questions: Peter.</div></footer>
+<footer><div class="wrap">Optimal Health · 630 Huronia Rd, Unit 5, Barrie · <a href="{{RELEASE}}" target="_blank" rel="noopener">All full-quality files</a> · Zips: {{ZIPS}} · Questions: Peter.</div></footer>
 
 <script id="catalog" type="application/json">{{CATALOG_JSON}}</script>
 <script id="snapshot" type="application/json">{{SNAPSHOT_JSON}}</script>
@@ -603,6 +651,7 @@
       ig: pick(t["Instagram"], seed.ig || (org ? "Not posted" : "—")), igDate: pick(t["IG date"], seed.ig_date || ""), igLink: pick(t["IG link"], seed.ig_link || ""),
       fbDate: t["FB date"] || "", fbLink: t["FB link"] || "", google: pick(t["Google Ads"], g ? "Not built" : "—"), notes: t["Notes"] || "" };
     r.fb = pick(t["Facebook"], (org || tone(r.ig) === "on") ? "Not posted" : "—");
+    if (e.organic_ok) { if (tone(r.ig) === "na") r.ig = "Not posted"; if (tone(r.fb) === "na") r.fb = "Not posted"; }   // ads that also work as posts
     r.q = [r.code, r.line, SVC[r.svc], r.fmt, r.plan, r.notes].join(" ").toLowerCase();
     return r;
   }
@@ -632,14 +681,14 @@
     if (ig === "on") return "fbgap";
     if (fb === "on") return "fbonly";
     if (ig === "off" || fb === "off") return "gone";
-    return r.kind === "organic" ? "todo" : null;
+    return r.kind === "organic" ? "todo" : r.organic_ok ? "adpost" : null;
   }
   const PLAN_RANK = p => { const m = /^Test now #(\d+)/.exec(p); return m ? +m[1] : /^Run now/.test(p) ? 10 : /^Test ·/.test(p) ? 20 : /^Next/.test(p) ? 30 : /^Twin/.test(p) ? 40 : 50; };
   const bySvc = (a, b) => SVC_ORDER.indexOf(a.svc) - SVC_ORDER.indexOf(b.svc);
   const byPost = (a, b) => (toDate(b.igDate || b.fbDate) || 0) - (toDate(a.igDate || a.fbDate) || 0) || a.i - b.i;
   const LISTS = {
     ads: { group: adGroup, head: ["Ad", "On Meta / Google", "Also posted"], groups: [
-      { k: "fix", name: "Needs a fix", sort: bySvc },
+      { k: "fix", name: "Needs a fix or a check", sort: bySvc },
       { k: "review", name: "In review at Meta", sort: bySvc },
       { k: "running", name: "Running now", sort: bySvc },
       { k: "ready", name: "Ready to upload", hint: "per service, in launch order", sort: (a, b) => bySvc(a, b) || PLAN_RANK(a.plan) - PLAN_RANK(b.plan) || a.i - b.i },
@@ -650,6 +699,7 @@
       { k: "both", name: "On Instagram and Facebook", sort: byPost },
       { k: "fbonly", name: "On Facebook only", sort: byPost },
       { k: "todo", name: "Not posted yet", sort: bySvc },
+      { k: "adpost", name: "Paid ads that could also be posts", hint: "videos with real people, no AI label needed", closed: true, sort: bySvc },
       { k: "gone", name: "Taken down", closed: true, sort: byPost }] },
   };
 
@@ -657,7 +707,8 @@
   const ICON = {
     ig: '<svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.6"/></svg>',
     fb: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M13.6 20.4v-7h2.2l.4-2.6h-2.6V9.2c0-.8.3-1.3 1.4-1.3h1.3V5.6"/></svg>',
-    g: '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>' };
+    g: '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>',
+    img: '<svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2.5"/><path d="m4 16 5-5 4 4 3-3 4 4"/></svg>' };
   const href = r => r.anchor ? "#" + r.anchor : (r.igLink || r.fbLink || "");
   const KIND_POST = r => /carousel/i.test(r.fmt) ? "Carousel" : /image/i.test(r.fmt) ? "Photo" : "Reel";
   function status(label, date, link, words) {
@@ -668,7 +719,7 @@
     return `<span class="st ${t}">${link ? `<a href="${esc(link)}" target="_blank" rel="noopener">${inner}&nbsp;↗</a>` : inner}</span>`;
   }
   function rowHTML(r, list) {
-    const th = r.thumb ? `<img src="${esc(r.thumb)}" alt="" loading="lazy">` : `<span class="gl">${r.kind === "google" ? ICON.g : ICON.ig}</span>`;
+    const th = r.thumb ? `<img src="${esc(r.thumb)}" alt="" loading="lazy">` : `<span class="gl">${r.kind === "google" ? ICON.g : r.kind === "ad" ? ICON.img : ICON.ig}</span>`;
     const note = noteText(r.notes);
     const sub = list === "ads"
       ? [r.fmt, `<span class="sn"><i class="sv ${r.svc}"></i>${esc(SVC[r.svc])}</span>`, r.plan && !r.plan.startsWith("Hold") ? esc(r.plan) : ""]
@@ -742,12 +793,12 @@
   // ---------------- totals, needs attention, this week
   function renderTop() {
     const cnt = f => rows.filter(f).length, on = s => tone(s) === "on";
-    const meta = cnt(r => r.kind === "ad" && on(r.meta)), ready = cnt(r => adGroup(r) === "ready"), hold = cnt(r => adGroup(r) === "hold");
+    const meta = cnt(r => r.kind === "ad" && on(r.meta)), ready = cnt(r => r.kind === "ad" && adGroup(r) === "ready"), hold = cnt(r => r.kind === "ad" && adGroup(r) === "hold");
     $("#k-meta").textContent = meta;
     $("#k-meta-s").textContent = [ready && `${ready} ready to upload`, hold && `${hold} on hold`].filter(Boolean).join(" · ");
     const igRows = rows.filter(r => on(r.ig)), last = igRows.map(r => toDate(r.igDate)).filter(Boolean).sort((a, b) => b - a)[0];
     $("#k-ig").textContent = igRows.length; $("#k-ig-s").textContent = last ? `Latest ${fmtDay(last)}` : "";
-    const fb = cnt(r => on(r.fb)), gap = cnt(r => on(r.ig) && !on(r.fb));
+    const fb = cnt(r => on(r.fb)), gap = cnt(r => on(r.ig) && !on(r.fb));   // counts only what's actually on Instagram
     $("#k-fb").textContent = fb; $("#k-fb-s").textContent = gap ? `${gap} Instagram posts not copied over` : "Up to date with Instagram";
     const g = rows.filter(r => r.kind === "google"), gl = g.filter(r => on(r.google)).length;
     $("#k-g").textContent = `${gl}`; $("#k-g-u").textContent = `of ${g.length} live`;
@@ -771,7 +822,7 @@
     const c = checks[0];
     const rel = d => { const t = new Date(); t.setHours(0, 0, 0, 0); const dd = new Date(d); dd.setHours(0, 0, 0, 0);
       return dd - t === 0 ? "today" : t - dd === 864e5 ? "yesterday" : fmtDay(d); };
-    $("#checked").innerHTML = (c ? `<i class="d ${now - c.d < 2 * 864e5 ? "on" : "wait"}"></i>Last checked ${rel(c.d)} at ${c.d.toLocaleTimeString("en-CA", { hour: "numeric", minute: "2-digit" })}: Instagram, the Facebook Page and the Meta Ad Library.`
+    $("#checked").innerHTML = (c ? `<i class="d ${now - c.d < 2 * 864e5 ? "on" : "wait"}"></i>Last checked ${rel(c.d)} at ${c.d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}: Instagram, the Facebook Page and the Meta Ad Library.`
       : '<i class="d wait"></i>Not checked yet.') + (live ? "" : ` <span>(saved copy from ${esc(SNAP.at)})</span>`);
   }
   document.addEventListener("click", e => {
@@ -789,7 +840,8 @@
       el.innerHTML = codes.map(c => by.get(c)).filter(Boolean).map(r => {
         const p = multi ? `${r.code} ` : "";
         return [["Meta", r.meta, r.metaDate], ["Instagram", r.ig, r.igDate, r.igLink], ["Facebook", r.fb, r.fbDate, r.fbLink], ["Google", r.google]]
-          .filter(([, v]) => tone(v) !== "na").map(([k, v, d, l]) => {
+          .filter(([k, v]) => tone(v) !== "na" && (r.kind !== "ad" || k === "Meta" || !["todo", "na"].includes(tone(v))))   // ads: Instagram/Facebook only once posted
+          .map(([k, v, d, l]) => {
             const t = tone(v), txt = t === "todo" ? "not yet" : v.toLowerCase(), dd = d ? `<em>${esc(shortDate(d))}</em>` : "";
             const inner = `<i class="d ${t}"></i><b>${esc(p + k)}</b>${esc(txt)}${dd}`;
             return l ? `<a class="tk" href="${esc(l)}" target="_blank" rel="noopener">${inner} ↗</a>` : `<span class="tk">${inner}</span>`;
@@ -830,6 +882,11 @@
       window.addEventListener("load", () => setTimeout(go, 20), { once: true });
     }
   }
+  const io = new IntersectionObserver(es => {
+    if (document.body.dataset.view !== "library") return;
+    for (const e of es) if (e.isIntersecting) document.querySelectorAll("nav.tabs a:not(.sumtab)").forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id));
+  }, { rootMargin: "-40% 0px -55% 0px" });
+  document.querySelectorAll("main section.svc").forEach(sec => io.observe(sec));
   const setNav = () => document.documentElement.style.setProperty("--navh", document.querySelector("nav.tabs").offsetHeight + "px");
   window.addEventListener("resize", setNav); setNav();
   window.addEventListener("hashchange", route); route();

@@ -92,7 +92,7 @@ python3 gen/r9/art.py && python3 render.py --page cycle   # art -> assets/r9, ad
 **Headline:** PMOS (formerly PCOS) care in Barrie · **Description:** No referral · Free Cycle Check
 
 ### CP2 · "PMOS care that looks at cycles, skin, hair and metabolism together." (Set 2 · PMOS)
-**Primary text:** PMOS care that looks at the whole picture, with one nurse practitioner: cycles, skin, hair and metabolism, androgen, insulin and thyroid bloodwork, and an InBody scan at the start and the end. A plan you understand in 12 weeks. Start with the free 3-minute Cycle Check.
+**Primary text:** PMOS care that looks at the whole picture with one nurse practitioner: your cycles, skin, hair and metabolism, with androgen, insulin and thyroid bloodwork and an InBody scan at the start and the end. A plan you understand in 12 weeks. Start with the free 3-minute Cycle Check.
 **Headline:** PMOS care, the whole picture · **Description:** NP-led · Barrie · No referral
 
 ### CD1 · "Mood that crashes the week before a period and lifts once it starts can be PMDD." (Set 2 · PMDD)
