@@ -439,26 +439,132 @@
     .card.ad, .card.carousel, .card.gad { padding: 16px; }
     .phone { max-width: 100%; }
   }
+
+  /* ---------------- Oct 28 layout: app shell. A left sidebar (sections, their parts, and the tracker) on desktop;
+     a sticky top bar with the tracker button on smaller screens. */
+  html { scroll-padding-top: calc(var(--navh, 0px) + 18px); }
+  .shell { display: grid; grid-template-columns: 252px minmax(0, 1fr); min-height: 100vh; }
+  .col { min-width: 0; }
+  .side { position: sticky; top: 0; height: 100vh; overflow-y: auto; background: #F6F1E7; border-right: 1px solid var(--line);
+          padding: 22px 14px 16px; display: flex; flex-direction: column; gap: 14px; scrollbar-width: thin; }
+  .side-brand { display: flex; align-items: center; gap: 10px; padding: 2px 10px 12px; text-decoration: none; }
+  .side-brand img { height: 22px; display: block; }
+  .side-brand span { font: 600 12.5px "Public Sans"; color: var(--muted); padding-left: 10px; border-left: 1px solid var(--line-2); }
+  .side-nav { display: flex; flex-direction: column; gap: 1px; }
+  .side-label { font: 600 10.5px "Public Sans"; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); padding: 16px 10px 6px; }
+  .side-nav a.navlink { display: flex; align-items: center; gap: 10px; padding: 7px 10px; border-radius: 8px; text-decoration: none;
+                        color: var(--body); font: 500 14px/1.3 "Public Sans"; transition: background .12s, color .12s; }
+  .side-nav a.navlink svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.7; flex: none; }
+  .side-nav a.navlink i.sv { width: 8px; height: 8px; border-radius: 50%; margin: 0 3px; flex: none; }
+  .side-nav a.navlink b { margin-left: auto; font: 500 12px "Public Sans"; color: var(--muted); font-feature-settings: "tnum" 1; }
+  .side-nav a.navlink:hover { background: rgba(44, 78, 37, .06); color: var(--ink); }
+  .side-nav a.navlink.on { background: var(--paper); color: var(--ink); box-shadow: 0 0 0 1px var(--line), 0 1px 2px rgba(19, 23, 15, .05); }
+  .side-nav a.navlink.on b { color: var(--forest); }
+  .side-subs { display: none; flex-direction: column; margin: 2px 0 6px 24px; padding-left: 8px; border-left: 1px solid var(--line-2); }
+  .side-subs.on { display: flex; }
+  .side-subs a { font: 500 13px/1.3 "Public Sans"; color: var(--muted); text-decoration: none; padding: 5px 8px; border-radius: 6px; }
+  .side-subs a:hover { color: var(--forest); background: rgba(44, 78, 37, .05); }
+  .side-tracker { margin-top: auto; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 14px 14px 12px;
+                  display: flex; flex-direction: column; gap: 9px; box-shadow: 0 1px 2px rgba(19, 23, 15, .04); }
+  .st-label { font: 600 10.5px "Public Sans"; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); }
+  .st-state { font-size: 12.5px; line-height: 1.45; color: var(--body); }
+  .st-state i.d { vertical-align: 1px; }
+  .st-btn { justify-content: center; width: 100%; padding: 10px 12px; font-size: 13.5px; }
+  .st-files { font: 600 12.5px "Public Sans"; color: var(--forest); text-decoration: none; text-align: center; }
+  .st-files:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .mobilebar { display: none; }
+  .wrap { padding: 0 40px; }
+  header.top { padding: 40px 0 6px; }
+  .hero { display: flex; justify-content: space-between; align-items: flex-end; gap: 28px; flex-wrap: wrap; }
+  .eyebrow { font: 600 12px "Public Sans"; letter-spacing: .02em; color: var(--muted); margin-bottom: 14px; }
+  .hero h1 { max-width: 640px; }
+  .hero-cta { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; padding-bottom: 4px; }
+  .btn.big { padding: 13px 20px; font-size: 14.5px; border-radius: 11px; box-shadow: 0 1px 2px rgba(19, 23, 15, .12), inset 0 1px 0 rgba(255, 255, 255, .08); }
+  .hero-sub { font-size: 12.5px; color: var(--muted); }
+  body[data-view="library"] header.top { display: none; }
+  main section.svc:first-of-type { padding-top: 40px; }
+  section.svc { padding-top: 56px; }
+  .shead h2 { margin-bottom: 2px; }
+  .sstats { font: 600 13px "Public Sans"; color: var(--forest); margin-top: 6px; letter-spacing: .01em; }
+  .sstats:empty { display: none; }
+  .sstats span { color: var(--muted); font-weight: 500; }
+  .sumview { padding-top: 18px; }
+  footer { margin-top: 64px; }
+  @media (max-width: 1099px) {
+    .shell { display: block; }
+    .side { display: none; }
+    .mobilebar { display: block; position: sticky; top: 0; z-index: 8; background: rgba(255, 252, 247, .93); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 20px; }
+    .tb-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .tb-brand img { height: 22px; display: block; }
+    .tb-brand span { font: 600 12.5px "Public Sans"; color: var(--muted); padding-left: 10px; border-left: 1px solid var(--line-2); }
+    .tb-btn { padding: 8px 13px; font-size: 13px; }
+    .mobilebar nav.tabs { position: static; border: 0; background: none; backdrop-filter: none; -webkit-backdrop-filter: none; border-top: 1px solid var(--line); }
+    .mobilebar nav.tabs .wrap { padding: 6px 16px; }
+    .wrap { padding: 0 24px; }
+    .hero-cta { display: none; }
+    header.top { padding-top: 28px; }
+  }
+  @media (max-width: 520px) { .wrap { padding: 0 16px; } .tb-brand span { display: none; } }
 </style>
 </head>
 <body>
+<div class="shell">
+<aside class="side">
+  <a class="side-brand" href="#summary"><img src="files/logo.png" alt="Optimal"><span>Ad hand-off</span></a>
+  <nav class="side-nav" aria-label="Sections">
+    <a href="#summary" class="navlink sumtab"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.6"/><rect x="13" y="4" width="7" height="7" rx="1.6"/><rect x="4" y="13" width="7" height="7" rx="1.6"/><rect x="13" y="13" width="7" height="7" rx="1.6"/></svg><span>Overview</span></a>
+    <div class="side-label">Files &amp; copy</div>
+    <a href="#menopause" class="navlink"><i class="sv menopause"></i><span>Menopause</span><b>{{N_MENO}}</b></a>
+    <div class="side-subs" data-for="menopause"></div>
+  <a href="#cycle" class="navlink"><i class="sv cycle"></i><span>Cycle &amp; Hormone</span><b>{{N_CYCLE}}</b></a>
+    <div class="side-subs" data-for="cycle"></div>
+  <a href="#longevity" class="navlink"><i class="sv longevity"></i><span>Longevity</span><b>{{N_LONG}}</b></a>
+    <div class="side-subs" data-for="longevity"></div>
+  <a href="#iron" class="navlink"><i class="sv iron"></i><span>IV iron</span><b>{{N_IRON}}</b></a>
+    <div class="side-subs" data-for="iron"></div>
+  <a href="#instagram" class="navlink"><i class="sv clinic"></i><span>Organic posts</span><b>{{N_IG}}</b></a>
+    <div class="side-subs" data-for="instagram"></div>
+    <div class="side-label">Reference</div>
+    <a href="#howto" class="navlink"><span>How to launch</span></a>
+    <a href="#new" class="navlink"><span>Change log</span></a>
+  </nav>
+  <div class="side-tracker">
+    <span class="st-label">Tracker</span>
+    <p class="st-state" id="side-checked"><i class="d wait"></i>Reading the tracker…</p>
+    <a class="btn st-btn" href="{{TRACKER_EDIT}}" target="_blank" rel="noopener">Open tracker sheet ↗</a>
+    <a class="st-files" href="{{RELEASE}}" target="_blank" rel="noopener">All full-quality files ↗</a>
+  </div>
+</aside>
+<div class="col">
+<div class="mobilebar">
+  <div class="topbar">
+    <a class="tb-brand" href="#summary"><img src="files/logo.png" alt="Optimal"><span>Ad hand-off</span></a>
+    <a class="btn tb-btn" href="{{TRACKER_EDIT}}" target="_blank" rel="noopener">Tracker sheet ↗</a>
+  </div>
+  <nav class="tabs"><div class="wrap wide">
+    <a href="#summary" class="navlink sumtab">Overview</a>
+    <a href="#menopause" class="navlink"><i class="sv menopause"></i><span>Menopause</span><b>{{N_MENO}}</b></a>
+  <a href="#cycle" class="navlink"><i class="sv cycle"></i><span>Cycle &amp; Hormone</span><b>{{N_CYCLE}}</b></a>
+  <a href="#longevity" class="navlink"><i class="sv longevity"></i><span>Longevity</span><b>{{N_LONG}}</b></a>
+  <a href="#iron" class="navlink"><i class="sv iron"></i><span>IV iron</span><b>{{N_IRON}}</b></a>
+  <a href="#instagram" class="navlink"><i class="sv clinic"></i><span>Organic posts</span><b>{{N_IG}}</b></a>
+    <a href="#howto" class="navlink">How to launch</a>
+  </div></nav>
+</div>
 <header class="top"><div class="wrap ov">
-  <div class="brand"><img src="files/logo.png" alt="Optimal"><span>Ads &amp; posts · files updated {{UPDATED}}</span>
-    <a class="toplink" href="{{TRACKER_EDIT}}" target="_blank" rel="noopener">Open the tracker sheet ↗</a></div>
-  <h1>What's live, and what's next.</h1>
-  <p class="lede">Every Optimal ad and post, and where it's running. Checked every day against Instagram, the Facebook Page and the Meta Ad Library.</p>
+  <div class="hero">
+    <div>
+      <p class="eyebrow">Ads &amp; posts · files updated {{UPDATED}}</p>
+      <h1>What's live, and what's next.</h1>
+      <p class="lede">Every Optimal ad and post, and where it's running. Checked every day against Instagram, the Facebook Page and the Meta Ad Library.</p>
+    </div>
+    <div class="hero-cta">
+      <a class="btn big" href="{{TRACKER_EDIT}}" target="_blank" rel="noopener">Open tracker sheet ↗</a>
+      <span class="hero-sub">Change a status there and this page picks it up.</span>
+    </div>
+  </div>
 </div></header>
-
-<nav class="tabs"><div class="wrap wide">
-  <a href="#summary" class="sumtab">Overview</a>
-  <span class="navsep"></span><span class="navlbl">Files &amp; copy</span>
-  <a href="#menopause">Menopause<b>{{N_MENO}}</b></a>
-  <a href="#cycle">Cycle &amp; Hormone<b>{{N_CYCLE}}</b></a>
-  <a href="#longevity">Longevity<b>{{N_LONG}}</b></a>
-  <a href="#iron">IV iron<b>{{N_IRON}}</b></a>
-  <a href="#instagram">Organic posts<b>{{N_IG}}</b></a>
-  <a href="#howto">How to launch</a>
-</div></nav>
 
 <section id="summary" class="sumview"><div class="wrap ov">
   <p class="checked" id="checked"><i class="d wait"></i>Reading the tracker…</p>
@@ -500,7 +606,7 @@
 
 <main class="wrap">
   <section class="svc" id="menopause">
-    <div class="shead"><h2>Menopause</h2>
+    <div class="shead"><h2>Menopause</h2><p class="sstats" data-svc="menopause"></p>
       <p>One ad set. Every ad goes to the menopause page with the button <b>Book now</b>. Start with the ads marked Test now, in order.</p></div>
     <div class="setup">{{MENO_SETUP}}</div>
     <div class="group"><h3>Video ads</h3><span>Each cut comes in 9:16, 1:1 and 1.91:1. Previews are compressed; downloads are full quality.</span></div>
@@ -511,7 +617,7 @@
   </section>
 
   <section class="svc" id="cycle">
-    <div class="shead"><h2>Cycle &amp; Hormone Care</h2>
+    <div class="shead"><h2>Cycle &amp; Hormone Care</h2><p class="sstats" data-svc="cycle"></p>
       <p>Two ad sets: <b>Set 1 · General</b> (videos, five image ads and the carousel) and <b>Set 2 · By condition</b> (PMOS, PMDD, endometriosis). Every ad goes to the Cycle &amp; Hormone Care page. All copy: <a href="files/COPY-CYCLE.md" target="_blank" rel="noopener">COPY-CYCLE.md</a>.</p></div>
     <div class="setup">{{CYCLE_SETUP}}</div>
     <div class="group"><h3>Video ads</h3><span>Set 1. Each opens with the Cycle &amp; Hormone Care badge.</span></div>
@@ -528,7 +634,7 @@
   </section>
 
   <section class="svc" id="longevity">
-    <div class="shead"><h2>Longevity membership</h2>
+    <div class="shead"><h2>Longevity membership</h2><p class="sstats" data-svc="longevity"></p>
       <p>One ad set. Every ad goes to the membership page with the button <b>Book now</b>.</p></div>
     <div class="setup">{{LONG_SETUP}}</div>
     <div class="group"><h3>Video ads</h3><span>Each cut comes in 9:16, 1:1 and 1.91:1.</span></div>
@@ -539,7 +645,7 @@
   </section>
 
   <section class="svc" id="iron">
-    <div class="shead"><h2>IV iron</h2>
+    <div class="shead"><h2>IV iron</h2><p class="sstats" data-svc="iron"></p>
       <p>Opens in Barrie in November. Until then, every ad collects founding-waitlist signups on a Meta Instant Form, with the button <b>Sign up</b>. No price, no booking.</p></div>
     <div class="setup">{{IRON_SETUP}}</div>
     <div class="group"><h3>Video ads</h3><span>Start with IRV1 (marked Run now), then test the four talking heads (IRT) and the rest.</span></div>
@@ -551,7 +657,7 @@
   </section>
 
   <section class="svc" id="instagram">
-    <div class="shead"><h2>Organic posts</h2>
+    <div class="shead"><h2>Organic posts</h2><p class="sstats" data-svc="instagram"></p>
       <p>For Instagram (@beoptimal.ca) and the Facebook Page. Each card shows where it's posted, from the tracker. On Facebook, swap “link in bio” for book.beoptimal.ca, which is clickable there. Nothing that would need Meta's AI label goes up, and the label is never turned on.</p></div>
     <div class="group"><h3>Posts</h3><span>Feed videos are 4:5, with a 9:16 reel cut.</span></div>
     <div class="grid">{{IG_POSTS}}</div>
@@ -591,6 +697,7 @@
 </main>
 
 <footer><div class="wrap">Optimal Health · 630 Huronia Rd, Unit 5, Barrie · <a href="{{RELEASE}}" target="_blank" rel="noopener">All full-quality files</a> · Zips: {{ZIPS}} · Questions: Peter.</div></footer>
+</div></div>
 
 <script id="catalog" type="application/json">{{CATALOG_JSON}}</script>
 <script id="snapshot" type="application/json">{{SNAPSHOT_JSON}}</script>
@@ -822,6 +929,21 @@
     const c = checks[0];
     const rel = d => { const t = new Date(); t.setHours(0, 0, 0, 0); const dd = new Date(d); dd.setHours(0, 0, 0, 0);
       return dd - t === 0 ? "today" : t - dd === 864e5 ? "yesterday" : fmtDay(d); };
+    const when = c ? `Checked ${rel(c.d)} at ${c.d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}` : "Not checked yet";
+    $("#side-checked").innerHTML = `<i class="d ${c && now - c.d < 2 * 864e5 ? "on" : "wait"}"></i>${when}.${live ? " Reading the sheet live." : " Showing a saved copy until link sharing is on."}`;
+    const SEC = { menopause: "menopause", cycle: "cycle", longevity: "longevity", iron: "iron" };
+    document.querySelectorAll(".sstats").forEach(el => {
+      if (el.dataset.svc === "instagram") {
+        const p = rows.filter(r => postGroup(r) && r.kind === "organic");
+        el.innerHTML = `${cnt(r => on(r.ig))} on Instagram <span>·</span> ${cnt(r => on(r.fb))} on Facebook <span>· ${p.length} organic posts listed</span>`;
+        return;
+      }
+      const mine = rows.filter(r => r.svc === SEC[el.dataset.svc]), ads = mine.filter(r => r.kind === "ad"), g = mine.filter(r => r.kind === "google");
+      const parts = [`${ads.filter(r => on(r.meta)).length} running on Meta`, `${ads.filter(r => adGroup(r) === "ready").length} ready to upload`];
+      const fix = ads.filter(r => adGroup(r) === "fix").length; if (fix) parts.push(`${fix} to fix or check`);
+      if (g.length) parts.push(`Google ${g.filter(r => on(r.google)).length} of ${g.length} live`);
+      el.innerHTML = parts.join(" <span>·</span> ");
+    });
     $("#checked").innerHTML = (c ? `<i class="d ${now - c.d < 2 * 864e5 ? "on" : "wait"}"></i>Last checked ${rel(c.d)} at ${c.d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}: Instagram, the Facebook Page and the Meta Ad Library.`
       : '<i class="d wait"></i>Not checked yet.') + (live ? "" : ` <span>(saved copy from ${esc(SNAP.at)})</span>`);
   }
@@ -863,16 +985,19 @@
     .catch(() => {});
 
   // ---------------- two views: Overview and the library (cards by service); the hash picks one
-  const sumtab = document.querySelector("nav.tabs .sumtab");
+  const markNav = id => {        // highlight the section in both navs, and open its parts in the sidebar
+    document.querySelectorAll("a.navlink:not(.sumtab)").forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + id));
+    document.querySelectorAll(".side-subs").forEach(d => d.classList.toggle("on", d.dataset.for === id));
+  };
   function route() {
     const id = decodeURIComponent(location.hash.slice(1));
     const el = id && document.getElementById(id);
     const summary = !id || id === "summary" || (el && el.closest("#summary"));
     document.body.dataset.view = summary ? "summary" : "library";
-    sumtab.classList.toggle("on", !!summary);
-    document.querySelectorAll("nav.tabs a:not(.sumtab)").forEach(a => {
-      const sec = el && el.closest("section"); a.classList.toggle("on", !summary && sec && a.getAttribute("href") === "#" + sec.id);
-    });
+    document.querySelectorAll(".sumtab").forEach(a => a.classList.toggle("on", !!summary));
+    const sec = el && el.closest("section.svc");
+    markNav(!summary && sec ? sec.id : (id === "new" || id === "howto" ? id : ""));
+    if (summary && id === "new") document.querySelectorAll('a.navlink[href="#new"]').forEach(a => a.classList.add("on"));
     if (el && el.matches("details")) el.open = true;
     const go = () => el && id !== "summary" ? el.scrollIntoView({ block: el.matches("section, details") ? "start" : "center", behavior: "instant" })
                                             : summary && window.scrollTo({ top: 0, behavior: "instant" });
@@ -884,10 +1009,18 @@
   }
   const io = new IntersectionObserver(es => {
     if (document.body.dataset.view !== "library") return;
-    for (const e of es) if (e.isIntersecting) document.querySelectorAll("nav.tabs a:not(.sumtab)").forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id));
+    for (const e of es) if (e.isIntersecting) markNav(e.target.id);
   }, { rootMargin: "-40% 0px -55% 0px" });
   document.querySelectorAll("main section.svc").forEach(sec => io.observe(sec));
-  const setNav = () => document.documentElement.style.setProperty("--navh", document.querySelector("nav.tabs").offsetHeight + "px");
+  // the sidebar lists each section's parts (its group headings)
+  document.querySelectorAll("main section.svc").forEach(sec => {
+    const box = document.querySelector(`.side-subs[data-for="${sec.id}"]`); if (!box) return;
+    box.innerHTML = [...sec.querySelectorAll(".group")].map((g, i) => {
+      g.id = g.id || `${sec.id}-part-${i + 1}`;
+      return `<a href="#${g.id}">${esc(g.querySelector("h3").textContent)}</a>`;
+    }).join("");
+  });
+  const setNav = () => document.documentElement.style.setProperty("--navh", document.querySelector(".mobilebar").offsetHeight + "px");
   window.addEventListener("resize", setNav); setNav();
   window.addEventListener("hashchange", route); route();
 })();
