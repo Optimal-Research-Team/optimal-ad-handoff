@@ -321,10 +321,7 @@ def serp(hs, ds, path, assets, mobile=False):
             f'<span class="g-site"><span class="g-name">Optimal Health</span><span class="g-url">https://www.beoptimal.ca › {esc(crumbs)}</span></span>'
             f'<span class="g-dots" aria-hidden="true">⋮</span></div>')
     body = f'<div class="g-title">{esc(title)}</div><div class="g-desc">{esc(desc)}</div>'
-    if not mobile:
-        hdr, vals = assets["snippet"]
-        body += (f'<div class="g-desc g-ext">{esc(" · ".join(assets["callouts"][:4]))}</div>'
-                 f'<div class="g-desc g-ext">{esc(hdr)}: {esc(", ".join(vals[:5]))}</div>')
+    if not mobile:      # callouts and the snippet can show too, but Google rarely shows every extra at once
         body += '<div class="g-sl">' + "".join(f'<div><span class="g-slt">{esc(t)}</span><span>{esc(a)}</span><span>{esc(b)}</span></div>'
                                                for t, a, b in assets["sitelinks"][:4]) + "</div>"
     else:
@@ -773,8 +770,12 @@ def build():
           <figure class="gdesk"><figcaption>Google on a computer</figcaption>{serp(hs, ds, path, gassets)}</figure>
           <figure class="gmob"><figcaption>Google on a phone</figcaption><div class="phone">{serp(hs, ds, path, gassets, mobile=True)}</div></figure>
         </div>
-        <p class="gnote">A preview. Google mixes the {len(hs)} headlines and {len(ds)} descriptions and picks which extras to show, so live ads vary.</p>
-        <details class="more"><summary>Headlines, descriptions, keywords to paste</summary>{copy_field("Headlines (one per line)", chr(10).join(hs), 8)}{copy_field("Descriptions", chr(10).join(ds), 4)}{copy_field("Keywords", chr(10).join(kws), 5)}</details>
+        <p class="gnote">A preview. Google mixes the {len(hs)} headlines and {len(ds)} descriptions, and may add callouts or a services line, so live ads vary.
+          <b class="ok">Within Google's limits:</b> longest headline {max(map(len, hs))}/30 characters, longest description {max(map(len, ds))}/90.</p>
+        <details class="more"><summary>Every headline and description, with its character count</summary>
+          <ol class="glens">{"".join(f'<li><span>{esc(h)}</span><em>{len(h)}/30</em></li>' for h in hs)}</ol>
+          <ol class="glens">{"".join(f'<li><span>{esc(d)}</span><em>{len(d)}/90</em></li>' for d in ds)}</ol></details>
+        <details class="more"><summary>Copy to paste into Google Ads</summary>{copy_field("Headlines (one per line)", chr(10).join(hs), 8)}{copy_field("Descriptions", chr(10).join(ds), 4)}{copy_field("Keywords", chr(10).join(kws), 5)}</details>
       </article>''')
     th8 = open(os.path.join(STUDIO, "..", "optimal-content-library", "SHOTLIST.md")).read()
     th8 = th8[th8.index("**TH8"):th8.index("### Strongly want")].strip()

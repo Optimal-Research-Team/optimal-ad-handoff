@@ -9,7 +9,7 @@ The campaign has five ad groups in two sets, matching the Meta ads:
 | **General** | CG1 cycle & hormone care · CG2 period problems |
 | **By condition** | CG3 PMOS (formerly PCOS) · CG4 PMDD · CG5 endometriosis & adenomyosis |
 
-- **Character limits:** every headline is ≤30 characters, every description ≤90, every callout and sitelink ≤25, every sitelink line ≤35, and every path ≤15. All are checked by `gen/r9/check_google.py`.
+- **Character limits:** every headline is ≤30 characters, every description ≤90 (ours are kept to about 70 so two fit on two lines), every callout and sitelink ≤25, every sitelink line ≤35, and every path ≤15. All are checked by `gen/r9/check_google.py`.
 - **Approach:** Hormozi-style and simple.
   - Lead with the searcher's problem.
   - Make the outcome concrete ("real answers in 12 weeks", "a plan you understand").
@@ -76,11 +76,10 @@ The campaign has five ad groups in two sets, matching the Meta ads:
 15. Local Clinic in Barrie, ON
 
 **Descriptions (4):**
-1. Take the free 3-minute Cycle Check, then a 60-minute visit with our Nurse Practitioner.
-2. No referral needed. We time your bloodwork to your cycle, and OHIP covers the bloodwork.
-3. In 12 weeks, know what's driving your symptoms and leave with a plan you understand.
-4. For women 18 to 45 who still have periods: PMOS, PMDD, endometriosis, irregular cycles.
-
+1. Free 3-minute Cycle Check, then 60 minutes with a Nurse Practitioner.
+2. No referral. Bloodwork timed to your cycle, covered by OHIP.
+3. In 12 weeks, know what's behind your symptoms, with a clear plan.
+4. For women 18–45 with PMOS, PMDD, endometriosis or irregular cycles.
 ## CG2 · Period problems (irregular, heavy or painful)
 
 **Display path:** `beoptimal.ca/periods/barrie`
@@ -113,11 +112,10 @@ The campaign has five ad groups in two sets, matching the Meta ads:
 15. Local Clinic in Barrie, ON
 
 **Descriptions (4):**
-1. Irregular, heavy, painful or missing periods deserve a proper look, not "that's normal".
-2. We check iron, time your bloodwork to your cycle and arrange imaging when it's needed.
-3. No referral needed. Free 3-minute Cycle Check, then a 60-minute visit with your NP.
-4. In 12 weeks, know what's driving your symptoms and leave with a plan you understand.
-
+1. Irregular, heavy or painful periods deserve a proper look.
+2. We check iron, time your bloodwork to your cycle, and image if needed.
+3. No referral. Free 3-minute Cycle Check, then 60 minutes with an NP.
+4. In 12 weeks, know what's behind your symptoms, with a clear plan.
 ## CG3 · PMOS (formerly PCOS)
 
 **Display path:** `beoptimal.ca/pmos-pcos/barrie`
@@ -150,11 +148,10 @@ The campaign has five ad groups in two sets, matching the Meta ads:
 15. Local Clinic in Barrie, ON
 
 **Descriptions (4):**
-1. PMOS, formerly called PCOS: cycles, skin, hair and metabolism, looked at together.
-2. We check androgens, insulin and thyroid, timed to your cycle. OHIP covers the bloodwork.
-3. No referral needed. Free 3-minute Cycle Check, then a 60-minute visit with your NP.
-4. Options are chosen with you: cycle regulation, skin and hair care, metabolic support.
-
+1. PMOS, formerly PCOS: cycles, skin, hair and metabolism, together.
+2. Androgen, insulin and thyroid bloodwork, timed to your cycle.
+3. No referral. Free 3-minute Cycle Check, then 60 minutes with an NP.
+4. Options chosen with you: cycle, skin, hair and metabolic care.
 ## CG4 · PMDD and severe PMS
 
 **Display path:** `beoptimal.ca/pmdd/barrie`
@@ -186,11 +183,10 @@ The campaign has five ad groups in two sets, matching the Meta ads:
 15. Local Clinic in Barrie, ON
 
 **Descriptions (4):**
-1. When mood crashes the week before a period and lifts once it starts, there are options.
-2. We confirm the pattern with daily tracking, then build a plan with your NP.
-3. No referral needed. Free 3-minute Cycle Check, then a 60-minute visit with your NP.
-4. Options are chosen with you, from sleep and stress support to medication when it helps.
-
+1. Mood that crashes before a period and lifts after? There are options.
+2. We confirm the pattern with daily tracking, then plan with your NP.
+3. No referral. Free 3-minute Cycle Check, then 60 minutes with an NP.
+4. From sleep and stress support to medication when it helps.
 ## CG5 · Endometriosis and adenomyosis
 
 **Display path:** `beoptimal.ca/endometriosis/barrie`
@@ -222,11 +218,10 @@ The campaign has five ad groups in two sets, matching the Meta ads:
 15. Local Clinic in Barrie, ON
 
 **Descriptions (4):**
-1. Painful periods, pelvic pain or pain with intimacy can point to endometriosis.
-2. We assess pain and bleeding, check iron, and arrange imaging or referral when needed.
-3. No referral needed. Free 3-minute Cycle Check, then a 60-minute visit with your NP.
-4. Suspected or already diagnosed: a plan you understand, with the same NP every visit.
-
+1. Painful periods, pelvic pain or pain with intimacy deserve answers.
+2. We assess pain and bleeding, check iron, and refer or image if needed.
+3. No referral. Free 3-minute Cycle Check, then 60 minutes with an NP.
+4. Suspected or diagnosed: one NP, every visit, and a plan you understand.
 ## Assets (campaign level)
 
 **Sitelinks:**
