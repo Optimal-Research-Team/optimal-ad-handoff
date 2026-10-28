@@ -205,104 +205,129 @@
   @media (max-width: 520px) { .wrap { padding: 0 16px; } .ad { padding: 16px; } .grid { grid-template-columns: 1fr 1fr; gap: 10px; }
     .tbody { padding: 10px; } .tbody h4 { font-size: 15px; } }
 
-  /* ---------------- Oct 28: Summary view (one table, every ad and post, statuses from the tracker sheet) */
+  /* ---------------- Oct 28 (round 2, "simpler, clearer, more digestible"): Overview = channel totals, what needs
+     attention, then two plain lists grouped by status. Statuses come from the tracker sheet. */
   :root { --menopause: #7A486C; --cycle: #C4747C; --longevity: #2C4E25; --iron: #C06244; --clinic: #182E6C;
           --on: #3D7A3A; --wait: #CC8F34; --bad: #B4552D; --off: #A39F98; }
-  .wrap.wide { max-width: 1400px; }
+  .wrap.wide { max-width: 1120px; }
+  .wrap.ov { max-width: 1040px; }
   body[data-view="summary"] main, body[data-view="summary"] footer { display: none; }
   body[data-view="library"] #summary { display: none; }
+  header.top { padding: 34px 0 20px; }
+  .brand { margin-bottom: 26px; }
+  .brand .toplink { margin-left: auto; font: 600 13px "Public Sans"; color: var(--forest); text-decoration: none; }
+  .brand .toplink:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .lede { max-width: 640px; color: var(--body); }
   nav.tabs a.on { background: var(--forest); color: var(--cream); }
   nav.tabs a.on b { color: rgba(255, 252, 247, .7); }
-  nav.tabs .navsep { flex: none; width: 1px; margin: 6px 6px; background: var(--line-2); }
-  nav.tabs .navnew { margin-left: auto; }
-  header.top { padding-bottom: 22px; }
-  .topact { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
-  .zipsd > summary { font: 600 12.5px "Public Sans"; color: var(--muted); list-style: none; cursor: pointer; }
-  .zipsd > summary::-webkit-details-marker { display: none; }
-  .zipsd .zips { max-width: 420px; text-align: right; line-height: 1.9; }
+  nav.tabs .navsep { flex: none; width: 1px; margin: 6px 8px; background: var(--line-2); }
+  nav.tabs .navlbl { flex: none; align-self: center; font: 600 10.5px "Public Sans"; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-right: 2px; }
   .btn.ghost { background: transparent; color: var(--forest); border: 1px solid var(--line-2); padding: 8px 12px; font-size: 13px; }
   .btn.ghost:hover { background: var(--forest); color: var(--cream); border-color: var(--forest); }
 
-  .sumview { padding: 26px 0 40px; }
-  .stats { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
-  .stats button { all: unset; cursor: pointer; padding: 16px 18px 15px; border-left: 1px solid var(--line); position: relative; display: flex; flex-direction: column; gap: 2px; }
-  .stats button:first-child { border-left: 0; }
-  .stats button b { font: 400 34px/1 Castoro, serif; color: var(--ink); letter-spacing: -.02em; font-feature-settings: "lnum" 1, "tnum" 1; }
-  .stats button span { font-size: 12.5px; color: var(--muted); }
-  .stats button:hover { background: var(--cream); }
-  .stats button.on { background: var(--cream); }
-  .stats button.on::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--forest); }
-  .stats button.on span { color: var(--forest); font-weight: 600; }
-  .stats button:focus-visible, .seg button:focus-visible { outline: 2px solid var(--forest); outline-offset: -2px; }
+  .sumview { padding: 22px 0 56px; }
+  .checked { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+  .checked i.d { vertical-align: 1px; }
+  .checked a { color: var(--forest); }
+  i.d { width: 7px; height: 7px; border-radius: 50%; display: inline-block; flex: none; margin-right: 7px; }
+  i.d.on { background: var(--on); } i.d.wait { background: var(--wait); } i.d.bad { background: var(--bad); }
+  i.d.off { box-shadow: inset 0 0 0 1.5px var(--off); } i.d.todo { box-shadow: inset 0 0 0 1.5px rgba(44, 78, 37, .28); }
 
-  .toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 16px 0 12px; }
-  .search { display: flex; align-items: center; gap: 8px; background: var(--paper); border: 1px solid var(--line-2); border-radius: 10px; padding: 0 12px; height: 38px; width: 240px; }
+  /* the four channel totals */
+  .channels { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+  .chcard { all: unset; box-sizing: border-box; cursor: pointer; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r);
+            padding: 16px 18px 15px; display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto auto; column-gap: 8px; align-items: baseline;
+            transition: border-color .15s, transform .15s; }
+  .chcard:hover { border-color: var(--line-2); transform: translateY(-1px); }
+  .chcard:focus-visible { outline: 2px solid var(--forest); outline-offset: 2px; }
+  .chname { grid-column: 1 / -1; font: 600 11px "Public Sans"; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .chcard b { font: 400 40px/1 Castoro, serif; color: var(--ink); letter-spacing: -.02em; font-feature-settings: "lnum" 1; }
+  .chunit { font-size: 14px; color: var(--ink); }
+  .chsub { grid-column: 1 / -1; font-size: 12.5px; color: var(--muted); margin-top: 8px; line-height: 1.4; }
+
+  /* needs attention: a plain numbered list, one action per line */
+  .attn { margin-top: 26px; }
+  .attn h2, .lower h2 { font: 400 22px/1.2 Castoro, serif; letter-spacing: -.01em; margin-bottom: 8px; }
+  .attn ol { list-style: none; padding: 0; border-top: 1px solid var(--line); }
+  .attn li { display: grid; grid-template-columns: 16px minmax(0, 1fr) auto; gap: 10px; align-items: baseline; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 14.5px; color: var(--ink); }
+  .attn li::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--bad); transform: translateY(-1px); }
+  .attn li.soft::before { background: var(--wait); }
+  .attn li b { font-weight: 700; }
+  .attn li a { font: 600 13px "Public Sans"; color: var(--forest); text-decoration: none; white-space: nowrap; }
+  .attn li a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* the lists */
+  .listbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin: 34px 0 10px; }
+  .views { display: inline-flex; gap: 22px; border-bottom: 1px solid var(--line); }
+  .views button { all: unset; cursor: pointer; font: 400 22px/1.2 Castoro, serif; color: var(--muted); padding: 0 0 8px; position: relative; letter-spacing: -.01em; }
+  .views button em { font: 600 12px "Public Sans"; font-style: normal; color: var(--muted); margin-left: 4px; vertical-align: 3px; }
+  .views button.on { color: var(--ink); }
+  .views button.on::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--forest); }
+  .views button:focus-visible { outline: 2px solid var(--forest); outline-offset: 4px; }
+  .filters { display: flex; gap: 8px; }
+  .search { display: flex; align-items: center; gap: 8px; background: var(--paper); border: 1px solid var(--line-2); border-radius: 10px; padding: 0 12px; height: 36px; width: 200px; }
   .search:focus-within { border-color: var(--forest); }
-  .search svg { width: 16px; height: 16px; fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; flex: none; }
-  .search input { all: unset; flex: 1; font: 400 14px "Public Sans"; color: var(--ink); }
-  .seg { display: inline-flex; background: var(--bone); border-radius: 10px; padding: 3px; gap: 2px; }
-  .seg button { all: unset; cursor: pointer; font: 600 12.5px "Public Sans"; color: var(--body); padding: 7px 11px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
-  .seg button:hover { color: var(--ink); }
-  .seg button.on { background: var(--paper); color: var(--ink); box-shadow: 0 1px 2px rgba(19, 23, 15, .08), 0 0 0 1px var(--line); }
-  #fmt { font: 600 12.5px "Public Sans"; color: var(--ink); height: 38px; padding: 0 30px 0 12px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--paper);
-         appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%2377746E" stroke-width="2.2" stroke-linecap="round"><path d="m7 10 5 5 5-5"/></svg>');
-         background-repeat: no-repeat; background-position: right 9px center; background-size: 15px; cursor: pointer; }
-  .trk { margin-left: auto; display: flex; align-items: center; gap: 12px; font-size: 12.5px; color: var(--muted); }
-  i.sv { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex: none; }
+  .search svg { width: 15px; height: 15px; fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; flex: none; }
+  .search input { all: unset; flex: 1; min-width: 0; font: 400 14px "Public Sans"; color: var(--ink); }
+  #svcsel { font: 500 13px "Public Sans"; color: var(--ink); height: 36px; padding: 0 30px 0 12px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--paper);
+            appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%2377746E" stroke-width="2.2" stroke-linecap="round"><path d="m7 10 5 5 5-5"/></svg>');
+            background-repeat: no-repeat; background-position: right 9px center; background-size: 15px; cursor: pointer; }
+
+  .colhead, .row { display: grid; grid-template-columns: 44px minmax(0, 1fr) 200px 150px 16px; gap: 14px; align-items: center; }
+  .colhead { font: 600 10.5px "Public Sans"; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 6px 12px 6px; }
+  .colhead span:first-child { grid-column: 1 / 3; }
+  details.grp { margin-top: 14px; }
+  details.grp > summary { list-style: none; cursor: pointer; display: flex; align-items: baseline; gap: 8px; padding: 6px 2px 8px; border-bottom: 1px solid var(--line-2); }
+  details.grp > summary::-webkit-details-marker { display: none; }
+  details.grp > summary::before { content: ""; width: 7px; height: 7px; border-right: 1.6px solid var(--muted); border-bottom: 1.6px solid var(--muted);
+                                  transform: rotate(-45deg); transition: transform .15s; margin-right: 4px; align-self: center; }
+  details.grp[open] > summary::before { transform: rotate(45deg) translate(-2px, -1px); }
+  .gname { font: 600 14.5px "Public Sans"; color: var(--ink); }
+  .gcount { font: 600 13px "Public Sans"; color: var(--muted); }
+  .ghint { font-size: 12.5px; color: var(--muted); margin-left: 6px; }
+  .rows { background: var(--paper); border: 1px solid var(--line); border-top: 0; border-radius: 0 0 var(--r) var(--r); }
+  .row { padding: 9px 12px; border-top: 1px solid var(--line); cursor: pointer; transition: background .12s; }
+  .row:first-child { border-top: 0; }
+  .row:hover { background: #FBF8F2; }
+  .row:last-child { border-radius: 0 0 var(--r) var(--r); }
+  .row .th img, .row .th .gl { width: 44px; height: 44px; border-radius: 8px; object-fit: cover; display: block; background: var(--bone); border: 1px solid var(--line); }
+  .row .th .gl { display: grid; place-items: center; }
+  .row .th .gl svg { width: 18px; height: 18px; fill: none; stroke: var(--muted); stroke-width: 1.8; stroke-linecap: round; }
+  .row .main { min-width: 0; }
+  .row .t { display: block; color: var(--ink); font-size: 14.5px; line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .row .t b { font: 700 12.5px "Public Sans"; color: var(--forest); letter-spacing: .02em; margin-right: 8px; }
+  .row .t .new { font: 700 9.5px "Public Sans"; letter-spacing: .1em; text-transform: uppercase; color: var(--new); margin-left: 8px; vertical-align: 1px; }
+  .row .sub { display: block; font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+  .row .sub .sn { white-space: nowrap; }
+  .row .sub i.sv { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 5px; vertical-align: 1px; }
   i.sv.menopause { background: var(--menopause); } i.sv.cycle { background: var(--cycle); } i.sv.longevity { background: var(--longevity); }
   i.sv.iron { background: var(--iron); } i.sv.clinic { background: var(--clinic); }
-  i.d { width: 7px; height: 7px; border-radius: 50%; display: inline-block; flex: none; margin-right: 6px; vertical-align: 1px; }
-  i.d.on { background: var(--on); } i.d.wait { background: var(--wait); } i.d.bad { background: var(--bad); }
-  i.d.off { box-shadow: inset 0 0 0 1.5px var(--off); } i.d.todo { box-shadow: inset 0 0 0 1.5px var(--line-2); }
+  .row .note { display: block; font-size: 12.5px; color: var(--bad); font-weight: 600; margin-top: 3px; white-space: normal; }
+  .row .st { font-size: 13.5px; color: var(--ink); display: flex; align-items: center; white-space: nowrap; overflow: hidden; }
+  .row .st em { font-style: normal; color: var(--muted); margin-left: 5px; }
+  .row .st.todo, .row .st.off { color: var(--muted); }
+  .row .st a { color: inherit; text-decoration: none; display: inline-flex; align-items: center; }
+  .row .st a:hover { color: var(--forest); text-decoration: underline; text-underline-offset: 3px; }
+  .row .also { display: flex; gap: 6px; }
+  .row .also a, .row .also span { display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px; color: var(--body); text-decoration: none; }
+  .row .also a:hover { color: var(--forest); }
+  .row .also svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+  .row .chev { color: var(--muted); font-size: 18px; line-height: 1; text-align: right; }
+  .empty { padding: 30px; text-align: center; color: var(--muted); }
 
-  .sheet { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); overflow: clip; }
-  #tbl { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13.5px; }
-  #tbl thead th { position: sticky; top: var(--navh, 50px); z-index: 2; background: rgba(255, 252, 247, .96); backdrop-filter: blur(8px); text-align: left; white-space: nowrap;
-                  font: 600 10.5px "Public Sans"; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 10px 10px; border-bottom: 1px solid var(--line-2); }
-  #tbl thead th.sortable { cursor: pointer; user-select: none; }
-  #tbl thead th.sortable:hover { color: var(--ink); }
-  #tbl thead th .ar { display: inline-block; width: 10px; margin-left: 3px; color: var(--forest); }
-  #tbl tbody td { padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
-  #tbl tbody tr:last-child td { border-bottom: 0; }
-  #tbl tbody tr { cursor: pointer; transition: background .12s; }
-  #tbl tbody tr:hover td { background: #FBF8F2; }
-  #tbl td.th { width: 52px; padding-right: 0; }
-  #tbl td.th img, #tbl td.th .gl { width: 40px; height: 40px; border-radius: 7px; object-fit: cover; display: block; background: var(--bone); border: 1px solid var(--line); }
-  #tbl td.th .gl { display: grid; place-items: center; }
-  #tbl td.th .gl svg { width: 18px; height: 18px; fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; }
-  #tbl td.code { white-space: nowrap; }
-  #tbl td.code a { font: 700 12.5px "Public Sans"; color: var(--forest); text-decoration: none; letter-spacing: .02em; }
-  #tbl td.code .new { display: block; font: 700 9.5px "Public Sans"; letter-spacing: .1em; text-transform: uppercase; color: var(--new); margin-top: 2px; }
-  #tbl td.line { min-width: 200px; max-width: 400px; color: var(--ink); }
-  #tbl td.line span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4; }
-  #tbl td.line small { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; color: var(--muted); font-size: 12px; margin-top: 2px; line-height: 1.35; }
-  #tbl td.line small.warn { color: var(--bad); font-weight: 600; }
-  #tbl td.svc, #tbl td.fmt, #tbl td.plan { white-space: nowrap; color: var(--body); }
-  #tbl td.svc { display: table-cell; font: inherit; letter-spacing: 0; text-transform: none; }
-  #tbl td.svc i.sv { margin-right: 7px; }
-  #tbl td.plan.hold { color: var(--muted); }
-  #tbl td.ai { color: var(--muted); white-space: nowrap; }
-  #tbl td.ch { white-space: nowrap; }
-  .st { display: inline-flex; align-items: center; color: var(--ink); text-decoration: none; }
-  .st em { font-style: normal; color: var(--muted); margin-left: 5px; font-size: 12.5px; }
-  .st.todo { color: var(--muted); }
-  a.st:hover { color: var(--forest); text-decoration: underline; text-underline-offset: 3px; }
-  .na { color: rgba(19, 23, 15, .22); }
-  #tbl td.added { color: var(--muted); white-space: nowrap; font-size: 12.5px; }
-  .empty { padding: 40px; text-align: center; color: var(--muted); }
-  .tfoot { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 10px; font-size: 12.5px; color: var(--muted); }
-  .legend { display: flex; gap: 16px; flex-wrap: wrap; }
-  .legend > span { display: inline-flex; align-items: center; }
-  .legend .na { margin-right: 6px; }
-  .how { margin-top: 22px; max-width: 860px; font-size: 13.5px; color: var(--body); }
-  .how b { color: var(--ink); }
-  .sumview .news { margin-top: 30px; }
-  .sumview .news h3 { padding: 16px 0 4px; }
-  .news .day:first-of-type { border-top: 1px solid var(--line); }
-  .news details.older { border-top: 1px solid var(--line); padding: 12px 0; }
-  .news details.older .day:first-of-type { margin-top: 10px; }
+  .lower { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; margin-top: 46px; }
+  .week ul { list-style: none; padding: 0; border-top: 1px solid var(--line); }
+  .week li { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; color: var(--ink); }
+  .week time { color: var(--muted); font-size: 12.5px; padding-top: 1px; }
+  .week li small { display: block; color: var(--muted); font-size: 12px; margin-top: 1px; }
+  .week li.none { display: block; color: var(--muted); }
+  .howto2 p { font-size: 13.5px; color: var(--body); margin-bottom: 10px; }
+  .howto2 b { color: var(--ink); }
+  details.news { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 14px; background: none; border-radius: 0; padding-left: 0; padding-right: 0; border-left: 0; border-right: 0; border-bottom: 0; }
+  details.news > summary { font: 600 13px "Public Sans"; color: var(--muted); }
+  details.news .day:first-of-type { margin-top: 10px; }
 
-  /* the tracker's status line on every card in the library view */
+  /* the tracker's status line on every card in the library */
   .track { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 8px; font-size: 12.5px; color: var(--body); }
   .track:empty { display: none; }
   .track .tk { display: inline-flex; align-items: center; }
@@ -310,75 +335,76 @@
   .track .tk em { font-style: normal; color: var(--muted); margin-left: 4px; }
   .track a.tk { color: var(--body); text-decoration: none; } .track a.tk:hover { color: var(--forest); text-decoration: underline; }
   .when b.ai { color: var(--ink); }
+  .group h3 { flex: none; }
   .cards.n6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   :target.card { box-shadow: 0 0 0 2px var(--forest); }
 
-  @media (max-width: 1180px) {
-    .sheet { overflow-x: auto; } #tbl { min-width: 1080px; } #tbl thead th { position: static; }
-    .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); } .stats button:nth-child(4) { border-left: 0; }
-    .stats button:nth-child(n+4) { border-top: 1px solid var(--line); } .trk { margin-left: 0; }
+  @media (max-width: 860px) {
+    .channels { grid-template-columns: 1fr 1fr; } .lower { grid-template-columns: 1fr; gap: 28px; }
+    .colhead { display: none; }
+    .row { grid-template-columns: 44px minmax(0, 1fr) 16px; grid-template-areas: "th main chev" "th st chev" "th also chev"; row-gap: 4px; }
+    .row .th { grid-area: th; align-self: start; } .row .main { grid-area: main; } .row .st { grid-area: st; } .row .also { grid-area: also; } .row .chev { grid-area: chev; }
+    .row .also:empty { display: none; } .row .t { white-space: normal; }
+    .cards.n6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
-  @media (max-width: 860px) { .cards.n6 { grid-template-columns: repeat(3, minmax(0, 1fr)); } .topact { align-items: flex-start; } .zipsd .zips { text-align: left; } }
-  @media (max-width: 520px) { .stats { grid-template-columns: 1fr 1fr; } .stats button:nth-child(odd) { border-left: 0; } .stats button:nth-child(4) { border-left: 1px solid var(--line); }
-    .stats button:nth-child(n+3) { border-top: 1px solid var(--line); } .stats button b { font-size: 28px; } .search { width: 100%; } .seg { overflow-x: auto; max-width: 100%; } }
+  @media (max-width: 520px) { .chcard b { font-size: 32px; } .filters { width: 100%; } .search { flex: 1; width: auto; } .views button { font-size: 19px; }
+    .brand .toplink { display: none; } }
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap wide">
-  <div class="brand"><img src="files/logo.png" alt="Optimal"><span>Ad hand-off · updated {{UPDATED}}</span></div>
-  <div class="toprow">
-    <div>
-      <h1>Every ad and post, and where it's live.</h1>
-      <p class="lede">The <b>Summary</b> lists all <span data-n="all">{{N_ALL}}</span> ads and organic posts in one table, with where each one is live on Meta,
-        Instagram, Facebook and Google, read from the shared tracker. Click a row for its files and the exact text to paste.</p>
-    </div>
-    <div class="topact">
-      <a class="btn" href="{{RELEASE}}" target="_blank" rel="noopener">All full-quality files ↗</a>
-      <details class="zipsd"><summary>Zips by round</summary><div class="zips">{{ZIPS}}</div></details>
-    </div>
-  </div>
+<header class="top"><div class="wrap ov">
+  <div class="brand"><img src="files/logo.png" alt="Optimal"><span>Ads &amp; posts · files updated {{UPDATED}}</span>
+    <a class="toplink" href="{{TRACKER_EDIT}}" target="_blank" rel="noopener">Open the tracker sheet ↗</a></div>
+  <h1>What's live, and what's next.</h1>
+  <p class="lede">Every Optimal ad and post, and where it's running. Checked every day against Instagram, the Facebook Page and the Meta Ad Library.</p>
 </div></header>
 
 <nav class="tabs"><div class="wrap wide">
-  <a href="#summary" class="sumtab">Summary<b data-n="all">{{N_ALL}}</b></a>
-  <span class="navsep"></span>
+  <a href="#summary" class="sumtab">Overview</a>
+  <span class="navsep"></span><span class="navlbl">Files &amp; copy</span>
   <a href="#menopause">Menopause<b>{{N_MENO}}</b></a>
   <a href="#cycle">Cycle &amp; Hormone<b>{{N_CYCLE}}</b></a>
   <a href="#longevity">Longevity<b>{{N_LONG}}</b></a>
   <a href="#iron">IV iron<b>{{N_IRON}}</b></a>
-  <a href="#instagram">Instagram posts<b>{{N_IG}}</b></a>
+  <a href="#instagram">Organic posts<b>{{N_IG}}</b></a>
   <a href="#howto">How to launch</a>
-  <a href="#new" class="navnew">Updates</a>
 </div></nav>
 
-<section id="summary" class="sumview"><div class="wrap wide">
-  <div class="stats">
-    <button data-preset="all" class="on"><b data-count="all">–</b><span>All ads and posts</span></button>
-    <button data-preset="ready"><b data-count="ready">–</b><span>Ready, not uploaded yet</span></button>
-    <button data-preset="live"><b data-count="live">–</b><span>Running as ads</span></button>
-    <button data-preset="hold"><b data-count="hold">–</b><span>On hold</span></button>
-    <button data-preset="ig"><b data-count="ig">–</b><span>On Instagram</span></button>
-    <button data-preset="fb"><b data-count="fb">–</b><span>On Instagram, not Facebook</span></button>
+<section id="summary" class="sumview"><div class="wrap ov">
+  <p class="checked" id="checked"><i class="d wait"></i>Reading the tracker…</p>
+
+  <div class="channels">
+    <button class="chcard" data-go="ads"><span class="chname">Meta ads</span><b id="k-meta">–</b><span class="chunit">running</span><span class="chsub" id="k-meta-s"></span></button>
+    <button class="chcard" data-go="posts"><span class="chname">Instagram</span><b id="k-ig">–</b><span class="chunit">posts</span><span class="chsub" id="k-ig-s"></span></button>
+    <button class="chcard" data-go="posts"><span class="chname">Facebook Page</span><b id="k-fb">–</b><span class="chunit">posts</span><span class="chsub" id="k-fb-s"></span></button>
+    <button class="chcard" data-go="ads"><span class="chname">Google search</span><b id="k-g">–</b><span class="chunit" id="k-g-u">live</span><span class="chsub" id="k-g-s"></span></button>
   </div>
-  <div class="toolbar">
-    <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
-      <input id="q" type="search" placeholder="Search a code or a word" autocomplete="off"></label>
-    <div class="seg" id="svc">
-      <button data-v="" class="on">All</button><button data-v="menopause"><i class="sv menopause"></i>Menopause</button><button data-v="cycle"><i class="sv cycle"></i>Cycle &amp; Hormone</button><button data-v="longevity"><i class="sv longevity"></i>Longevity</button><button data-v="iron"><i class="sv iron"></i>IV iron</button><button data-v="clinic"><i class="sv clinic"></i>Clinic</button>
+
+  <div class="attn" id="attn" hidden><h2>Needs attention</h2><ol></ol></div>
+
+  <div class="listbar">
+    <div class="views" id="views" role="tablist">
+      <button data-v="ads" class="on" role="tab">Paid ads <em id="n-ads"></em></button>
+      <button data-v="posts" role="tab">Instagram &amp; Facebook <em id="n-posts"></em></button>
     </div>
-    <select id="fmt" aria-label="Format"><option value="">Every format</option></select>
-    <div class="trk"><span id="trk"><i class="d wait"></i>Reading the tracker…</span>
-      <a class="btn ghost" href="{{TRACKER_EDIT}}" target="_blank" rel="noopener">Update statuses in the tracker ↗</a></div>
+    <div class="filters">
+      <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+        <input id="q" type="search" placeholder="Search" autocomplete="off" aria-label="Search ads and posts"></label>
+      <select id="svcsel" aria-label="Service"><option value="">All services</option><option value="menopause">Menopause</option><option value="cycle">Cycle &amp; Hormone</option><option value="longevity">Longevity</option><option value="iron">IV iron</option><option value="clinic">Clinic</option></select>
+    </div>
   </div>
-  <div class="sheet"><table id="tbl"><thead></thead><tbody></tbody></table><p class="empty" hidden>Nothing matches these filters.</p></div>
-  <div class="tfoot"><span id="shown"></span>
-    <span class="legend"><span><i class="d on"></i>Live or posted</span><span><i class="d wait"></i>In review</span><span><i class="d off"></i>Paused or taken down</span><span><i class="d todo"></i>Not yet</span><span><span class="na">—</span> Not for this channel</span></span></div>
-  <div class="how">
-    <p><b>How the tracker works.</b> It's a Google Sheet with one row per ad name or post. Whoever uploads an ad or posts it changes its row:
-      <b>Meta Ads</b> (Not uploaded → In review → Live → Paused), <b>Instagram</b> and <b>Facebook</b> (Not posted → Posted), and <b>Google Ads</b>, with a date and a link.
-      This page reads the sheet every time it opens. Claude checks Instagram, the Facebook Page and the Meta Ad Library and fills in what it finds.</p>
+  <div class="colhead" id="colhead"></div>
+  <div id="list"></div>
+  <p class="empty" hidden>Nothing matches that search.</p>
+
+  <div class="lower">
+    <div class="week"><h2>This week</h2><ul id="week"></ul></div>
+    <div class="howto2"><h2>Keeping it up to date</h2>
+      <p>Every day at 4:30 PM Claude checks the public Instagram, the Facebook Page and the Meta Ad Library, updates the tracker, and logs what changed. Things it can't see from outside (Meta's In review, Paused or Rejected states, and Google Ads) are updated by hand in the tracker; there's a reminder in #marketing-and-growth every Friday.</p>
+      <p>Start a note with <b>Fix:</b> or <b>Check:</b> and it appears under Needs attention.</p>
+      <a class="btn ghost" href="{{TRACKER_EDIT}}" target="_blank" rel="noopener">Open the tracker sheet ↗</a></div>
   </div>
-  <div class="news" id="new"><h3>Updates</h3>{{WHATSNEW}}</div>
+  <details class="news" id="new"><summary>Changes to this page and its files</summary>{{WHATSNEW}}</details>
 </div></section>
 
 
@@ -476,17 +502,19 @@
 <script id="snapshot" type="application/json">{{SNAPSHOT_JSON}}</script>
 <script src="https://cdn.jsdelivr.net/npm/@tanstack/table-core@8.20.5/build/umd/index.production.js"></script>
 <script>
-/* ---------------- Summary + tracker (Oct 28). The catalog (what exists) comes from build.py; the statuses come from the
-   tracker Google Sheet, read live on every visit, else the copy fetched at build time. */
+/* ---------------- Overview + tracker (Oct 28). The catalog (what exists) comes from build.py; statuses and the sync log
+   come from the tracker Google Sheet, read live on every visit, else the copy saved at build time. */
 (() => {
-  const SHEET_CSV = "{{TRACKER_CSV}}&headers=1";
+  const SHEET = "{{TRACKER_BASE}}", SHEET_EDIT = "{{TRACKER_EDIT}}";
   const CATALOG = JSON.parse(document.getElementById("catalog").textContent);
   const SNAP = JSON.parse(document.getElementById("snapshot").textContent);
   const SVC = { menopause: "Menopause", cycle: "Cycle & Hormone", longevity: "Longevity", iron: "IV iron", clinic: "Clinic" };
   const SVC_ORDER = ["menopause", "cycle", "longevity", "iron", "clinic"];
   const LATEST = CATALOG.reduce((m, e) => e.added > m ? e.added : m, "");
+  const $ = s => document.querySelector(s);
   const esc = t => String(t ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
+  // ---------------- reading the sheet
   function parseCSV(t) {
     const rows = []; let row = [], cell = "", q = false;
     for (let i = 0; i < t.length; i++) {
@@ -502,16 +530,24 @@
     const head = rows[0].map(h => h.trim());
     return rows.slice(1).filter(r => r.some(x => x.trim())).map(r => Object.fromEntries(head.map((h, i) => [h, (r[i] || "").trim()])));
   }
+  const MON = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
+  function toDate(d) {                       // "2026-10-28", "Oct 28, 2026", "Oct 28, 2026 4:34 PM", "Oct 28"
+    if (!d) return null;
+    let m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d);
+    if (m) return new Date(+m[1], m[2] - 1, +m[3]);
+    m = /^([A-Za-z]{3})[a-z]*\.? (\d{1,2})(?:, (\d{4}))?(?:,? (\d{1,2}):(\d{2})(?::\d{2})? ?([AP]M))?/i.exec(d);
+    if (!m || !(m[1].toLowerCase() in MON)) return null;
+    const h = m[4] ? (+m[4] % 12) + (/p/i.test(m[6]) ? 12 : 0) : 0;
+    return new Date(+(m[3] || 2026), MON[m[1].toLowerCase()], +m[2], h, m[5] ? +m[5] : 0);
+  }
+  const fmtDay = d => d ? d.toLocaleDateString("en-CA", { month: "short", day: "numeric" }) : "";
+  const shortDate = s => fmtDay(toDate(s)) || s;
   const tone = s => !s || /^(—|-|n\/a|none)$/i.test(s) ? "na" : /^not\b/i.test(s) ? "todo" : /^(live|posted|built|running|active)/i.test(s) ? "on"
     : /review|scheduled|uploaded/i.test(s) ? "wait" : /reject/i.test(s) ? "bad" : /paus|off|taken|removed|ended|inactive/i.test(s) ? "off" : "todo";
   const svcKey = v => Object.keys(SVC).find(k => SVC[k].toLowerCase() === String(v || "").toLowerCase() || k === String(v || "").toLowerCase()) || "clinic";
   const kindOf = f => /google/i.test(f || "") ? "google" : /organic|post/i.test(f || "") ? "organic" : "ad";
-  function shortDate(d) {
-    if (!d) return "";
-    const iso = /^(\d{4})-(\d{2})-(\d{2})$/.exec(d);      // a bare ISO date is a calendar day, not UTC midnight
-    const t = iso ? new Date(+iso[1], iso[2] - 1, +iso[3]) : new Date(Date.parse(/\d{4}/.test(d) ? d : d + ", 2026"));
-    return isNaN(t) ? d : t.toLocaleDateString("en-CA", { month: "short", day: "numeric" });
-  }
+  const noteText = n => n.replace(/\s*\(Ad Library \d+\)\s*$/, "").replace(/^Ad Library \d+(?: \([^)]*\))?[.:]\s*/, "");
+  const isFlag = r => /^(fix|check)\b/i.test(noteText(r.notes));
 
   function rowFor(e, t, i) {
     const seed = e.seed || {}, pick = (v, d) => (v && v.trim()) ? v.trim() : d;
@@ -519,115 +555,187 @@
     const r = { ...e, i,
       meta: pick(t["Meta Ads"], ad ? "Not uploaded" : "—"), metaDate: t["Meta date"] || "",
       ig: pick(t["Instagram"], seed.ig || (org ? "Not posted" : "—")), igDate: pick(t["IG date"], seed.ig_date || ""), igLink: pick(t["IG link"], seed.ig_link || ""),
-      fbDate: t["FB date"] || "", fbLink: t["FB link"] || "", google: pick(t["Google Ads"], g ? "Not built" : "—"),
-      by: t["Updated by"] || "", notes: t["Notes"] || "" };
+      fbDate: t["FB date"] || "", fbLink: t["FB link"] || "", google: pick(t["Google Ads"], g ? "Not built" : "—"), notes: t["Notes"] || "" };
     r.fb = pick(t["Facebook"], (org || tone(r.ig) === "on") ? "Not posted" : "—");
-    const tags = ["all"];
-    if (r.plan.startsWith("Hold")) tags.push("hold");
-    else if ((ad && tone(r.meta) === "todo") || (g && tone(r.google) === "todo")) tags.push("ready");
-    if (tone(r.meta) === "on" || tone(r.google) === "on") tags.push("live");
-    if (tone(r.ig) === "on") tags.push("ig");
-    if (tone(r.ig) === "on" && tone(r.fb) !== "on") tags.push("fb");
-    r.tags = tags;
-    r.q = [r.code, r.line, SVC[r.svc], r.fmt, r.plan, r.notes, r.meta, r.ig, r.fb].join(" ").toLowerCase();
+    r.q = [r.code, r.line, SVC[r.svc], r.fmt, r.plan, r.notes].join(" ").toLowerCase();
     return r;
   }
   function merge(sheetRows) {
     const by = new Map(sheetRows.filter(r => r.Code).map(r => [r.Code.trim().toUpperCase(), r]));
     const out = CATALOG.map((e, i) => { const t = by.get(e.code.toUpperCase()) || {}; by.delete(e.code.toUpperCase()); return rowFor(e, t, i); });
     let i = out.length;
-    for (const [code, t] of by) out.push(rowFor({ code: t.Code, line: t["What it says"] || "", svc: svcKey(t.Service), fmt: t.Format || "Other",
+    for (const [, t] of by) out.push(rowFor({ code: t.Code, line: t["What it says"] || "", svc: svcKey(t.Service), fmt: t.Format || "Other",
       anchor: "", thumb: "", plan: t.Plan || "", ai: /^on/i.test(t["AI label"] || ""), added: "", kind: kindOf(t.Format) }, t, i++));
-    return out.sort((a, b) => SVC_ORDER.indexOf(a.svc) - SVC_ORDER.indexOf(b.svc) || a.i - b.i);
+    return out;
   }
 
-  // ---------------- cells
-  const GLYPH = '<span class="gl"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg></span>';
-  const IGLYPH = '<span class="gl"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.6"/></svg></span>';
+  // ---------------- groups: each row sits in exactly one group per list
+  const paidStatus = r => r.kind === "google" ? r.google : r.meta;
+  function adGroup(r) {
+    if (r.kind === "organic") return null;
+    const t = tone(paidStatus(r));
+    if (isFlag(r) || t === "bad") return "fix";
+    if (t === "wait") return "review";
+    if (t === "on") return "running";
+    if (t === "off") return "stopped";
+    return r.plan.startsWith("Hold") ? "hold" : "ready";
+  }
+  function postGroup(r) {
+    const ig = tone(r.ig), fb = tone(r.fb);
+    if (ig === "on" && fb === "on") return "both";
+    if (ig === "on") return "fbgap";
+    if (fb === "on") return "fbonly";
+    if (ig === "off" || fb === "off") return "gone";
+    return r.kind === "organic" ? "todo" : null;
+  }
+  const PLAN_RANK = p => { const m = /^Test now #(\d+)/.exec(p); return m ? +m[1] : /^Run now/.test(p) ? 10 : /^Test ·/.test(p) ? 20 : /^Next/.test(p) ? 30 : /^Twin/.test(p) ? 40 : 50; };
+  const bySvc = (a, b) => SVC_ORDER.indexOf(a.svc) - SVC_ORDER.indexOf(b.svc);
+  const byPost = (a, b) => (toDate(b.igDate || b.fbDate) || 0) - (toDate(a.igDate || a.fbDate) || 0) || a.i - b.i;
+  const LISTS = {
+    ads: { group: adGroup, head: ["Ad", "On Meta / Google", "Also posted"], groups: [
+      { k: "fix", name: "Needs a fix", sort: bySvc },
+      { k: "review", name: "In review at Meta", sort: bySvc },
+      { k: "running", name: "Running now", sort: bySvc },
+      { k: "ready", name: "Ready to upload", hint: "per service, in launch order", sort: (a, b) => bySvc(a, b) || PLAN_RANK(a.plan) - PLAN_RANK(b.plan) || a.i - b.i },
+      { k: "hold", name: "On hold", hint: "waiting for the Cycle & Hormone Care page to go live", closed: true, sort: bySvc },
+      { k: "stopped", name: "Paused or switched off", closed: true, sort: bySvc }] },
+    posts: { group: postGroup, head: ["Post", "Instagram", "Facebook Page"], groups: [
+      { k: "fbgap", name: "On Instagram, not on Facebook yet", hint: "post these to the Facebook Page", sort: byPost },
+      { k: "both", name: "On Instagram and Facebook", sort: byPost },
+      { k: "fbonly", name: "On Facebook only", sort: byPost },
+      { k: "todo", name: "Not posted yet", sort: bySvc },
+      { k: "gone", name: "Taken down", closed: true, sort: byPost }] },
+  };
+
+  // ---------------- row html
+  const ICON = {
+    ig: '<svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.6"/></svg>',
+    fb: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M13.6 20.4v-7h2.2l.4-2.6h-2.6V9.2c0-.8.3-1.3 1.4-1.3h1.3V5.6"/></svg>',
+    g: '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>' };
   const href = r => r.anchor ? "#" + r.anchor : (r.igLink || r.fbLink || "");
-  function stat(label, date, link) {
+  const KIND_POST = r => /carousel/i.test(r.fmt) ? "Carousel" : /image/i.test(r.fmt) ? "Photo" : "Reel";
+  function status(label, date, link, words) {
     const t = tone(label);
-    if (t === "na") return '<span class="na">—</span>';
-    const txt = t === "todo" ? "Not yet" : label, d = date ? `<em>${esc(shortDate(date))}</em>` : "";
-    return link ? `<a class="st ${t}" href="${esc(link)}" target="_blank" rel="noopener"><i class="d ${t}"></i>${esc(txt)}${d} ↗</a>`
-                : `<span class="st ${t}"><i class="d ${t}"></i>${esc(txt)}${d}</span>`;
+    if (t === "na") return `<span class="st na"></span>`;
+    const txt = (words && words[t]) || label, d = date ? `<em>${esc(t === "on" && words && words.since ? "since " : "")}${esc(shortDate(date))}</em>` : "";
+    const inner = `<i class="d ${t}"></i>${esc(txt)}${d}`;
+    return `<span class="st ${t}">${link ? `<a href="${esc(link)}" target="_blank" rel="noopener">${inner}&nbsp;↗</a>` : inner}</span>`;
   }
-  const COLS = [
-    { id: "th", header: "", sort: false, cell: r => `<td class="th">${r.thumb ? `<img src="${esc(r.thumb)}" alt="" loading="lazy">` : r.kind === "google" ? GLYPH : IGLYPH}</td>` },
-    { id: "code", header: "Code", acc: r => r.code, cell: r => `<td class="code"><a href="${esc(href(r))}"${r.anchor ? "" : ' target="_blank" rel="noopener"'}>${esc(r.code)}</a>${r.added === LATEST ? '<span class="new">New</span>' : ""}</td>` },
-    { id: "line", header: "What it says", acc: r => r.line, cell: r => {
-      const note = r.notes.replace(/^Ad Library \d+(?: \([^)]*\))?[.:]\s*/, "");      // the Library ID stays in the tooltip
-      return `<td class="line"${r.notes ? ` title="${esc(r.notes)}"` : ""}><span>${esc(r.line)}</span>${note ? `<small class="${/wrong|check/i.test(note) ? "warn" : ""}">${esc(note)}</small>` : ""}</td>`; } },
-    { id: "svc", header: "Service", acc: r => SVC_ORDER.indexOf(r.svc), filter: "equalsKey", cell: r => `<td class="svc"><i class="sv ${r.svc}"></i>${esc(SVC[r.svc])}</td>` },
-    { id: "fmt", header: "Format", acc: r => r.fmt, filter: "equalsString", cell: r => `<td class="fmt">${esc(r.fmt)}</td>` },
-    { id: "plan", header: "Plan", acc: r => r.plan, cell: r => `<td class="plan${r.plan.startsWith("Hold") ? " hold" : ""}">${esc(r.plan) || '<span class="na">—</span>'}</td>` },
-    { id: "ai", header: "AI label", acc: r => r.kind === "ad" ? (r.ai ? "On" : "Off") : "", cell: r => `<td class="ai">${r.kind === "ad" ? (r.ai ? "On" : "Off") : '<span class="na">—</span>'}</td>` },
-    { id: "meta", header: "Meta ads", acc: r => r.meta, cell: r => `<td class="ch">${stat(r.meta, r.metaDate)}</td>` },
-    { id: "ig", header: "Instagram", acc: r => r.ig, cell: r => `<td class="ch">${stat(r.ig, r.igDate, r.igLink)}</td>` },
-    { id: "fb", header: "Facebook", acc: r => r.fb, cell: r => `<td class="ch">${stat(r.fb, r.fbDate, r.fbLink)}</td>` },
-    { id: "google", header: "Google", acc: r => r.google, cell: r => `<td class="ch">${stat(r.google)}</td>` },
-    { id: "added", header: "Added", acc: r => r.added, cell: r => `<td class="added">${esc(shortDate(r.added))}</td>` },
-    { id: "tags", hidden: true, acc: r => r.tags, filter: "arrIncludes" },
-    { id: "q", hidden: true, acc: r => r.q, filter: "includesString" },
-  ];
-  const thead = document.querySelector("#tbl thead"), tbody = document.querySelector("#tbl tbody");
+  function rowHTML(r, list) {
+    const th = r.thumb ? `<img src="${esc(r.thumb)}" alt="" loading="lazy">` : `<span class="gl">${r.kind === "google" ? ICON.g : ICON.ig}</span>`;
+    const note = noteText(r.notes);
+    const sub = list === "ads"
+      ? [r.fmt, `<span class="sn"><i class="sv ${r.svc}"></i>${esc(SVC[r.svc])}</span>`, r.plan && !r.plan.startsWith("Hold") ? esc(r.plan) : "", r.ai ? "AI label on" : ""]
+      : [KIND_POST(r), `<span class="sn"><i class="sv ${r.svc}"></i>${esc(SVC[r.svc])}</span>`, r.kind !== "organic" ? "also a paid ad" : ""];
+    const main = `<span class="main"><span class="t"><b>${esc(r.code)}</b>${esc(r.line)}${r.added === LATEST ? '<span class="new">New</span>' : ""}</span>
+      <span class="sub">${sub.filter(Boolean).join(" · ")}</span>${isFlag(r) ? `<span class="note">${esc(note)}</span>` : ""}</span>`;
+    let cols;
+    if (list === "ads") {
+      const paid = r.kind === "google"
+        ? status(r.google, "", "", { todo: "Google · not built", on: "Google · live", off: "Google · paused" })
+        : status(r.meta, r.metaDate, "", { on: "Running", since: true, todo: r.plan.startsWith("Hold") ? "On hold" : "Not uploaded" });
+      const also = [tone(r.ig) === "on" ? `<a href="${esc(r.igLink || "#")}" target="_blank" rel="noopener" title="On Instagram">${ICON.ig}IG</a>` : "",
+                    tone(r.fb) === "on" ? `<a href="${esc(r.fbLink || "#")}" target="_blank" rel="noopener" title="On Facebook">${ICON.fb}FB</a>` : ""].join("");
+      cols = `${paid}<span class="also">${also}</span>`;
+    } else {
+      cols = status(r.ig, r.igDate, r.igLink, { todo: "Not posted" }) + status(r.fb, r.fbDate, r.fbLink, { todo: "Not posted" });
+    }
+    return `<div class="row" data-href="${esc(href(r))}"><span class="th">${th}</span>${main}${cols}<span class="chev">›</span></div>`;
+  }
 
-  // ---------------- TanStack Table (headless core): sorting + filtering; we render the DOM ourselves
-  let rows = merge([]), table = null, state = null, filters = { svc: "", fmt: "", tags: "all", q: "" };
+  // ---------------- TanStack Table (headless core) filters the rows; grouping and rendering are ours
+  let rows = merge([]), live = false, logRows = [], view = "ads", table = null, state = null;
+  const open = {};                                     // remembers which groups were opened or closed
   const TC = window.TableCore;
   if (TC) {
-    const columns = COLS.map(c => ({ id: c.id, accessorFn: c.acc || (() => ""), enableSorting: c.sort !== false && !c.hidden,
-      filterFn: c.filter === "equalsKey" ? (row, id, v) => !v || row.original.svc === v
-              : c.filter === "includesString" ? (row, id, v) => !v || row.getValue(id).includes(v.toLowerCase())
-              : c.filter || "auto", sortUndefined: "last" }));
+    const columns = [
+      { id: "svc", accessorFn: r => r.svc, filterFn: (row, id, v) => !v || row.original.svc === v },
+      { id: "q", accessorFn: r => r.q, filterFn: (row, id, v) => !v || row.getValue(id).includes(String(v).toLowerCase()) }];
     table = TC.createTable({ data: rows, columns, state: {}, onStateChange: () => {}, renderFallbackValue: null,
-      getCoreRowModel: TC.getCoreRowModel(), getSortedRowModel: TC.getSortedRowModel(), getFilteredRowModel: TC.getFilteredRowModel() });
-    state = { ...table.initialState, columnVisibility: { tags: false, q: false } };
-    table.setOptions(o => ({ ...o, state, onStateChange: u => { state = typeof u === "function" ? u(state) : u; table.setOptions(p => ({ ...p, state })); render(); } }));
+      getCoreRowModel: TC.getCoreRowModel(), getFilteredRowModel: TC.getFilteredRowModel() });
+    state = { ...table.initialState };
+    table.setOptions(o => ({ ...o, state, onStateChange: u => { state = typeof u === "function" ? u(state) : u; table.setOptions(p => ({ ...p, state })); renderList(); } }));
   }
-  function setFilter(id, v) {
-    filters[id] = v;
-    if (table) table.getColumn(id).setFilterValue(v || undefined); else render();
-  }
+  const filt = { svc: "", q: "" };
   const visible = () => table ? table.getRowModel().rows.map(r => r.original)
-    : rows.filter(r => (!filters.svc || r.svc === filters.svc) && (!filters.fmt || r.fmt === filters.fmt) && r.tags.includes(filters.tags) && (!filters.q || r.q.includes(filters.q.toLowerCase())));
+    : rows.filter(r => (!filt.svc || r.svc === filt.svc) && (!filt.q || r.q.includes(filt.q.toLowerCase())));
+  function setFilter(id, v) { filt[id] = v; if (table) table.getColumn(id).setFilterValue(v || undefined); else renderList(); }
 
-  function render() {
-    const sort = table ? (state.sorting[0] || {}) : {};
-    thead.innerHTML = "<tr>" + COLS.filter(c => !c.hidden).map(c => {
-      const can = c.sort !== false, ar = sort.id === c.id ? (sort.desc ? "↓" : "↑") : "";
-      return `<th data-col="${c.id}"${can && table ? ' class="sortable"' : ""}>${c.header}${can ? `<span class="ar">${ar}</span>` : ""}</th>`;
-    }).join("") + "</tr>";
-    const vis = visible();
-    tbody.innerHTML = vis.map(r => `<tr data-href="${esc(href(r))}">${COLS.filter(c => !c.hidden).map(c => c.cell(r)).join("")}</tr>`).join("");
-    document.querySelector(".sheet .empty").hidden = vis.length > 0;
-    document.getElementById("shown").textContent = vis.length === rows.length ? `${rows.length} ads and posts` : `Showing ${vis.length} of ${rows.length}`;
-    // counts respect the service + format filters, so each preset says what you'd get
-    const base = rows.filter(r => (!filters.svc || r.svc === filters.svc) && (!filters.fmt || r.fmt === filters.fmt));
-    document.querySelectorAll("[data-count]").forEach(b => b.textContent = base.filter(r => r.tags.includes(b.dataset.count)).length);
-    document.querySelectorAll("[data-n=all]").forEach(b => b.textContent = rows.length);
+  function renderList() {
+    const L = LISTS[view], vis = visible();
+    $("#colhead").innerHTML = `<span>${L.head[0]}</span><span>${L.head[1]}</span><span>${L.head[2]}</span>`;
+    let html = "", shown = 0;
+    for (const g of L.groups) {
+      const gr = vis.filter(r => L.group(r) === g.k).sort(g.sort);
+      if (!gr.length) continue;
+      shown += gr.length;
+      const isOpen = open[view + g.k] ?? !g.closed;
+      html += `<details class="grp" data-g="${view + g.k}"${isOpen ? " open" : ""}><summary><span class="gname">${esc(g.name)}</span><span class="gcount">${gr.length}</span>${g.hint ? `<span class="ghint">${esc(g.hint)}</span>` : ""}</summary>
+        <div class="rows">${gr.map(r => rowHTML(r, view)).join("")}</div></details>`;
+    }
+    $("#list").innerHTML = html;
+    $(".sumview .empty").hidden = shown > 0;
+    $("#n-ads").textContent = vis.filter(r => adGroup(r)).length;
+    $("#n-posts").textContent = vis.filter(r => postGroup(r)).length;
   }
-  thead.addEventListener("click", e => {
-    const th = e.target.closest("th.sortable"); if (!th || !table) return;
-    const col = table.getColumn(th.dataset.col), cur = col.getIsSorted();
-    table.setSorting(cur === "desc" ? [] : [{ id: col.id, desc: cur === "asc" }]);
-  });
-  tbody.addEventListener("click", e => {
-    if (e.target.closest("a")) return;
-    const h = e.target.closest("tr")?.dataset.href; if (!h) return;
+  $("#list").addEventListener("toggle", e => { if (e.target.matches("details.grp")) open[e.target.dataset.g] = e.target.open; }, true);
+  $("#list").addEventListener("click", e => {
+    if (e.target.closest("a") || e.target.closest("summary")) return;
+    const h = e.target.closest(".row")?.dataset.href; if (!h) return;
     if (h.startsWith("#")) location.hash = h.slice(1); else window.open(h, "_blank", "noopener");
   });
-  document.querySelectorAll(".stats button").forEach(b => b.addEventListener("click", () => {
-    document.querySelectorAll(".stats button").forEach(x => x.classList.toggle("on", x === b)); setFilter("tags", b.dataset.preset);
-  }));
-  document.querySelectorAll("#svc button").forEach(b => b.addEventListener("click", () => {
-    document.querySelectorAll("#svc button").forEach(x => x.classList.toggle("on", x === b)); setFilter("svc", b.dataset.v);
-  }));
-  document.getElementById("fmt").addEventListener("change", e => setFilter("fmt", e.target.value));
-  document.getElementById("q").addEventListener("input", e => setFilter("q", e.target.value.trim()));
-  if (table) table.getColumn("tags").setFilterValue("all"); else render();
+  function setView(v) {
+    view = v; document.querySelectorAll("#views button").forEach(b => { b.classList.toggle("on", b.dataset.v === v); b.setAttribute("aria-selected", b.dataset.v === v); });
+    renderList();
+  }
+  document.querySelectorAll("#views button").forEach(b => b.addEventListener("click", () => setView(b.dataset.v)));
+  document.querySelectorAll(".chcard").forEach(b => b.addEventListener("click", () => { setView(b.dataset.go); $("#views").scrollIntoView({ behavior: "smooth", block: "start" }); }));
+  $("#q").addEventListener("input", e => setFilter("q", e.target.value.trim()));
+  $("#svcsel").addEventListener("change", e => setFilter("svc", e.target.value));
 
-  // ---------------- each card's status line in the library view
+  // ---------------- totals, needs attention, this week
+  function renderTop() {
+    const cnt = f => rows.filter(f).length, on = s => tone(s) === "on";
+    const meta = cnt(r => r.kind === "ad" && on(r.meta)), ready = cnt(r => adGroup(r) === "ready"), hold = cnt(r => adGroup(r) === "hold");
+    $("#k-meta").textContent = meta;
+    $("#k-meta-s").textContent = [ready && `${ready} ready to upload`, hold && `${hold} on hold`].filter(Boolean).join(" · ");
+    const igRows = rows.filter(r => on(r.ig)), last = igRows.map(r => toDate(r.igDate)).filter(Boolean).sort((a, b) => b - a)[0];
+    $("#k-ig").textContent = igRows.length; $("#k-ig-s").textContent = last ? `Latest ${fmtDay(last)}` : "";
+    const fb = cnt(r => on(r.fb)), gap = cnt(r => on(r.ig) && !on(r.fb));
+    $("#k-fb").textContent = fb; $("#k-fb-s").textContent = gap ? `${gap} Instagram posts not copied over` : "Up to date with Instagram";
+    const g = rows.filter(r => r.kind === "google"), gl = g.filter(r => on(r.google)).length;
+    $("#k-g").textContent = `${gl}`; $("#k-g-u").textContent = `of ${g.length} live`;
+    $("#k-g-s").textContent = g.every(r => r.plan.startsWith("Hold")) ? "Built when the Cycle & Hormone page is live" : `${g.length - gl} not live yet`;
+
+    const fixFirst = (a, b) => /^fix/i.test(noteText(b.notes)) - /^fix/i.test(noteText(a.notes)) || bySvc(a, b);
+    const items = rows.filter(isFlag).sort(fixFirst).map(r =>
+      `<li><span><b>${esc(r.code)}</b> · ${esc(noteText(r.notes).replace(/^(fix|check):\s*/i, ""))}</span><a href="${esc(href(r))}"${r.anchor ? "" : ' target="_blank" rel="noopener"'}>Open ${r.anchor ? "" : "↗"}</a></li>`);
+    if (gap) items.push(`<li class="soft"><span>${gap} Instagram posts aren't on the Facebook Page yet.</span><a href="#summary" data-go="posts">See them</a></li>`);
+    const held = rows.filter(r => adGroup(r) === "hold");
+    if (held.length) items.push(`<li class="soft"><span>${held.length} ${held.every(r => r.svc === "cycle") ? "Cycle &amp; Hormone Care ads are" : "ads are"} on hold until beoptimal.ca/services/cycle-and-hormone-care is live.</span><a href="#summary" data-go="hold">See them</a></li>`);
+    if (!live) items.push(`<li class="soft"><span>This page is showing a saved copy of the tracker. In the sheet, set Share → General access → Anyone with the link → Viewer so it updates by itself.</span><a href="${esc(SHEET_EDIT)}" target="_blank" rel="noopener">Open sheet ↗</a></li>`);
+    $("#attn").hidden = !items.length;
+    $("#attn ol").innerHTML = items.join("");
+
+    const now = new Date(), week = logRows.map(r => ({ ...r, d: toDate(r.When) })).filter(r => r.d && now - r.d < 7 * 864e5);
+    const checks = logRows.map(r => ({ ...r, d: toDate(r.When) })).filter(r => r.d && /daily check/i.test(r.Source)).sort((a, b) => b.d - a.d);
+    const changes = week.filter(r => !/daily check/i.test(r.Source)).sort((a, b) => b.d - a.d).slice(0, 8);
+    $("#week").innerHTML = changes.length ? changes.map(r => `<li><time>${fmtDay(r.d)}</time><span>${r.Codes ? `<b>${esc(r.Codes)}</b> · ` : ""}${esc(r["What changed"])}<small>${esc(r.Source)}${r.By ? " · " + esc(r.By) : ""}</small></span></li>`).join("")
+      : '<li class="none">No changes logged in the last 7 days.</li>';
+    const c = checks[0];
+    const rel = d => { const t = new Date(); t.setHours(0, 0, 0, 0); const dd = new Date(d); dd.setHours(0, 0, 0, 0);
+      return dd - t === 0 ? "today" : t - dd === 864e5 ? "yesterday" : fmtDay(d); };
+    $("#checked").innerHTML = (c ? `<i class="d ${now - c.d < 2 * 864e5 ? "on" : "wait"}"></i>Last checked ${rel(c.d)} at ${c.d.toLocaleTimeString("en-CA", { hour: "numeric", minute: "2-digit" })}: Instagram, the Facebook Page and the Meta Ad Library.`
+      : '<i class="d wait"></i>Not checked yet.') + (live ? "" : ` <span>(saved copy from ${esc(SNAP.at)})</span>`);
+  }
+  document.addEventListener("click", e => {
+    const a = e.target.closest("#attn a[data-go]"); if (!a) return;
+    e.preventDefault();
+    if (a.dataset.go === "hold") { open["adshold"] = true; setView("ads"); } else setView(a.dataset.go);
+    $("#views").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  // ---------------- each card's status line in the library
   function paintCards() {
     const by = new Map(rows.map(r => [r.code, r]));
     document.querySelectorAll(".track[data-codes]").forEach(el => {
@@ -643,22 +751,20 @@
       }).join("");
     });
   }
-  function apply(csv, how) {
+  function apply(csv, log, isLive) {
+    live = isLive;
     rows = merge(csv ? parseCSV(csv) : []);
-    const sel = document.getElementById("fmt"), fmts = [...new Set(rows.map(r => r.fmt))];
-    sel.innerHTML = '<option value="">Every format</option>' + fmts.map(f => `<option${f === filters.fmt ? " selected" : ""}>${esc(f)}</option>`).join("");
+    logRows = log ? parseCSV(log) : [];
     if (table) table.setOptions(o => ({ ...o, data: rows }));
-    render(); paintCards();
-    const trk = document.getElementById("trk");
-    if (how === "live") trk.innerHTML = `<i class="d on"></i>Live from the tracker · read ${new Date().toLocaleTimeString("en-CA", { hour: "numeric", minute: "2-digit" })}`;
-    else trk.innerHTML = `<i class="d wait"></i>${SNAP.at ? `Tracker as of ${esc(SNAP.at)} (couldn't reach the sheet)` : "Couldn't reach the tracker"}`;
+    renderTop(); renderList(); paintCards();
   }
-  apply(SNAP.csv, "snapshot");
-  fetch(SHEET_CSV + "&cachebust=" + Date.now()).then(r => r.ok ? r.text() : Promise.reject(r.status))
-    .then(t => { if (!/^"?Code"?,/.test(t.trimStart())) throw new Error("not the tracker"); apply(t, "live"); })
-    .catch(() => apply(SNAP.csv, "snapshot"));
+  apply(SNAP.csv, SNAP.log, false);
+  const get = tab => fetch(SHEET + tab + "&cachebust=" + Date.now()).then(r => r.ok ? r.text() : Promise.reject(r.status));
+  Promise.all([get("Tracker"), get("Sync%20log").catch(() => SNAP.log)])
+    .then(([t, l]) => { if (!/^"?Code"?,/.test(t.trimStart())) throw new Error("not the tracker"); apply(t, l, true); })
+    .catch(() => {});
 
-  // ---------------- two views: Summary (the table) and the library (cards by service); the hash picks one
+  // ---------------- two views: Overview and the library (cards by service); the hash picks one
   const sumtab = document.querySelector("nav.tabs .sumtab");
   function route() {
     const id = decodeURIComponent(location.hash.slice(1));
@@ -669,7 +775,8 @@
     document.querySelectorAll("nav.tabs a:not(.sumtab)").forEach(a => {
       const sec = el && el.closest("section"); a.classList.toggle("on", !summary && sec && a.getAttribute("href") === "#" + sec.id);
     });
-    const go = () => el && id !== "summary" ? el.scrollIntoView({ block: el.matches("section, .news") ? "start" : "center", behavior: "instant" })
+    if (el && el.matches("details")) el.open = true;
+    const go = () => el && id !== "summary" ? el.scrollIntoView({ block: el.matches("section, details") ? "start" : "center", behavior: "instant" })
                                             : summary && window.scrollTo({ top: 0, behavior: "instant" });
     setTimeout(go, 20);
     if (document.readyState !== "complete") {        // fonts and images shift the layout on first load: land again once they're in

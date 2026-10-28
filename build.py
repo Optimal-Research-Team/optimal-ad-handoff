@@ -40,7 +40,7 @@ SERVICES = {
 # The page reads it live (gviz CSV: the sheet is link-viewable) and falls back to the copy fetched at build time.
 TRACKER_ID = "10I29jiV4DCNSixJbTqPjM06sUSQxTZO7swV3yMabFxs"
 TRACKER_EDIT = f"https://docs.google.com/spreadsheets/d/{TRACKER_ID}/edit"
-TRACKER_CSV = f"https://docs.google.com/spreadsheets/d/{TRACKER_ID}/gviz/tq?tqx=out:csv&sheet=Tracker"
+TRACKER_BASE = f"https://docs.google.com/spreadsheets/d/{TRACKER_ID}/gviz/tq?tqx=out:csv&headers=1&sheet="   # + Tracker | Sync%20log
 # Meta's AI label ("AI info"): the copy docs say which ads use AI imagery or AI motion
 AI_ON = set(("MB1 MB2 MB3 MB4 MB5 MB6 LB1 LB2 LB3 LB4 LB5 LB6 MC LC MA1 MA2 LA1 LA2 MV2 CV2 "        # round 2 + 3, two videos
              "IR1 IR2 IRV1 IR4 IR5 IR6 IRM1 IRM2 IRV2 IRV3 IRT1 IRT2 IRT3 IRT4 "                     # IV iron: every ad
@@ -397,9 +397,8 @@ NEWS = [  # (date, what happened, ids that link to cards, ids removed)
     (D28, "Cycle & Hormone Care statics redone in two sets. Set 1 (general) covers every symptom the program looks at: five "
           "single-image ads (CA1–CA5) and a 6-card carousel (CC1–CC6) with one symptom group per card. Set 2 (by condition) "
           "has two ads each for PMOS (formerly PCOS), PMDD and endometriosis (CP, CD, CE). They describe the signs and never "
-          "ask \u201cDo you have…?\u201d, which Meta rejects. The old singles CS3–CS6 are retired. Also new: the Summary tab, one table of "
-          "every ad and post showing where each one is live (Meta, Instagram, Facebook, Google), read live from the shared "
-          "tracker sheet.", ["CA1", "CA2", "CA3", "CA4", "CA5", "CC", "CP1", "CP2", "CD1", "CD2", "CE1", "CE2"], ["CS3–CS6"]),
+          "ask \u201cDo you have…?\u201d, which Meta rejects. The old singles CS3–CS6 are retired. Also new: the Overview, which shows "
+          "where every ad and post is live (Meta, Instagram, Facebook, Google) from the shared tracker sheet, checked every day.", ["CA1", "CA2", "CA3", "CA4", "CA5", "CC", "CP1", "CP2", "CD1", "CD2", "CE1", "CE2"], ["CS3–CS6"]),
     (D26, "Instagram check: nothing new has gone up since Oct 24. MI2 (brain fog) was taken down for its cover, which caught "
           "Chantelle mid-word, and reposted on Oct 26 with a new cover (a smiling frame). MA2 is live as an organic feed post (since Oct 23), and its card "
           "now says so. Two drawn 3-D equipment reels went up on Oct 24 (the InBody 580 and the KICKR BIKE); they aren't ads, so "
@@ -841,21 +840,25 @@ def build():
         elif b in posted:
             e["seed"] = dict(ig="Posted", ig_date=posted[b] + ", 2026")
     json.dump(CATALOG, open(os.path.join(HERE, "catalog.json"), "w"), indent=1, ensure_ascii=False)
+    snaps = {}
+    for tab, fname, head in (("Tracker", "tracker-snapshot.csv", "Code"), ("Sync%20log", "sync-log-snapshot.csv", "When")):
+        path = os.path.join(HERE, fname)
+        try:
+            text = urllib.request.urlopen(TRACKER_BASE + tab, timeout=15).read().decode("utf-8")
+            if text.lstrip('"').startswith(head):
+                open(path, "w").write(text)
+        except Exception as e:
+            print(f"tracker tab {tab} not readable at build time, keeping the last snapshot:", e)
+        snaps[fname] = open(path).read() if os.path.exists(path) else ""
     snap_path = os.path.join(HERE, "tracker-snapshot.csv")
-    try:
-        csv_text = urllib.request.urlopen(TRACKER_CSV, timeout=15).read().decode("utf-8")
-        if csv_text.lstrip('"').startswith("Code"):
-            open(snap_path, "w").write(csv_text)
-    except Exception as e:
-        print("tracker not readable at build time, keeping the last snapshot:", e)
-    snap = open(snap_path).read() if os.path.exists(snap_path) else ""
+    snap = snaps["tracker-snapshot.csv"]
     snap_at = time.strftime("%b %-d, %Y %-I:%M %p", time.localtime(os.path.getmtime(snap_path))) if snap else ""
     jsdump = lambda o: json.dumps(o, ensure_ascii=False).replace("</", "<\\/")
 
     page = TEMPLATE
     for k, v in {
-        "CATALOG_JSON": jsdump(CATALOG), "SNAPSHOT_JSON": jsdump(dict(csv=snap, at=snap_at)),
-        "TRACKER_EDIT": TRACKER_EDIT, "TRACKER_CSV": TRACKER_CSV, "N_ALL": str(len(CATALOG)),
+        "CATALOG_JSON": jsdump(CATALOG), "SNAPSHOT_JSON": jsdump(dict(csv=snap, log=snaps["sync-log-snapshot.csv"], at=snap_at)),
+        "TRACKER_EDIT": TRACKER_EDIT, "TRACKER_BASE": TRACKER_BASE, "N_ALL": str(len(CATALOG)),
         "UPDATED": UPDATED, "TAG": TAG, "RELEASE": f"https://github.com/{REPO}/releases/tag/{TAG}", "ZIPS": zips_html,
         "WHATSNEW": news, "N_MENO": str(n["menopause"]), "N_LONG": str(n["longevity"]), "N_IRON": str(n["iron"]), "N_IG": str(n["ig"]),
         "MENO_SETUP": setup("menopause", "Women 35–60, about 40 km around Barrie, broad"),
