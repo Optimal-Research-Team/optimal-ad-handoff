@@ -449,6 +449,7 @@ CHANGED["MI2"] = (D26, "new cover: Chantelle smiling, not mid-word")
 CHANGED["CC"] = (D28, "redone as 6 cards; card 1 now names the symptoms")
 CHANGED["CA5"] = (D28, "says \u201cmenstrual cycle\u201d")
 CHANGED["CE2"] = (D28, "\u201cpain with intimacy\u201d")
+CHANGED["CE1"] = (D29, "redrawn: the whole uterus, simplified")   # Peter: the crop was too zoomed in and graphic
 CHANGED.update({new: (D28, f"renamed from {old}") for old, new in RENAME.items()})
 CHANGED.update({g: (D28, "rewritten as five ad groups") for g in ("CG1", "CG2", "CG3", "CG4")})
 ADDED.update({g: D28 for g in ("IRG1", "IRG2", "IRG3", "IRG4")})
