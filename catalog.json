@@ -42,7 +42,7 @@
   "fmt": "Video ad",
   "anchor": "MV2",
   "thumb": "previews/MenoTimeToTalk_Tight_9x16.jpg",
-  "plan": "Next up",
+  "plan": "Chantelle videos set",
   "added": "2026-10-20",
   "kind": "ad",
   "organic_ok": true
@@ -66,7 +66,7 @@
   "fmt": "Video ad",
   "anchor": "MV3",
   "thumb": "previews/MenoThreeThings_Tight_9x16.jpg",
-  "plan": "Next up",
+  "plan": "Chantelle videos set",
   "added": "2026-10-20",
   "kind": "ad",
   "organic_ok": true
@@ -80,6 +80,18 @@
   "thumb": "previews/MenoThreeThings_Flow_9x16.jpg",
   "plan": "Next up",
   "added": "2026-10-20",
+  "kind": "ad",
+  "organic_ok": true
+ },
+ {
+  "code": "MVSL",
+  "line": "The menopause video sales letter (2:33).",
+  "svc": "menopause",
+  "fmt": "Video ad",
+  "anchor": "MVSL",
+  "thumb": "previews/MenoVSL_Main_9x16.jpg",
+  "plan": "Chantelle videos set",
+  "added": "2026-10-29",
   "kind": "ad",
   "organic_ok": true
  },

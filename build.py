@@ -49,13 +49,13 @@ CUT = {"M3": "price card only", "M5": "too abstract, no clear value", "MA1": "to
 RENAME = {"M4": "M3", "M6": "M4", "MA2": "MA1"}
 CATALOG = []   # one entry per tracker row, filled while the page is built
 # paid ads that also work as organic posts (real people or drawn graphics, nothing that would need an AI label)
-ORGANIC_OK = {"MV1", "MV2", "MV3", "LV1", "LV2", "LV3", "CV1", "CV2", "CV3", "IRT1", "IRT2", "IRT3", "IRT4", "MA1"}
+ORGANIC_OK = {"MV1", "MV2", "MV3", "MVSL", "LV1", "LV2", "LV3", "CV1", "CV2", "CV3", "IRT1", "IRT2", "IRT3", "IRT4", "MA1"}
 
 
 def cat(code, line, svc, fmt, anchor, thumb, base=None, kind="ad"):
     b = base or code
     CATALOG.append(dict(code=code, line=re.sub(r"[*{}]", "", line).replace("|", " "), svc=svc, fmt=fmt, anchor=anchor,
-                        thumb=thumb, plan=plan_label(b), added=ADDED.get(b, ""), kind=kind, organic_ok=kind == "ad" and b in ORGANIC_OK))
+                        thumb=thumb, plan=MENO_SET_NAME if code in MENO_SET else plan_label(b), added=ADDED.get(b, ""), kind=kind, organic_ok=kind == "ad" and b in ORGANIC_OK))
 
 
 def track(*codes):
@@ -71,6 +71,9 @@ VIDEOS = [  # id, service, folder in meta-ad-studio/out, render name, the line o
     # Oct 20, Chantelle Oostwoud, NP: a Tight cut (~MV1's length, so NP vs care coordinator is the one change) + a Flow cut
     ("MV2", "menopause", "meno-time-to-talk", "MenoTimeToTalk", "Menopause affects nearly every system.", [("T", "Tight"), ("F", "Flow")]),
     ("MV3", "menopause", "meno-three-things", "MenoThreeThings", "Patients tell me the same three things.", [("T", "Tight"), ("F", "Flow")]),
+    # Oct 29 (Peter): the 2:33 menopause VSL (locked Oct 28) runs as an ad too. One cut, ad name MVSL (no suffix),
+    # 9:16 + 16:9 only (the 16:9 is the desktop split-screen). The web encodes, staged from the Oct 28 delivery folder.
+    ("MVSL", "menopause", "meno-vsl-web", "MenoVSL", "The menopause video sales letter (2:33).", [("", "Main")]),
     # Oct 22, Cheryl: Cycle & Hormone Care, one cut each, labelled with the program badge from frame 0
     ("CV1", "cycle", "cycle-signs", "CycleSigns", "3 or more of these?", [("A", "Ad")]),
     ("CV2", "cycle", "cycle-told-normal", "CycleToldNormal", "“That’s just part of being a woman.”", [("A", "Ad")]),
@@ -103,6 +106,7 @@ PLAN = {
     "MC":  ("now", 5, "How it works · carousel"),
     "MV3": ("next", None, "A/B vs MV1: the NP on camera, same offer · video"),
     "MV2": ("next", None, "NP explains the full-hour first visit · video"),
+    "MVSL": ("next", None, "The whole program in 2:33, price on screen · video"),
     "M2":  ("next", None, "60-minute first visit · big number"),
     "M1":  ("next", None, "Symptom list · education"),
     "MB4": ("next", None, "Hot flashes at work · photo"),
@@ -164,7 +168,11 @@ IRON = {  # id: (badge class, badge text)
 
 SHOW_ID = {"MV1": "MV1-T", "LV1": "LV1-T", "LV2": "LV2-T", "LV3": "LV3-T", "MC": "MC1–5", "LC": "LC1–5"}
 # Oct 19 (Peter): every ad ships in Meta's three ratios, full-bleed. 4:5 is retired (used only as a fallback if a file is missing).
-RATIOS = [("9x16", "9:16 · Stories + Reels"), ("1x1", "1:1 · Feed"), ("1-91x1", "1.91:1 · Feed, right column, in-stream")]
+RATIOS = [("9x16", "9:16 · Stories + Reels"), ("1x1", "1:1 · Feed"), ("1-91x1", "1.91:1 · Feed, right column, in-stream"),
+          ("16x9", "16:9 · Feed, desktop")]   # 16:9 only for MVSL, the VSL's desktop split-screen
+# Oct 29 (Peter): Chantelle's videos get their own Menopause ad set, so they stop losing the budget to MB5
+MENO_SET = {"MV2-T", "MV3-T", "MVSL"}
+MENO_SET_NAME = "Chantelle videos set"
 SRATIOS = [("1x1", "1:1 Feed"), ("9x16", "9:16 Stories + Reels"), ("1-91x1", "1.91:1 Feed + right column")]
 
 
@@ -176,14 +184,14 @@ def simgs(folder, ad):
     return out
 
 
-def web_preview(src, rel):
+def web_preview(src, rel, width=720, maxrate=2200):
     """A 720-wide H.264 preview + poster for the page, re-encoded only when the source is newer."""
     dst = os.path.join(HERE, rel)
     if not os.path.exists(dst) or os.path.getmtime(src) > os.path.getmtime(dst):
         os.makedirs(os.path.dirname(dst), exist_ok=True)
         ff = os.path.join(STUDIO, "tools/node_modules/ffmpeg-static/ffmpeg")
-        subprocess.run([ff, "-y", "-v", "error", "-i", src, "-vf", "scale=720:-2:flags=lanczos,format=yuv420p", "-c:v", "libx264",
-                        "-preset", "slow", "-crf", "27", "-maxrate", "2200k", "-bufsize", "4400k", "-c:a", "aac", "-b:a", "96k",
+        subprocess.run([ff, "-y", "-v", "error", "-i", src, "-vf", f"scale={width}:-2:flags=lanczos,format=yuv420p", "-c:v", "libx264",
+                        "-preset", "slow", "-crf", "27", "-maxrate", f"{maxrate}k", "-bufsize", f"{2 * maxrate}k", "-c:a", "aac", "-b:a", "96k",
                         "-movflags", "+faststart", dst], check=True)
         subprocess.run([ff, "-y", "-v", "error", "-ss", "1.2", "-i", dst, "-frames:v", "1", "-q:v", "4", dst[:-4] + ".jpg"], check=True)
     return rel
@@ -340,10 +348,21 @@ def copy_field(label, text, rows=None):
             f'{body}</div>')
 
 
+def meno_set(vid, cuts):
+    """the card's plan line when one of its cuts is in the Chantelle videos ad set"""
+    inset = [f"{vid}-{k}" if k else vid for k, _ in cuts if (f"{vid}-{k}" if k else vid) in MENO_SET]
+    return "" if not inset else MENO_SET_NAME if len(cuts) == 1 else f"{MENO_SET_NAME} ({inset[0]})"
+
+
 def ad_names(vid, cuts):
+    if vid == "MVSL":
+        return ("Ad name <code>MVSL</code>, in the new Chantelle videos ad set with MV2-T and MV3-T. Upload the 9:16 (Stories + "
+                "Reels) and the 16:9 (Feed, right column, search) as one ad. There's no 1:1 or 1.91:1 cut. At 2:33 Meta skips "
+                "Facebook Stories, Facebook Reels ads, in-stream and Audience Network by itself.")
     if len(cuts) == 1:
         return f"Ad name <code>{vid}-{cuts[0][0]}</code>. Upload its three files as one ad."
-    extra = " MV3-T is also the Chantelle vs Cheryl test against MV1-T." if vid == "MV3" else ""
+    extra = (f" {vid}-T goes in the new Chantelle videos ad set (duplicate it there, keeping its post ID, then switch the "
+             f"original off); {vid}-F stays in the queue.") if vid in ("MV2", "MV3") else ""
     return (f"Two ads, <code>{vid}-T</code> (short) and <code>{vid}-F</code> (longer), in the same ad set as a Meta A/B test "
             f"on length. Upload each cut's three files as one ad.{extra}")
 
@@ -414,7 +433,8 @@ ADDED = {**{k: D12 for k in ("M1 M2 M3 M4 M5 M6 L1 L2 L3 L4 L5 L6 MB1 MB2 MB3 MB
          **{k: D19 for k in ("IR4", "IR5", "IR6", "IRM1", "IRM2", "IRV2", "IRV3")},
          **{k: D20 for k in ("IRT1", "IRT2", "IRT3", "IRT4", "MV2", "MV3")},
          **{k: D22 for k in ("CV1", "CV2", "CV3", "CC", "CG1", "CG2", "CG3", "CG4")},
-         **{k: D28 for k in CYCLE_R4}}
+         **{k: D28 for k in CYCLE_R4},
+         "MVSL": D29}
 ADDED = {RENAME.get(k, k): v for k, v in ADDED.items() if k not in CUT}
 CHANGED = {"IR1": (D20, "new image and headline"), "IR2": (D20, "new image: the website hero"),
            "IRV1": (D20, "rebuilt from the website hero, animated"),
@@ -438,8 +458,10 @@ CHANGED["IRM2"] = (D29, "reworked: what you get, then Book now")
 CHANGED.update({k: (D29, "copy says Book now") for k in ("IR1", "IR2", "IR4", "IR5", "IR6")})
 CHANGED.update({k: (D29, "Book now, no waitlist") for k in ("IRG1", "IRG2", "IRG3", "IRG4")})
 REMOVED = {"IR3": D20}
-SHORT = {"9x16": "9:16", "1x1": "1:1", "1-91x1": "1.91:1"}
+SHORT = {"9x16": "9:16", "1x1": "1:1", "1-91x1": "1.91:1", "16x9": "16:9"}
 NEWS = [  # (date, what happened, ids that link to cards, ids removed)
+    (D29, "Menopause: the 2:33 video sales letter (MVSL) is now an ad, in 9:16 and 16:9. Chantelle opens with what patients tell her, Chantelle and Cheryl walk through the physiology and the three-month program with the price on screen, and Chantelle closes on the free 15-minute call. It goes in a new Menopause ad set with Chantelle's two live videos, MV2-T and MV3-T, so her videos get their own budget instead of losing it to MB5.",
+     ["MVSL", "MV2", "MV3"], []),
     (D29, "IV iron now says Book now, not \u201cjoin the founding waitlist\u201d. Every IV iron video has a new end card (\u201cBook your IV iron visit.\u201d with a Book now button), and the spoken \u201cjoin the waitlist\u201d lines are cut from the talking heads and the voiceover films. IRM2 used to sell the free waitlist, so it now lists what you get, start to finish. All the IV iron copy and the Google search ads end on booking. The Meta button is Book now and the destination is the IV iron page, which still shows the waitlist form: its buttons need to open booking before these go live.",
      ["IRV1", "IRT1", "IRT2", "IRT3", "IRT4", "IRV2", "IRV3", "IRM1", "IRM2", "IR1", "IR2", "IR4", "IR5", "IR6", "IRG1", "IRG2", "IRG3", "IRG4"], []),
     (D28, "Cut four ads that weren't good enough: M3 (just a price card), M5 and MA1 (too abstract) and MB6 (looks too AI). "
@@ -557,7 +579,7 @@ def kv(k, v, copy=False):
 
 CHECKLIST = '''
   <label class="check"><input type="checkbox" data-k="g-sets"><span><b>Few ads, videos first:</b> 4–6 ads per ad set, mostly videos plus a couple of statics. At our budgets Meta can only give that many a fair test. One ad set per service, images and videos together (Cycle has two: general and by condition). <small>Oct 29 plan (Peter): don't upload every ad; the rest is a queue.</small></span></label>
-  <label class="check"><input type="checkbox" data-k="g-m"><span><b>Menopause:</b> keep MV1-T, MV2-T, MV3-T, MB1 and MB5 running, and switch off the old M3 (the price card, cut Oct 28). No new ads this round. Set MB1's description to \u201cFree 15-min call \u00b7 No referral\u201d.</span></label>
+  <label class="check"><input type="checkbox" data-k="g-m"><span><b>Menopause:</b> keep MV1-T, MB1 and MB5 running, and switch off the old M3 (the price card, cut Oct 28). Set MB1's description to \u201cFree 15-min call \u00b7 No referral\u201d. <b>New ad set, Chantelle videos</b> (minimum spend as set in Slack, from the current Menopause budget): duplicate MV2-T and MV3-T into it, keeping their post IDs, switch the originals off, and add <b>MVSL</b>, the 2:33 video sales letter (9:16 + 16:9). <small>Oct 29 (Peter).</small></span></label>
   <label class="check"><input type="checkbox" data-k="g-l"><span><b>Longevity:</b> rebuild LV1-T with the real LV1 video (it has been running MV1's) and add LV2-T. Put the two videos in their own ad set with a small daily minimum for 7 days, so they get a fair read next to L1, L2 and LB1.</span></label>
   <label class="check"><input type="checkbox" data-k="g-cv"><span><b>Cycle &amp; Hormone Care:</b> the landing page is live. Meta, two ad sets for women 18–45, budget split evenly: <b>Set 1 · general</b> CV1-A, CV2-A, CV3-A and the CC carousel; <b>Set 2 · by condition</b> CP1, CP2 (PMOS), CD1, CD2 (PMDD), CE1, CE2 (endometriosis). <small>Oct 29 (Peter): push the condition statics too.</small> Google: build from <a href="files/GOOGLE-ADS-CYCLE.md" target="_blank" rel="noopener">GOOGLE-ADS-CYCLE.md</a> (five ad groups).</span></label>
   <label class="check"><input type="checkbox" data-k="g-ir"><span><b>IV iron (opens next week):</b> once the IV iron page's buttons open booking, Meta: IRV1, IRT1, IRT2 and IR1 with the <b>Book now</b> button, and Google from <a href="files/GOOGLE-ADS-IRON.md" target="_blank" rel="noopener">GOOGLE-ADS-IRON.md</a> (four ad groups, booking conversion first). Download the videos fresh: they were re-rendered Oct 29 with the Book now end card.</span></label>
@@ -606,22 +628,24 @@ def build():
         cuts = rest[0] if rest else CUTS
         cuts_html = []
         for k, cut in cuts:
-            files, more, d = video_files(out, lambda r: f"{name}_{cut}_{r}", lambda r: f"{vid}-{k}_{cut}_{r}.mp4", "videos",
-                                         lambda r: f"files/{vid}-{k}_thumbnail_{r}.jpg")
+            code = f"{vid}-{k}" if k else vid
+            files, more, d = video_files(out, lambda r: f"{name}_{cut}_{r}", lambda r: f"{code}_{cut}_{r}.mp4", "videos",
+                                         lambda r: f"files/{code}_thumbnail_{r}.jpg")
             srt = os.path.join(out, f"{name}_{cut}.srt")
-            more.append(dl(put(srt, f"files/{vid}-{k}_captions.srt"), "Captions .srt (optional)", mb(srt)))
-            prev = web_preview(os.path.join(out, f"{name}_{cut}_9x16.mp4"), f"previews/{name}_{cut}_9x16.mp4")
-            cat(f"{vid}-{k}", line + ("" if len(cuts) == 1 else f" ({cut} cut)"), svc, "Video ad", vid, prev[:-4] + ".jpg", base=vid)
+            more.append(dl(put(srt, f"files/{code}_captions.srt"), "Captions .srt (optional)", mb(srt)))
+            prev = web_preview(os.path.join(out, f"{name}_{cut}_9x16.mp4"), f"previews/{name}_{cut}_9x16.mp4",
+                              *((540, 1100) if vid == "MVSL" else ()))   # 2:33 long: keep the page light
+            cat(code, line + ("" if len(cuts) == 1 else f" ({cut} cut)"), svc, "Video ad", vid, prev[:-4] + ".jpg", base=vid)
             cuts_html.append(f'''<div class="cut"><video src="{prev}" poster="{prev[:-4]}.jpg" controls playsinline preload="none"></video>
-          <div class="cutname">{vid}-{k} · {cut} · {d}</div><div class="dls">{"".join(files)}</div>{thumbs_more(more)}</div>''')
+          <div class="cutname">{code} · {cut} · {d}</div><div class="dls">{"".join(files)}</div>{thumbs_more(more)}</div>''')
         isnew, newpill, whenline = when(vid)
         alt = copy_field("Alt headline", c["alt"]) if c.get("alt") else ""
         n[svc] += 1
         vids[svc].append(f'''
     <article class="card ad{" isnew" if isnew else ""}" id="{vid}">
       <div class="cuts">{"".join(cuts_html)}</div>
-      <div class="adtext">{khead(vid, "Video ad", plan_label(vid))}<h3>{esc(line)}</h3>{whenline}
-        {track(*(f"{vid}-{k}" for k, _ in cuts))}
+      <div class="adtext">{khead(vid, "Video ad", meno_set(vid, cuts) or plan_label(vid))}<h3>{esc(line)}</h3>{whenline}
+        {track(*(f"{vid}-{k}" if k else vid for k, _ in cuts))}
         <p class="note">{ad_names(vid, cuts)}</p>
         <details class="copybox"><summary>Copy to paste</summary>
           <div class="twocol">{copy_field("Headline", c["headline"])}{copy_field("Description", c["description"])}</div>{alt}
@@ -883,7 +907,7 @@ def build():
     # ---------------- plan + rewrites (How to launch)
     thumbs, titles = {}, {}
     for vid, svc, folder, name, line, *rest in VIDEOS:
-        thumbs[vid], titles[vid] = f"previews/{name}_Tight_9x16.jpg", line
+        thumbs[vid], titles[vid] = f"previews/{name}_{(rest[0] if rest else CUTS)[0][1]}_9x16.jpg", line
     for ad, c in list(r1.items()) + list(r2.items()) + list(r3.items()):
         if ad in CUT:
             continue
