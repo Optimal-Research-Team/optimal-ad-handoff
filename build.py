@@ -150,7 +150,7 @@ REWRITES = [
     ("LC5", "Book a free intro call at beoptimal.ca.", "Start with a free 15-minute call, no commitment.", "Risk reversal: free, short and no strings."),
 ]
 
-# IV iron (Oct 14, 2026): pre-launch, founding waitlist only, on a Meta Instant Form (no landing page yet).
+# IV iron (Oct 14, 2026): pre-launch waitlist test on a Meta Instant Form. Oct 29 (Peter): the CTA is "Book now", to the IV iron page.
 IRON = {  # id: (badge class, badge text)
     "IR1": ("now", "Run now"), "IRV1": ("now", "Run now"),   # IR3 removed Oct 20 (Peter: "delete IR3")
     "IR2": ("now", "Run now · cleared by the Clinical Director (Oct 20)"),
@@ -401,10 +401,11 @@ def dl(href, label, size, primary=False):
 
 
 # ------------------------------------------------------------------ Oct 20 2026 rebuild: by service, dated, IR3 gone
-UPDATED = "Oct 28, 2026"
-LATEST = "2026-10-28"
-D12, D13, D14, D15, D19, D20, D21, D22, D26, D28 = ("2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-19", "2026-10-20",
-                                                    "2026-10-21", "2026-10-22", "2026-10-26", "2026-10-28")
+UPDATED = "Oct 29, 2026"
+LATEST = "2026-10-29"
+D12, D13, D14, D15, D19, D20, D21, D22, D26, D28, D29 = ("2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-19",
+                                                         "2026-10-20", "2026-10-21", "2026-10-22", "2026-10-26", "2026-10-28",
+                                                         "2026-10-29")
 ADDED = {**{k: D12 for k in ("M1 M2 M3 M4 M5 M6 L1 L2 L3 L4 L5 L6 MB1 MB2 MB3 MB4 MB5 MB6 LB1 LB2 LB3 LB4 LB5 LB6 "
                              "MC LC LV1 LV2 MV1").split()},
          **{k: D13 for k in ("MA1", "MA2", "LA1", "LA2")},
@@ -430,9 +431,17 @@ CHANGED.update({new: (D28, f"renamed from {old}") for old, new in RENAME.items()
 CHANGED.update({g: (D28, "rewritten as five ad groups") for g in ("CG1", "CG2", "CG3", "CG4")})
 ADDED.update({g: D28 for g in ("IRG1", "IRG2", "IRG3", "IRG4")})
 ADDED["CG5"] = D28
+# Oct 29 (Peter): IV iron's call to action is "Book now", not the founding waitlist
+CHANGED.update({k: (D29, "Book now end card; the waitlist line is cut") for k in ("IRT1", "IRT2", "IRT3", "IRT4", "IRV2", "IRV3")})
+CHANGED.update({k: (D29, "Book now end card") for k in ("IRV1", "IRM1")})
+CHANGED["IRM2"] = (D29, "reworked: what you get, then Book now")
+CHANGED.update({k: (D29, "copy says Book now") for k in ("IR1", "IR2", "IR4", "IR5", "IR6")})
+CHANGED.update({k: (D29, "Book now, no waitlist") for k in ("IRG1", "IRG2", "IRG3", "IRG4")})
 REMOVED = {"IR3": D20}
 SHORT = {"9x16": "9:16", "1x1": "1:1", "1-91x1": "1.91:1"}
 NEWS = [  # (date, what happened, ids that link to cards, ids removed)
+    (D29, "IV iron now says Book now, not \u201cjoin the founding waitlist\u201d. Every IV iron video has a new end card (\u201cBook your IV iron visit.\u201d with a Book now button), and the spoken \u201cjoin the waitlist\u201d lines are cut from the talking heads and the voiceover films. IRM2 used to sell the free waitlist, so it now lists what you get, start to finish. All the IV iron copy and the Google search ads end on booking. The Meta button is Book now and the destination is the IV iron page, which still shows the waitlist form: its buttons need to open booking before these go live.",
+     ["IRV1", "IRT1", "IRT2", "IRT3", "IRT4", "IRV2", "IRV3", "IRM1", "IRM2", "IR1", "IR2", "IR4", "IR5", "IR6", "IRG1", "IRG2", "IRG3", "IRG4"], []),
     (D28, "Cut four ads that weren't good enough: M3 (just a price card), M5 and MA1 (too abstract) and MB6 (looks too AI). "
           "The rest were renamed so the codes run in order: M4 is now M3, M6 is now M4, MA2 is now MA1. The old M3 is still "
           "running in Ads Manager, so switch it off. The Cycle & Hormone Care page is live, so nothing is on hold any more. "
@@ -547,13 +556,13 @@ def kv(k, v, copy=False):
 
 
 CHECKLIST = '''
-  <label class="check"><input type="checkbox" data-k="g-sets"><span><b>Ad sets:</b> one each for Menopause and Longevity, two for Cycle &amp; Hormone Care (Set 1 general, Set 2 by condition), and two for IV iron (Statics, Video). Broad audience, Advantage+ placements.</span></label>
+  <label class="check"><input type="checkbox" data-k="g-sets"><span><b>Ad sets:</b> one each for Menopause and Longevity, two for Cycle &amp; Hormone Care (Set 1 general, Set 2 by condition), and one for IV iron (images and videos together). Broad audience, Advantage+ placements.</span></label>
   <label class="check"><input type="checkbox" data-k="g-m"><span><b>Upload the Menopause Test now ads</b> in rank order: MV1-T, MB1, MB5, MB2, MC. <small>The old M3 (the price card) was cut on Oct 28: switch it off. The code M3 now belongs to the old M4.</small></span></label>
   <label class="check"><input type="checkbox" data-k="g-l"><span><b>Upload the Longevity Test now ads</b> in rank order: LV1-T, L1, L2, LB1, LB2, LB3.</span></label>
   <label class="check"><input type="checkbox" data-k="g-ab"><span><b>Set up the Chantelle vs Cheryl test:</b> MV1-T against MV3-T as a Meta A/B test (equal budgets).</span></label>
   <label class="check"><input type="checkbox" data-k="g-ai"><span><b>Leave Meta's AI label off</b> for every ad and post (Peter, Oct 28).</span></label>
   <label class="check"><input type="checkbox" data-k="g-cv"><span><b>Cycle &amp; Hormone Care:</b> the landing page is live. Meta: Set 1 (CV, CA, CC) and Set 2 (CP, CD, CE), women 18–45. Google: build from <a href="files/GOOGLE-ADS-CYCLE.md" target="_blank" rel="noopener">GOOGLE-ADS-CYCLE.md</a> (five ad groups).</span></label>
-  <label class="check"><input type="checkbox" data-k="g-irg"><span><b>IV iron on Google:</b> build from <a href="files/GOOGLE-ADS-IRON.md" target="_blank" rel="noopener">GOOGLE-ADS-IRON.md</a> (four ad groups), after adding the waitlist conversion.</span></label>
+  <label class="check"><input type="checkbox" data-k="g-irg"><span><b>IV iron on Google:</b> build from <a href="files/GOOGLE-ADS-IRON.md" target="_blank" rel="noopener">GOOGLE-ADS-IRON.md</a> (four ad groups), after adding the booking conversion. The IV iron page has to show Book now first.</span></label>
   <label class="check"><input type="checkbox" data-k="g-track"><span><b>Mark it in the tracker</b> when an ad goes into Ads Manager, goes live or is paused: one row per ad name in the tracker sheet (top of the Overview). The daily check fills in what it can see.</span></label>
   <label class="check"><input type="checkbox" data-k="g-copy"><span><b>Name every ad with its ID</b> and paste the copy from its card. Keep the URL parameters exactly as written.</span></label>
   <label class="check"><input type="checkbox" data-k="g-pub"><span><b>Publish, then don't touch it for 7 days.</b></span></label>'''
@@ -691,7 +700,7 @@ def build():
             "IRV1": "The IV iron page's hero image, animated, silent",
             "IRV2": "Short film with a voiceover: our lounge and reception",
             "IRV3": "Short film with a voiceover: home still lifes and our lounge",
-            "IRM1": "Motion graphics, silent", "IRM2": "Motion graphics, silent: the offer"}
+            "IRM1": "Motion graphics, silent", "IRM2": "Motion graphics, silent: what you get"}
     iron_videos = []
     for ad in ("IRV1", "IRT1", "IRT2", "IRT3", "IRT4", "IRV2", "IRV3", "IRM1", "IRM2"):   # Run now first, then the tests
         base, zk = (idir, "r4") if ad == "IRV1" else (i2dir, "r5")
@@ -714,7 +723,7 @@ def build():
         <div class="cutname">{ad} · {d}</div><div class="dls">{"".join(files)}</div>{thumbs_more(more)}</div></div>
       <div class="adtext">{khead(ad, "Video ad", plan_label(ad))}<h3>{esc(c["title"])}</h3>{whenline}
         {track(ad)}
-        <p class="note">{esc(KIND[ad])}. Ad name <code>{ad}</code>, call to action Sign up.</p>
+        <p class="note">{esc(KIND[ad])}. Ad name <code>{ad}</code>, call to action Book now.</p>
         <details class="copybox"><summary>Copy to paste</summary><div class="twocol">{copy_field("Headline", c["headline"])}{copy_field("Description", c["description"])}</div>{text}</details>
       </div>
     </article>''')
@@ -892,20 +901,18 @@ def build():
     def setup(svc, audience):
         return (kv("Website URL", SERVICES[svc]["dest"], True) + kv("URL parameters", SERVICES[svc]["utm"], True)
                 + kv("Call to action", "Book now") + kv("Audience", audience))
-    iron_setup = (kv("Campaign", "Leads → Instant form (\"Join the IV iron founding waitlist\")") + kv("Call to action", "Sign up")
-                  + kv("Ad sets", "Two: Statics and Video, $15–20 a day each, 7 days hands off")
+    IRON_UTM = "utm_source={{site_source_name}}&utm_medium=paid&utm_campaign={{campaign.id}}&utm_term={{adset.id}}&utm_content={{ad.id}}"
+    iron_setup = (kv("Campaign", "Sales → website conversions, optimized for BookAppointmentSuccess")
+                  + kv("Website URL", "https://www.beoptimal.ca/services/iron", True) + kv("Call to action", "Book now")
+                  + kv("Ad sets", "One, images and videos together. Start with IR1, IR2, IRV1 and IRT1, then add one or two a week")
                   + kv("Audience", "Adults 25–64, about 40 km around Barrie, broad"))
     iron_howto = f'''
       <div class="twocol">
-        <div>{copy_field("Instant Form intro", "IV iron is coming to Optimal in Barrie. Join the founding waitlist for first access, in signup order, and founding pricing. No referral needed.", 3)}
-          <div class="field"><div class="flabel">Questions</div><div class="val">First name, email, phone (prefilled), plus one multiple-choice question: "Do you have private or workplace drug coverage?" Yes / No / Not sure. No health questions.</div></div>
-          {copy_field("Privacy policy", "https://www.beoptimal.ca/privacy")}
-          {copy_field("Thank-you screen", "You're on the list. We'll email you when booking opens. Questions? Call (437) 370-0291.", 2)}</div>
+        <div>{copy_field("URL parameters", IRON_UTM, 2)}</div>
         <div><ul class="rules">
-          <li><b>Judge on</b> cost per signup and the share answering "Yes" on drug coverage; for video, the 3-second hold and ThruPlay.</li>
-          <li><b>Download the leads</b> every few days: founding access goes in signup order.</li>
-          <li><b>The page is live:</b> beoptimal.ca/iron (redirects to /services/iron). A second ad set can test it as a website destination; keep the Instant Form as the default.</li>
-          <li><b>Google Ads:</b> <a href="files/GOOGLE-ADS-IRON.md" target="_blank" rel="noopener">GOOGLE-ADS-IRON.md</a>, ready to build. Add a Google Ads conversion on the waitlist submit first.</li>
+          <li><b>Before launch:</b> the IV iron page still shows “Save my founding spot”. Its buttons need to open booking first, so the page matches the ads. The Instant Form is retired.</li>
+          <li><b>Judge on</b> cost per booked consult; for video, the 3-second hold and ThruPlay.</li>
+          <li><b>Google Ads:</b> <a href="files/GOOGLE-ADS-IRON.md" target="_blank" rel="noopener">GOOGLE-ADS-IRON.md</a>, ready to build. Add the booking conversion first.</li>
           <li><b>All the copy:</b> <a href="files/COPY-IRON.md" target="_blank" rel="noopener">COPY-IRON.md</a> (IR1, IR2, IRV1) and <a href="files/COPY-IRON-R2.md" target="_blank" rel="noopener">COPY-IRON-R2.md</a> (the rest). Shoot script: <a href="files/TH8-iv-iron-shoot-script.md" target="_blank" rel="noopener">TH8</a>.</li>
         </ul></div>
       </div>'''
