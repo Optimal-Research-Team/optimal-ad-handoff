@@ -510,6 +510,64 @@
   .st-links { display: flex; justify-content: space-between; gap: 8px; }
   .st-links a { font: 600 12.5px "Public Sans"; color: var(--forest); text-decoration: none; }
   .st-links a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ---------------- Oct 28 (round 3, Peter: "reduce how busy the overview is … more minimal, larger fonts"):
+     headline + one button, four big numbers, short attention lines, lists with only the actionable groups open */
+  body { font-size: 16px; }
+  header.top { padding: 56px 0 0; }
+  .hero { align-items: center; gap: 24px; }
+  .hero h1 { font-size: clamp(38px, 4.6vw, 60px); line-height: 1.02; max-width: none; }
+  .hero-cta { display: inline-flex; flex-direction: row; align-items: center; }
+  .checked { margin: 14px 0 0; font-size: 14px; }
+  .sumview { padding-top: 34px; }
+  .channels { gap: 14px; }
+  .chcard { padding: 22px 22px 20px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; border-radius: 16px; }
+  .chcard b { font: 400 56px/1 Castoro, serif; letter-spacing: -.03em; }
+  .chcard .chname { font: 500 15px/1.3 "Public Sans"; letter-spacing: 0; text-transform: none; color: var(--body); margin: 0; }
+  .attn { margin-top: 48px; }
+  .attn h2, .views button { font: 400 28px/1.15 Castoro, serif; letter-spacing: -.015em; }
+  .attn ol { margin-top: 10px; }
+  .attn li { grid-template-columns: 10px 120px minmax(0, 1fr) auto; gap: 14px; padding: 15px 0; font-size: 16px; align-items: center; }
+  .attn li::before { width: 8px; height: 8px; transform: none; }
+  .attn li b { font: 700 14px "Public Sans"; color: var(--ink); letter-spacing: .01em; }
+  .attn li > span { color: var(--body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .attn li a { font-size: 14px; }
+  .listbar { margin: 56px 0 6px; align-items: flex-end; }
+  .views { gap: 28px; border: 0; }
+  .views button { padding-bottom: 10px; }
+  .views button em { font-size: 13px; vertical-align: 6px; }
+  .search { height: 40px; width: 220px; }
+  details.grp { margin-top: 22px; }
+  details.grp > summary { padding: 8px 2px 10px; border-bottom: 0; }
+  .gname { font: 600 16px "Public Sans"; }
+  .gcount { font: 500 15px "Public Sans"; }
+  .rows { border-top: 1px solid var(--line); border-radius: var(--r); }
+  .row { grid-template-columns: 52px minmax(0, 1fr) minmax(160px, auto); gap: 18px; padding: 12px 18px; }
+  .row:first-child { border-radius: var(--r) var(--r) 0 0; }
+  .row .th img, .row .th .gl { width: 52px; height: 52px; border-radius: 10px; }
+  .row .t { font-size: 16px; }
+  .row .t b { font-size: 13px; margin-right: 10px; }
+  .row .sub { font-size: 13.5px; margin-top: 3px; }
+  .row .note { font-size: 13.5px; margin-top: 4px; font-weight: 600; }
+  .stcol { display: flex; align-items: center; justify-content: flex-end; gap: 12px; }
+  .stcol.two { flex-direction: column; align-items: flex-end; gap: 4px; }
+  .row .st { font-size: 14.5px; }
+  .row .also { gap: 8px; color: var(--muted); }
+  .row .also a { color: var(--muted); } .row .also a:hover { color: var(--forest); }
+  .row .also svg { width: 17px; height: 17px; }
+  details.news { margin-top: 56px; }
+  details.news > summary { font-size: 14px; }
+  @media (max-width: 860px) {
+    .row { grid-template-columns: 52px minmax(0, 1fr); grid-template-areas: "th main" "th st"; }
+    .row .th { grid-area: th; } .row .main { grid-area: main; } .row .stcol { grid-area: st; justify-content: flex-start; }
+    .stcol.two { flex-direction: row; align-items: center; gap: 14px; }
+    .attn li { grid-template-columns: 10px minmax(0, 1fr) auto; } .attn li b { grid-column: 2; } .attn li > span { grid-column: 2; white-space: normal; }
+    .attn li a { grid-row: 1 / span 2; grid-column: 3; }
+  }
+  @media (max-width: 520px) { .chcard b { font-size: 44px; } .search { width: 100%; } .hero h1 { font-size: 38px; } }
+
+  .st-note { display: block; color: var(--muted); font-size: 12px; margin-top: 3px; }
+  .side-tracker .st-state { font-size: 13.5px; color: var(--ink); }
 </style>
 </head>
 <body>
@@ -558,54 +616,33 @@
 </div>
 <header class="top"><div class="wrap ov">
   <div class="hero">
-    <div>
-      <p class="eyebrow">Ads &amp; posts · files updated {{UPDATED}}</p>
-      <h1>What's live, and what's next.</h1>
-      <p class="lede">Every Optimal ad and post, and where it's running. Checked every day against Instagram, the Facebook Page and the Meta Ad Library.</p>
-    </div>
-    <div class="hero-cta">
-      <a class="btn big" href="{{TRACKER_EDIT}}" target="_blank" rel="noopener">Open tracker sheet ↗</a>
-      <span class="hero-sub">Change a status there and this page picks it up.</span>
-    </div>
+    <h1>What's live, and what's next.</h1>
+    <a class="btn big hero-cta" href="{{TRACKER_EDIT}}" target="_blank" rel="noopener">Open tracker sheet ↗</a>
   </div>
+  <p class="checked" id="checked"><i class="d wait"></i>Reading the tracker…</p>
 </div></header>
 
 <section id="summary" class="sumview"><div class="wrap ov">
-  <p class="checked" id="checked"><i class="d wait"></i>Reading the tracker…</p>
-
   <div class="channels">
-    <button class="chcard" data-go="ads"><span class="chname">Meta ads</span><b id="k-meta">–</b><span class="chunit">running</span><span class="chsub" id="k-meta-s"></span></button>
-    <button class="chcard" data-go="posts"><span class="chname">Instagram</span><b id="k-ig">–</b><span class="chunit">posts</span><span class="chsub" id="k-ig-s"></span></button>
-    <button class="chcard" data-go="posts"><span class="chname">Facebook Page</span><b id="k-fb">–</b><span class="chunit">posts</span><span class="chsub" id="k-fb-s"></span></button>
-    <button class="chcard" data-go="ads"><span class="chname">Google search</span><b id="k-g">–</b><span class="chunit" id="k-g-u">live</span><span class="chsub" id="k-g-s"></span></button>
+    <button class="chcard" data-go="ads"><b id="k-meta">–</b><span class="chname">running on Meta</span></button>
+    <button class="chcard" data-go="posts"><b id="k-ig">–</b><span class="chname">on Instagram</span></button>
+    <button class="chcard" data-go="posts"><b id="k-fb">–</b><span class="chname">on Facebook</span></button>
+    <button class="chcard" data-go="ads"><b id="k-g">–</b><span class="chname" id="k-g-u">Google ad groups live</span></button>
   </div>
 
   <div class="attn" id="attn" hidden><h2>Needs attention</h2><ol></ol></div>
 
   <div class="listbar">
     <div class="views" id="views" role="tablist">
-      <button data-v="ads" class="on" role="tab">Paid ads <em id="n-ads"></em></button>
-      <button data-v="posts" role="tab">Instagram &amp; Facebook <em id="n-posts"></em></button>
+      <button data-v="ads" class="on" role="tab">Ads <em id="n-ads"></em></button>
+      <button data-v="posts" role="tab">Posts <em id="n-posts"></em></button>
     </div>
-    <div class="filters">
-      <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
-        <input id="q" type="search" placeholder="Search" autocomplete="off" aria-label="Search ads and posts"></label>
-      <select id="svcsel" aria-label="Service"><option value="">All services</option><option value="menopause">Menopause</option><option value="cycle">Cycle &amp; Hormone</option><option value="longevity">Longevity</option><option value="iron">IV iron</option><option value="clinic">Clinic</option></select>
-    </div>
+    <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+      <input id="q" type="search" placeholder="Search" autocomplete="off" aria-label="Search ads and posts"></label>
   </div>
-  <div class="colhead" id="colhead"></div>
   <div id="list"></div>
   <p class="empty" hidden>Nothing matches that search.</p>
-
-  <div class="lower">
-    <div class="week"><h2>This week</h2><ul id="week"></ul></div>
-    <div class="howto2"><h2>Keeping it up to date</h2>
-      <p>Every day at 4:30 PM Claude checks the public Instagram, the Facebook Page and the Meta Ad Library, updates the tracker, and logs what changed. Things it can't see from outside (Meta's In review, Paused or Rejected states, and Google Ads) are updated by hand in the tracker; there's a reminder in #marketing-and-growth every Friday.</p>
-      <p>Start a note with <b>Fix:</b> or <b>Check:</b> and it appears under Needs attention.</p>
-      <p>Weekly marketing KPIs live in the same sheet, on the <a href="{{TRACKER_KPI}}" target="_blank" rel="noopener">Weekly KPIs</a> tab. Ads launched, Instagram posts and Facebook cross-posts count themselves from the tracker.</p>
-      <a class="btn ghost" href="{{TRACKER_EDIT}}" target="_blank" rel="noopener">Open the tracker sheet ↗</a></div>
-  </div>
-  <details class="news" id="new"><summary>Changes to this page and its files</summary>{{WHATSNEW}}</details>
+  <details class="news" id="new"><summary>Change log</summary>{{WHATSNEW}}</details>
 </div></section>
 
 
@@ -752,6 +789,7 @@
     : /review|scheduled|uploaded/i.test(s) ? "wait" : /reject/i.test(s) ? "bad" : /paus|off|taken|removed|ended|inactive/i.test(s) ? "off" : "todo";
   const svcKey = v => Object.keys(SVC).find(k => SVC[k].toLowerCase() === String(v || "").toLowerCase() || k === String(v || "").toLowerCase()) || "clinic";
   const kindOf = f => /google/i.test(f || "") ? "google" : /organic|post/i.test(f || "") ? "organic" : "ad";
+  const cap = t => t.charAt(0).toUpperCase() + t.slice(1);
   const noteText = n => n.replace(/\s*\(Ad Library \d+\)\s*$/, "").replace(/^Ad Library \d+(?: \([^)]*\))?[.:]\s*/, "");
   const isFlag = r => /^(fix|check)\b/i.test(noteText(r.notes));
 
@@ -799,19 +837,19 @@
   const bySvc = (a, b) => SVC_ORDER.indexOf(a.svc) - SVC_ORDER.indexOf(b.svc);
   const byPost = (a, b) => (toDate(b.igDate || b.fbDate) || 0) - (toDate(a.igDate || a.fbDate) || 0) || a.i - b.i;
   const LISTS = {
-    ads: { group: adGroup, head: ["Ad", "On Meta / Google", "Also posted"], groups: [
-      { k: "fix", name: "Needs a fix or a check", sort: bySvc },
-      { k: "review", name: "In review at Meta", sort: bySvc },
-      { k: "running", name: "Running now", sort: bySvc },
-      { k: "ready", name: "Ready to upload", hint: "per service, in launch order", sort: (a, b) => bySvc(a, b) || PLAN_RANK(a.plan) - PLAN_RANK(b.plan) || a.i - b.i },
+    ads: { group: adGroup, groups: [
+      { k: "fix", name: "Fix or check", sort: bySvc },
+      { k: "review", name: "In review", sort: bySvc },
+      { k: "running", name: "Running", sort: bySvc },
+      { k: "ready", name: "Ready to upload", closed: true, sort: (a, b) => bySvc(a, b) || PLAN_RANK(a.plan) - PLAN_RANK(b.plan) || a.i - b.i },
       { k: "hold", name: "On hold", closed: true, sort: bySvc },
-      { k: "stopped", name: "Paused or switched off", closed: true, sort: bySvc }] },
-    posts: { group: postGroup, head: ["Post", "Instagram", "Facebook Page"], groups: [
-      { k: "fbgap", name: "On Instagram, not on Facebook yet", hint: "post these to the Facebook Page", sort: byPost },
-      { k: "both", name: "On Instagram and Facebook", sort: byPost },
-      { k: "fbonly", name: "On Facebook only", sort: byPost },
+      { k: "stopped", name: "Paused or off", closed: true, sort: bySvc }] },
+    posts: { group: postGroup, groups: [
+      { k: "fbgap", name: "Not on Facebook yet", sort: byPost },
+      { k: "both", name: "On Instagram and Facebook", closed: true, sort: byPost },
+      { k: "fbonly", name: "Facebook only", closed: true, sort: byPost },
       { k: "todo", name: "Not posted yet", sort: bySvc },
-      { k: "adpost", name: "Paid ads that could also be posts", hint: "videos with real people, no AI label needed", closed: true, sort: bySvc },
+      { k: "adpost", name: "Ads that could also be posts", closed: true, sort: bySvc },
       { k: "gone", name: "Taken down", closed: true, sort: byPost }] },
   };
 
@@ -833,23 +871,21 @@
   function rowHTML(r, list) {
     const th = r.thumb ? `<img src="${esc(r.thumb)}" alt="" loading="lazy">` : `<span class="gl">${r.kind === "google" ? ICON.g : r.kind === "ad" ? ICON.img : ICON.ig}</span>`;
     const note = noteText(r.notes);
-    const sub = list === "ads"
-      ? [r.fmt, `<span class="sn"><i class="sv ${r.svc}"></i>${esc(SVC[r.svc])}</span>`, r.plan && !r.plan.startsWith("Hold") ? esc(r.plan) : ""]
-      : [KIND_POST(r), `<span class="sn"><i class="sv ${r.svc}"></i>${esc(SVC[r.svc])}</span>`, r.kind !== "organic" ? "also a paid ad" : ""];
-    const main = `<span class="main"><span class="t"><b>${esc(r.code)}</b>${esc(r.line)}${r.added === LATEST ? '<span class="new">New</span>' : ""}</span>
-      <span class="sub">${sub.filter(Boolean).join(" · ")}</span>${isFlag(r) ? `<span class="note">${esc(note)}</span>` : ""}</span>`;
+    const sub = [`<span class="sn"><i class="sv ${r.svc}"></i>${esc(SVC[r.svc])}</span>`, list === "ads" ? r.fmt.replace(/ ad$/, "") : KIND_POST(r)];
+    const main = `<span class="main"><span class="t"><b>${esc(r.code)}</b>${esc(r.line)}</span>
+      <span class="sub">${sub.join(" · ")}</span>${isFlag(r) ? `<span class="note">${esc(cap(note.replace(/^(fix|check):\s*/i, "")))}</span>` : ""}</span>`;
     let cols;
     if (list === "ads") {
       const paid = r.kind === "google"
         ? status(r.google, "", "", { todo: "Google · not built", on: "Google · live", off: "Google · paused" })
-        : status(r.meta, r.metaDate, "", { on: "Running", since: true, todo: r.plan.startsWith("Hold") ? "On hold" : "Not uploaded" });
-      const also = [tone(r.ig) === "on" ? `<a href="${esc(r.igLink || "#")}" target="_blank" rel="noopener" title="On Instagram">${ICON.ig}IG</a>` : "",
-                    tone(r.fb) === "on" ? `<a href="${esc(r.fbLink || "#")}" target="_blank" rel="noopener" title="On Facebook">${ICON.fb}FB</a>` : ""].join("");
-      cols = `${paid}<span class="also">${also}</span>`;
+        : status(r.meta, r.metaDate, "", { on: "Running", todo: r.plan.startsWith("Hold") ? "On hold" : "Not uploaded" });
+      const also = [tone(r.ig) === "on" ? `<a href="${esc(r.igLink || "#")}" target="_blank" rel="noopener" title="Also on Instagram">${ICON.ig}</a>` : "",
+                    tone(r.fb) === "on" ? `<a href="${esc(r.fbLink || "#")}" target="_blank" rel="noopener" title="Also on Facebook">${ICON.fb}</a>` : ""].join("");
+      cols = `<span class="stcol">${paid}<span class="also">${also}</span></span>`;
     } else {
-      cols = status(r.ig, r.igDate, r.igLink, { todo: "Not posted" }) + status(r.fb, r.fbDate, r.fbLink, { todo: "Not posted" });
+      cols = `<span class="stcol two">${status(r.ig, r.igDate, r.igLink, { todo: "Not on Instagram", on: "Instagram" })}${status(r.fb, r.fbDate, r.fbLink, { todo: "Not on Facebook", on: "Facebook" })}</span>`;
     }
-    return `<div class="row" data-href="${esc(href(r))}"><span class="th">${th}</span>${main}${cols}<span class="chev">›</span></div>`;
+    return `<div class="row" data-href="${esc(href(r))}"><span class="th">${th}</span>${main}${cols}</div>`;
   }
 
   // ---------------- TanStack Table (headless core) filters the rows; grouping and rendering are ours
@@ -872,7 +908,6 @@
 
   function renderList() {
     const L = LISTS[view], vis = visible();
-    $("#colhead").innerHTML = `<span>${L.head[0]}</span><span>${L.head[1]}</span><span>${L.head[2]}</span>`;
     let html = "", shown = 0;
     for (const g of L.groups) {
       const gr = vis.filter(r => L.group(r) === g.k).sort(g.sort);
@@ -900,42 +935,37 @@
   document.querySelectorAll("#views button").forEach(b => b.addEventListener("click", () => setView(b.dataset.v)));
   document.querySelectorAll(".chcard").forEach(b => b.addEventListener("click", () => { setView(b.dataset.go); $("#views").scrollIntoView({ behavior: "smooth", block: "start" }); }));
   $("#q").addEventListener("input", e => setFilter("q", e.target.value.trim()));
-  $("#svcsel").addEventListener("change", e => setFilter("svc", e.target.value));
+
 
   // ---------------- totals, needs attention, this week
   function renderTop() {
     const cnt = f => rows.filter(f).length, on = s => tone(s) === "on";
     const meta = cnt(r => r.kind === "ad" && on(r.meta)), ready = cnt(r => r.kind === "ad" && adGroup(r) === "ready"), hold = cnt(r => r.kind === "ad" && adGroup(r) === "hold");
     $("#k-meta").textContent = meta;
-    $("#k-meta-s").textContent = [ready && `${ready} ready to upload`, hold && `${hold} on hold`].filter(Boolean).join(" · ");
-    const igRows = rows.filter(r => on(r.ig)), last = igRows.map(r => toDate(r.igDate)).filter(Boolean).sort((a, b) => b - a)[0];
-    $("#k-ig").textContent = igRows.length; $("#k-ig-s").textContent = last ? `Latest ${fmtDay(last)}` : "";
-    const fb = cnt(r => on(r.fb)), gap = cnt(r => on(r.ig) && !on(r.fb));   // counts only what's actually on Instagram
-    $("#k-fb").textContent = fb; $("#k-fb-s").textContent = gap ? `${gap} Instagram posts not copied over` : "Up to date with Instagram";
+    $("#k-ig").textContent = cnt(r => on(r.ig));
+    const fb = cnt(r => on(r.fb)), gap = cnt(r => on(r.ig) && !on(r.fb) && tone(r.fb) !== "na");   // "—" on Facebook = left off on purpose
+    $("#k-fb").textContent = fb;
     const g = rows.filter(r => r.kind === "google"), gl = g.filter(r => on(r.google)).length;
-    $("#k-g").textContent = `${gl}`; $("#k-g-u").textContent = `of ${g.length} live`;
-    $("#k-g-s").textContent = gl === g.length ? "All live" : `${g.length - gl} ad groups ready to build`;
+    $("#k-g").textContent = `${gl}/${g.length}`; $("#k-g-u").textContent = "Google ad groups live";
 
     const fixFirst = (a, b) => /^fix/i.test(noteText(b.notes)) - /^fix/i.test(noteText(a.notes)) || bySvc(a, b);
     const items = rows.filter(isFlag).sort(fixFirst).map(r =>
-      `<li><span><b>${esc(r.code)}</b> · ${esc(noteText(r.notes).replace(/^(fix|check):\s*/i, ""))}</span>${href(r) ? `<a href="${esc(href(r))}"${r.anchor ? "" : ' target="_blank" rel="noopener"'}>Open ${r.anchor ? "" : "↗"}</a>` : "<span></span>"}</li>`);
-    if (gap) items.push(`<li class="soft"><span>${gap} Instagram posts aren't on the Facebook Page yet.</span><a href="#summary" data-go="posts">See them</a></li>`);
+      `<li><b>${esc(r.code)}</b><span>${esc(cap(noteText(r.notes).replace(/^(fix|check):\s*/i, "").replace(/\s*\(cut Oct 28\)/, "")))}</span>${href(r) ? `<a href="${esc(href(r))}"${r.anchor ? "" : ' target="_blank" rel="noopener"'}>Open</a>` : "<span></span>"}</li>`);
+    if (gap) items.push(`<li class="soft"><b>Facebook</b><span>${gap} Instagram post${gap === 1 ? "" : "s"} not posted yet</span><a href="#summary" data-go="posts">See</a></li>`);
     const held = rows.filter(r => adGroup(r) === "hold");
-    if (held.length) items.push(`<li class="soft"><span>${held.length} ads are on hold.</span><a href="#summary" data-go="hold">See them</a></li>`);
-    if (!live) items.push(`<li class="soft"><span>This page is showing a saved copy of the tracker. In the sheet, set Share → General access → Anyone with the link → Viewer so it updates by itself.</span><a href="${esc(SHEET_EDIT)}" target="_blank" rel="noopener">Open sheet ↗</a></li>`);
+    if (held.length) items.push(`<li class="soft"><b>On hold</b><span>${held.length} ads</span><a href="#summary" data-go="hold">See</a></li>`);
+    if (!live) items.push(`<li class="soft"><b>Tracker</b><span>Turn on link sharing so this page updates live</span><a href="${esc(SHEET_EDIT)}" target="_blank" rel="noopener">Open ↗</a></li>`);
     $("#attn").hidden = !items.length;
     $("#attn ol").innerHTML = items.join("");
 
     const now = new Date(), week = logRows.map(r => ({ ...r, d: toDate(r.When) })).filter(r => r.d && now - r.d < 7 * 864e5);
     const checks = logRows.map(r => ({ ...r, d: toDate(r.When) })).filter(r => r.d && /daily check/i.test(r.Source)).sort((a, b) => b.d - a.d);
     const changes = week.filter(r => !/daily check/i.test(r.Source)).sort((a, b) => b.d - a.d).slice(0, 8);
-    $("#week").innerHTML = changes.length ? changes.map(r => `<li><time>${fmtDay(r.d)}</time><span>${r.Codes ? `<b>${esc(r.Codes)}</b> · ` : ""}${esc(r["What changed"])}<small>${esc(r.Source)}${r.By ? " · " + esc(r.By) : ""}</small></span></li>`).join("")
-      : '<li class="none">No changes logged in the last 7 days.</li>';
     const c = checks[0];
     const rel = d => { const t = new Date(); t.setHours(0, 0, 0, 0); const dd = new Date(d); dd.setHours(0, 0, 0, 0);
       return dd - t === 0 ? "today" : t - dd === 864e5 ? "yesterday" : fmtDay(d); };
     const when = c ? `Checked ${rel(c.d)} at ${c.d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}` : "Not checked yet";
-    $("#side-checked").innerHTML = `<i class="d ${c && now - c.d < 2 * 864e5 ? "on" : "wait"}"></i>${when}.${live ? " Reading the sheet live." : " Showing a saved copy until link sharing is on."}`;
+    $("#side-checked").innerHTML = `<i class="d ${c && now - c.d < 2 * 864e5 ? "on" : "wait"}"></i>${when}${live ? "" : '<small class="st-note">Saved copy · turn on link sharing for live</small>'}`;
     const SEC = { menopause: "menopause", cycle: "cycle", longevity: "longevity", iron: "iron" };
     document.querySelectorAll(".sstats").forEach(el => {
       if (el.dataset.svc === "instagram") {
@@ -949,8 +979,7 @@
       if (g.length) parts.push(`Google ${g.filter(r => on(r.google)).length} of ${g.length} live`);
       el.innerHTML = parts.join(" <span>·</span> ");
     });
-    $("#checked").innerHTML = (c ? `<i class="d ${now - c.d < 2 * 864e5 ? "on" : "wait"}"></i>Last checked ${rel(c.d)} at ${c.d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}: Instagram, the Facebook Page and the Meta Ad Library.`
-      : '<i class="d wait"></i>Not checked yet.') + (live ? "" : ` <span>(saved copy from ${esc(SNAP.at)})</span>`);
+    $("#checked").innerHTML = `<i class="d ${c && now - c.d < 2 * 864e5 ? "on" : "wait"}"></i>${when}`;
   }
   document.addEventListener("click", e => {
     const a = e.target.closest("#attn a[data-go]"); if (!a) return;
