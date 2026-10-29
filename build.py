@@ -361,10 +361,12 @@ def ad_names(vid, cuts):
                 "Facebook Stories, Facebook Reels ads, in-stream and Audience Network by itself.")
     if len(cuts) == 1:
         return f"Ad name <code>{vid}-{cuts[0][0]}</code>. Upload its three files as one ad."
-    extra = (f" {vid}-T goes in the new Chantelle videos ad set (duplicate it there, keeping its post ID, then switch the "
-             f"original off); {vid}-F stays in the queue.") if vid in ("MV2", "MV3") else ""
+    if vid in ("MV2", "MV3"):   # Oct 29: the Tight cut moves to the Chantelle videos ad set; the Flow cut waits
+        return (f"Two cuts, <code>{vid}-T</code> (short, live) and <code>{vid}-F</code> (longer). {vid}-T goes in the new "
+                f"Chantelle videos ad set: duplicate it there, keeping its post ID, then switch the original off. "
+                f"{vid}-F stays in the queue. Upload each cut's three files as one ad.")
     return (f"Two ads, <code>{vid}-T</code> (short) and <code>{vid}-F</code> (longer), in the same ad set as a Meta A/B test "
-            f"on length. Upload each cut's three files as one ad.{extra}")
+            f"on length. Upload each cut's three files as one ad.")
 
 
 def badge(ad):
