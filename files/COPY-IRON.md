@@ -1,13 +1,13 @@
-# IV iron ads: three ideas (Oct 14, 2026) · Book now since Oct 29
+# IV iron ads: three ideas (Oct 14, 2026) · Book now since Oct 29 · Now booking since Nov 2
 
-**Oct 29 (Peter): the call to action is "Book now", not the founding waitlist.** The Meta button is **Book now**, the destination is the IV iron page, and the IRV1 end card says "Book your IV iron visit." Every waitlist, founding-price and sign-up line is gone. These ads launched as a pre-launch waitlist test on Oct 14; the history below is kept for the art. There are three ideas, each a different format so Meta treats them as separate creatives.
+**Nov 2 (Peter): IV iron is booking now.** Nothing says "coming" or "opening November" any more, and the first step is an in-person consult, as on the booking page. **Oct 29 (Peter): the call to action is "Book now", not the founding waitlist.** The Meta button is **Book now**, the destination is the IV iron page, and the IRV1 end card says "Book your IV iron visit." Every waitlist, founding-price and sign-up line is gone. These ads launched as a pre-launch waitlist test on Oct 14; the history below is kept for the art. There are three ideas, each a different format so Meta treats them as separate creatives.
 
 | Ad | Idea | Format | On the image |
 |---|---|---|---|
 | IR1 | Pills not working | One big engraved IV bag of amber iron solution on cream (Oct 20 rework) | Iron pills not working? IV iron skips the gut. |
 | IR2 | Hidden deficiency | The IV iron page's hero close-up, never extended (Oct 20) | Low iron doesn't always look like anemia. |
 | ~~IR3~~ | **Removed Oct 20** (Peter: delete IR3) | | |
-| IRV1 | The hero, animated | 6.5 s: the page hero close-up animated (she turns a page) + end card, silent (Oct 20) | IV iron is coming to Barrie this November. Then "Book your IV iron visit." with a Book now button (Oct 29) |
+| IRV1 | The hero, animated | 6.5 s: the page hero close-up animated (she turns a page) + end card, silent (Oct 20) | IV iron is booking now in Barrie. (Nov 2) Then "Book your IV iron visit." with a Book now button (Oct 29) |
 
 ```
 python3 gen/r6/compose.py && python3 render.py --page iron   # art, then out/r4/iron/IR1–IR3 _1x1 + _9x16 + _1-91x1, QA
@@ -34,7 +34,7 @@ IRV1 lives at `out/r4/iron/IRV1_{9x16,1x1,1-91x1}.mp4`, with thumbnails. It's re
 | Meta AI label | **Off** for every ad. Never turn it on (Peter, Oct 28) |
 | URL parameters | `utm_source={{site_source_name}}&utm_medium=paid&utm_campaign={{campaign.id}}&utm_term={{adset.id}}&utm_content={{ad.id}}` |
 
-**Before launch:** on Oct 29 the IV iron page still showed "Save my founding spot" and an email-only waitlist form. Its buttons have to open booking before these ads go live, or the ad and the page will disagree. The Instant Form ("Join the IV iron founding waitlist") is retired.
+**Landing page (checked Nov 2):** the IV iron page says "Now booking", and its buttons open `book.beoptimal.ca/?service=iron`: a 25-minute in-person consultation with NP Rubeana Deol. The ads and the page agree. The Instant Form ("Join the IV iron founding waitlist") is retired.
 
 **Reading the test:** judge on cost per booked consult. For video, also look at the 3-second hold rate and ThruPlay. Turn off an ad that has spent about 1.5× the cost per booking with no booking, and add the next one from the queue.
 
@@ -42,21 +42,21 @@ IRV1 lives at `out/r4/iron/IRV1_{9x16,1x1,1-91x1}.mp4`, with thumbnails. It's re
 
 ## Copy
 
-Every primary text ends on the one action: book. The first step people book is a consult with our Nurse Practitioner, virtual or in-clinic (the page's "Path B"). "Opening November" stays where it's true; swap it for "now open" once IV iron starts.
+Every primary text ends on the one action: book. The first step people book is an in-person consult with our Nurse Practitioner (the page's "Path B").
 
 ### IR1 · "Iron pills not working? IV iron skips the gut."
-**Primary text:** Iron pills not working? IV iron skips the gut and goes straight into a vein, refilling iron stores in one or two monitored visits. It opens at Optimal in Barrie this November: no referral needed, and we order your bloodwork first. Book a consult with our Nurse Practitioner now, virtual or in-clinic.
+**Primary text:** Iron pills not working? IV iron skips the gut and goes straight into a vein, refilling iron stores in one or two monitored visits. It's now booking at Optimal in Barrie: no referral needed, and we order your bloodwork first. Book an in-person consult with our Nurse Practitioner now.
 **Headline:** Iron pills not working? · **Description:** IV iron · No referral · Barrie
 
 ### IR2 · "Low iron doesn't always look like anemia." (cleared by the Clinical Director, Oct 20)
-**Primary text:** Low iron doesn't always look like anemia. Hemoglobin can sit in range while iron stores, measured as ferritin, run low. IV iron opens at Optimal in Barrie this November, led by a Nurse Practitioner who reviews your bloodwork before anything else. No referral needed. Book a consult with our NP now, virtual or in-clinic.
+**Primary text:** Low iron doesn't always look like anemia. Hemoglobin can sit in range while iron stores, measured as ferritin, run low. IV iron is now booking at Optimal in Barrie, led by a Nurse Practitioner who reviews your bloodwork before anything else. No referral needed. Book an in-person consult with our NP now.
 **Headline:** Iron stores, checked properly · **Description:** IV iron · No referral · Barrie
 
 ### ~~IR3~~ (removed Oct 20, Peter)
 
-### IRV1 · "IV iron is coming to Barrie this November." (video)
-**Primary text:** IV iron is coming to Optimal in Barrie this November: a calm, monitored infusion with a Nurse Practitioner on site, and no referral needed. Book a consult with our NP now, virtual or in-clinic.
-**Headline:** Book IV iron in Barrie · **Description:** No referral · Opening November
+### IRV1 · "IV iron is booking now in Barrie." (video)
+**Primary text:** IV iron is now booking at Optimal in Barrie: a calm, monitored infusion with a Nurse Practitioner on site, and no referral needed. Book an in-person consult with our NP now.
+**Headline:** Book IV iron in Barrie · **Description:** No referral · Now booking
 
 ## Guardrails used
 

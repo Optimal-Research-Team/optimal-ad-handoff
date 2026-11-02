@@ -422,8 +422,9 @@ def dl(href, label, size, primary=False):
 
 
 # ------------------------------------------------------------------ Oct 20 2026 rebuild: by service, dated, IR3 gone
-UPDATED = "Oct 29, 2026"
-LATEST = "2026-10-29"
+UPDATED = "Nov 2, 2026"
+LATEST = "2026-11-02"
+DN2 = "2026-11-02"
 D12, D13, D14, D15, D19, D20, D21, D22, D26, D28, D29 = ("2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-19",
                                                          "2026-10-20", "2026-10-21", "2026-10-22", "2026-10-26", "2026-10-28",
                                                          "2026-10-29")
@@ -460,9 +461,19 @@ CHANGED.update({k: (D29, "Book now end card") for k in ("IRV1", "IRM1")})
 CHANGED["IRM2"] = (D29, "reworked: what you get, then Book now")
 CHANGED.update({k: (D29, "copy says Book now") for k in ("IR1", "IR2", "IR4", "IR5", "IR6")})
 CHANGED.update({k: (D29, "Book now, no waitlist") for k in ("IRG1", "IRG2", "IRG3", "IRG4")})
+# Nov 2 (Peter): IV iron is booking now, so nothing says "coming" or "opening November"; the first step is an in-person consult
+CHANGED["IRV1"] = (DN2, "says booking now")
+CHANGED["IRT1"] = (DN2, "\u201cWe open in November\u201d is cut")
+CHANGED["IRT3"] = (DN2, "\u201cIV iron opens in Barrie this November\u201d is cut")
+CHANGED["IRV2"] = (DN2, "\u201cIV iron is coming\u201d is cut; opens on \u201cRight here in Barrie\u201d")
+CHANGED["IRV3"] = (DN2, "\u201cIV iron is coming to Barrie\u201d is cut")
+CHANGED.update({k: (DN2, "copy says now booking") for k in ("IRT2", "IRT4", "IRM2", "IR1", "IR2", "IR4", "IR5", "IR6")})
+CHANGED.update({k: (DN2, "says now booking, in-person consult") for k in ("IRG1", "IRG2", "IRG3", "IRG4")})
 REMOVED = {"IR3": D20}
 SHORT = {"9x16": "9:16", "1x1": "1:1", "1-91x1": "1.91:1", "16x9": "16:9"}
 NEWS = [  # (date, what happened, ids that link to cards, ids removed)
+    (DN2, "IV iron is booking now: the page says Now booking and its buttons open booking, so nothing says \u201ccoming\u201d or \u201copening November\u201d any more. IRV1 opens on \u201cIV iron is booking now in Barrie.\u201d The spoken November lines are cut from IRT1 and IRT3. IRV2's voiceover now opens on \u201cRight here in Barrie\u201d, and IRV3's ends on \u201cat six to eight weeks\u201d. All the IV iron copy and the Google ads say now booking, and the first step is an in-person consult, as on the booking page.",
+     ["IRV1", "IRT1", "IRT3", "IRV2", "IRV3", "IRT2", "IRT4", "IRM2", "IR1", "IR2", "IR4", "IR5", "IR6", "IRG1", "IRG2", "IRG3", "IRG4"], []),
     (D29, "Menopause: the 2:33 video sales letter (MVSL) is now an ad, in 9:16 and 16:9. Chantelle opens with what patients tell her, Chantelle and Cheryl walk through the physiology and the three-month program with the price on screen, and Chantelle closes on the free 15-minute call. It goes in a new Menopause ad set with Chantelle's two live videos, MV2-T and MV3-T, so her videos get their own budget instead of losing it to MB5.",
      ["MVSL", "MV2", "MV3"], []),
     (D29, "IV iron now says Book now, not \u201cjoin the founding waitlist\u201d. Every IV iron video has a new end card (\u201cBook your IV iron visit.\u201d with a Book now button), and the spoken \u201cjoin the waitlist\u201d lines are cut from the talking heads and the voiceover films. IRM2 used to sell the free waitlist, so it now lists what you get, start to finish. All the IV iron copy and the Google search ads end on booking. The Meta button is Book now and the destination is the IV iron page, which still shows the waitlist form: its buttons need to open booking before these go live.",
@@ -585,7 +596,7 @@ CHECKLIST = '''
   <label class="check"><input type="checkbox" data-k="g-m"><span><b>Menopause:</b> keep MV1-T, MB1 and MB5 running, and switch off the old M3 (the price card, cut Oct 28). Set MB1's description to \u201cFree 15-min call \u00b7 No referral\u201d. <b>New ad set, Chantelle videos</b> (minimum spend as set in Slack, from the current Menopause budget): duplicate MV2-T and MV3-T into it, keeping their post IDs, switch the originals off, and add <b>MVSL</b>, the 2:33 video sales letter (9:16 + 16:9). <small>Oct 29 (Peter).</small></span></label>
   <label class="check"><input type="checkbox" data-k="g-l"><span><b>Longevity:</b> rebuild LV1-T with the real LV1 video (it has been running MV1's) and add LV2-T. Put the two videos in their own ad set with a small daily minimum for 7 days, so they get a fair read next to L1, L2 and LB1.</span></label>
   <label class="check"><input type="checkbox" data-k="g-cv"><span><b>Cycle &amp; Hormone Care:</b> the landing page is live. Meta, two ad sets for women 18–45, budget split evenly: <b>Set 1 · general</b> CV1-A, CV2-A, CV3-A and the CC carousel; <b>Set 2 · by condition</b> CP1, CP2 (PMOS), CD1, CD2 (PMDD), CE1, CE2 (endometriosis). <small>Oct 29 (Peter): push the condition statics too.</small> Google: build from <a href="files/GOOGLE-ADS-CYCLE.md" target="_blank" rel="noopener">GOOGLE-ADS-CYCLE.md</a> (five ad groups).</span></label>
-  <label class="check"><input type="checkbox" data-k="g-ir"><span><b>IV iron (opens next week):</b> once the IV iron page's buttons open booking, Meta: IRV1, IRT1, IRT2 and IR1 with the <b>Book now</b> button, and Google from <a href="files/GOOGLE-ADS-IRON.md" target="_blank" rel="noopener">GOOGLE-ADS-IRON.md</a> (four ad groups, booking conversion first). Download the videos fresh: they were re-rendered Oct 29 with the Book now end card.</span></label>
+  <label class="check"><input type="checkbox" data-k="g-ir"><span><b>IV iron (booking now):</b> the page is ready, so go ahead. Meta: IRV1, IRT1, IRT2 and IR1 with the <b>Book now</b> button, and Google from <a href="files/GOOGLE-ADS-IRON.md" target="_blank" rel="noopener">GOOGLE-ADS-IRON.md</a> (four ad groups, booking conversion first). Download the videos fresh: IRV1, IRT1, IRT3, IRV2 and IRV3 were re-rendered Nov 2 to say booking now, and the copy changed too.</span></label>
   <label class="check"><input type="checkbox" data-k="g-ai"><span><b>Leave Meta's AI label off</b> for every ad and post (Peter, Oct 28).</span></label>
   <label class="check"><input type="checkbox" data-k="g-rot"><span><b>Every week:</b> turn off an ad that has spent about 1.5\u00d7 the cost per booking with no booking, and add the next one or two from the queue.</span></label>
   <label class="check"><input type="checkbox" data-k="g-track"><span><b>Mark it in the tracker</b> when an ad goes into Ads Manager, goes live or is paused: one row per ad name in the tracker sheet (top of the Overview). The daily check fills in what it can see.</span></label>
@@ -937,7 +948,7 @@ def build():
       <div class="twocol">
         <div>{copy_field("URL parameters", IRON_UTM, 2)}</div>
         <div><ul class="rules">
-          <li><b>Before launch:</b> the IV iron page still shows “Save my founding spot”. Its buttons need to open booking first, so the page matches the ads. The Instant Form is retired.</li>
+          <li><b>Landing page:</b> ready (checked Nov 2). It says Now booking, and its buttons open booking for an in-person consult. The Instant Form is retired.</li>
           <li><b>Judge on</b> cost per booked consult; for video, the 3-second hold and ThruPlay.</li>
           <li><b>Google Ads:</b> <a href="files/GOOGLE-ADS-IRON.md" target="_blank" rel="noopener">GOOGLE-ADS-IRON.md</a>, ready to build. Add the booking conversion first.</li>
           <li><b>All the copy:</b> <a href="files/COPY-IRON.md" target="_blank" rel="noopener">COPY-IRON.md</a> (IR1, IR2, IRV1) and <a href="files/COPY-IRON-R2.md" target="_blank" rel="noopener">COPY-IRON-R2.md</a> (the rest). Shoot script: <a href="files/TH8-iv-iron-shoot-script.md" target="_blank" rel="noopener">TH8</a>.</li>

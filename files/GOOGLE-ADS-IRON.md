@@ -1,6 +1,6 @@
-# Google Ads: IV iron (Search), Oct 28, 2026 · Book now since Oct 29
+# Google Ads: IV iron (Search), Oct 28, 2026 · Book now since Oct 29 · Now booking since Nov 2
 
-A build sheet for whoever pushes this live. It's rewritten from the Oct 19 version in the same shape as the Cycle & Hormone Care sheet. **Oct 29 (Peter): the call to action is "Book now", not the founding waitlist.** Every waitlist, founding-price and sign-up line is gone.
+A build sheet for whoever pushes this live. It's rewritten from the Oct 19 version in the same shape as the Cycle & Hormone Care sheet. **Nov 2 (Peter): IV iron is booking now, so no ad says "opens in November", and the consult is in person, as on the booking page.** **Oct 29 (Peter): the call to action is "Book now", not the founding waitlist.** Every waitlist, founding-price and sign-up line is gone.
 
 The campaign has four ad groups: two for searchers who already know they want iron (IRG1 IV iron, IRG3 iron pills not working) and two for searchers who don't know it's iron yet (IRG2 low ferritin, IRG4 tired all the time).
 
@@ -8,20 +8,20 @@ The campaign has four ad groups: two for searchers who already know they want ir
 - **Hormozi, kept simple:**
   - **Dream outcome:** iron stores refilled.
   - **Likelihood:** bloodwork before and after, an NP on site.
-  - **Time:** often just one infusion, opening in November.
-  - **Effort:** no referral, it skips the gut, and the first step is a consult, virtual or in-clinic.
+  - **Time:** often just one infusion, booking now.
+  - **Effort:** no referral, it skips the gut, and the first step is an in-person consult.
   - **One action:** book a consult with our NP.
 - **Guardrails, the same as the Meta set (`COPY-IRON-R2.md`):**
   - Book now, no price;
   - no drug or brand names;
   - no feel-better timelines;
   - no comparisons with other providers or hospitals.
-- **Claims** come from the live page (beoptimal.ca/services/iron, checked Oct 28): "Restore it in as little as one visit", "1–2 infusions, often just one", "No referral needed", "We order your bloodwork", "An NP on site for every infusion", "Recheck bloodwork at 6–8 weeks", "Iron often covered by drug plans", "Opening November 2026".
+- **Claims** come from the live page (beoptimal.ca/services/iron, checked Nov 2): "Restore it in as little as one visit", "1–2 infusions, often just one", "No referral needed", "We order your bloodwork", "An NP on site for every infusion", "Recheck bloodwork at 6–8 weeks", "Iron often covered by drug plans", "Now booking in Barrie", "in-person consultation".
 
 ## Before launch
 
 1. **Final URL:** use `https://www.beoptimal.ca/services/iron`. `/iron` redirects to it, and Google flags redirecting final URLs.
-2. **The page has to say Book now first.** On Oct 29 beoptimal.ca/services/iron still showed "Save my founding spot" and an email-only waitlist form. Its buttons need to open booking before this campaign goes live.
+2. **The page is ready (checked Nov 2).** beoptimal.ca/services/iron says "Now booking", and its buttons open `book.beoptimal.ca/?service=iron`.
 3. **Conversion tracking:** fire a Google Ads conversion on a completed booking (the same booking event the menopause and longevity campaigns use, or import it from GA4). Start on Maximize clicks, then switch to Maximize conversions after about 30 bookings.
 
 ## Campaign settings
@@ -62,13 +62,13 @@ The campaign has four ad groups: two for searchers who already know they want ir
 2. Often Just One Infusion
 3. No Referral Needed
 4. Book Now in Barrie
-5. Opens in Barrie, November
+5. Now Booking in Barrie
 6. IV Iron Skips the Gut
 7. We Order Your Bloodwork
 8. NP On Site Every Infusion
 9. Bloodwork Rechecked at 6–8 Wk
 10. Book Your NP Consult
-11. Virtual or In-Clinic Consult
+11. In-Person NP Consult
 12. Iron Often Covered by Plans
 13. Measured, Not Guessed
 14. A Calm, Comfortable Clinic
@@ -78,7 +78,7 @@ The campaign has four ad groups: two for searchers who already know they want ir
 1. Restore iron in as little as one visit. Book your NP consult today.
 2. No referral. We order your bloodwork, and an NP assesses you first.
 3. An NP is on site for every infusion, and we recheck iron at 6–8 weeks.
-4. Book a consult with our NP, virtual or in-clinic. No referral needed.
+4. Book an in-person consult with our NP. No referral needed.
 
 ## IRG2 · Low ferritin / iron deficiency
 
@@ -104,9 +104,9 @@ The campaign has four ad groups: two for searchers who already know they want ir
 8. Rechecked at 6–8 Weeks
 9. Measured, Not Guessed
 10. Book Now in Barrie
-11. Opens in Barrie, November
+11. Now Booking in Barrie
 12. Book Your NP Consult
-13. Virtual or In-Clinic Consult
+13. In-Person NP Consult
 14. NP On Site Every Infusion
 15. Local Clinic in Barrie, ON
 
@@ -114,7 +114,7 @@ The campaign has four ad groups: two for searchers who already know they want ir
 1. Ferritin shows your iron stores. An NP reviews your bloodwork first.
 2. Low iron doesn't always look like anemia. Get it measured properly.
 3. No referral. We order the labs, assess you, and recheck at 6–8 weeks.
-4. IV iron opens in Barrie in November. Book your NP consult today.
+4. IV iron is now booking in Barrie. Book your NP consult today.
 
 ## IRG3 · Iron pills not working
 
@@ -140,7 +140,7 @@ The campaign has four ad groups: two for searchers who already know they want ir
 9. NP On Site Every Infusion
 10. Book Now in Barrie
 11. Book Your NP Consult
-12. Opens in Barrie, November
+12. Now Booking in Barrie
 13. Iron Often Covered by Plans
 14. Rechecked at 6–8 Weeks
 15. Local Clinic in Barrie, ON
@@ -149,7 +149,7 @@ The campaign has four ad groups: two for searchers who already know they want ir
 1. Pills refill iron a little at a time. IV iron skips the gut.
 2. Pills suit many people. An NP decides the right route, after bloodwork.
 3. Often just one monitored visit, with an NP on site the whole time.
-4. No referral needed. Book a consult with our NP, virtual or in-clinic.
+4. No referral needed. Book an in-person consult with our NP.
 
 ## IRG4 · Tired all the time (symptom searches)
 
@@ -176,7 +176,7 @@ The campaign has four ad groups: two for searchers who already know they want ir
 9. Measured, Not Guessed
 10. Often Just One Infusion
 11. Book Now in Barrie
-12. Opens in Barrie, November
+12. Now Booking in Barrie
 13. Book Your NP Consult
 14. Rechecked at 6–8 Weeks
 15. Local Clinic in Barrie, ON
@@ -185,7 +185,7 @@ The campaign has four ad groups: two for searchers who already know they want ir
 1. Tiredness, hair shedding and breathlessness can be low iron. Check it.
 2. No referral. We order your bloodwork, and an NP reviews it with you.
 3. If iron is low, IV iron can refill stores in as little as one visit.
-4. IV iron opens in Barrie in November. Book your NP consult today.
+4. IV iron is now booking in Barrie. Book your NP consult today.
 
 ## Assets (campaign level)
 
@@ -193,12 +193,12 @@ The campaign has four ad groups: two for searchers who already know they want ir
 
 | Text | Line 1 | Line 2 |
 |---|---|---|
-| Book a Consult | Virtual or in-clinic | No referral needed |
+| Book a Consult | In person in Barrie | No referral needed |
 | How It Works | NP assessment, labs, infusion | Recheck at 6–8 weeks |
 | Check Your Symptoms | A 10-second quick check | See if iron could be the cause |
 | For Doctors: Refer | One-page referral form | Fax it with recent labs |
 
-**Callouts:** No Referral Needed · NP On Site · Bloodwork Ordered for You · Book Online · Virtual Consults · 6–8 Week Recheck · Local in Barrie
+**Callouts:** No Referral Needed · NP On Site · Bloodwork Ordered for You · Book Online · In-Person Consults · 6–8 Week Recheck · Local in Barrie
 
 **Structured snippet** (header: Services): IV Iron Infusions · NP Assessment · Bloodwork Review · 6–8 Week Recheck
 
