@@ -3,6 +3,7 @@ When,Source,Codes,What changed,By
 "Oct 28, 2026 3:40 PM",Meta Ad Library,LV1-T,Fix: LV1-T is running with MV1's menopause video instead of the LV1 video.,Claude
 "Oct 28, 2026 3:40 PM",Meta Ad Library,MB1,Check: MB1's link description is the longevity one.,Claude
 "Oct 28, 2026 3:40 PM",Instagram,IG01–IG20,"Added 20 Instagram posts that aren't on the hand-off page (the Oct 12–13 relaunch set, equipment reels, portal teaser).",Claude
+"Oct 28, 2026 3:40 PM",Instagram,IG19,The Specimen film reel is down: Peter took it off Instagram on Oct 24 because it carried the AI content label.,Claude
 "Oct 28, 2026 3:40 PM",Facebook,,No new posts on the Facebook Page since Aug 28 (public view).,Claude
 "Oct 28, 2026 3:40 PM",Daily check,,"Checked Instagram, the Facebook Page and the Meta Ad Library. First full check.",Claude
 "Oct 28, 2026 5:09 PM",Ads Manager,"MV1-T, MV2-T, MV3-T, MB1, MB5, M3 (cut), L1, L2, LV1-T, LB1","Checked Ads Manager (Optimal1): these 10 ads are Active in two campaigns, Optimal Menopause | Conversion | Q4 and Optimal | Longevity | Conversion | Q4. No IV iron or Cycle & Hormone campaign yet.",Claude
@@ -12,9 +13,16 @@ When,Source,Codes,What changed,By
 "Oct 28, 2026 5:09 PM",Manual,"CV, CA, CC, CP, CD, CE, CG","Hold lifted: the Cycle & Hormone Care page is live, so these ads are ready to upload.",Claude
 "Oct 28, 2026 5:09 PM",Manual,"CA5, CC, CE2","Copy: CA5 says menstrual cycle, the carousel's card 1 names the symptoms, CE2 and CC5 say pain with intimacy.",Claude
 "Oct 28, 2026 5:09 PM",Manual,CG1–CG5,"Google search rewritten as five ad groups: two general (CG1, CG2), three by condition (CG3 PMOS, CG4 PMDD, CG5 endometriosis).",Claude
+"Oct 28, 2026 5:09 PM",Manual,,AI label column removed: Meta's AI label stays off for every ad and post (Peter).,Claude
+"Oct 28, 2026 6:10 PM",Facebook,"IG01–IG09, IG11–IG13, MV1-T, LV2-T",Posted to the Facebook Page (no AI label): the Oct 12–13 relaunch set so far. The rest of Instagram is going up in order. IG10 (realistic AI video) stays off Facebook.,Claude
+"Oct 28, 2026 6:46 PM",Facebook,"IG14–IG16, LV1-T, RB1, CI1, CB1, CB2, IRT1–IRT3, MI1–MI3","Posted to the Facebook Page (no AI label). Left to post: IRT4, MA1, IG17, IG18, IG20.",Claude
+"Oct 28, 2026 11:10 PM",Facebook,"IRT4, MA1, IG17, IG18, IG20","Posted to the Facebook Page (no AI label). Every Instagram post is now on Facebook too, except IG10 (kept off on purpose) and IG19 (taken down).",Claude
 "Oct 29, 2026 9:30 AM",Manual,"IRV1–IRV3, IRT1–IRT4, IRM1, IRM2, IR1, IR2, IR4–IR6, IRG1–IRG4","IV iron's call to action is now Book now, not the founding waitlist (Peter). New end cards, spoken waitlist lines cut, IRM2 reworked as what you get, copy and Google ads end on booking.",Peter
 "Oct 29, 2026 1:16 PM",Facebook,"IRT1, IRT2, IRT3, IRT4",Old IV iron reels (join the waitlist) moved to Facebook trash (30 days). Instagram copies still up.,Claude
 "Oct 29, 2026 1:16 PM",Instagram,"IG03, IG07, IG13, IG16","Found: these IV iron carousels still say join the waitlist (IG16 also shows the founding rate). Flagged, not changed.",Claude
 "Oct 29, 2026 2:30 PM",Instagram + Facebook,"IG03, IG07, IG13, IG16",Captions changed to Book now on both platforms (Peter). Slides can't be swapped on a published post; Book now versions are rendered for a repost.,Claude
 "Oct 29, 2026 4:05 PM",Manual,"MVSL, MV2-T, MV3-T","New Menopause ad set for Chantelle's videos (Peter): MV2-T and MV3-T move into it, and the 2:33 video sales letter (MVSL) joins as an ad. MVSL added to the tracker; it's been on Instagram since Oct 28.",Peter
 "Nov 2, 2026 3:40 PM",Manual,"IRV1, IRT1, IRT3, IRV2, IRV3, IV iron copy, IRG1–IRG4","IV iron is booking now (Peter). IRV1's line changed, the spoken November and coming lines cut from IRT1, IRT3, IRV2 and IRV3, and all IV iron copy and Google ads say now booking, with an in-person consult. Page checked: Now booking, buttons open booking.",Peter
+"Nov 5, 2026 4:20 PM",Instagram,"IG21, I1","Checked Instagram (36 posts): the only new post since Oct 29 is the clinic tour (IG21, Nov 1), now in the Tracker. New Post queue tab: one post a day to Instagram and Facebook, each asked for first (Peter). I1 cover re-rendered to say now booking.",Claude
+"Nov 5, 2026 4:45 PM",Instagram + Facebook,IG22,"Posted the IV iron ""now booking"" carousel (7 slides) to Instagram and the Facebook Page, on Peter's go. First post from the Post queue.",Claude
+"Nov 8, 2026 12:30 PM",Manual,"M3 (cut), MB1, LV1-T",Hand-off page refreshed from the sheet (Peter): Jeremy's Nov 3 launches now show as running. Three fixes he finished are marked Done. Nothing new posted since IG22.,Claude

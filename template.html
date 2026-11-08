@@ -785,12 +785,12 @@
   }
   const fmtDay = d => d ? d.toLocaleDateString("en-CA", { month: "short", day: "numeric" }) : "";
   const shortDate = s => fmtDay(toDate(s)) || s;
-  const tone = s => !s || /^(—|-|n\/a|none)$/i.test(s) ? "na" : /^not\b/i.test(s) ? "todo" : /^(live|posted|built|running|active)/i.test(s) ? "on"
+  const tone = s => !s || /^(—|-|n\/a|none)$/i.test(s) ? "na" : /^not\b/i.test(s) ? "todo" : /^(live|posted|built|running|active|enabled|published)/i.test(s) ? "on"
     : /review|scheduled|uploaded/i.test(s) ? "wait" : /reject/i.test(s) ? "bad" : /paus|off|taken|removed|ended|inactive/i.test(s) ? "off" : "todo";
   const svcKey = v => Object.keys(SVC).find(k => SVC[k].toLowerCase() === String(v || "").toLowerCase() || k === String(v || "").toLowerCase()) || "clinic";
   const kindOf = f => /google/i.test(f || "") ? "google" : /organic|post/i.test(f || "") ? "organic" : "ad";
   const cap = t => t.charAt(0).toUpperCase() + t.slice(1);
-  const noteText = n => n.replace(/\s*\(Ad Library \d+\)\s*$/, "").replace(/^Ad Library \d+(?: \([^)]*\))?[.:]\s*/, "");
+  const noteText = n => n.split("\n")[0].replace(/\s*\(Ad Library \d+\)\s*$/, "").replace(/^Ad Library \d+(?: \([^)]*\))?[.:]\s*/, "");
   const isFlag = r => /^(fix|check)\b/i.test(noteText(r.notes));
 
   function rowFor(e, t, i) {
@@ -943,7 +943,7 @@
     const meta = cnt(r => r.kind === "ad" && on(r.meta)), ready = cnt(r => r.kind === "ad" && adGroup(r) === "ready"), hold = cnt(r => r.kind === "ad" && adGroup(r) === "hold");
     $("#k-meta").textContent = meta;
     $("#k-ig").textContent = cnt(r => on(r.ig));
-    const fb = cnt(r => on(r.fb)), gap = cnt(r => on(r.ig) && !on(r.fb) && tone(r.fb) !== "na");   // "—" on Facebook = left off on purpose
+    const fb = cnt(r => on(r.fb)), gap = cnt(r => on(r.ig) && tone(r.fb) === "todo");   // "—" or "Taken down" on Facebook = left off on purpose
     $("#k-fb").textContent = fb;
     const g = rows.filter(r => r.kind === "google"), gl = g.filter(r => on(r.google)).length;
     $("#k-g").textContent = `${gl}/${g.length}`; $("#k-g-u").textContent = "Google ad groups live";
